@@ -9,7 +9,7 @@ Measure living-condition deprivation across Busan's administrative dongs in the 
 | ID | Milestone | Target | Definition of done |
 |---|---|---:|---|
 | M0 | Project governance and reproducible environment | 2026-08-12 | Git policy, Docker/Jupyter environment, core documentation, and CI are ready |
-| M1 | Competition requirements and data availability | 2026-08-17 | Official template and criteria are confirmed; candidate data and spatial units are set for all seven domains |
+| M1 | Competition requirements and data availability | 2026-08-17 | Direct/proxy measures, availability grades, inclusion rules, and open versus future models are fixed for all seven domains |
 | M2 | Data collection and administrative-dong standardization | 2026-08-24 | Raw data, provenance metadata, administrative-code mapping, and data dictionary are ready |
 | M3 | EDA and Busan IMD model | 2026-08-31 | Quality checks, normalization, domain scores, weighted composite, and sensitivity analysis are reproducible |
 | M4 | Area interpretation, policy, and visualization | 2026-09-07 | Priority areas and drivers are interpreted; policy matrix and map draft are complete |
@@ -30,6 +30,8 @@ Measure living-condition deprivation across Busan's administrative dongs in the 
 - Confirm the competition notice, submission template, and evaluation criteria
 - Draft Busan IMD domains, indicators, and weights
 - Audit administrative-dong data availability and define fallback rules
+- Produce the data catalog, availability matrix, and institutional data-request roadmap
+- Define open-data, institution-supported, and operational stages and their transition gates
 
 ### M2 — Data foundation
 
@@ -67,7 +69,8 @@ Measure living-condition deprivation across Busan's administrative dongs in the 
 |---|---|
 | Some indicators are available only at district level | Fix the spatial unit and fallback indicators in M1; prohibit unexplained mixed-granularity scoring |
 | Crime, income, or employment data are unavailable or delayed | Pre-document public proxy indicators and exclusion criteria |
+| Proxy measures are over-interpreted as actual deprivation | Publish direct/proxy labels, confidence grades, and prohibited interpretations |
+| The experimental model is mistaken for an official policy index | Label its non-official status and enforce staged expansion gates |
 | Administrative-dong names and codes do not match | Use one reference-year administrative-code table as the canonical join key |
 | Weights appear arbitrary | Use UK IMD weights as the baseline and compare equal and alternative weights |
 | Solo execution misses validation | Require an artifact, verification method, and documentation update in every issue |
-
