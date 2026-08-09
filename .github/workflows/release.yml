@@ -46,9 +46,7 @@ jobs:
         run: |
           set -euo pipefail
           git clone "https://x-access-token:${GH_TOKEN}@github.com/${REPOSITORY}.wiki.git" wiki
-          find wiki -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
-          cp -R docs/. wiki/
-          cp README.md wiki/Home.md
+          bash scripts/build_wiki.sh wiki
           cd wiki
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -56,4 +54,3 @@ jobs:
           git diff --cached --quiet && exit 0
           git commit -m "docs: sync wiki for v$(tr -d '[:space:]' < ../VERSION)"
           git push origin HEAD:master
-
