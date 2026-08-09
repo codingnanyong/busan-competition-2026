@@ -30,7 +30,7 @@ feat/<linear-id>-<slug>
 
 - PR 제목: `<LINEAR-ID> <type>: <summary>`
 - 본문에 `Closes <LINEAR-ID>`를 포함합니다.
-- 분석 결과, 데이터 스키마 또는 사용자 동작이 바뀌면 관련 `docs/`를 같은 PR에서 갱신합니다.
+- 분석 결과, 데이터 스키마 또는 사용자 동작이 바뀌면 관련 국문·영문 문서를 같은 PR에서 갱신합니다.
 - CI, 재현성 검사와 완료조건을 통과한 뒤 squash merge합니다.
 
 ### `develop → main`
@@ -56,4 +56,3 @@ feat/<linear-id>-<slug>
 - `main`: PR 필수, 상태검사 `PR policy` 필수, head=`develop` 제한, 직접 푸시 금지
 - force push와 branch deletion 금지
 - 대화 해결과 최신 base 반영 필수
-
