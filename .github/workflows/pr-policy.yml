@@ -1,0 +1,60 @@
+name: PR policy
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  validate-flow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate branch flow and Linear issue reference
+        env:
+          BASE_REF: ${{ github.base_ref }}
+          HEAD_REF: ${{ github.head_ref }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          set -euo pipefail
+
+          if [[ "$BASE_REF" == "develop" ]]; then
+            [[ "$HEAD_REF" =~ ^feat/[a-z0-9]+-[0-9]+-[a-z0-9-]+$ ]] || {
+              echo "develop accepts only feat/<linear-id>-<slug> branches"
+              exit 1
+            }
+            printf '%s\n%s' "$PR_TITLE" "$PR_BODY" | grep -Eiq '(COD-[0-9]+)' || {
+              echo "PR must reference a Linear issue such as COD-123"
+              exit 1
+            }
+          elif [[ "$BASE_REF" == "main" ]]; then
+            [[ "$HEAD_REF" == "develop" ]] || {
+              echo "main accepts PRs only from develop"
+              exit 1
+            }
+          else
+            echo "Unsupported PR base: $BASE_REF"
+            exit 1
+          fi
+
+  validate-release:
+    if: github.base_ref == 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Validate release metadata
+        run: |
+          set -euo pipefail
+          VERSION="$(tr -d '[:space:]' < VERSION)"
+          [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          test -f "docs/releases/v${VERSION}.md"
+          grep -Fq "[${VERSION}]" CHANGELOG.md
+          if git rev-parse "v${VERSION}" >/dev/null 2>&1; then
+            echo "Tag v${VERSION} already exists"
+            exit 1
+          fi
+
