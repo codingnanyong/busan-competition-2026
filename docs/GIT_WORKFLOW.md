@@ -32,6 +32,7 @@ feat/<linear-id>-<slug>
 - 본문에 `Closes <LINEAR-ID>`를 포함합니다.
 - 분석 결과, 데이터 스키마 또는 사용자 동작이 바뀌면 관련 국문·영문 문서를 같은 PR에서 갱신합니다.
 - CI, 재현성 검사와 완료조건을 통과한 뒤 squash merge합니다.
+- 병합이 완료되면 원격 `feat/*` 브랜치를 즉시 삭제합니다.
 
 ### `develop → main`
 
@@ -47,6 +48,7 @@ feat/<linear-id>-<slug>
 - 관련 문서가 갱신됨
 - PR이 `develop`에 병합됨
 - Linear 이슈가 PR에 의해 닫히거나 Done으로 동기화됨
+- 병합된 원격 작업 브랜치가 삭제됨
 
 ## 권장 브랜치 보호 설정
 
@@ -54,5 +56,6 @@ feat/<linear-id>-<slug>
 
 - `develop`: PR 필수, 상태검사 `PR policy` 필수, 직접 푸시 금지
 - `main`: PR 필수, 상태검사 `PR policy` 필수, head=`develop` 제한, 직접 푸시 금지
-- force push와 branch deletion 금지
+- 보호 브랜치(`develop`, `main`)의 force push와 삭제 금지
+- 병합된 작업 브랜치(`feat/*`)는 자동 또는 수동으로 삭제
 - 대화 해결과 최신 base 반영 필수
