@@ -27,7 +27,7 @@ Measure living-condition deprivation across Busan's administrative dongs in the 
 
 ### M1 — Requirements and data design
 
-- Confirm the competition notice, submission template, and evaluation criteria
+- [Confirm the competition notice, submission template, and submission requirements](COMPETITION_REQUIREMENTS.md)
 - Draft Busan IMD domains, indicators, and weights
 - Audit administrative-dong data availability and define fallback rules
 - Produce the data catalog, availability matrix, and institutional data-request roadmap
