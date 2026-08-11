@@ -11,7 +11,7 @@ services:
       - .:/workspace
     working_dir: /workspace
     environment:
-      PYTHONPATH: /workspace
+      PYTHONPATH: /workspace/src
     command:
       - jupyter
       - lab

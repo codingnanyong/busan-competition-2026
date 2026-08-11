@@ -3,7 +3,8 @@ FROM python:3.12-slim
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
-    JUPYTER_CONFIG_DIR=/home/jovyan/.jupyter
+    JUPYTER_CONFIG_DIR=/home/jovyan/.jupyter \
+    PYTHONPATH=/workspace/src
 
 WORKDIR /workspace
 
