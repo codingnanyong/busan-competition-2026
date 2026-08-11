@@ -1,30 +1,44 @@
 # Data Availability Matrix
 
-This document determines whether candidate measures can compare every Busan administrative dong. Initial ratings remain provisional until COD-10 verifies authoritative data.
-
 ## Grades
 
-| Grade | Standard | Scoring rule |
+| Grade | Test | Index rule |
 |---|---|---|
-| A | Same-period direct dong statistics with full coverage and verified reuse | Prefer for inclusion |
-| B | Coordinates, census tracts, or legal-dong data can be reproducibly aggregated | Include with transformation error documented |
-| C | Old, partial, proxy, or geographically incomplete | Hold or sensitivity analysis only |
-| D | Closed, view-only, incompatible, or non-redistributable | Exclude from the composite |
+| A | Same-period administrative-dong direct statistic, full Busan coverage, reuse verified | Prefer inclusion |
+| B | Coordinates, census tracts, or legal dongs can be mapped reproducibly | May include with transformation error disclosed |
+| C | Old, partial, proxy, or spatially incomplete | Sensitivity analysis or hold |
+| D | Private, view-only, non-redistributable, or definition mismatch | Exclude from composite |
 
-## Initial assessment
+## Audit decisions at 2026-08-11
 
-| Domain | Open-data candidate | Expected grade | Main gap | Current-model rule |
-|---|---|---:|---|---|
-| Income | Benefit-recipient rate | B–C | Consistent dong and period coverage | Exclude without Busan-wide coverage |
-| Employment | Establishment and worker change | B | Resident unemployment | Do not label as resident employment deprivation |
-| Education | Attainment or education access | B–C | Recent small-area attainment | Separate access from outcomes |
-| Health | Vulnerability and care access | B–C | Disease and mortality outcomes | Separate facilities from health status |
-| Safety | Accidents, fire, hazards, infrastructure | B–C | Actual crime aggregates | Do not present proxies as crime rates |
-| Housing/access | Age, vacancy, transit, essential services | A–B | Inconsistent vacancy definitions | Combine only common definitions |
-| Environment | Flood, heat, air, green space, slope | B | Resolution and interpolation | Separate observations from modelled exposure |
+| Domain | Best public candidate | Type | Grade | Decision | Condition to pass |
+|---|---|---|---:|---|---|
+| Income | Basic-livelihood recipients in five districts | Proxy | C | Exclude | 100% of 16 districts with one date and benefit definition |
+| Employment | SGIS establishments and workers | Proxy | C | Hold | Verify API years/coverage and obtain resident employment separately |
+| Education | National school register | Proxy | B | Hold | Geocode, calculate service areas, and keep separate from outcomes |
+| Health | Hospital, pharmacy, and AED locations | Proxy/context | B | Hold | Clean operating status, geocode, and obtain small-area outcomes |
+| Safety | TAAS map | Validation | D | Validation only | Obtain reproducible raw data and verify derivative redistribution |
+| Housing | Yeongdo and Suyeong vacancy | Direct | C | Exclude | One vacancy definition and date across Busan |
+| Services | Bus-stop locations | Proxy | B | Hold | Retrieve source, join boundaries, and add frequency/walk-time evidence |
+| Environment | Heat-shelter locations | Context | B | Hold | Spatial join plus hours and capacity checks |
+| Environment | Air-monitoring network | Context | C | Hold | Join station coordinates and observations; disclose interpolation error |
+| Environment | Sasang flood traces | Validation | C | Validation only | Same-period citywide geospatial records |
 
-## Inclusion gates
+## Inclusion gate
 
-A core indicator must have consistent Busan-wide geography, a documented numerator and denominator, distinguish zero from missingness, provide reproducible spatial conversion, disclose missingness, and permit the intended reuse. Otherwise it is held, validation-only, or excluded. Missing values are never silently replaced with zero.
+A candidate enters the base composite only if it:
 
-One reference year and administrative-code version are fixed before scoring. District values are not copied into every constituent dong, and boundary conversions are documented.
+1. compares every Busan dong under one geography and definition;
+2. documents numerator, denominator, direction, and period;
+3. distinguishes observed zero, missing, uncollected, private, and not applicable;
+4. has a reproducible code or spatial mapping path;
+5. publishes mapping rate, unmatched count, and missingness; and
+6. permits both source use and publication of analytical derivatives.
+
+Failure leads to `hold`, `validation-only`, or `exclude`. District values must never be repeated across dongs, and missing values must never be changed to zero to pass the gate.
+
+## Reference-period status
+
+Verified candidates span 2024–2026, and SGIS years still require authenticated inspection. No reference year is fixed yet. COD-11 will freeze the geography and population denominator first, then choose the best common period and flag lagged measures for sensitivity analysis.
+
+See [DATASET_AUDIT.csv](../../data/DATASET_AUDIT.csv) for row-level evidence.
