@@ -1,45 +1,74 @@
 # Data Catalog
 
-This is the single inventory of datasets considered for the Busan IMD (B-IMD). It tracks both the minimum open-data model and the direct measures that could replace proxies through future institutional cooperation.
+This document manages candidate sources for the Busan Index of Multiple Deprivation (B-IMD). [DATASET_AUDIT.csv](../../data/DATASET_AUDIT.csv) is the row-level COD-10 register; this page explains the decisions and usage rules.
 
-## Recording rules
+## COD-10 audit result
 
-- Record provenance, reference period, geography, licence, and update cycle before inclusion.
-- Distinguish `direct`, `proxy`, `context`, and `validation` measures.
-- Document geocoding and spatial joins for sources that do not carry an administrative-dong code.
-- Keep missing values distinct from observed zeroes.
-- Preserve raw files and record collection timestamps and checksums.
+- Audit date: 2026-08-11
+- Registered candidates: 18
+- Raw files inspected: 10 Public Data Portal CSV files, including size, encoding, schema, row count, and SHA-256
+- Current `include` decisions: 0
+- Conclusion: public candidates exist, but they do not yet form a seven-domain set that compares every Busan administrative dong at one reference period and geography.
 
-## Catalog schema
+The Busan administrative-area page labels its table as 205 units while the district row counts sum to 206. The number 206 is therefore only a provisional audit denominator. Missingness and rankings must not be finalized until COD-11 obtains same-period administrative codes and boundaries.
 
-| Field | Description |
+## Domain decisions
+
+| Domain | Representative sources checked | Grade | Decision | Main reason |
+|---|---|---:|---|---|
+| Income | Basic-livelihood-recipient CSVs from five districts | C | Exclude | Reference dates span 2024–2026, definitions differ, and only five districts are covered |
+| Employment | SGIS establishment and worker API | C | Hold | Credentials and year checks are required; workplace employment is not resident employment |
+| Education | KERIS school register | B | Hold | Supports access measures, not adult attainment or outcomes |
+| Health | LOCALDATA hospitals/pharmacies and AED API | B | Hold | Facility access is a proxy, not a health outcome |
+| Safety | TAAS web GIS | D | Validation only | A reproducible extract and derivative redistribution terms were not verified |
+| Housing/access | Yeongdo/Suyeong vacancy and Busan bus stops | B–C | Hold/exclude | Stops can be joined spatially; vacancy covers only two districts with differing definitions |
+| Living environment | Heat shelters, air stations, and Sasang flood traces | B–C | Hold/validation only | Boundary joins and interpolation are required; flood records are partial |
+
+The absence of an A-grade source is an audit finding. Filling uncovered districts with zero or repeating district values across their dongs would create false comparability and is prohibited.
+
+## Raw-file findings
+
+| Source | Finding |
 |---|---|
-| `dataset_id` | Repository-wide stable identifier |
-| `domain` / `indicator_candidate` | Domain and candidate measure |
-| `measure_type` | `direct`, `proxy`, `context`, or `validation` |
-| `provider` / `source_url` | Publisher and authoritative URL |
-| `reference_period` / `update_cycle` | Observation period and refresh schedule |
-| `spatial_unit` | Census tract, administrative dong, legal dong, district, or coordinates |
-| `format` / `access_method` | CSV, SHP, API, WMS, and authentication |
-| `license` | Reuse and redistribution conditions |
-| `coverage` / `missing_rate` | Busan coverage and missingness |
-| `availability_grade` / `decision` | A–D and include/hold/exclude/validation-only |
-| `fallback` | Substitute measure or domain exclusion rule |
-| `collected_at` / `checksum` | Retrieval time and source integrity |
+| Basic livelihood | Geumjeong 16, Buk 13, Suyeong 10, Dong 12, and Nam 17 dongs. Periods and columns differ, so the files are excluded from index input |
+| Vacancy | All 11 Yeongdo and 10 Suyeong dongs are present within each file, but condition definitions differ |
+| Heat shelters | 1,789 rows and 0% coordinate missingness; opening hours, capacity, and cooling performance are absent |
+| Air monitoring network | 37 rows and 34 unique station names; this file does not provide coordinates |
+| Sasang flood traces | Nine rows; the source states that pre-2024 records are unavailable |
 
-## Initial candidate register
+Raw files remain in the Git-ignored `data/raw/audit/` directory. Recheck catalog structure and local SHA-256 values with:
 
-COD-10 must verify URLs, periods, coverage, missingness, and licences before any row is finalized.
+```powershell
+$env:PYTHONPATH = "src"
+python -m busan_imd.data_catalog docs/data/DATASET_AUDIT.csv --raw-dir data/raw/audit
+```
 
-| Domain | Preferred candidate | Type | Initial assessment | COD-10 check |
-|---|---|---|---|---|
-| Income | Basic-livelihood-benefit recipient rate | Proxy | Partial | Consistent coverage for every Busan dong |
-| Employment | Resident labour status or establishment/worker change | Direct/proxy | Partial | Availability of resident-based measures |
-| Education | Low educational attainment or service access | Direct/proxy | Partial | Recent small-area attainment coverage |
-| Health | Outcomes or vulnerable population and care access | Direct/proxy | Partial | Small-area outcomes and disclosure limits |
-| Safety | Crime, accidents, fire, or safety infrastructure | Direct/proxy | Partial | Downloadable aggregates versus map-only access |
-| Housing/access | Housing age, vacancy, transit, and essential services | Direct | Higher | Coordinate quality and spatial joins |
-| Living environment | Flood, heat, air, green space, and slope exposure | Direct/modelled | Feasible | Resolution and interpolation uncertainty |
+## Missing-value states
+
+- `0`: the publisher observed zero events for that unit and period
+- `missing`: a collected cell is blank or cannot be parsed
+- `uncollected`: a public source has not yet been retrieved
+- `private/unavailable`: no reproducible source is available
+- `not_applicable`: the indicator definition does not apply
+
+These states are never substituted for one another, especially not with zero.
+
+## Spatial mapping rules
+
+1. Use a same-period administrative-code register.
+2. Resolve name variants such as `제1동` and `1동` through an explicit district-aware crosswalk.
+3. Convert legal dongs only with a verified crosswalk, documenting one-to-many weights.
+4. Join coordinates by point-in-polygon after recording CRS and boundary date.
+5. Map census tracts with area or population weights and publish mapping rates.
+6. Never repeat district-level values across constituent dongs.
+
+## Access information still needed
+
+- `SGIS_CONSUMER_KEY` and `SGIS_CONSUMER_SECRET` for SGIS population, establishment, and boundary APIs
+- `DATA_GO_KR_SERVICE_KEY` for Public Data Portal APIs such as AED, bus, and air services
+- A same-period authoritative Busan administrative-code register and boundary file
+
+Secrets belong only in the local `.env`; they must not be pasted into chat or committed. Public-file auditing and institutional requests can continue without the keys.
 
 ## Related documents
 
