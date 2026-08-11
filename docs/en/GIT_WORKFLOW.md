@@ -32,6 +32,7 @@ Only the initial repository commit is allowed as a bootstrap exception. Direct p
 - Include `Closes <LINEAR-ID>` in the body.
 - Update both Korean and English documentation when analytical results, data contracts, or user-visible behavior change.
 - Squash merge only after CI, reproducibility checks, and acceptance criteria pass.
+- Delete the remote `feat/*` branch immediately after the merge completes.
 
 ### `develop → main`
 
@@ -47,11 +48,13 @@ Only the initial repository commit is allowed as a bootstrap exception. Direct p
 - Korean and English documentation are updated where required.
 - The pull request is merged into `develop`.
 - The Linear issue is closed by the pull request or synchronized to Done.
+- The merged remote work branch is deleted.
 
 ## Recommended branch protection
 
 - `develop`: pull request required, `PR policy` required, direct pushes disabled
 - `main`: pull request required, `PR policy` required, only `develop` accepted as head, direct pushes disabled
-- Force pushes and branch deletion disabled
+- Force pushes and deletion disabled for protected branches (`develop`, `main`)
+- Merged work branches (`feat/*`) are deleted automatically or manually
 - Conversation resolution and up-to-date base required
 
