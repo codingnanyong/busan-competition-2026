@@ -19,6 +19,7 @@ This project adapts the UK Index of Multiple Deprivation (IMD) to Busan's admini
 
 - [Project plan](docs/en/PROJECT_PLAN.md)
 - [Competition submission requirements and official template](docs/en/COMPETITION_REQUIREMENTS.md)
+- [Docker-based analysis environment](docs/en/DEVELOPMENT_ENVIRONMENT.md)
 - [Linear issue map](docs/en/ISSUES.md)
 - [Git workflow](docs/en/GIT_WORKFLOW.md)
 - [Release policy](docs/en/RELEASE_POLICY.md)

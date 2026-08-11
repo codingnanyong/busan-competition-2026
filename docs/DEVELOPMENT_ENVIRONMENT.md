@@ -7,7 +7,8 @@
 - Python 3.12
 - JupyterLab
 - pandas, GeoPandas, scikit-learn, Plotly
-- pytest 기반 smoke test
+- Ruff 기반 lint
+- pytest 기반 smoke test와 프로젝트 구조 검사
 
 패키지 버전은 `requirements.txt`에 고정합니다. GeoPandas가 사용하는 Shapely, pyproj 등 하위 패키지는 Linux wheel을 사용하므로 별도 GDAL 개발 도구를 이미지에 설치하지 않습니다.
 
@@ -36,13 +37,36 @@ $env:JUPYTER_PORT = "8890"
 docker compose up -d
 ```
 
-## 검증
+## 프로젝트 구조
 
-필수 라이브러리 import와 간단한 GeoDataFrame/Plotly 생성을 함께 확인합니다.
+```text
+data/
+├─ raw/          # 원본 데이터, 직접 수정 금지
+└─ processed/    # 재현 가능한 코드로 생성한 가공 데이터
+notebooks/       # 탐색 및 분석 노트북
+outputs/         # 생성된 표, 그림, 지도와 제출 후보 산출물
+src/busan_imd/   # 재사용 가능한 Python 분석 코드
+tests/           # 환경, 구조와 분석 코드 테스트
+```
+
+`data/raw`, `data/processed`, `outputs`의 실제 파일은 기본적으로 Git과 Docker build context에서 제외합니다. 데이터 출처와 라이선스는 `docs/data`에 기록하고, 재현에 필요한 소형 공개 산출물만 후속 이슈에서 명시적으로 추적합니다.
+
+## 품질검사
+
+전체 Python lint와 테스트를 컨테이너에서 실행합니다.
+
+```bash
+docker compose run --rm jupyter python -m ruff check .
+docker compose run --rm jupyter python -m pytest -v
+```
+
+필수 라이브러리 import만 빠르게 확인하려면 다음 smoke test를 실행합니다.
 
 ```bash
 docker compose run --rm jupyter python -m pytest tests/test_environment.py -v
 ```
+
+Ruff와 pytest 설정은 `pyproject.toml`에서 관리하며, pull request와 `develop` push에서도 동일한 검사를 실행합니다.
 
 실행 중인 서비스 상태는 다음 명령으로 확인합니다.
 
@@ -59,4 +83,4 @@ docker compose down
 
 ## 데이터 보존
 
-저장소 전체가 `/workspace`에 bind mount되므로 notebook과 코드 변경은 호스트에 바로 저장됩니다. 원천·가공 데이터와 출력물은 기본적으로 Docker build context에서 제외하며, 각 디렉터리의 Git 추적 정책은 후속 프로젝트 구조 이슈에서 확정합니다.
+저장소 전체가 `/workspace`에 bind mount되므로 notebook과 코드 변경은 호스트에 바로 저장됩니다. 원천·가공 데이터와 출력물은 기본적으로 Git 및 Docker build context에서 제외합니다.
