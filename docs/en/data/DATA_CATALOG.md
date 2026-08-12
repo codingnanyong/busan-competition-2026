@@ -5,8 +5,8 @@ This document manages candidate sources for the Busan Index of Multiple Deprivat
 ## COD-10 audit result
 
 - Audit date: 2026-08-11
-- Registered candidates: 18
-- Raw files inspected: 10 Public Data Portal CSV files, including size, encoding, schema, row count, and SHA-256
+- Registered candidates: 20
+- Raw sources inspected: ten direct downloads and four authenticated APIs, including bytes, record counts, and SHA-256
 - Current `include` decisions: 0
 - Conclusion: public candidates exist, but they do not yet form a seven-domain set that compares every Busan administrative dong at one reference period and geography.
 
@@ -19,12 +19,12 @@ The analytical cutoff is 2026-07-31. Annual indicators prefer complete 2025 data
 | Domain | Representative sources checked | Grade | Decision | Main reason |
 |---|---|---:|---|---|
 | Income | Basic-livelihood-recipient CSVs from five districts | C | Exclude | Reference dates span 2024–2026, definitions differ, and only five districts are covered |
-| Employment | SGIS establishment and worker API | C | Hold | Credentials and year checks are required; workplace employment is not resident employment |
+| Employment | SGIS 2024 establishment and worker API | C | Hold | All 206 dongs are present, but workplace employment is not resident employment |
 | Education | KERIS school register | B | Hold | Supports access measures, not adult attainment or outcomes |
-| Health | LOCALDATA hospitals/pharmacies and AED API | B | Hold | Facility access is a proxy, not a health outcome |
+| Health | LOCALDATA hospitals/pharmacies and AED API | B | Hold | 1,079 AED records are collected but undated; facility access is not a health outcome |
 | Safety | TAAS web GIS | D | Validation only | A reproducible extract and derivative redistribution terms were not verified |
-| Housing/access | Yeongdo/Suyeong vacancy and Busan bus stops | B–C | Hold/exclude | Stops can be joined spatially; vacancy covers only two districts with differing definitions |
-| Living environment | Heat shelters, air stations, and Sasang flood traces | B–C | Hold/validation only | Boundary joins and interpolation are required; flood records are partial |
+| Housing/access | Yeongdo/Suyeong vacancy and Busan bus stops | B–C | Hold/exclude | 8,790 stops need date verification and a spatial join; vacancy remains partial and inconsistent |
+| Living environment | Heat shelters, air stations, real-time air, and Sasang flood traces | B–C | Hold/exclude/validation only | The real-time response is outside cutoff; other sources need joins, interpolation, or broader coverage |
 
 The absence of an A-grade source is an audit finding. Filling uncovered districts with zero or repeating district values across their dongs would create false comparability and is prohibited.
 
@@ -37,6 +37,10 @@ The absence of an A-grade source is an audit finding. Filling uncovered district
 | Heat shelters | 1,789 rows and 0% coordinate missingness; opening hours, capacity, and cooling performance are absent |
 | Air monitoring network | 37 rows and 34 unique station names; this file does not provide coordinates |
 | Sasang flood traces | Nine rows; the source states that pre-2024 records are unavailable |
+| SGIS establishments | 2024, all 206 Busan dongs, no duplicate code or missing count cells |
+| Bus-stop API | All 8,790 records collected; held because the inventory date is absent |
+| AED API | All 1,079 records collected; held because the inventory date is absent |
+| Real-time air API | 1,184 observations from 2026-08-11–12; excluded beyond the 2026-07-31 cutoff |
 
 Raw files remain in the Git-ignored `data/raw/audit/` directory. Recheck catalog structure and local SHA-256 values with:
 
@@ -75,6 +79,7 @@ Secrets belong only in the local `.env`; they must not be pasted into chat or co
 
 - [Availability matrix](AVAILABILITY_MATRIX.md)
 - [Reference-period policy](REFERENCE_PERIOD_POLICY.md)
+- [Raw-data collection and provenance](RAW_DATA_COLLECTION.md)
 - [Data request roadmap](DATA_REQUEST_ROADMAP.md)
 - [Indicator specification](../methodology/INDICATOR_SPEC.md)
 - [Limitations](../methodology/LIMITATIONS.md)

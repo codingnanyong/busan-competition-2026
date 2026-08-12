@@ -14,14 +14,14 @@
 | Domain | Best public candidate | Type | Grade | Decision | Condition to pass |
 |---|---|---|---:|---|---|
 | Income | Basic-livelihood recipients in five districts | Proxy | C | Exclude | 100% of 16 districts with one date and benefit definition |
-| Employment | SGIS establishments and workers | Proxy | C | Hold | Verify API years/coverage and obtain resident employment separately |
+| Employment | SGIS 2024 establishments and workers | Proxy | C | Hold | All 206 dongs collected; obtain resident employment separately |
 | Education | National school register | Proxy | B | Hold | Geocode, calculate service areas, and keep separate from outcomes |
-| Health | Hospital, pharmacy, and AED locations | Proxy/context | B | Hold | Clean operating status, geocode, and obtain small-area outcomes |
+| Health | Hospital, pharmacy, and AED locations | Proxy/context | B | Hold | Verify AED date, clean status, and obtain small-area outcomes |
 | Safety | TAAS map | Validation | D | Validation only | Obtain reproducible raw data and verify derivative redistribution |
 | Housing | Yeongdo and Suyeong vacancy | Direct | C | Exclude | One vacancy definition and date across Busan |
-| Services | Bus-stop locations | Proxy | B | Hold | Retrieve source, join boundaries, and add frequency/walk-time evidence |
+| Services | Bus-stop locations | Proxy | B | Hold | Verify date for 8,790 records, join boundaries, and add frequency/walk-time evidence |
 | Environment | Heat-shelter locations | Context | B | Hold | Spatial join plus hours and capacity checks |
-| Environment | Air-monitoring network | Context | C | Hold | Join station coordinates and observations; disclose interpolation error |
+| Environment | Air-monitoring network | Context | C | Hold | Exclude August snapshot; obtain pre-cutoff observations and coordinates and disclose interpolation error |
 | Environment | Sasang flood traces | Validation | C | Validation only | Same-period citywide geospatial records |
 
 ## Inclusion gate
