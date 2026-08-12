@@ -10,7 +10,7 @@ This document manages candidate sources for the Busan Index of Multiple Deprivat
 - Current `include` decisions: 0
 - Conclusion: public candidates exist, but they do not yet form a seven-domain set that compares every Busan administrative dong at one reference period and geography.
 
-The Busan administrative-area page labels its table as 205 units while the district row counts sum to 206. The number 206 is therefore only a provisional audit denominator. Missingness and rankings must not be finalized until COD-11 obtains same-period administrative codes and boundaries.
+The Busan administrative-area page labels its table as 205 units while the district row counts sum to 206. COD-11's single SGIS 2025 response contains 206 codes and 206 matching boundaries, so the project fixes its reference geography at 206 units. See [administrative-dong codes and boundaries](ADMIN_BOUNDARIES.md).
 
 ## Domain decisions
 
