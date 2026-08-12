@@ -14,12 +14,13 @@ COD-10 found domains where public data cannot produce a direct measure or comple
 
 Never paste secrets into Slack, Linear, GitHub, documentation, or chat. Public-file auditing and request drafting can continue without them.
 
-### Decisions still needed
+### Fixed criteria and decisions still needed
 
-1. Competition limits on reference years and historical data
-2. Whether institutional data and derivatives may be redistributed in deliverables, GitHub, and Docker images
-3. Whether non-public data may be used for scoring without submitting the source
-4. The date on which the administrative-dong geography will be frozen
+Fixed: the geography is the 206-dong SGIS 2025 version and the data cutoff is 2026-07-31.
+
+1. Whether institutional data and derivatives may be redistributed in deliverables, GitHub, and Docker images
+2. Whether non-public data may be used for scoring without submitting the source
+3. The maximum acceptable lag where a domain has no current source
 
 ## Priority requests
 
@@ -39,6 +40,7 @@ Never paste secrets into Slack, Linear, GitHub, documentation, or chat. Public-f
 - Aggregate or mask small cells under the publisher's disclosure rule.
 - Do not request names, addresses, phone numbers, identifiers, or person-level event narratives.
 - Request denominator, deduplication rule, date, and administrative-code version.
+- Request both calendar-year 2025 and January–July 2026 or a 2026-07-31 snapshot where possible.
 - Ask how observed zero, uncollected, private, and not applicable are represented.
 - Obtain written permission for source use and publication of aggregates, maps, and index derivatives.
 - If unavailable, record the reason and the smallest publishable geography.

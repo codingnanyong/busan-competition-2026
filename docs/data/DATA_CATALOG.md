@@ -12,6 +12,8 @@
 
 부산시 행정 읍·면·동 페이지는 표 제목에 205라고 쓰면서 구·군별 행 수의 합은 206이다. COD-11의 SGIS 2025년 동일 응답에서 행정동 코드와 경계가 각각 206개로 일치했으므로 프로젝트 기준지리는 206개로 확정한다. 세부 내용은 [행정동 기준코드와 경계](ADMIN_BOUNDARIES.md)를 따른다.
 
+분석 데이터의 컷오프는 2026-07-31이다. 연간 지표는 2025년 완결자료를 우선하고 월별·분기별·기준일 자료는 2026년 7월까지 사용할 수 있다. 같은 지표 안에서 부분연도 누계와 연간값을 섞지 않으며 게시일·관측기간·수집일을 분리한다. 세부 선택 규칙은 [데이터 기준기간 정책](REFERENCE_PERIOD_POLICY.md)을 따른다.
+
 ## 영역별 판정
 
 | 영역 | 확인한 대표 자료 | 등급 | 결정 | 핵심 사유 |
@@ -64,15 +66,15 @@ python -m busan_imd.data_catalog docs/data/DATASET_AUDIT.csv --raw-dir data/raw/
 
 ## 추가로 필요한 접근 정보
 
-- `SGIS_CONSUMER_KEY`, `SGIS_CONSUMER_SECRET`: SGIS 사업체·인구·경계 API 검증용
-- `DATA_GO_KR_SERVICE_KEY`: AED·버스·대기 등 공공데이터포털 OpenAPI 검증용
-- 같은 기준연도의 부산 행정기관 코드·행정동 경계 원본
+- 현재 SGIS와 공공데이터포털 키는 로컬 `.env`에 준비되어 있다.
+- 2026년 7월 이하 관측기간을 제공하는 기관 담당 창구와 자료별 재배포 조건은 추가 확인이 필요하다.
 
 비밀값은 대화나 문서에 붙여 넣지 않고 로컬 `.env`에만 저장한다. 키가 없어도 공개 CSV 감사와 기관 데이터 요청은 계속할 수 있다.
 
 ## 관련 문서
 
 - [데이터 가용성 매트릭스](AVAILABILITY_MATRIX.md)
+- [데이터 기준기간 정책](REFERENCE_PERIOD_POLICY.md)
 - [필요 데이터 요청 로드맵](DATA_REQUEST_ROADMAP.md)
 - [지표 명세](../methodology/INDICATOR_SPEC.md)
 - [한계 및 해석 원칙](../methodology/LIMITATIONS.md)

@@ -12,6 +12,8 @@ This document manages candidate sources for the Busan Index of Multiple Deprivat
 
 The Busan administrative-area page labels its table as 205 units while the district row counts sum to 206. COD-11's single SGIS 2025 response contains 206 codes and 206 matching boundaries, so the project fixes its reference geography at 206 units. See [administrative-dong codes and boundaries](ADMIN_BOUNDARIES.md).
 
+The analytical cutoff is 2026-07-31. Annual indicators prefer complete 2025 data, while monthly, quarterly, and snapshot sources may extend through July 2026. Part-year cumulative and annual values are never mixed within an indicator, and publication, observation, and retrieval dates remain separate. See the [reference-period policy](REFERENCE_PERIOD_POLICY.md).
+
 ## Domain decisions
 
 | Domain | Representative sources checked | Grade | Decision | Main reason |
@@ -64,15 +66,15 @@ These states are never substituted for one another, especially not with zero.
 
 ## Access information still needed
 
-- `SGIS_CONSUMER_KEY` and `SGIS_CONSUMER_SECRET` for SGIS population, establishment, and boundary APIs
-- `DATA_GO_KR_SERVICE_KEY` for Public Data Portal APIs such as AED, bus, and air services
-- A same-period authoritative Busan administrative-code register and boundary file
+- SGIS and Public Data Portal credentials are now configured in the local `.env`.
+- Institutional contact routes and source-specific redistribution terms for observations through July 2026 still require confirmation.
 
 Secrets belong only in the local `.env`; they must not be pasted into chat or committed. Public-file auditing and institutional requests can continue without the keys.
 
 ## Related documents
 
 - [Availability matrix](AVAILABILITY_MATRIX.md)
+- [Reference-period policy](REFERENCE_PERIOD_POLICY.md)
 - [Data request roadmap](DATA_REQUEST_ROADMAP.md)
 - [Indicator specification](../methodology/INDICATOR_SPEC.md)
 - [Limitations](../methodology/LIMITATIONS.md)

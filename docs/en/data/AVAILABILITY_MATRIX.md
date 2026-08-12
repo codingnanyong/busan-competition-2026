@@ -34,11 +34,12 @@ A candidate enters the base composite only if it:
 4. has a reproducible code or spatial mapping path;
 5. publishes mapping rate, unmatched count, and missingness; and
 6. permits both source use and publication of analytical derivatives.
+7. ends on or before 2026-07-31 and uses the same observation window for every dong.
 
 Failure leads to `hold`, `validation-only`, or `exclude`. District values must never be repeated across dongs, and missing values must never be changed to zero to pass the gate.
 
-## Reference-period status
+## Reference year and data cutoff
 
-Verified candidates span 2024–2026. COD-11 fixes the reference geography at 206 Busan administrative dongs in SGIS 2025; see [administrative-dong codes and boundaries](ADMIN_BOUNDARIES.md) for validation and reproduction. Indicator lags remain flagged for sensitivity analysis.
+The project fixes its geography at 206 Busan administrative dongs in SGIS 2025 and permits observations through 2026-07-31. Annual indicators prefer complete 2025 data; monthly, quarterly, and snapshot sources may extend through July 2026. When unavailable, the nearest earlier complete period is used with lag and partial-period status disclosed. See the [reference-period policy](REFERENCE_PERIOD_POLICY.md) and [administrative-dong boundary record](ADMIN_BOUNDARIES.md).
 
 See [DATASET_AUDIT.csv](../../data/DATASET_AUDIT.csv) for row-level evidence.
