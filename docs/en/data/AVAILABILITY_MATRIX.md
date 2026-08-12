@@ -39,6 +39,6 @@ Failure leads to `hold`, `validation-only`, or `exclude`. District values must n
 
 ## Reference-period status
 
-Verified candidates span 2024–2026, and SGIS years still require authenticated inspection. No reference year is fixed yet. COD-11 will freeze the geography and population denominator first, then choose the best common period and flag lagged measures for sensitivity analysis.
+Verified candidates span 2024–2026. COD-11 fixes the reference geography at 206 Busan administrative dongs in SGIS 2025; see [administrative-dong codes and boundaries](ADMIN_BOUNDARIES.md) for validation and reproduction. Indicator lags remain flagged for sensitivity analysis.
 
 See [DATASET_AUDIT.csv](../../data/DATASET_AUDIT.csv) for row-level evidence.
