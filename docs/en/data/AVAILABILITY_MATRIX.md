@@ -14,14 +14,14 @@
 | Domain | Best public candidate | Type | Grade | Decision | Condition to pass |
 |---|---|---|---:|---|---|
 | Income | Basic-livelihood recipients in five districts | Proxy | C | Exclude | 100% of 16 districts with one date and benefit definition |
-| Employment | SGIS establishments and workers | Proxy | C | Hold | Verify API years/coverage and obtain resident employment separately |
+| Employment | SGIS 2024 establishments and workers | Proxy | C | Hold | All 206 dongs collected; obtain resident employment separately |
 | Education | National school register | Proxy | B | Hold | Geocode, calculate service areas, and keep separate from outcomes |
-| Health | Hospital, pharmacy, and AED locations | Proxy/context | B | Hold | Clean operating status, geocode, and obtain small-area outcomes |
+| Health | Hospital, pharmacy, and AED locations | Proxy/context | B | Hold | Verify AED date, clean status, and obtain small-area outcomes |
 | Safety | TAAS map | Validation | D | Validation only | Obtain reproducible raw data and verify derivative redistribution |
 | Housing | Yeongdo and Suyeong vacancy | Direct | C | Exclude | One vacancy definition and date across Busan |
-| Services | Bus-stop locations | Proxy | B | Hold | Retrieve source, join boundaries, and add frequency/walk-time evidence |
+| Services | Bus-stop locations | Proxy | B | Hold | Verify date for 8,790 records, join boundaries, and add frequency/walk-time evidence |
 | Environment | Heat-shelter locations | Context | B | Hold | Spatial join plus hours and capacity checks |
-| Environment | Air-monitoring network | Context | C | Hold | Join station coordinates and observations; disclose interpolation error |
+| Environment | Air-monitoring network | Context | C | Hold | Exclude August snapshot; obtain pre-cutoff observations and coordinates and disclose interpolation error |
 | Environment | Sasang flood traces | Validation | C | Validation only | Same-period citywide geospatial records |
 
 ## Inclusion gate
@@ -34,11 +34,12 @@ A candidate enters the base composite only if it:
 4. has a reproducible code or spatial mapping path;
 5. publishes mapping rate, unmatched count, and missingness; and
 6. permits both source use and publication of analytical derivatives.
+7. ends on or before 2026-07-31 and uses the same observation window for every dong.
 
 Failure leads to `hold`, `validation-only`, or `exclude`. District values must never be repeated across dongs, and missing values must never be changed to zero to pass the gate.
 
-## Reference-period status
+## Reference year and data cutoff
 
-Verified candidates span 2024–2026. COD-11 fixes the reference geography at 206 Busan administrative dongs in SGIS 2025; see [administrative-dong codes and boundaries](ADMIN_BOUNDARIES.md) for validation and reproduction. Indicator lags remain flagged for sensitivity analysis.
+The project fixes its geography at 206 Busan administrative dongs in SGIS 2025 and permits observations through 2026-07-31. Annual indicators prefer complete 2025 data; monthly, quarterly, and snapshot sources may extend through July 2026. When unavailable, the nearest earlier complete period is used with lag and partial-period status disclosed. See the [reference-period policy](REFERENCE_PERIOD_POLICY.md) and [administrative-dong boundary record](ADMIN_BOUNDARIES.md).
 
 See [DATASET_AUDIT.csv](../../data/DATASET_AUDIT.csv) for row-level evidence.
