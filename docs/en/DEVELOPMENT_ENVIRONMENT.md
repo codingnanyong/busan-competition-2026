@@ -30,6 +30,15 @@ Files under `data/raw`, `data/processed`, and `outputs` are ignored by Git and t
 
 ## Quality checks
 
+Regenerate the 206-dong candidate profile and its validation report from collected sources with:
+
+```bash
+docker compose run --rm jupyter python -m busan_imd.standardization
+```
+
+See [2025 administrative-dong data standardization](data/STANDARDIZATION.md) for the rules and
+current match results.
+
 Run the same lint and test commands used by CI:
 
 ```bash
