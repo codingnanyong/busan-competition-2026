@@ -4,25 +4,33 @@ from __future__ import annotations
 
 import argparse
 import csv
-import hashlib
 import json
 import re
 import xml.etree.ElementTree as ET
-from datetime import UTC, date, datetime
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlencode
-from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
-from busan_imd.admin_boundaries import authenticate, read_env_file
+from busan_imd.core.artifacts import sha256_file as sha256
+from busan_imd.core.artifacts import write_json
+from busan_imd.core.config import read_env_file, require_values
+from busan_imd.core.http import encoded_secret_url, fetch_bytes
+from busan_imd.core.provenance import (
+    ANALYSIS_CUTOFF,
+    PRIMARY_REFERENCE_YEAR,
+    cutoff_status,
+    ensure_secret_free,
+)
 from busan_imd.data_catalog import read_catalog
+from busan_imd.sources.sgis import authenticate
 
-CUTOFF = date(2026, 7, 31)
+CUTOFF = ANALYSIS_CUTOFF
 COLLECTION_ROOT = Path("data/raw/collection")
 AUDIT_ROOT = Path("data/raw/audit")
 CATALOG_PATH = Path("docs/data/DATASET_AUDIT.csv")
-MANIFEST_PATH = Path("docs/data/RAW_DATA_MANIFEST.json")
+MANIFEST_PATH = Path("docs/data/manifests/RAW_DATA_MANIFEST.json")
 PORTAL_ID_PATTERN = re.compile(r"data\.go\.kr/data/(\d+)/fileData\.do")
 
 API_SOURCES = {
@@ -67,25 +75,12 @@ API_SOURCES = {
     },
 }
 
-
-def sha256(path: Path) -> str:
-    """Return an uppercase SHA-256 digest."""
-    return hashlib.sha256(path.read_bytes()).hexdigest().upper()
-
-
-def fetch_bytes(url: str) -> bytes:
-    """Fetch a fixed HTTPS API URL."""
-    request = Request(url, headers={"User-Agent": "busan-competition-2026/1.0"})
-    with urlopen(request, timeout=120) as response:  # noqa: S310 - configured HTTPS APIs
-        return response.read()
-
-
 def public_portal_url(endpoint: str, service_key: str, result_type: str) -> str:
     """Build a portal URL without double-encoding its already encoded service key."""
     parameters = {"pageNo": "1", "numOfRows": "10000"}
     if result_type == "json":
         parameters["resultType"] = "json"
-    return f"{endpoint}?serviceKey={service_key}&{urlencode(parameters)}"
+    return encoded_secret_url(endpoint, "serviceKey", service_key, parameters)
 
 
 def json_summary(payload: bytes) -> tuple[int, dict[str, Any]]:
@@ -116,19 +111,6 @@ def xml_summary(payload: bytes) -> tuple[int, dict[str, Any]]:
     if len(items) != total_count:
         raise ValueError(f"Expected {total_count} XML items, received {len(items)}")
     return total_count, {}
-
-
-def cutoff_status(reference_period: str) -> str:
-    """Classify an ISO-like reference period against the project cutoff."""
-    match = re.search(r"(20\d{2})-(\d{2})-(\d{2})", reference_period)
-    if match:
-        observed = date.fromisoformat(match.group(0))
-        return "eligible" if observed <= CUTOFF else "outside_cutoff"
-    match = re.search(r"(20\d{2})", reference_period)
-    if match:
-        return "eligible" if int(match.group(1)) <= CUTOFF.year else "outside_cutoff"
-    return "unverified"
-
 
 def direct_download_entries(catalog_path: Path, audit_root: Path) -> list[dict[str, Any]]:
     """Verify and describe the direct downloads already present locally."""
@@ -282,10 +264,9 @@ def collect_portal_api(
 
 def validate_manifest(manifest: dict[str, Any], repository_root: Path = Path(".")) -> None:
     """Reject secrets, duplicate IDs, missing files, and checksum drift."""
-    serialized = json.dumps(manifest, ensure_ascii=False)
-    forbidden = ("serviceKey=", "accessToken=", "consumer_secret", "consumer_key")
-    if any(term in serialized for term in forbidden):
-        raise ValueError("Manifest contains a credential or secret-bearing query parameter")
+    ensure_secret_free(manifest)
+    if manifest.get("primary_reference_year") != PRIMARY_REFERENCE_YEAR:
+        raise ValueError(f"Manifest primary reference year must be {PRIMARY_REFERENCE_YEAR}")
     entries = manifest.get("datasets", [])
     identifiers = [entry["dataset_id"] for entry in entries]
     if len(identifiers) != len(set(identifiers)):
@@ -306,13 +287,13 @@ def write_manifest(entries: list[dict[str, Any]], path: Path, generated_at: str)
         "schema_version": 1,
         "generated_at": generated_at,
         "analysis_cutoff": CUTOFF.isoformat(),
+        "primary_reference_year": PRIMARY_REFERENCE_YEAR,
         "dataset_count": len(entries),
         "cutoff_status_counts": status_counts,
         "datasets": sorted(entries, key=lambda entry: entry["dataset_id"]),
     }
     validate_manifest(manifest)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json(path, manifest)
 
 
 def main() -> int:
@@ -326,9 +307,7 @@ def main() -> int:
 
     config = read_env_file(args.env_file)
     required = ("SGIS_CONSUMER_KEY", "SGIS_CONSUMER_SECRET", "DATA_GO_KR_SERVICE_KEY")
-    missing = [name for name in required if not config.get(name)]
-    if missing:
-        raise ValueError(f"Missing credentials in {args.env_file}: {', '.join(missing)}")
+    require_values(config, required, args.env_file)
 
     retrieved_at = datetime.now(UTC).replace(microsecond=0).isoformat()
     entries = direct_download_entries(args.catalog, args.audit_root)
@@ -347,9 +326,8 @@ def main() -> int:
             )
         )
     write_manifest(entries, args.manifest, retrieved_at)
-    with (args.output_root / "manifest.json").open("w", encoding="utf-8") as stream:
-        manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
-        json.dump(manifest, stream, ensure_ascii=False, indent=2)
+    manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
+    write_json(args.output_root / "manifest.json", manifest)
     print(f"collected and verified {len(entries)} datasets; manifest: {args.manifest}")
     return 0
 

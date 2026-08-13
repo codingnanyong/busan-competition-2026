@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "dataset_id": "ENV-AIR-HEIS-DAILY-2025-001",
+  "provider": "Busan Metropolitan City Health & Environment Information System (HEIS)",
+  "source_page": "https://heis.busan.go.kr/environmental/air002_3.aspx",
+  "access_method": "public HEIS HTML daily-average query",
+  "query_parameters": [
+    "areaindex",
+    "sitename",
+    "yearselect",
+    "monthselect",
+    "year",
+    "month"
+  ],
+  "reference_period": "2025-01-01/2025-12-31",
+  "primary_reference_year": 2025,
+  "analysis_role": "primary",
+  "eligible_for_primary_analysis": true,
+  "analysis_cutoff": "2026-07-31",
+  "cutoff_status": "eligible",
+  "period_type": "annual",
+  "retrieved_at": "2026-08-12T06:07:47+00:00",
+  "license": "Public HEIS page; raw-data redistribution terms require separate verification",
+  "station_count": 33,
+  "stations": [
+    {
+      "code": "221112",
+      "name": "광복동"
+    },
+    {
+      "code": "221202",
+      "name": "장림동"
+    },
+    {
+      "code": "221181",
+      "name": "학장동"
+    },
+    {
+      "code": "221182",
+      "name": "덕천동"
+    },
+    {
+      "code": "221221",
+      "name": "연산동"
+    },
+    {
+      "code": "221172",
+      "name": "대연동"
+    },
+    {
+      "code": "221191",
+      "name": "청룡동"
+    },
+    {
+      "code": "221152",
+      "name": "전포동"
+    },
+    {
+      "code": "221141",
+      "name": "태종대"
+    },
+    {
+      "code": "221231",
+      "name": "기장읍"
+    },
+    {
+      "code": "221211",
+      "name": "대저동"
+    },
+    {
+      "code": "221251",
+      "name": "부곡동"
+    },
+    {
+      "code": "221271",
+      "name": "광안동"
+    },
+    {
+      "code": "221163",
+      "name": "명장동"
+    },
+    {
+      "code": "221212",
+      "name": "녹산동"
+    },
+    {
+      "code": "221233",
+      "name": "용수리"
+    },
+    {
+      "code": "221192",
+      "name": "좌동"
+    },
+    {
+      "code": "221241",
+      "name": "수정동"
+    },
+    {
+      "code": "221281",
+      "name": "대신동"
+    },
+    {
+      "code": "221282",
+      "name": "덕포동"
+    },
+    {
+      "code": "221284",
+      "name": "당리동"
+    },
+    {
+      "code": "221283",
+      "name": "개금동"
+    },
+    {
+      "code": "221142",
+      "name": "청학동"
+    },
+    {
+      "code": "221193",
+      "name": "재송동"
+    },
+    {
+      "code": "221183",
+      "name": "화명동"
+    },
+    {
+      "code": "221162",
+      "name": "온천동(도로변)"
+    },
+    {
+      "code": "221131",
+      "name": "초량동(도로변)"
+    },
+    {
+      "code": "221213",
+      "name": "명지동"
+    },
+    {
+      "code": "221253",
+      "name": "회동동"
+    },
+    {
+      "code": "221174",
+      "name": "용호동"
+    },
+    {
+      "code": "221184",
+      "name": "삼락동"
+    },
+    {
+      "code": "221185",
+      "name": "우동"
+    },
+    {
+      "code": "221186",
+      "name": "감천동"
+    }
+  ],
+  "month_count": 12,
+  "raw_file_count": 396,
+  "raw_files_aggregate_sha256": "CCCDC281B73972D7A832F76123C51C8FE5534248C7B2E0DFF608296E9FF422DE",
+  "csv_path": "data/raw/heis/air_daily/2025/busan_heis_air_daily_2025_01_12.csv",
+  "csv_sha256": "C9DF487584AFA1E4B6DE1DCC2C55C59C4632D2A8B7B24A751498DFF9539CEBFD",
+  "record_count": 12045,
+  "fully_observed_record_count": 10674,
+  "non_observed_record_count": 1371,
+  "notes": "Each HTML response is retained locally. Non-numeric source values such as 점검중 are preserved in measurement_status and represented as blank pollutant values."
+}

@@ -24,7 +24,7 @@ remain explicit in the catalog and result metadata.
 - [SGIS use policy](https://sgis.mods.go.kr/developer/html/newOpenApi/policy/policy.html)
 - Access: short-lived access token issued from personal SGIS consumer credentials
 - Versioned codes: `docs/data/BUSAN_ADMIN_DONG_CODES_2025.csv`
-- Versioned provenance snapshot: `docs/data/BUSAN_ADMIN_DONG_MANIFEST_2025.json`
+- Versioned provenance snapshot: `docs/data/manifests/BUSAN_ADMIN_DONG_MANIFEST_2025.json`
 
 The authenticated raw GeoJSON is excluded from Git due to its size and redistribution
 conditions. The manifest instead records the source, non-secret request parameters,
@@ -42,11 +42,11 @@ SGIS_CONSUMER_SECRET=...
 
 ```powershell
 $env:PYTHONPATH = "src"
-python -m busan_imd.admin_boundaries --year 2025
+python -m busan_imd.collectors.admin_boundaries --year 2025
 docker compose run --rm --no-deps jupyter python scripts/validate_admin_boundaries.py `
   data/raw/sgis/admin_boundaries/2025/busan_admin_dong_boundaries_2025.geojson `
   --repair-output data/raw/sgis/admin_boundaries/2025/busan_admin_dong_boundaries_2025_valid.geojson `
-  --report docs/data/BUSAN_ADMIN_DONG_GEOMETRY_VALIDATION_2025.json
+  --report docs/data/manifests/BUSAN_ADMIN_DONG_GEOMETRY_VALIDATION_2025.json
 ```
 
 The command writes ignored raw artifacts under

@@ -4,16 +4,16 @@ from __future__ import annotations
 
 import argparse
 import csv
-import hashlib
 import json
 import os
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlencode
-from urllib.request import Request, urlopen
 
-AUTH_ENDPOINT = "https://sgisapi.mods.go.kr/OpenAPI3/auth/authentication.json"
+from busan_imd.core.artifacts import sha256_file as sha256
+from busan_imd.core.config import read_env_file
+from busan_imd.sources.sgis import authenticate, request_json
+
 BOUNDARY_ENDPOINT = "https://sgisapi.mods.go.kr/OpenAPI3/boundary/hadmarea.geojson"
 SOURCE_PAGE = (
     "https://sgis.mods.go.kr/developer/html/newOpenApi/api/dataApi/addressBoundary.html"
@@ -23,42 +23,6 @@ DEFAULT_YEAR = 2025
 BUSAN_CODE = "21"
 EXPECTED_DONG_COUNT = 206
 CRS = "EPSG:5179"
-
-
-def read_env_file(path: Path) -> dict[str, str]:
-    """Read simple KEY=VALUE entries without modifying the process environment."""
-    if not path.exists():
-        return {}
-    values: dict[str, str] = {}
-    for raw_line in path.read_text(encoding="utf-8-sig").splitlines():
-        line = raw_line.strip()
-        if not line or line.startswith("#") or "=" not in line:
-            continue
-        key, value = line.split("=", 1)
-        values[key.strip()] = value.strip().strip("\"'")
-    return values
-
-
-def request_json(endpoint: str, parameters: dict[str, str]) -> dict[str, Any]:
-    """Request a JSON document from SGIS."""
-    request = Request(
-        f"{endpoint}?{urlencode(parameters)}",
-        headers={"User-Agent": "busan-competition-2026/1.0"},
-    )
-    with urlopen(request, timeout=60) as response:  # noqa: S310 - fixed HTTPS endpoints
-        return json.load(response)
-
-
-def authenticate(consumer_key: str, consumer_secret: str) -> str:
-    """Exchange SGIS credentials for a short-lived access token."""
-    response = request_json(
-        AUTH_ENDPOINT,
-        {"consumer_key": consumer_key, "consumer_secret": consumer_secret},
-    )
-    if response.get("errCd") != 0:
-        raise ValueError(f"SGIS authentication failed: {response.get('errMsg', 'unknown error')}")
-    return str(response["result"]["accessToken"])
-
 
 def fetch_boundaries(access_token: str, year: int) -> dict[str, Any]:
     """Fetch all second-level descendants (administrative dongs) of Busan."""
@@ -110,12 +74,6 @@ def validate_boundaries(
     if errors:
         raise ValueError("\n".join(errors))
     return sorted(features, key=lambda item: item["properties"]["adm_cd"])
-
-
-def sha256(path: Path) -> str:
-    """Return an uppercase SHA-256 digest for a file."""
-    return hashlib.sha256(path.read_bytes()).hexdigest().upper()
-
 
 def code_rows(features: list[dict[str, Any]], year: int) -> list[dict[str, str | int]]:
     """Build the reference code table from boundary properties."""
@@ -193,7 +151,7 @@ def write_reference_snapshot(
     """Write the redistributable code table and provenance snapshot for version control."""
     output_dir.mkdir(parents=True, exist_ok=True)
     codes_path = output_dir / f"BUSAN_ADMIN_DONG_CODES_{year}.csv"
-    manifest_path = output_dir / f"BUSAN_ADMIN_DONG_MANIFEST_{year}.json"
+    manifest_path = output_dir / "manifests" / f"BUSAN_ADMIN_DONG_MANIFEST_{year}.json"
     rows = code_rows(features, year)
     with codes_path.open("w", encoding="utf-8-sig", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
@@ -204,6 +162,7 @@ def write_reference_snapshot(
         codes_path.name: {"sha256": sha256(codes_path)},
         "raw_boundary_committed": False,
     }
+    manifest_path.parent.mkdir(parents=True, exist_ok=True)
     manifest_path.write_text(json.dumps(snapshot, ensure_ascii=False, indent=2), encoding="utf-8")
 
 

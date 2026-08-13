@@ -1,3 +1,5 @@
+"""Smoke test for the containerized analysis dependency stack."""
+
 import geopandas as gpd
 import pandas as pd
 import plotly.express as px

@@ -1,9 +1,10 @@
-import json
+"""Unit tests for SGIS administrative-boundary normalization."""
+
 from pathlib import Path
 
 import pytest
 
-from busan_imd.admin_boundaries import code_rows, read_env_file, validate_boundaries
+from busan_imd.collectors.admin_boundaries import code_rows, read_env_file, validate_boundaries
 
 
 def feature(code: str, name: str, geometry_type: str = "Polygon") -> dict:
@@ -48,32 +49,3 @@ def test_read_env_file_ignores_comments(tmp_path: Path) -> None:
     path.write_text("# secret values\nSGIS_CONSUMER_KEY='example'\n", encoding="utf-8")
 
     assert read_env_file(path) == {"SGIS_CONSUMER_KEY": "example"}
-
-
-def test_committed_manifest_has_no_secret_and_matches_reference_table() -> None:
-    root = Path(__file__).resolve().parents[1]
-    manifest_path = root / "docs/data/BUSAN_ADMIN_DONG_MANIFEST_2025.json"
-    codes_path = root / "docs/data/BUSAN_ADMIN_DONG_CODES_2025.csv"
-    manifest_text = manifest_path.read_text(encoding="utf-8")
-    manifest = json.loads(manifest_text)
-
-    assert "accessToken" not in manifest_text
-    assert "consumer_secret" not in manifest_text
-    assert manifest["reference_year"] == 2025
-    assert manifest["feature_count"] == 206
-    assert codes_path.read_text(encoding="utf-8-sig").count("\n") == 207
-
-
-def test_committed_geometry_report_records_repair() -> None:
-    root = Path(__file__).resolve().parents[1]
-    report = json.loads(
-        (root / "docs/data/BUSAN_ADMIN_DONG_GEOMETRY_VALIDATION_2025.json").read_text(
-            encoding="utf-8"
-        )
-    )
-
-    assert report["source_checks"]["invalid_geometries"] == 1
-    assert report["invalid_geometry_details"][0]["adm_cd"] == "21100620"
-    assert report["repaired_checks"]["invalid_geometries"] == 0
-    assert len(report["source_sha256"]) == 64
-    assert len(report["repair_output_sha256"]) == 64

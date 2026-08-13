@@ -49,6 +49,9 @@ src/busan_imd/   # 재사용 가능한 Python 분석 코드
 tests/           # 환경, 구조와 분석 코드 테스트
 ```
 
+세부 디렉터리 책임은 [프로젝트 파일 구조](PROJECT_STRUCTURE.md), 다른 컴퓨터로의 원본
+이전과 macOS 실행은 [macOS 작업환경 이전](MACOS_SETUP.md)을 참고합니다.
+
 `data/raw`, `data/processed`, `outputs`의 실제 파일은 기본적으로 Git과 Docker build context에서 제외합니다. 데이터 출처와 라이선스는 `docs/data`에 기록하고, 재현에 필요한 소형 공개 산출물만 후속 이슈에서 명시적으로 추적합니다.
 
 ## 품질검사
@@ -63,7 +66,7 @@ docker compose run --rm jupyter python -m pytest -v
 필수 라이브러리 import만 빠르게 확인하려면 다음 smoke test를 실행합니다.
 
 ```bash
-docker compose run --rm jupyter python -m pytest tests/test_environment.py -v
+docker compose run --rm jupyter python -m pytest tests/smoke/test_environment.py -v
 ```
 
 Ruff와 pytest 설정은 `pyproject.toml`에서 관리하며, pull request와 `develop` push에서도 동일한 검사를 실행합니다.

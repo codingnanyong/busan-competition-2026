@@ -1,10 +1,10 @@
 # Raw-data collection and provenance
 
-## Collection result on 2026-08-12
+## Collection result on 2026-08-12–13
 
-COD-12 preserves 14 local raw sources: ten direct downloads and four authenticated API responses.
-The secret-free [RAW_DATA_MANIFEST.json](../../data/RAW_DATA_MANIFEST.json) records their provenance
-and validation.
+COD-12 preserves 23 local datasets across direct downloads, authenticated APIs, and public queries.
+Secret-free manifests in `docs/data/manifests` record provenance and validation for the base collection, HEIS,
+reference data, healthcare facilities, KOROAD crashes, and the dated bus-stop snapshot.
 
 | Type | Dataset | Records | Cutoff status |
 |---|---|---:|---|
@@ -13,9 +13,15 @@ and validation.
 | Busan bus API | Stops | 8,790 | Observation date unverified |
 | Busan AED API | Emergency equipment | 1,079 | Observation date unverified |
 | Busan air API | Hourly observations | 1,184 | Excluded: 2026-08-11–12 |
+| NEIS API | Busan schools | 667 total; 662 eligible at 2025-12-31 | Hold for geocoding |
+| MOIS hospital API | Current register and reconstructed 2025 candidates | 641 / 406 | History and coordinate validation required |
+| MOIS pharmacy API | Current register and reconstructed 2025 candidates | 4,336 / 1,731 | History and coordinate validation required |
+| KOROAD API | 2025 district statistics / 2024 hotspots | 202 / 48 | Validation only |
+| National Fire Agency API | 2025 daily fire-station summaries | 3,156 rows / 365 dates | Validation only |
 
-`Eligible` only means the period ends by 2026-07-31. It does not bypass the A/B inclusion gate for
-coverage, definition, direct/proxy validity, or reuse. The bus and AED APIs expose no record-level
+`Eligible` only means the period ends by the collection cutoff. The primary index still requires
+2025 data; 2026 part-year data is supplemental validation only. Eligibility does not bypass the A/B
+inclusion gate for coverage, definition, direct/proxy validity, or reuse. The bus and AED APIs expose no record-level
 observation date and therefore require confirmation before scoring. The real-time air snapshot is
 outside the cutoff and remains provenance-only.
 
@@ -34,7 +40,7 @@ Never commit or paste their values.
 
 ```powershell
 $env:PYTHONPATH = "src"
-python -m busan_imd.raw_collection
+python -m busan_imd.collectors.approved_apis
 ```
 
 Before writing the manifest, the collector verifies all ten direct-download checksums, 206 unique
@@ -45,16 +51,13 @@ API responses can change. Rerunning overwrites the local API snapshots and updat
 so only when intentionally refreshing the reference snapshot and record the reason and retrieval
 time in the pull request.
 
-## Candidates still without raw files
+## Collected candidates that still require validation
 
-- KERIS school-register external download
-- Nationwide LOCALDATA hospital and pharmacy files
-- Busan bus-stop SHP (the API XML is collected)
-- Reproducible TAAS crash source
-
-These remain `not_collected` in the audit. They are not presented as acquired until their external
-download path, redistribution terms, or reproducible extraction method is verified. Only the 14
-manifested sources form the current COD-12 snapshot.
+- The school register requires geocoding and service-area checks.
+- Hospital and pharmacy 2025 candidates are reconstructed from the current licence register and
+  require historical-completeness and coordinate checks.
+- KOROAD statistics are district-level, while hotspots are selected locations rather than a complete
+  crash census; both remain validation-only.
 
 Direct no-key downloads follow exactly the same attribution rule as APIs: provider, source URL,
 observation period, retrieval date, terms, bytes, record count, and SHA-256 are mandatory.
