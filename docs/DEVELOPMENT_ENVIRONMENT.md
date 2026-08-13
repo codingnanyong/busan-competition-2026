@@ -56,6 +56,16 @@ tests/           # 환경, 구조와 분석 코드 테스트
 
 ## 품질검사
 
+수집된 원본을 2025년 기준 206개 행정동 후보 프로파일로 가공하고 검증 보고서를
+재생성하려면 다음을 실행합니다.
+
+```bash
+docker compose run --rm jupyter python -m busan_imd.standardization
+```
+
+세부 규칙과 현재 매칭 결과는 [2025 행정동 데이터 표준화와 검증](data/STANDARDIZATION.md)에
+기록합니다.
+
 전체 Python lint와 테스트를 컨테이너에서 실행합니다.
 
 ```bash

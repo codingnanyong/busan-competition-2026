@@ -38,7 +38,7 @@ The absence of an A-grade source is an audit finding. Filling uncovered district
 | Air monitoring network | 37 rows and 34 unique station names; this file does not provide coordinates |
 | Sasang flood traces | Nine rows; the source states that pre-2024 records are unavailable |
 | SGIS establishments | 2024, all 206 Busan dongs, no duplicate code or missing count cells |
-| Bus-stop API | All 8,790 records collected; held because the inventory date is absent |
+| Bus-stop API | The undated 8,790-record live response is held; the 8,522-record 2025-01-21 shapefile is the reference inventory |
 | AED API | All 1,079 records collected; held because the inventory date is absent |
 | Real-time air API | 1,184 observations from 2026-08-11–12; excluded beyond the 2026-07-31 cutoff |
 | School register | All 667 Busan schools collected; 662 remain after excluding five post-2025 openings |
@@ -83,6 +83,7 @@ Secrets belong only in the local `.env`; they must not be pasted into chat or co
 - [Availability matrix](AVAILABILITY_MATRIX.md)
 - [Reference-period policy](REFERENCE_PERIOD_POLICY.md)
 - [Raw-data collection and provenance](RAW_DATA_COLLECTION.md)
+- [2025 administrative-dong data standardization](STANDARDIZATION.md)
 - [Data request roadmap](DATA_REQUEST_ROADMAP.md)
 - [Indicator specification](../methodology/INDICATOR_SPEC.md)
 - [Limitations](../methodology/LIMITATIONS.md)

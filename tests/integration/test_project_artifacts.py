@@ -49,6 +49,8 @@ def test_project_structure_and_required_documents() -> None:
         "docs/data/manifests/MOIS_RESIDENT_POPULATION_MANIFEST_2025.json",
         "docs/data/manifests/BUSAN_SUPPLEMENTAL_DATA_MANIFEST.json",
         "docs/data/manifests/FIRE_SUMMARY_MANIFEST_2025.json",
+        "docs/data/manifests/STANDARDIZATION_REPORT_2025.json",
+        "docs/data/STANDARDIZATION.md",
     )
 
     assert all((REPOSITORY_ROOT / path).is_dir() for path in required_directories)
@@ -189,6 +191,26 @@ def test_fire_manifest_covers_complete_2025_as_validation_only() -> None:
     assert manifest["eligible_for_primary_analysis"] is False
 
 
+def test_standardization_report_covers_canonical_dongs_and_discloses_failures() -> None:
+    report = read_json("docs/data/manifests/STANDARDIZATION_REPORT_2025.json")
+    entries = {entry["dataset_id"]: entry for entry in report["datasets"]}
+
+    assert report["reference_year"] == 2025
+    assert report["reference_crs"] == "EPSG:5179"
+    assert report["canonical_admin_dong_count"] == 206
+    assert report["profile_record_count"] == 206
+    assert report["profile_checks"]["total_population_2025"] == 3241600
+    assert report["profile_checks"]["sex_total_mismatch_admin_dongs"] == 0
+    assert report["profile_checks"]["count_column_totals"]["bus_stop_count_2025"] == 7940
+    assert report["analysis_roles"]["primary_denominator"] == ["DEM-MOIS-POP-2025-001"]
+    assert entries["DEM-MOIS-POP-2025-001"]["matched_admin_dongs"] == 206
+    assert entries["HOU-BUSSTOP-001"]["matched_records"] == 7940
+    assert entries["HOU-BUSSTOP-001"]["unmatched_records"] == 582
+    assert entries["HLT-HOSPITAL-001"]["coordinate_missing_records"] == 29
+    assert entries["SAF-BUSAN-CCTV-001"]["coordinate_invalid_records"] == 43
+    assert all(re.fullmatch(r"[0-9A-F]{64}", entry["source_sha256"]) for entry in entries.values())
+
+
 def test_committed_manifests_do_not_contain_credentials() -> None:
     for relative_path in (
         "docs/data/manifests/RAW_DATA_MANIFEST.json",
@@ -200,6 +222,7 @@ def test_committed_manifests_do_not_contain_credentials() -> None:
         "docs/data/manifests/MOIS_RESIDENT_POPULATION_MANIFEST_2025.json",
         "docs/data/manifests/BUSAN_SUPPLEMENTAL_DATA_MANIFEST.json",
         "docs/data/manifests/FIRE_SUMMARY_MANIFEST_2025.json",
+        "docs/data/manifests/STANDARDIZATION_REPORT_2025.json",
     ):
         text = (REPOSITORY_ROOT / relative_path).read_text(encoding="utf-8")
         assert "serviceKey=" not in text

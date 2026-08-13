@@ -40,7 +40,7 @@
 | 사상구 침수흔적 | 9행. 2024년 이전 자료가 없다고 명시되어 검증용으로만 유지 |
 | SGIS 사업체 | 2024년 부산 206개 행정동, 코드 중복 0, 사업체·종사자 셀 결측 0% |
 | SGIS 인구·가구 | 2024년 부산 206개 행정동, 총인구·총가구 결측 0%. 2025 경계 대비 1년 시차 검증 필요 |
-| 버스정류소 API | 8,790건 전량 수집. 기준일 미제공으로 컷오프 적합성 확인 전 보류 |
+| 버스정류소 API | 실시간 응답 8,790건은 기준일 미제공으로 보류. 2025-01-21 SHP 8,522건을 기준자료로 사용 |
 | AED API | 1,079건 전량 수집. 기준일 미제공으로 컷오프 적합성 확인 전 보류 |
 | 실시간 대기질 API | 1,184건은 2026-08-11~12 관측으로 2026-07-31 컷오프 밖이라 제외 |
 | HEIS 2025 일평균 대기질 | 주 분석 자료. 33개소·12,045행, 원본 HTML 396개. 완결연도 기준선 |
@@ -90,6 +90,7 @@ python -m busan_imd.data_catalog docs/data/DATASET_AUDIT.csv --raw-dir data/raw/
 - [데이터 가용성 매트릭스](AVAILABILITY_MATRIX.md)
 - [데이터 기준기간 정책](REFERENCE_PERIOD_POLICY.md)
 - [원본 데이터 수집과 출처 기록](RAW_DATA_COLLECTION.md)
+- [2025 행정동 데이터 표준화와 검증](STANDARDIZATION.md)
 - [필요 데이터 요청 로드맵](DATA_REQUEST_ROADMAP.md)
 - [기관 데이터 요청 문안](DATA_REQUEST_TEMPLATES.md)
 - [부산 AED 과거자료 가용성 검토](AED_HISTORY_ASSESSMENT.md)

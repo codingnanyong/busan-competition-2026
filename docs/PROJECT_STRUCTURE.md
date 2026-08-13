@@ -7,7 +7,8 @@ src/busan_imd/
 ├─ collectors/   # 데이터셋 단위 실행 진입점; 원본·정규화 CSV·manifest 생성
 ├─ sources/      # 외부 API URL, 요청 파라미터와 응답 파싱 계약
 ├─ core/         # HTTP, 설정, 체크섬, 출처 검증 공통 코드
-└─ data_catalog.py
+├─ data_catalog.py
+└─ standardization.py  # 2025 행정동 공통키·공간결합·단위 표준화
 tests/
 ├─ unit/         # 네트워크와 실제 파일에 의존하지 않는 로직 검사
 ├─ integration/  # 로컬 원본과 커밋된 manifest의 일관성 검사
@@ -33,6 +34,7 @@ scripts/         # 운영체제에 독립적인 보조 명령과 문서 빌드 �
 
 ```bash
 docker compose run --rm jupyter python -m busan_imd.collectors.fire_incidents
+docker compose run --rm jupyter python -m busan_imd.standardization
 docker compose run --rm jupyter python -m pytest -q
 ```
 

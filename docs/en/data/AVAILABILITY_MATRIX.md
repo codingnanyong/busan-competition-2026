@@ -19,7 +19,7 @@
 | Health | Reconstructed 2025 hospital/pharmacy candidates and AED locations | Proxy/context | B | Hold | Validate historical completeness and coordinates, obtain an AED archive, and obtain small-area outcomes |
 | Safety | KOROAD crash context and 2025 NFA daily fire-station summaries | Validation | C | Validation only | Obtain complete administrative-dong crash and fire counts and verify derivative redistribution |
 | Housing | Yeongdo and Suyeong vacancy | Direct | C | Exclude | One vacancy definition and date across Busan |
-| Services | Bus-stop locations | Proxy | B | Hold | Verify date for 8,790 records, join boundaries, and add frequency/walk-time evidence |
+| Services | 2025-01-21 bus-stop locations | Proxy | B | Hold | 7,940 of 8,522 points (93.17%) joined; review 582 unmatched points and add frequency/walk-time evidence |
 | Environment | Heat-shelter locations | Context | B | Hold | Spatial join plus hours and capacity checks |
 | Environment | HEIS daily air quality | Context | C | Hold | Use 2025 as the primary period; use 2026 January-July only for validation, and disclose interpolation error |
 | Environment | Sasang flood traces | Validation | C | Validation only | Same-period citywide geospatial records |
