@@ -9,6 +9,8 @@
 - [프로젝트 계획](docs/PROJECT_PLAN.md)
 - [공모전 제출 요구사항 및 공식 서식](docs/COMPETITION_REQUIREMENTS.md)
 - [Docker 기반 분석 환경](docs/DEVELOPMENT_ENVIRONMENT.md)
+- [macOS 작업환경 이전](docs/MACOS_SETUP.md)
+- [프로젝트 파일 구조](docs/PROJECT_STRUCTURE.md)
 - [Linear 이슈 맵](docs/ISSUES.md)
 - [Git 워크플로](docs/GIT_WORKFLOW.md)
 - [릴리스 정책](docs/RELEASE_POLICY.md)

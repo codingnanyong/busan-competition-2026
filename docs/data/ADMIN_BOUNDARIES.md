@@ -24,7 +24,7 @@ SGIS 공식 행정구역경계 API는 2025년 경계를 제공한다. `adm_cd=21
 - [SGIS 이용정책](https://sgis.mods.go.kr/developer/html/newOpenApi/policy/policy.html)
 - 접근방식: 개인 SGIS consumer key/secret으로 단기 access token 발급 후 OpenAPI 호출
 - 저장소 기준코드: `docs/data/BUSAN_ADMIN_DONG_CODES_2025.csv`
-- 저장소 출처 스냅샷: `docs/data/BUSAN_ADMIN_DONG_MANIFEST_2025.json`
+- 저장소 출처 스냅샷: `docs/data/manifests/BUSAN_ADMIN_DONG_MANIFEST_2025.json`
 
 원본 GeoJSON은 인증 API 산출물이며 크기와 재배포 조건을 고려해 Git에 커밋하지 않는다.
 대신 출처, 요청 파라미터, 조회시각, 피처 수, 좌표계 및 원본 SHA-256 체크섬을 manifest에
@@ -41,11 +41,11 @@ SGIS_CONSUMER_SECRET=...
 
 ```powershell
 $env:PYTHONPATH = "src"
-python -m busan_imd.admin_boundaries --year 2025
+python -m busan_imd.collectors.admin_boundaries --year 2025
 docker compose run --rm --no-deps jupyter python scripts/validate_admin_boundaries.py `
   data/raw/sgis/admin_boundaries/2025/busan_admin_dong_boundaries_2025.geojson `
   --repair-output data/raw/sgis/admin_boundaries/2025/busan_admin_dong_boundaries_2025_valid.geojson `
-  --report docs/data/BUSAN_ADMIN_DONG_GEOMETRY_VALIDATION_2025.json
+  --report docs/data/manifests/BUSAN_ADMIN_DONG_GEOMETRY_VALIDATION_2025.json
 ```
 
 결과는 Git에서 제외되는 다음 위치에 생성된다.

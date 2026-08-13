@@ -15,13 +15,13 @@
 |---|---|---|---:|---|---|
 | Income | Basic-livelihood recipients in five districts | Proxy | C | Exclude | 100% of 16 districts with one date and benefit definition |
 | Employment | SGIS 2024 establishments and workers | Proxy | C | Hold | All 206 dongs collected; obtain resident employment separately |
-| Education | National school register | Proxy | B | Hold | Geocode, calculate service areas, and keep separate from outcomes |
-| Health | Hospital, pharmacy, and AED locations | Proxy/context | B | Hold | Verify AED date, clean status, and obtain small-area outcomes |
-| Safety | TAAS map | Validation | D | Validation only | Obtain reproducible raw data and verify derivative redistribution |
+| Education | 667 Busan school records | Proxy | B | Hold | Geocode the 662 schools eligible at 2025-12-31, calculate service areas, and keep separate from outcomes |
+| Health | Reconstructed 2025 hospital/pharmacy candidates and AED locations | Proxy/context | B | Hold | Validate historical completeness and coordinates, obtain an AED archive, and obtain small-area outcomes |
+| Safety | KOROAD crash context and 2025 NFA daily fire-station summaries | Validation | C | Validation only | Obtain complete administrative-dong crash and fire counts and verify derivative redistribution |
 | Housing | Yeongdo and Suyeong vacancy | Direct | C | Exclude | One vacancy definition and date across Busan |
 | Services | Bus-stop locations | Proxy | B | Hold | Verify date for 8,790 records, join boundaries, and add frequency/walk-time evidence |
 | Environment | Heat-shelter locations | Context | B | Hold | Spatial join plus hours and capacity checks |
-| Environment | Air-monitoring network | Context | C | Hold | Exclude August snapshot; obtain pre-cutoff observations and coordinates and disclose interpolation error |
+| Environment | HEIS daily air quality | Context | C | Hold | Use 2025 as the primary period; use 2026 January-July only for validation, and disclose interpolation error |
 | Environment | Sasang flood traces | Validation | C | Validation only | Same-period citywide geospatial records |
 
 ## Inclusion gate
@@ -40,6 +40,6 @@ Failure leads to `hold`, `validation-only`, or `exclude`. District values must n
 
 ## Reference year and data cutoff
 
-The project fixes its geography at 206 Busan administrative dongs in SGIS 2025 and permits observations through 2026-07-31. Annual indicators prefer complete 2025 data; monthly, quarterly, and snapshot sources may extend through July 2026. When unavailable, the nearest earlier complete period is used with lag and partial-period status disclosed. See the [reference-period policy](REFERENCE_PERIOD_POLICY.md) and [administrative-dong boundary record](ADMIN_BOUNDARIES.md).
+The project fixes its geography at 206 Busan administrative dongs in SGIS 2025. The primary index uses complete 2025 observations or a 2025-12-31 snapshot. January-July 2026 observations are supplemental validation data, despite falling within the 2026-07-31 collection cutoff. When 2025 is unavailable, the nearest earlier complete period is used with its lag disclosed. See the [reference-period policy](REFERENCE_PERIOD_POLICY.md) and [administrative-dong boundary record](ADMIN_BOUNDARIES.md).
 
 See [DATASET_AUDIT.csv](../../data/DATASET_AUDIT.csv) for row-level evidence.

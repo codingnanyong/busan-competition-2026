@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "dataset_id": "HOU-BUSSTOP-001",
+  "provider": "Busan Metropolitan City",
+  "source_page": "https://www.data.go.kr/data/15084251/fileData.do",
+  "source_title": "부산광역시_버스 정류소 정보(SHP)_20250121",
+  "access_method": "public direct download",
+  "reference_period": "2025-01-21",
+  "period_type": "snapshot",
+  "analysis_cutoff": "2026-07-31",
+  "cutoff_status": "eligible",
+  "retrieved_at": "2026-08-12T06:15:53Z",
+  "license": "no restriction",
+  "local_path": "data/raw/bus_stops/2025/busan_bus_stops_20250121.zip",
+  "bytes": 454474,
+  "sha256": "F34A6F1034B479FEA6E48C5E5B8FBA7DE30A52136BAC39D2F09B179F8D31D22F",
+  "archive_members": [
+    "tl_bus_station_info.cpg",
+    "tl_bus_station_info.dbf",
+    "tl_bus_station_info.prj",
+    "tl_bus_station_info.shp",
+    "tl_bus_station_info.shx"
+  ],
+  "record_count": 8522,
+  "crs": "EPSG:4326",
+  "geometry_type": "Point",
+  "null_geometry_count": 0,
+  "columns": [
+    "arsno",
+    "bstopid",
+    "bstopnm",
+    "gpsx",
+    "gpsy",
+    "stoptype",
+    "geometry"
+  ],
+  "notes": "This dated snapshot replaces the undated real-time API inventory for cutoff-compatible spatial analysis. Stop presence does not measure service frequency or travel time."
+}

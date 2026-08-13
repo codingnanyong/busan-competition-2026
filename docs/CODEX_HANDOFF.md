@@ -28,7 +28,7 @@ COD-6은 `develop`에 병합되었고 Windows Docker Desktop에서 다음을 검
 | `docker compose config --quiet` | 통과 |
 | `docker compose build` | `busan-imd-jupyter:dev` 빌드 성공 |
 | `docker compose up -d --wait` | Jupyter 서비스 `healthy` |
-| 환경 smoke test | `tests/test_environment.py` 1개 통과 |
+| 환경 smoke test | `tests/smoke/test_environment.py` 통과 |
 
 ## COD-7 진행 내용
 

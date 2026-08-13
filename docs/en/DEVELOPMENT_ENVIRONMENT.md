@@ -40,7 +40,7 @@ docker compose run --rm jupyter python -m pytest -v
 Run only the analysis-stack smoke test with:
 
 ```bash
-docker compose run --rm jupyter python -m pytest tests/test_environment.py -v
+docker compose run --rm jupyter python -m pytest tests/smoke/test_environment.py -v
 ```
 
 Configuration lives in `pyproject.toml`.

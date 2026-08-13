@@ -16,7 +16,7 @@ Never paste secrets into Slack, Linear, GitHub, documentation, or chat. Public-f
 
 ### Fixed criteria and decisions still needed
 
-Fixed: the geography is the 206-dong SGIS 2025 version and the data cutoff is 2026-07-31.
+Fixed: the geography is the 206-dong SGIS 2025 version, the primary analysis year is 2025, and the collection cutoff is 2026-07-31.
 
 1. Whether institutional data and derivatives may be redistributed in deliverables, GitHub, and Docker images
 2. Whether non-public data may be used for scoring without submitting the source
@@ -40,7 +40,7 @@ Fixed: the geography is the 206-dong SGIS 2025 version and the data cutoff is 20
 - Aggregate or mask small cells under the publisher's disclosure rule.
 - Do not request names, addresses, phone numbers, identifiers, or person-level event narratives.
 - Request denominator, deduplication rule, date, and administrative-code version.
-- Request both calendar-year 2025 and January–July 2026 or a 2026-07-31 snapshot where possible.
+- Request calendar-year 2025 as the required primary period. Request January-July 2026 or a 2026-07-31 snapshot separately when useful for validation.
 - Ask how observed zero, uncollected, private, and not applicable are represented.
 - Obtain written permission for source use and publication of aggregates, maps, and index derivatives.
 - If unavailable, record the reason and the smallest publishable geography.

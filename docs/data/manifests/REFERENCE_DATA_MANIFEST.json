@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-12T07:15:56+00:00",
+  "analysis_cutoff": "2026-07-31",
+  "primary_reference_year": 2025,
+  "dataset_count": 2,
+  "datasets": [
+    {
+      "dataset_id": "DEM-SGIS-001",
+      "provider": "Statistics Korea SGIS",
+      "source_page": "https://sgis.mods.go.kr/developer/html/newOpenApi/api/dataApi/census.html",
+      "endpoint": "https://sgisapi.mods.go.kr/OpenAPI3/stats/population.json",
+      "access_method": "SGIS consumer key and secret",
+      "request_parameters": {
+        "year": "2024",
+        "adm_cd": "21",
+        "low_search": "2"
+      },
+      "reference_period": "2024-12-31",
+      "primary_reference_year": 2025,
+      "analysis_role": "fallback",
+      "lag_years": 1,
+      "period_type": "annual",
+      "cutoff_status": "eligible",
+      "local_path": "data/raw/reference/DEM-SGIS-001/sgis_population_households_2024.json",
+      "record_count": 206,
+      "fields": [
+        "adm_cd",
+        "adm_nm",
+        "tot_family",
+        "tot_ppltn"
+      ],
+      "sha256": "F522B4C6C6D9182046203A2F1CCED401EA0E15B3E68CDFD8E523F67216E9837C",
+      "notes": "Latest year exposed by the SGIS API; 206 rows align with the 2025 boundary count."
+    },
+    {
+      "dataset_id": "EDU-SCHOOL-NEIS-001",
+      "provider": "KERIS NEIS Education Information Open Portal",
+      "source_page": "https://www.data.go.kr/data/15068997/fileData.do",
+      "endpoint": "https://open.neis.go.kr/hub/schoolInfo",
+      "access_method": "NEIS OpenAPI key required",
+      "request_parameters": {
+        "ATPT_OFCDC_SC_CODE": "C10",
+        "Type": "json"
+      },
+      "reference_period": "current register; record load dates vary",
+      "primary_reference_year": 2025,
+      "analysis_role": "primary_facility_filter",
+      "facility_opening_cutoff": "2025-12-31",
+      "period_type": "snapshot",
+      "cutoff_status": "unverified",
+      "load_date_min": "20260423",
+      "load_date_max": "20260517",
+      "local_path": "data/raw/reference/EDU-SCHOOL-NEIS-001/busan_school_info.json",
+      "record_count": 667,
+      "analysis_eligible_record_count": 662,
+      "excluded_after_cutoff_record_count": 5,
+      "analysis_cutoff": "2026-07-31",
+      "sha256": "2547E89D5D718EA0549B5E1A868F7DCB672B4BA6320EE25C74BD219A8D4492DF",
+      "notes": "The raw register includes future-planned schools. Records with FOND_YMD after 2025-12-31 are retained for provenance but excluded from the primary 2025 analysis."
+    }
+  ]
+}

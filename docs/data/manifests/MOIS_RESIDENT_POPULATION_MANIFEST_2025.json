@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-12T23:38:55+00:00",
+  "dataset_id": "DEM-MOIS-RESIDENT-2025-001",
+  "dataset_name": "2025 Busan resident population and households by administrative dong",
+  "provider": "Ministry of the Interior and Safety (MOIS)",
+  "source_page": "https://jumin.mois.go.kr/",
+  "access_method": "manual CSV download from the resident registration statistics portal",
+  "reference_period": "2025-12-31",
+  "primary_reference_year": 2025,
+  "analysis_role": "primary",
+  "eligible_for_primary_analysis": true,
+  "period_type": "snapshot",
+  "spatial_unit": "administrative dong",
+  "source_code_system": "MOIS 10-digit administrative institution code",
+  "reference_code_system": "SGIS 2025 administrative dong code",
+  "mapping_method": "district and normalized administrative-dong name",
+  "source_file_count": 16,
+  "source_files": [
+    {
+      "local_path": "data/raw/mois/resident_population/2025/busan_buk_gu_resident_population_2025_12.csv",
+      "sha256": "D39EC8D723B685405EC373B11ED9D6D78C8FA5492FFA2C6E374B6CC4734925B8",
+      "raw_record_count": 14,
+      "admin_dong_record_count": 13
+    },
+    {
+      "local_path": "data/raw/mois/resident_population/2025/busan_busanjin_gu_resident_population_2025_12.csv",
+      "sha256": "CB8C63F0416EC20EE43D5C6AC6A44E0609A6E55ADC73BD72CEC3CD92C7ED6C99",
+      "raw_record_count": 21,
+      "admin_dong_record_count": 20
+    },
+    {
+      "local_path": "data/raw/mois/resident_population/2025/busan_dong_gu_resident_population_2025_12.csv",
+      "sha256": "AA267D0431D5027B9D872E41B4F9C8B014CAA496EAB4E252326C3745C20E3B2E",
+      "raw_record_count": 13,
+      "admin_dong_record_count": 12
+    },
+    {
+      "local_path": "data/raw/mois/resident_population/2025/busan_dongnae_gu_resident_population_2025_12.csv",
+      "sha256": "AAA819145AF556C3E074A7EF426D38F90C4ADB1CE8679FD79D902E635A12F449",
+      "raw_record_count": 14,
+      "admin_dong_record_count": 13
+    },
+    {
+      "local_path": "data/raw/mois/resident_population/2025/busan_gangseo_gu_resident_population_2025_12.csv",
+      "sha256": "FF33DF1C0A37518EED36333889C92487F28965FD2DFE4B4B72CAE712F20E3339",
+      "raw_record_count": 10,
+      "admin_dong_record_count": 9
+    },
+    {
+      "local_path": "data/raw/mois/resident_population/2025/busan_geumjeong_gu_resident_population_2025_12.csv",
+      "sha256": "614940AD5CABBFCD016F05E063518CE87898A95DDDD48FFADAC486976033CA83",
+      "raw_record_count": 17,
+      "admin_dong_record_count": 16
+    },
+    {
+      "local_path": "data/raw/mois/resident_population/2025/busan_gijang_gun_resident_population_2025_12.csv",
+      "sha256": "C7A26D10A45E3F016AB014728330BBBEB8CBAC30C4750F783564C90CE7F86B97",
+      "raw_record_count": 6,
+      "admin_dong_record_count": 5
+    },
+    {
+      "local_path": "data/raw/mois/resident_population/2025/busan_haeundae_gu_resident_population_2025_12.csv",
+      "sha256": "66CB7A2B99BBB25A85047CAD8060E65A919BA78B06CF2E39CB97176D6627E448",
+      "raw_record_count": 19,
+      "admin_dong_record_count": 18
+    },
+    {
+      "local_path": "data/raw/mois/resident_population/2025/busan_jung_gu_resident_population_2025_12.csv",
+      "sha256": "DE415D9E170BC28AED69CE1F4A021FC10BE21CB24AE900950F0C1F7296B79272",
+      "raw_record_count": 10,
+      "admin_dong_record_count": 9
+    },
+    {
+      "local_path": "data/raw/mois/resident_population/2025/busan_nam_gu_resident_population_2025_12.csv",
+      "sha256": "B04B20609DBEC6D62719CAE990618722FAF3AD783B8C6809F5E3D2E76EA117E6",
+      "raw_record_count": 18,
+      "admin_dong_record_count": 17
+    },
+    {
+      "local_path": "data/raw/mois/resident_population/2025/busan_saha_gu_resident_population_2025_12.csv",
+      "sha256": "B6C93CDC8E0B20D70D6228C55C7F8618D89817CD6A847ACB948C43F0DD2BBFDB",
+      "raw_record_count": 17,
+      "admin_dong_record_count": 16
+    },
+    {
+      "local_path": "data/raw/mois/resident_population/2025/busan_sasang_gu_resident_population_2025_12.csv",
+      "sha256": "254D6BD1A30C94C0D9E20412FE440A7A14924E01DBF46D540273CA4B61CCEA63",
+      "raw_record_count": 13,
+      "admin_dong_record_count": 12
+    },
+    {
+      "local_path": "data/raw/mois/resident_population/2025/busan_seo_gu_resident_population_2025_12.csv",
+      "sha256": "72E6F0ECAAD3C9BA82BAA542FD4EAE7802A304CC98DF2685A359C5E17AF42D99",
+      "raw_record_count": 14,
+      "admin_dong_record_count": 13
+    },
+    {
+      "local_path": "data/raw/mois/resident_population/2025/busan_suyeong_gu_resident_population_2025_12.csv",
+      "sha256": "82F74DC43038980DF11817FC7B837C004DB88607A4456715FEBAF0CDE03EC053",
+      "raw_record_count": 11,
+      "admin_dong_record_count": 10
+    },
+    {
+      "local_path": "data/raw/mois/resident_population/2025/busan_yeongdo_gu_resident_population_2025_12.csv",
+      "sha256": "842FB80D2A62EF37CFD8E67708A0CAC365A3B327F767BEBBDB408F2B2DB26BBD",
+      "raw_record_count": 12,
+      "admin_dong_record_count": 11
+    },
+    {
+      "local_path": "data/raw/mois/resident_population/2025/busan_yeonje_gu_resident_population_2025_12.csv",
+      "sha256": "FCC42D041967A701D404C11E4C2F9F77C7DE7ED426E9640DB2E52DE605C459C6",
+      "raw_record_count": 13,
+      "admin_dong_record_count": 12
+    }
+  ],
+  "summary_file": {
+    "local_path": "data/raw/mois/resident_population/2025/busan_resident_population_by_dong_2025_12.csv",
+    "sha256": "BC6F3D0A286002F4B01BCDF443E1951FAEC5E55EA2CF5D8738636682EC769B9C",
+    "record_count": 17,
+    "validation_role": "city_and_district_total_cross_check"
+  },
+  "output_path": "data/raw/mois/resident_population/2025/busan_resident_population_admin_dong_2025_12.csv",
+  "output_sha256": "72A6CFDFB0D1261FAEB300396BAC96E9358B10F71B3418B52B71DE3FF0C0AF01",
+  "record_count": 206,
+  "unique_mois_code_count": 206,
+  "matched_reference_count": 206,
+  "unmatched_reference_count": 0,
+  "totals": {
+    "total_population": 3241600,
+    "households": 1573996,
+    "male_population": 1575600,
+    "female_population": 1666000
+  },
+  "license_note": "Confirm and follow the source portal's current reuse terms when publishing.",
+  "notes": "The 16 district files contain 206 administrative-dong rows. The separate 17-row file contains only Busan and district totals and is used solely for reconciliation."
+}
