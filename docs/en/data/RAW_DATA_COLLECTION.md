@@ -13,7 +13,7 @@ reference data, healthcare facilities, KOROAD crashes, and the dated bus-stop sn
 | Busan bus API | Stops | 8,790 | Observation date unverified |
 | Busan AED API | Emergency equipment | 1,079 | Observation date unverified |
 | Busan air API | Hourly observations | 1,184 | Excluded: 2026-08-11–12 |
-| NEIS API | Busan schools | 667 total; 662 eligible at 2025-12-31 | Hold for geocoding |
+| NEIS API | Busan schools | 667 total; 655 of 662 eligible schools geocoded | Provisional access proxy |
 | MOIS hospital API | Current register and reconstructed 2025 candidates | 641 / 406 | History and coordinate validation required |
 | MOIS pharmacy API | Current register and reconstructed 2025 candidates | 4,336 / 1,731 | History and coordinate validation required |
 | KOROAD API | 2025 district statistics / 2024 hotspots | 202 / 48 | Validation only |

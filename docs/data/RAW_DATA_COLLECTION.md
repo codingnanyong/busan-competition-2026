@@ -13,8 +13,9 @@ COD-12는 직접 다운로드, 인증 API와 공개 조회를 합쳐 23개 데�
 
 | 구분 | 데이터셋 | 건수 | 컷오프 판정 |
 |---|---|---:|---|
-| 직접 다운로드 | 기초생활보장 5개 구, 빈집 2개 구, 무더위쉼터, 대기측정망, 침수흔적 | 10개 파일 | 사용 가능 10 |
+| 직접 다운로드 | 기초생활보장 5개 구, 빈집 2개 구, 무더위쉼터, 대기측정망 | 9개 파일 | 사용 가능 9; 침수흔적 1개는 범위 결정에 따라 제외 |
 | SGIS API | 2024 사업체·종사자 | 206개 행정동 | 사용 가능 |
+| SGIS API | 2024 노후주택 비율 → 2025 1년 시차 추론 | 206개 행정동 | 잠정 사용 가능 |
 | 부산 버스 API | 정류소 | 8,790 | 관측 기준일 확인 필요 |
 | 부산 AED API | 자동심장충격기 | 1,079 | 관측 기준일 확인 필요 |
 | 부산 대기질 API | 시간별 측정값 | 1,184 | 제외: 2026-08-11~12 |
@@ -56,7 +57,9 @@ data/raw/
 │   ├── healthcare_facilities/     # 병원·의원·약국 페이지 원본과 2025 후보 CSV
 │   └── fire/2025/                 # 소방청 365일 원본과 부산 소방서 일일요약 CSV
 ├── koroad/traffic_accidents/       # 16개 구·군별 교통사고 API 원본
-├── supplemental/                  # 생활인구·복지·CCTV·마을버스 등 보조자료
+├── supplemental/                  # 생활인구·복지·CCTV·버스 이용량 등 보조자료
+│   ├── basic_livelihood/          # 구·군별 기초생활보장 행정동 원본
+│   └── bus_route_usage/           # 2025 노선별 버스 이용량
 └── sgis/admin_boundaries/2025/    # COD-11 기준경계
 ```
 
@@ -90,6 +93,8 @@ python -m busan_imd.collectors.approved_apis
 python -m busan_imd.collectors.reference_data
 python -m busan_imd.collectors.healthcare_facilities
 python -m busan_imd.collectors.traffic_accidents
+python -m busan_imd.collectors.police_crime
+python -m busan_imd.collectors.housing
 ```
 
 수집기는 다음 검사를 모두 통과해야 manifest를 쓴다.
@@ -122,7 +127,8 @@ python -m busan_imd.collectors.heis_air --refresh
 
 - 병원·의원·약국: 현재 목록에서 2025-12-31 상태를 재구성했으므로 과거 완전성 검증 필요
 - KOROAD: 구·군 통계와 일부 다발지역만 제공하므로 행정동 전체 사고자료가 아님
-- 학교: 2025년 이후 개교 5개교를 제외했으며 주소 좌표화 필요
+- 학교: 2025년 이후 개교 5개교를 제외하고 662개 중 655개를 SGIS 공식 좌표화했다.
+  핵심 학교 616개로 206개 동 접근성 후보를 생성했으며 주소 없는 7개는 별도 공개한다.
 
 세부 범위와 남은 검증은 [공개자료 접근 및 수집 현황](DATA_ACCESS_REQUIREMENTS.md)을 따른다.
 
@@ -150,11 +156,11 @@ $env:PYTHONPATH = "src"
 python -m busan_imd.collectors.resident_population
 ```
 
-## 부산 보조자료 8종
+## 부산 보조자료 10종
 
 승인된 공공데이터포털 키로 마을버스와 독거노인 API를 수집하고, 공개 파일인 생활인구,
-교통사고 추세, 사고위험지역, 2025 복지사업 구·군 통계, 방범용 CCTV, 2023 버스
-승하차 자료를 함께 수집한다.
+교통사고 추세, 사고위험지역, 2025 복지사업 구·군 통계, 해운대구 기초생활수급자,
+방범용 CCTV, 2023 정류소별 승하차와 2025 노선별 버스 이용량을 함께 수집한다.
 
 ```powershell
 $env:PYTHONPATH = "src"

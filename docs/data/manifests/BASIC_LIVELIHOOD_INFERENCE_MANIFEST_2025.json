@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-14T01:14:17+00:00",
+  "dataset_id": "INC-BLF-INFERRED-2025-001",
+  "primary_reference_year": 2025,
+  "reference_period": "2025-12",
+  "analysis_role": "provisional_scoring_proxy",
+  "spatial_unit": "administrative dong",
+  "record_count": 206,
+  "district_count": 16,
+  "district_totals_are_observed": true,
+  "admin_dong_values_are_inferred": true,
+  "observed_pattern_districts": [
+    "금정구",
+    "남구",
+    "동구",
+    "북구",
+    "수영구",
+    "해운대구"
+  ],
+  "model_pattern_districts": [
+    "강서구",
+    "기장군",
+    "동래구",
+    "부산진구",
+    "사상구",
+    "사하구",
+    "서구",
+    "연제구",
+    "영도구",
+    "중구"
+  ],
+  "observed_pattern_admin_dongs": 86,
+  "district_people_total": 256393,
+  "district_household_total": 194722,
+  "district_totals_source": {
+    "dataset_id": "INC-WELFARE-SIGUNGU-2025-001",
+    "path": "data/raw/supplemental/welfare_beneficiaries/welfare_beneficiaries_by_sigungu_2025.csv",
+    "sha256": "157ECECACB6E3D932FC70F16ED402921F3239FCF83AF31988BBDED6F16D498E0"
+  },
+  "profile_source": {
+    "path": "data/processed/bootstrap/2025/busan_admin_dong_candidate_profile_2025.csv",
+    "sha256": "CB4C2A5F7CCF273BFB0DEA24DA7C5FD2FC15855C15C5278ABE87E13B6C762E7F"
+  },
+  "pattern_sources": [
+    {
+      "dataset_id": "INC-BLF-BUKGU-001",
+      "district": "북구",
+      "reference_period": "2025-12-31",
+      "path": "data/raw/audit/3069319.download",
+      "sha256": "F21440DD8EF683F58197B502CA125ED7FA8A94C2C7981BF675A9230A4B81F669",
+      "matched_admin_dongs": 13,
+      "pattern_definition": "matched-benefit or general-recipient distribution"
+    },
+    {
+      "dataset_id": "INC-BLF-DONGGU-001",
+      "district": "동구",
+      "reference_period": "2025-11-18",
+      "path": "data/raw/audit/15023207.download",
+      "sha256": "0471D76A55F6E7BD691D99AEA4D6A004D5D4159615F286099407FC823842402B",
+      "matched_admin_dongs": 12,
+      "pattern_definition": "matched-benefit or general-recipient distribution"
+    },
+    {
+      "dataset_id": "INC-BLF-GEUMJEONG-001",
+      "district": "금정구",
+      "reference_period": "2026-05-15",
+      "path": "data/raw/audit/3073078.download",
+      "sha256": "A307DBAF8B182AB0A5C5847A8D294D59642A1D86A7D4308697FF178C290C971A",
+      "matched_admin_dongs": 16,
+      "pattern_definition": "matched-benefit or general-recipient distribution"
+    },
+    {
+      "dataset_id": "INC-BLF-NAMGU-001",
+      "district": "남구",
+      "reference_period": "2024-12-31",
+      "path": "data/raw/audit/15113711.download",
+      "sha256": "CBA93F250E1DCDDD83ABEDBB07CE5049F9990084F485CE8610BC3D79C61658B3",
+      "matched_admin_dongs": 17,
+      "pattern_definition": "livelihood-benefit-only distribution"
+    },
+    {
+      "dataset_id": "INC-BLF-HAEUNDAE-2025-001",
+      "district": "해운대구",
+      "reference_period": "2025-08-20",
+      "path": "data/raw/supplemental/basic_livelihood/busan_haeundae_basic_livelihood_2025_08_20.csv",
+      "sha256": "754934A7803D644433BF3B4940869287AD68A9D51CB4F2313A03D963D36A8FE1",
+      "matched_admin_dongs": 18,
+      "pattern_definition": "livelihood-benefit-only distribution"
+    },
+    {
+      "dataset_id": "INC-BLF-SUYEONG-001",
+      "district": "수영구",
+      "reference_period": "2026-06-30",
+      "path": "data/raw/audit/15026899.download",
+      "sha256": "53A9036B4B228D3DE72037B4FD6E12FECE484758C15E702C70498F4E9180950E",
+      "matched_admin_dongs": 10,
+      "pattern_definition": "livelihood-benefit-only distribution"
+    }
+  ],
+  "model": {
+    "model": "ridge regression on within-district centered log recipient rate",
+    "ridge_alpha": 2.0,
+    "training_admin_dongs": 86,
+    "training_districts": [
+      "금정구",
+      "남구",
+      "동구",
+      "북구",
+      "수영구",
+      "해운대구"
+    ],
+    "features": [
+      "elderly_rate",
+      "old_house_share",
+      "single_person_pressure"
+    ],
+    "coefficients": {
+      "elderly_rate": 0.14844139,
+      "old_house_share": 0.19263359,
+      "single_person_pressure": 0.27512637
+    },
+    "training_r2": 0.562814
+  },
+  "lineage": {
+    "district_total_dataset_id": "INC-WELFARE-SIGUNGU-2025-001",
+    "model_pattern_dataset_ids": [
+      "INC-BLF-BUKGU-001",
+      "INC-BLF-DONGGU-001",
+      "INC-BLF-GEUMJEONG-001",
+      "INC-BLF-NAMGU-001",
+      "INC-BLF-HAEUNDAE-2025-001",
+      "INC-BLF-SUYEONG-001"
+    ],
+    "model_feature_dataset_ids": {
+      "elderly_rate": "SOC-BUSAN-ELDERLY-ALONE-001",
+      "old_house_share": "HOU-SGIS-OLD-001",
+      "single_person_pressure": "DEM-MOIS-POP-2025-001"
+    },
+    "row_level_lineage_columns": [
+      "district_total_source_dataset_id",
+      "inference_pattern_source_dataset_ids",
+      "inference_feature_source_dataset_ids",
+      "inference_basis",
+      "inference_quality_tier",
+      "value_status"
+    ]
+  },
+  "integerization": "largest remainder within each district",
+  "limitations": "Only the 16 district totals are observed December 2025 matched-benefit counts. All 206 administrative-dong values are inferred. Six districts use disclosed dong patterns from varying reference dates or benefit subsets; ten districts use a ridge relative-risk model. The values must not be represented as observed counts and require sensitivity analysis before final IMD publication.",
+  "output_path": "data/processed/candidates/2025/basic_livelihood_inferred_2025.csv",
+  "output_sha256": "59FABD3A67A3B0039880186EE193486B1C6CD8C30C3506FF7005A5CF5E96EE81"
+}

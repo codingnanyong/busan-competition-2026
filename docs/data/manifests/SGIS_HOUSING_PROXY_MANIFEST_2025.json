@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-13T06:26:44+00:00",
+  "analysis_cutoff": "2026-07-31",
+  "primary_reference_year": 2025,
+  "dataset_id": "HOU-SGIS-OLD-001",
+  "provider": "Statistics Korea SGIS",
+  "source_page": "https://sgis.mods.go.kr/developer/html/newOpenApi/api/dataApi/census.html",
+  "endpoint": "https://sgisapi.mods.go.kr/OpenAPI3/stats/house.json",
+  "source_attribution": "Source: Statistics Korea SGIS housing statistics API",
+  "access_method": "SGIS consumer key and secret",
+  "request_parameters": {
+    "year": "2024",
+    "adm_cd": "21",
+    "low_search": "2",
+    "house_use_prid_cd": [
+      "10",
+      "11",
+      "12"
+    ]
+  },
+  "reference_period": "2024-12-31",
+  "inference_target_year": 2025,
+  "lag_years": 1,
+  "period_type": "annual_lagged_proxy",
+  "analysis_role": "provisional_scoring_proxy",
+  "spatial_unit": "administrative dong",
+  "record_count": 206,
+  "old_housing_definition": "houses used for 30 years or more",
+  "value_semantics": "lower bound where SGIS suppresses an age-band value",
+  "suppressed_age_cells": 13,
+  "absent_age_cells_imputed_zero": 31,
+  "csv_path": "data/raw/sgis/housing/2024/busan_admin_dong_old_housing_proxy_2025.csv",
+  "csv_sha256": "527474B8290B13066C4D1F375EC5A97DF4E3CB8C7780A9DD13BAE2B5495A11BD",
+  "raw_directory": "data/raw/sgis/housing/2024/raw",
+  "raw_aggregate_sha256": "9B106FFC1AC6473FCBE312C0BFDB2EE4A9EC1ADEF26B2E038D10DCA18BA0484C",
+  "limitations": "SGIS does not expose year=2025 housing statistics. The observed 2024 administrative-dong distribution is used as a one-year-lag 2025 proxy. Missing age-band rows are treated as zero; N/A cells are treated as zero only to produce a disclosed lower bound and require sensitivity analysis."
+}

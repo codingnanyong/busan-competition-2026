@@ -19,12 +19,12 @@ The primary analysis year is 2025. Complete 2025 data or a 2025-12-31 snapshot d
 | Domain | Representative sources checked | Grade | Decision | Main reason |
 |---|---|---:|---|---|
 | Income | Basic-livelihood-recipient CSVs from five districts | C | Exclude | Reference dates span 2024–2026, definitions differ, and only five districts are covered |
-| Employment | SGIS 2024 establishment and worker API | C | Hold | All 206 dongs are present, but workplace employment is not resident employment |
-| Education | KERIS NEIS school register | B | Hold | All 667 rows were collected and 662 are eligible at 2025-12-31; locations measure access, not outcomes |
-| Health | MOIS hospital/pharmacy APIs and AED API | B | Hold | Reconstructed 2025 candidates require history and coordinate validation; facility access is not a health outcome |
+| Employment | SGIS 2024 establishment and worker API | C | Provisional include | All 206 dongs joined; workplace employment is an opportunity proxy, not resident employment |
+| Education | KERIS NEIS school register | B | Provisional include | 655 of 662 eligible schools geocoded; core-school access calculated for 206 dongs |
+| Health | MOIS hospital/clinic/pharmacy APIs | B | Provisional include | Valid-coordinate 2025 candidates joined as facility-access proxies; AED remains validation only |
 | Safety | KOROAD traffic and NFA fire APIs | C | Validation only | District crash context and daily fire-station summaries are reproducible but are not complete dong-level incident censuses |
-| Housing/access | Yeongdo/Suyeong vacancy and Busan bus stops | B–C | Hold/exclude | 8,790 stops need date verification and a spatial join; vacancy remains partial and inconsistent |
-| Living environment | Heat shelters, air stations, real-time air, and Sasang flood traces | B–C | Hold/exclude/validation only | The real-time response is outside cutoff; other sources need joins, interpolation, or broader coverage |
+| Housing/access | Yeongdo/Suyeong vacancy and 2025 Busan bus stops | B–C | Provisional include/exclude | 7,940 dated stops joined; vacancy remains partial and inconsistent |
+| Living environment | Heat shelters and HEIS 2025 air quality | B | Provisional include | Heat shelters joined and air exposure interpolated to all 206 dongs |
 
 The absence of an A-grade source is an audit finding. Filling uncovered districts with zero or repeating district values across their dongs would create false comparability and is prohibited.
 
@@ -39,9 +39,11 @@ The absence of an A-grade source is an audit finding. Filling uncovered district
 | Sasang flood traces | Nine rows; the source states that pre-2024 records are unavailable |
 | SGIS establishments | 2024, all 206 Busan dongs, no duplicate code or missing count cells |
 | Bus-stop API | The undated 8,790-record live response is held; the 8,522-record 2025-01-21 shapefile is the reference inventory |
+| 2025 bus route usage | 333 unique routes and 444,461,191 card transactions; demand validation only, not actual service frequency |
+| Haeundae basic-livelihood recipients | Eighteen administrative-dong rows plus one facility total at 2025-08-20; partial-coverage income validation only |
 | AED API | All 1,079 records collected; held because the inventory date is absent |
 | Real-time air API | 1,184 observations from 2026-08-11–12; excluded beyond the 2026-07-31 cutoff |
-| School register | All 667 Busan schools collected; 662 remain after excluding five post-2025 openings |
+| School register | All 667 schools collected; 655 of 662 cutoff-eligible rows geocoded and 616 core schools used for access |
 | Hospitals and pharmacies | Current API responses contain 641 and 4,336 rows; licence dates reconstruct 406 and 1,731 operating candidates at 2025-12-31, with 29 and 19 missing coordinates |
 | KOROAD crashes | 202 rows of 2025 district statistics and 48 selected 2024 hotspots across all 16 Busan districts; validation only |
 

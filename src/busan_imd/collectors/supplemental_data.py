@@ -43,6 +43,27 @@ DISTRICTS = (
 )
 
 FILE_SOURCES: dict[str, dict[str, Any]] = {
+    "INC-BLF-HAEUNDAE-2025-001": {
+        "name": "Haeundae-gu basic-livelihood benefit recipients",
+        "provider": "Haeundae-gu, Busan Metropolitan City",
+        "source_page": "https://www.data.go.kr/data/3075567/fileData.do",
+        "download_url": (
+            "https://www.data.go.kr/cmm/cmm/fileDownload.do?"
+            "atchFileId=FILE_000000003248813&fileDetailSn=1&insertDataPrcus=N"
+        ),
+        "path": "basic_livelihood/busan_haeundae_basic_livelihood_2025_08_20.csv",
+        "format": "csv",
+        "reference_period": "2025-08-20",
+        "period_type": "snapshot",
+        "analysis_role": "partial_coverage_income_validation",
+        "spatial_unit": "administrative dong",
+        "license": "no restriction",
+        "notes": (
+            "Contains 18 administrative-dong rows and one facility-total row. It expands "
+            "income validation coverage but cannot enter the composite until all 16 districts "
+            "share one date and benefit definition."
+        ),
+    },
     "INC-WELFARE-SIGUNGU-2025-001": {
         "name": "2025 welfare-program beneficiaries by district",
         "provider": "Korea Social Security Information Service",
@@ -101,6 +122,26 @@ FILE_SOURCES: dict[str, dict[str, Any]] = {
         "notes": (
             "Contains stop- and time-band boarding/alighting counts but is too old to be a "
             "2025 primary indicator."
+        ),
+    },
+    "TRN-BUSAN-ROUTE-USAGE-2025-001": {
+        "name": "2025 Busan city-bus and village-bus route usage",
+        "provider": "Busan Metropolitan City",
+        "source_page": "https://www.data.go.kr/data/15095329/fileData.do",
+        "download_url": (
+            "https://www.data.go.kr/cmm/cmm/fileDownload.do?"
+            "atchFileId=FILE_000000003617805&fileDetailSn=1&insertDataPrcus=N"
+        ),
+        "path": "bus_route_usage/busan_bus_route_usage_2025.csv",
+        "format": "csv",
+        "reference_period": "2025-12-31",
+        "period_type": "annual_route_total",
+        "analysis_role": "supplemental_transport_demand",
+        "spatial_unit": "bus route",
+        "license": "no restriction",
+        "notes": (
+            "Contains 333 unique routes and passenger-type counts by transfer count. It is "
+            "a demand measure, not actual service frequency or an administrative-dong measure."
         ),
     },
     "DEM-BUSAN-LIVING-001": {
@@ -570,8 +611,11 @@ def validate_manifest(manifest: dict[str, Any], repository_root: Path = Path("."
     """Validate identities, checksums, and absence of credentials."""
     ensure_secret_free(manifest)
     datasets = manifest.get("datasets")
-    if not isinstance(datasets, list) or len(datasets) != 8:
-        raise ValueError("Supplemental manifest must contain eight selected datasets")
+    expected_count = len(FILE_SOURCES) + 2
+    if not isinstance(datasets, list) or len(datasets) != expected_count:
+        raise ValueError(
+            f"Supplemental manifest must contain {expected_count} selected datasets"
+        )
     ids = [dataset["dataset_id"] for dataset in datasets]
     if len(ids) != len(set(ids)):
         raise ValueError("Supplemental manifest dataset identifiers are duplicated")

@@ -10,6 +10,7 @@ from pathlib import Path, PurePosixPath
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 RAW_ROOT = REPOSITORY_ROOT / "data/raw"
 DEFAULT_ARCHIVE = REPOSITORY_ROOT / "outputs/busan-imd-raw-data.tar.gz"
+DEFAULT_ARCHIVE_NAME = "busan-imd-raw-data-2025.tar.gz"
 
 
 def sha256(path: Path) -> str:
@@ -18,6 +19,19 @@ def sha256(path: Path) -> str:
         for block in iter(lambda: stream.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest().upper()
+
+
+def verify_bundle_checksum(archive_path: Path, *, required: bool = False) -> None:
+    """Verify the adjacent SHA-256 sidecar when present or explicitly required."""
+    sidecar = archive_path.with_suffix(archive_path.suffix + ".sha256")
+    if not sidecar.exists():
+        if required:
+            raise FileNotFoundError(f"Raw-data bundle checksum is missing: {sidecar}")
+        return
+    expected = sidecar.read_text(encoding="ascii").split()[0].upper()
+    actual = sha256(archive_path)
+    if expected != actual:
+        raise ValueError(f"Raw-data bundle checksum mismatch: {archive_path}")
 
 
 def export_bundle(archive_path: Path) -> None:
@@ -43,9 +57,12 @@ def _validate_member(member: tarfile.TarInfo) -> None:
         raise ValueError(f"Links are not allowed in a raw-data bundle: {member.name}")
 
 
-def import_bundle(archive_path: Path, *, replace: bool = False) -> None:
+def import_bundle(
+    archive_path: Path, *, replace: bool = False, require_checksum: bool = False
+) -> None:
     """Safely restore a bundle; require --replace when raw data already exists."""
     archive_path = archive_path.resolve()
+    verify_bundle_checksum(archive_path, required=require_checksum)
     existing = [path for path in RAW_ROOT.rglob("*") if path.is_file() and path.name != ".gitkeep"]
     if existing and not replace:
         raise FileExistsError(

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-13T02:09:02+00:00",
+  "generated_at": "2026-08-14T01:14:17+00:00",
   "reference_year": 2025,
   "reference_crs": "EPSG:5179",
   "canonical_admin_dong_count": 206,
@@ -18,7 +18,8 @@
       "clinic_count_2025_candidate": 5270,
       "pharmacy_count_2025_candidate": 1712,
       "crime_prevention_cctv_count_2025": 20956,
-      "heat_shelter_count_2025": 1787
+      "heat_shelter_count_2025": 1787,
+      "school_count_2025": 616
     }
   },
   "missing_by_column": {
@@ -32,6 +33,11 @@
     "female_population_2025": 0,
     "establishments_2024": 0,
     "workplace_workers_2024": 0,
+    "total_house_count_2024": 0,
+    "old_house_count_30plus_2024_lower_bound": 0,
+    "old_house_share_30plus_2024_lower_bound_pct": 0,
+    "suppressed_age_cells": 0,
+    "absent_age_cells_imputed_zero": 0,
     "elderly_alone_latest_count": 0,
     "elderly_alone_reference_date": 20,
     "elderly_alone_latest_per_1000_population_2025_validation": 0,
@@ -48,7 +54,38 @@
     "crime_prevention_cctv_count_2025": 0,
     "crime_prevention_cctv_count_2025_per_10000_population": 0,
     "heat_shelter_count_2025": 0,
-    "heat_shelter_count_2025_per_10000_population": 0
+    "heat_shelter_count_2025_per_10000_population": 0,
+    "basic_livelihood_recipients_2025_inferred": 0,
+    "basic_livelihood_households_2025_inferred": 0,
+    "basic_livelihood_recipients_per_1000_population_2025_inferred": 0,
+    "allocation_method": 0,
+    "pattern_source_dataset_id": 0,
+    "pattern_source_period": 0,
+    "district_total_source_dataset_id": 0,
+    "inference_pattern_source_dataset_ids": 0,
+    "inference_feature_source_dataset_ids": 0,
+    "inference_basis": 0,
+    "inference_quality_tier": 0,
+    "is_inferred": 0,
+    "value_status": 0,
+    "observed_months_2025": 0,
+    "avg_daily_residential_living_population_2025": 0,
+    "avg_daily_workplace_living_population_2025": 0,
+    "avg_daily_visitor_living_population_2025": 0,
+    "elementary": 0,
+    "middle": 0,
+    "high": 0,
+    "school_count_2025": 0,
+    "nearest_core_school_distance_m_2025": 0,
+    "core_schools_within_2000m_2025": 0,
+    "air_idw_station_count": 0,
+    "nearest_air_station_distance_m": 0,
+    "annual_pm25_ug_m3_idw_2025": 0,
+    "annual_pm10_ug_m3_idw_2025": 0,
+    "annual_so2_ppm_idw_2025": 0,
+    "annual_o3_ppm_idw_2025": 0,
+    "annual_no2_ppm_idw_2025": 0,
+    "annual_co_ppm_idw_2025": 0
   },
   "datasets": [
     {
@@ -76,6 +113,19 @@
       "match_rate": 1.0,
       "source_path": "data/raw/collection/EMP-SGIS-001/sgis_company_2024.json",
       "source_sha256": "1CC03CC340C8A28E1ED8137397B6A58F3A5AE148F65E072C4C3D898FE38524DD"
+    },
+    {
+      "dataset_id": "HOU-SGIS-OLD-001",
+      "join_method": "canonical_code",
+      "input_records": 206,
+      "matched_records": 206,
+      "unmatched_records": 0,
+      "duplicate_code_records": 0,
+      "matched_admin_dongs": 206,
+      "missing_admin_dongs": 0,
+      "match_rate": 1.0,
+      "source_path": "data/raw/sgis/housing/2024/busan_admin_dong_old_housing_proxy_2025.csv",
+      "source_sha256": "527474B8290B13066C4D1F375EC5A97DF4E3CB8C7780A9DD13BAE2B5495A11BD"
     },
     {
       "dataset_id": "SOC-BUSAN-ELDERLY-ALONE-001",
@@ -202,6 +252,58 @@
       "match_rate": 0.998882,
       "source_path": "data/raw/audit/15152994.download",
       "source_sha256": "EF549B03AE13FF9BC4BEC1FF3008D02974FB19B50F9FB4B683749852FCFE717A"
+    },
+    {
+      "dataset_id": "INC-BLF-INFERRED-2025-001",
+      "join_method": "canonical_code",
+      "input_records": 206,
+      "matched_records": 206,
+      "unmatched_records": 0,
+      "duplicate_code_records": 0,
+      "matched_admin_dongs": 206,
+      "missing_admin_dongs": 0,
+      "match_rate": 1.0,
+      "source_path": "data/processed/candidates/2025/basic_livelihood_inferred_2025.csv",
+      "source_sha256": "59FABD3A67A3B0039880186EE193486B1C6CD8C30C3506FF7005A5CF5E96EE81"
+    },
+    {
+      "dataset_id": "DEM-BUSAN-LIVING-001",
+      "join_method": "canonical_code",
+      "input_records": 206,
+      "matched_records": 206,
+      "unmatched_records": 0,
+      "duplicate_code_records": 0,
+      "matched_admin_dongs": 206,
+      "missing_admin_dongs": 0,
+      "match_rate": 1.0,
+      "source_path": "data/processed/candidates/2025/living_population_2025.csv",
+      "source_sha256": "621C06AB7C76B8F892EBB066379E243622245A954D2D55A9E71EF4BF3BD54342"
+    },
+    {
+      "dataset_id": "EDU-SCHOOL-001",
+      "join_method": "canonical_code",
+      "input_records": 206,
+      "matched_records": 206,
+      "unmatched_records": 0,
+      "duplicate_code_records": 0,
+      "matched_admin_dongs": 206,
+      "missing_admin_dongs": 0,
+      "match_rate": 1.0,
+      "source_path": "data/processed/candidates/2025/school_counts_2025.csv",
+      "source_sha256": "D69952884C2C17825BC4005F03A31AD5350280524076C7DB4A8D826528A76C26"
+    },
+    {
+      "dataset_id": "ENV-AIR-HEIS-DAILY-2025-001",
+      "join_method": "canonical_code",
+      "input_records": 206,
+      "matched_records": 206,
+      "unmatched_records": 0,
+      "duplicate_code_records": 0,
+      "matched_admin_dongs": 206,
+      "missing_admin_dongs": 0,
+      "match_rate": 1.0,
+      "source_path": "data/processed/candidates/2025/air_exposure_idw_2025.csv",
+      "source_sha256": "3B1E0AFC400140D3E0F2EBF091DD8F8AF9CFBC2064AC2283D7A3007152619B2E"
     }
   ],
   "zero_is_observed_count_only": true,
@@ -210,20 +312,25 @@
     "primary_denominator": [
       "DEM-MOIS-POP-2025-001"
     ],
-    "proxy_hold": [
+    "provisional_scoring_proxy": [
       "EMP-SGIS-001",
+      "HOU-SGIS-OLD-001",
+      "INC-BLF-INFERRED-2025-001",
       "HLT-HOSPITAL-001",
       "HLT-CLINIC-001",
       "HLT-PHARMACY-001",
       "HOU-BUSSTOP-001",
       "SAF-BUSAN-CCTV-001",
-      "ENV-HEAT-SHELTER-001"
+      "ENV-HEAT-SHELTER-001",
+      "EDU-SCHOOL-001",
+      "ENV-AIR-HEIS-DAILY-2025-001"
     ],
     "validation_only": [
       "SOC-BUSAN-ELDERLY-ALONE-001",
-      "HLT-AED-001"
+      "HLT-AED-001",
+      "DEM-BUSAN-LIVING-001"
     ]
   },
   "profile_path": "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv",
-  "profile_sha256": "1DE88FFB70C13F4A18D4392D126CA0E1B793133F0FE065C9515D141D69068C84"
+  "profile_sha256": "D121FD3CAC99CDFC9E2473993ADE6D25654339CF54477A3AC0B98B5DF2981347"
 }

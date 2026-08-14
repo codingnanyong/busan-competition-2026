@@ -19,6 +19,7 @@ DEFAULT_SECRET_MARKERS = (
     "consumer_key",
     "KOROAD_API_KEY",
     "NEIS_API_KEY",
+    "SCHOOLINFO_API_KEY",
 )
 
 

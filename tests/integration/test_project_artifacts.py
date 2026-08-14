@@ -8,6 +8,8 @@ from busan_imd.collectors.healthcare_facilities import (
     validate_manifest as validate_healthcare_manifest,
 )
 from busan_imd.collectors.heis_air import validate_manifest as validate_heis_manifest
+from busan_imd.collectors.housing import validate_manifest as validate_housing_manifest
+from busan_imd.collectors.police_crime import validate_manifest as validate_police_manifest
 from busan_imd.collectors.reference_data import MANIFEST_PATH as REFERENCE_MANIFEST_PATH
 from busan_imd.collectors.resident_population import (
     validate_manifest as validate_population_manifest,
@@ -17,6 +19,7 @@ from busan_imd.collectors.supplemental_data import (
 )
 from busan_imd.collectors.traffic_accidents import validate_manifest as validate_traffic_manifest
 from busan_imd.data_catalog import validate_catalog
+from busan_imd.income_inference import validate_manifest as validate_income_manifest
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 
@@ -49,7 +52,16 @@ def test_project_structure_and_required_documents() -> None:
         "docs/data/manifests/MOIS_RESIDENT_POPULATION_MANIFEST_2025.json",
         "docs/data/manifests/BUSAN_SUPPLEMENTAL_DATA_MANIFEST.json",
         "docs/data/manifests/FIRE_SUMMARY_MANIFEST_2025.json",
+        "docs/data/manifests/POLICE_CRIME_MANIFEST_2025.json",
+        "docs/data/manifests/SGIS_HOUSING_PROXY_MANIFEST_2025.json",
+        "docs/data/manifests/BASIC_LIVELIHOOD_INFERENCE_MANIFEST_2025.json",
         "docs/data/manifests/STANDARDIZATION_REPORT_2025.json",
+        "docs/data/manifests/DATA_QUALITY_REPORT_2025.json",
+        "docs/data/DATA_DICTIONARY_2025.csv",
+        "docs/data/DATA_QUALITY.md",
+        "docs/data/DATA_PORTABILITY.md",
+        "docs/data/manifests/CONSUMER_SALES_MANIFEST_2025.json",
+        "docs/data/manifests/CITY_PARKS_MANIFEST.json",
         "docs/data/STANDARDIZATION.md",
     )
 
@@ -131,13 +143,15 @@ def test_supplemental_manifest_records_all_selected_sources() -> None:
     validate_supplemental_manifest(manifest, REPOSITORY_ROOT)
 
     entries = {entry["dataset_id"]: entry for entry in manifest["datasets"]}
-    assert manifest["dataset_count"] == 8
+    assert manifest["dataset_count"] == 10
     living = entries["DEM-BUSAN-LIVING-001"]
     assert living["record_count"] == 44340
     assert living["reference_month_min"] == "202301"
     assert living["reference_month_max"] == "202512"
     assert living["admin_dong_count"] == 206
     assert entries["TRN-BUSAN-VILLAGE-BUS-001"]["record_count"] == 136
+    assert entries["TRN-BUSAN-ROUTE-USAGE-2025-001"]["record_count"] == 333
+    assert entries["INC-BLF-HAEUNDAE-2025-001"]["record_count"] == 19
     elderly = entries["SOC-BUSAN-ELDERLY-ALONE-001"]
     assert elderly["collection_status"] == "collected"
     assert elderly["record_count"] == 206
@@ -191,6 +205,52 @@ def test_fire_manifest_covers_complete_2025_as_validation_only() -> None:
     assert manifest["eligible_for_primary_analysis"] is False
 
 
+def test_police_crime_manifest_covers_2025_as_validation_only() -> None:
+    manifest = read_json("docs/data/manifests/POLICE_CRIME_MANIFEST_2025.json")
+    validate_police_manifest(manifest, REPOSITORY_ROOT)
+
+    assert manifest["reference_period"] == "2025-01-01/2025-12-31"
+    assert manifest["record_count"] == 16
+    assert manifest["police_station_count"] == 16
+    assert manifest["crime_count_total"] == 31470
+    assert manifest["eligible_for_primary_analysis"] is False
+
+
+def test_housing_proxy_discloses_2024_to_2025_inference() -> None:
+    manifest = read_json("docs/data/manifests/SGIS_HOUSING_PROXY_MANIFEST_2025.json")
+    validate_housing_manifest(manifest, REPOSITORY_ROOT)
+
+    assert manifest["reference_period"] == "2024-12-31"
+    assert manifest["inference_target_year"] == 2025
+    assert manifest["lag_years"] == 1
+    assert manifest["record_count"] == 206
+    assert manifest["analysis_role"] == "provisional_scoring_proxy"
+
+
+def test_basic_livelihood_proxy_discloses_dong_inference() -> None:
+    manifest = read_json(
+        "docs/data/manifests/BASIC_LIVELIHOOD_INFERENCE_MANIFEST_2025.json"
+    )
+    validate_income_manifest(manifest, REPOSITORY_ROOT)
+
+    assert manifest["reference_period"] == "2025-12"
+    assert manifest["district_totals_are_observed"] is True
+    assert manifest["admin_dong_values_are_inferred"] is True
+    assert manifest["record_count"] == 206
+    assert manifest["district_count"] == 16
+    assert manifest["observed_pattern_admin_dongs"] == 86
+    assert manifest["district_people_total"] == 256393
+    assert manifest["analysis_role"] == "provisional_scoring_proxy"
+    assert manifest["lineage"]["district_total_dataset_id"] == (
+        "INC-WELFARE-SIGUNGU-2025-001"
+    )
+    assert set(manifest["lineage"]["model_feature_dataset_ids"].values()) == {
+        "SOC-BUSAN-ELDERLY-ALONE-001",
+        "HOU-SGIS-OLD-001",
+        "DEM-MOIS-POP-2025-001",
+    }
+
+
 def test_standardization_report_covers_canonical_dongs_and_discloses_failures() -> None:
     report = read_json("docs/data/manifests/STANDARDIZATION_REPORT_2025.json")
     entries = {entry["dataset_id"]: entry for entry in report["datasets"]}
@@ -203,7 +263,26 @@ def test_standardization_report_covers_canonical_dongs_and_discloses_failures() 
     assert report["profile_checks"]["sex_total_mismatch_admin_dongs"] == 0
     assert report["profile_checks"]["count_column_totals"]["bus_stop_count_2025"] == 7940
     assert report["analysis_roles"]["primary_denominator"] == ["DEM-MOIS-POP-2025-001"]
+    assert set(report["analysis_roles"]["provisional_scoring_proxy"]) == {
+        "EMP-SGIS-001",
+        "HOU-SGIS-OLD-001",
+        "INC-BLF-INFERRED-2025-001",
+        "HLT-HOSPITAL-001",
+        "HLT-CLINIC-001",
+        "HLT-PHARMACY-001",
+        "HOU-BUSSTOP-001",
+        "SAF-BUSAN-CCTV-001",
+        "ENV-HEAT-SHELTER-001",
+        "EDU-SCHOOL-001",
+        "ENV-AIR-HEIS-DAILY-2025-001",
+    }
+    assert set(report["analysis_roles"]["validation_only"]) == {
+        "SOC-BUSAN-ELDERLY-ALONE-001",
+        "HLT-AED-001",
+        "DEM-BUSAN-LIVING-001",
+    }
     assert entries["DEM-MOIS-POP-2025-001"]["matched_admin_dongs"] == 206
+    assert entries["INC-BLF-INFERRED-2025-001"]["matched_admin_dongs"] == 206
     assert entries["HOU-BUSSTOP-001"]["matched_records"] == 7940
     assert entries["HOU-BUSSTOP-001"]["unmatched_records"] == 582
     assert entries["HLT-HOSPITAL-001"]["coordinate_missing_records"] == 29
@@ -219,10 +298,17 @@ def test_committed_manifests_do_not_contain_credentials() -> None:
         "docs/data/manifests/HEIS_AIR_MANIFEST_2026.json",
         "docs/data/manifests/HEALTHCARE_FACILITY_MANIFEST_2025.json",
         "docs/data/manifests/KOROAD_TRAFFIC_ACCIDENT_MANIFEST.json",
+        "docs/data/manifests/POLICE_CRIME_MANIFEST_2025.json",
+        "docs/data/manifests/SGIS_HOUSING_PROXY_MANIFEST_2025.json",
+        "docs/data/manifests/BASIC_LIVELIHOOD_INFERENCE_MANIFEST_2025.json",
         "docs/data/manifests/MOIS_RESIDENT_POPULATION_MANIFEST_2025.json",
         "docs/data/manifests/BUSAN_SUPPLEMENTAL_DATA_MANIFEST.json",
         "docs/data/manifests/FIRE_SUMMARY_MANIFEST_2025.json",
         "docs/data/manifests/STANDARDIZATION_REPORT_2025.json",
+        "docs/data/manifests/CANDIDATE_PROCESSING_REPORT_2025.json",
+        "docs/data/manifests/DATA_QUALITY_REPORT_2025.json",
+        "docs/data/manifests/CONSUMER_SALES_MANIFEST_2025.json",
+        "docs/data/manifests/CITY_PARKS_MANIFEST.json",
     ):
         text = (REPOSITORY_ROOT / relative_path).read_text(encoding="utf-8")
         assert "serviceKey=" not in text
