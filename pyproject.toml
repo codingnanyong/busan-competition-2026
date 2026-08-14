@@ -11,4 +11,4 @@ src = ["src", "tests"]
 select = ["B", "E", "F", "I", "UP"]
 
 [tool.ruff.lint.isort]
-known-first-party = ["busan_imd"]
+known-first-party = ["busan_imd", "scripts"]

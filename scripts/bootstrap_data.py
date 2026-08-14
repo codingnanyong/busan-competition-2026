@@ -9,10 +9,9 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 
+from busan_imd.core.config import read_env_file
 from scripts.data_bundle import DEFAULT_ARCHIVE_NAME, import_bundle
 from scripts.rebuild_processed import rebuild
-
-from busan_imd.core.config import read_env_file
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 
