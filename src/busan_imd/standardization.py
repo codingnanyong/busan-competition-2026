@@ -32,6 +32,12 @@ class SourcePaths:
         "busan_resident_population_admin_dong_2025_12.csv"
     )
     employment: Path = Path("data/raw/collection/EMP-SGIS-001/sgis_company_2024.json")
+    housing: Path = Path(
+        "data/raw/sgis/housing/2024/busan_admin_dong_old_housing_proxy_2025.csv"
+    )
+    basic_livelihood: Path = Path(
+        "data/processed/candidates/2025/basic_livelihood_inferred_2025.csv"
+    )
     elderly: Path = Path(
         "data/raw/supplemental/elderly_alone/"
         "busan_elderly_alone_latest_by_admin_dong.csv"
@@ -55,6 +61,11 @@ class SourcePaths:
         "busan_crime_prevention_cctv_2025.csv"
     )
     heat_shelters: Path = Path("data/raw/audit/15152994.download")
+    living_population: Path = Path(
+        "data/processed/candidates/2025/living_population_2025.csv"
+    )
+    schools: Path = Path("data/processed/candidates/2025/school_counts_2025.csv")
+    air_exposure: Path = Path("data/processed/candidates/2025/air_exposure_idw_2025.csv")
 
 
 def read_csv_fallback(path: Path, **kwargs: Any) -> pd.DataFrame:
@@ -222,6 +233,8 @@ def _attach_counts(profile: pd.DataFrame, counts: pd.Series, column: str) -> Non
 
 def build_standardized_profile(
     paths: SourcePaths | None = None,
+    *,
+    include_basic_livelihood: bool = True,
 ) -> tuple[pd.DataFrame, dict[str, Any]]:
     """Build a 206-row candidate profile and a transparent validation report."""
     paths = paths or SourcePaths()
@@ -296,6 +309,35 @@ def build_standardized_profile(
                 "tot_worker": "workplace_workers_2024",
             }
         ),
+        on="admin_dong_code",
+        how="left",
+        validate="one_to_one",
+    )
+
+    housing = read_csv_fallback(paths.housing, dtype={"adm_cd": str})
+    reports.append(
+        attach_source_metadata(
+            validate_code_frame(
+                housing,
+                boundaries,
+                dataset_id="HOU-SGIS-OLD-001",
+                code_column="adm_cd",
+                expected_complete=True,
+            ),
+            paths.housing,
+        )
+    )
+    housing_columns = [
+        "total_house_count_2024",
+        "old_house_count_30plus_2024_lower_bound",
+        "old_house_share_30plus_2024_lower_bound_pct",
+        "suppressed_age_cells",
+        "absent_age_cells_imputed_zero",
+    ]
+    for column in housing_columns:
+        housing[column] = pd.to_numeric(housing[column], errors="raise")
+    profile = profile.merge(
+        housing[["adm_cd", *housing_columns]].rename(columns={"adm_cd": "admin_dong_code"}),
         on="admin_dong_code",
         how="left",
         validate="one_to_one",
@@ -398,6 +440,90 @@ def build_standardized_profile(
     reports.append(attach_source_metadata(report, paths.heat_shelters))
     _attach_counts(profile, heat_counts, "heat_shelter_count_2025")
 
+    processed_sources: list[tuple[str, Path, list[str]]] = []
+    if include_basic_livelihood:
+        processed_sources.append(
+            (
+            "INC-BLF-INFERRED-2025-001",
+            paths.basic_livelihood,
+            [
+                "basic_livelihood_recipients_2025_inferred",
+                "basic_livelihood_households_2025_inferred",
+                "basic_livelihood_recipients_per_1000_population_2025_inferred",
+                "allocation_method",
+                "pattern_source_dataset_id",
+                "pattern_source_period",
+                "district_total_source_dataset_id",
+                "inference_pattern_source_dataset_ids",
+                "inference_feature_source_dataset_ids",
+                "inference_basis",
+                "inference_quality_tier",
+                "is_inferred",
+                "value_status",
+            ],
+            )
+        )
+    processed_sources.extend(
+        [
+        (
+            "DEM-BUSAN-LIVING-001",
+            paths.living_population,
+            [
+                "observed_months_2025",
+                "avg_daily_residential_living_population_2025",
+                "avg_daily_workplace_living_population_2025",
+                "avg_daily_visitor_living_population_2025",
+            ],
+        ),
+        (
+            "EDU-SCHOOL-001",
+            paths.schools,
+            [
+                "elementary",
+                "middle",
+                "high",
+                "school_count_2025",
+                "nearest_core_school_distance_m_2025",
+                "core_schools_within_2000m_2025",
+            ],
+        ),
+        (
+            "ENV-AIR-HEIS-DAILY-2025-001",
+            paths.air_exposure,
+            [
+                "air_idw_station_count",
+                "nearest_air_station_distance_m",
+                "annual_pm25_ug_m3_idw_2025",
+                "annual_pm10_ug_m3_idw_2025",
+                "annual_so2_ppm_idw_2025",
+                "annual_o3_ppm_idw_2025",
+                "annual_no2_ppm_idw_2025",
+                "annual_co_ppm_idw_2025",
+            ],
+        ),
+        ]
+    )
+    for dataset_id, path, columns in processed_sources:
+        candidate = read_csv_fallback(path, dtype={"admin_dong_code": str})
+        reports.append(
+            attach_source_metadata(
+                validate_code_frame(
+                    candidate,
+                    boundaries,
+                    dataset_id=dataset_id,
+                    code_column="admin_dong_code",
+                    expected_complete=True,
+                ),
+                path,
+            )
+        )
+        profile = profile.merge(
+            candidate[["admin_dong_code", *columns]],
+            on="admin_dong_code",
+            how="left",
+            validate="one_to_one",
+        )
+
     profile = profile.sort_values("admin_dong_code").reset_index(drop=True)
     count_columns = [
         column
@@ -446,16 +572,24 @@ def build_standardized_profile(
         ),
         "analysis_roles": {
             "primary_denominator": ["DEM-MOIS-POP-2025-001"],
-            "proxy_hold": [
+            "provisional_scoring_proxy": [
                 "EMP-SGIS-001",
+                "HOU-SGIS-OLD-001",
+                *(["INC-BLF-INFERRED-2025-001"] if include_basic_livelihood else []),
                 "HLT-HOSPITAL-001",
                 "HLT-CLINIC-001",
                 "HLT-PHARMACY-001",
                 "HOU-BUSSTOP-001",
                 "SAF-BUSAN-CCTV-001",
                 "ENV-HEAT-SHELTER-001",
+                "EDU-SCHOOL-001",
+                "ENV-AIR-HEIS-DAILY-2025-001",
             ],
-            "validation_only": ["SOC-BUSAN-ELDERLY-ALONE-001", "HLT-AED-001"],
+            "validation_only": [
+                "SOC-BUSAN-ELDERLY-ALONE-001",
+                "HLT-AED-001",
+                "DEM-BUSAN-LIVING-001",
+            ],
         },
     }
     return profile, report_document

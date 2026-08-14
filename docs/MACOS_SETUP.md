@@ -39,6 +39,7 @@ docker compose run --rm jupyter python scripts/data_bundle.py export
 ```bash
 docker compose run --rm jupyter python scripts/data_bundle.py import \
   outputs/busan-imd-raw-data.tar.gz
+docker compose run --rm jupyter python scripts/rebuild_processed.py
 ```
 
 복원 대상에 기존 파일이 있으면 기본적으로 중단한다. 의도적으로 덮을 때만 `--replace`를
@@ -48,6 +49,11 @@ docker compose run --rm jupyter python scripts/data_bundle.py import \
 
 `.env`를 채운 다음 필요한 `collectors` 모듈을 실행한다. 단, MOIS 주민등록인구처럼 웹에서
 수동 다운로드한 원본은 API로 자동 복구되지 않으므로 bundle 이전이 필요하다.
+
+`git clone`만으로는 분석 데이터가 복구되지 않는다. raw bundle을 가져오거나 모든 수동
+원본을 다시 받아야 하며, 그 뒤 `scripts/rebuild_processed.py`가 운영체제 공통 순서로
+`data/processed`와 품질 리포트를 재생성한다. 소비매출의 분석용 CSV 복사본도 raw bundle에
+포함되므로 Windows Excel이 없는 Mac에서 다시 변환할 필요가 없다.
 
 ## 3. macOS 확인 사항
 

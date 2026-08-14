@@ -21,6 +21,7 @@
 docker compose run --rm jupyter python -m busan_imd.collectors.reference_data
 docker compose run --rm jupyter python -m busan_imd.collectors.healthcare_facilities --refresh
 docker compose run --rm jupyter python -m busan_imd.collectors.traffic_accidents --refresh
+docker compose run --rm jupyter python -m busan_imd.collectors.police_crime --refresh
 docker compose run --rm jupyter python -m busan_imd.collectors.fire_incidents --refresh
 ```
 
@@ -74,8 +75,8 @@ Git에는 출처, 요청조건, 기준기간, 레코드 수와 SHA-256을 담은
 
 아직 기관 요청이 필요한 핵심 자료는 행정동별 기초생활보장, 고용·실업, 범죄, 전체
 교통사고·화재, 표준화 건강결과·의료이용, 거주지 기준 교육성과, 동일 정의의
-빈집·노후주택·과밀가구, 2025-12-31 AED 이력, 전체 시내버스 운행횟수, 부산 전체
-침수·폭염 노출자료다.
+빈집·노후주택·과밀가구, 2025-12-31 AED 이력, 전체 시내버스 운행횟수와 부산 전체
+폭염·대기 노출자료다. 침수흔적도는 이번 분석 범위에서 제외한다.
 
 ## 공공데이터포털 추가 활용신청 우선순위
 
@@ -84,11 +85,15 @@ Git에는 출처, 요청조건, 기준기간, 레코드 수와 SHA-256을 담은
    경계에 공간 결합해야 하며 과밀가구는 별도 자료가 필요하다.
 2. [소방청 지역별 화재피해 현황](https://www.data.go.kr/data/15142972/openapi.do):
    주소가 읍·면·동까지 있지만 공개기간은 2019~2023년이므로 과거 검증용이다.
-3. 완료 — [소방청 화재정보서비스](https://www.data.go.kr/data/15077644/openapi.do):
+3. 완료 — [소방청 화재현황](https://www.data.go.kr/data/15155635/fileData.do):
+   활용신청은 완료됐지만 2026-08-14 실제 호출은 HTTP 401을 반환해 권한 전파를 다시
+   확인해야 한다. 현재 원문도 2023-12-31 기준이므로 접근 후 부산 과거 패턴 검증용으로만
+   사용한다.
+4. 완료 — [소방청 화재정보서비스](https://www.data.go.kr/data/15077644/openapi.do):
    2025년 365일을 수집했다. 소방서별 일일 처리요약이며 주소·행정동이 없어 검증 전용이다.
-4. [부산 시내버스 업체별 연도별 등록대수](https://www.data.go.kr/data/15043689/fileData.do):
+5. [부산 시내버스 업체별 연도별 등록대수](https://www.data.go.kr/data/15043689/fileData.do):
    노선별 투입 차량수 보조자료다. 실제 운행횟수나 배차이력은 아니다.
-5. [부산 버스정보안내기 현황](https://www.data.go.kr/data/15034014/openapi.do):
+6. [부산 버스정보안내기 현황](https://www.data.go.kr/data/15034014/openapi.do):
    정류소별 안내설비 접근성을 보완하지만 핵심 지표 우선순위는 낮다.
 
 복지사업 구·군 통계, 부산 방범용 CCTV, 2023 버스 승하차 자료는 파일 다운로드가 가능해

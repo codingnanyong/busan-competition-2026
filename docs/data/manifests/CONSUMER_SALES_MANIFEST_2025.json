@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-14T01:14:19+00:00",
+  "dataset_id": "ECO-BUSAN-CONSUMER-SALES-2025-001",
+  "provider": "Busan Metropolitan City (Busan Data Wave)",
+  "reference_period": "2025-01/2025-12",
+  "period_type": "annual",
+  "spatial_unit": "administrative dong (merchant location)",
+  "analysis_role": "validation",
+  "eligible_for_primary_analysis": false,
+  "limitations": "Card consumption is observed at merchant locations, not residents' household income. It is retained as economic-activity context and is not a direct income deprivation score. One dong has 11 observed months and is not zero-filled.",
+  "aggregation": "day-weighted mean of monthly average-daily values",
+  "protected_download_path": "data/raw/busan_data_wave/consumer_sales/2025/busan_admin_dong_consumer_sales_by_industry_2023_2025.xlsx",
+  "protected_download_sha256": "674CBD2F54856673A0512845D0C397044A0DFEE23EB9EF32F8BCAED1B264159C",
+  "conversion_note": "The portal download was protected by a non-OOXML wrapper. The parsed workbook is a value-preserving Excel CSV export; the protected original is retained.",
+  "input_path": "data/raw/busan_data_wave/consumer_sales/2025/busan_admin_dong_consumer_sales_by_industry_2023_2025_parsed.csv",
+  "input_sha256": "1EC000249A5171507F0C4AE0C3F05944E96071AD52C64A5DCD190F9C77574C9A",
+  "output_path": "data/processed/candidates/2025/consumer_sales_2025.csv",
+  "output_sha256": "967F7737E19B6ACB1DA01E51E7BB3D8BFDAA4E97B199BD204F0FC7D2F2A967CD",
+  "category_output_path": "data/processed/candidates/2025/consumer_sales_by_category_2025.csv",
+  "category_output_sha256": "E9BFC77A5AB606AAE92E34CDEC333310699F906449B7AAA7D8D21618896D1AFE",
+  "source_rows_2025": 27181,
+  "admin_dong_count": 206,
+  "industry_category_count": 11,
+  "complete_admin_dongs": 205,
+  "incomplete_admin_dongs": 1,
+  "recovered_names": [
+    {
+      "portal_code": "2644059000",
+      "canonical_code": "21120562",
+      "name": "강서구 신호동"
+    }
+  ]
+}

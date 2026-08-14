@@ -14,14 +14,14 @@
 | Domain | Best public candidate | Type | Grade | Decision | Condition to pass |
 |---|---|---|---:|---|---|
 | Income | Basic-livelihood recipients in five districts | Proxy | C | Exclude | 100% of 16 districts with one date and benefit definition |
-| Employment | SGIS 2024 establishments and workers | Proxy | C | Hold | All 206 dongs collected; obtain resident employment separately |
-| Education | 667 Busan school records | Proxy | B | Hold | Geocode the 662 schools eligible at 2025-12-31, calculate service areas, and keep separate from outcomes |
-| Health | Reconstructed 2025 hospital/pharmacy candidates and AED locations | Proxy/context | B | Hold | Validate historical completeness and coordinates, obtain an AED archive, and obtain small-area outcomes |
+| Employment | SGIS 2024 establishments and workers | Proxy | C | Provisional include | Joined all 206 dongs; interpret only as local employment opportunity |
+| Education | 667 Busan school records | Proxy | B | Provisional include | Geocoded 655 of 662 eligible schools and calculated access for all 206 dongs |
+| Health | Reconstructed 2025 hospital/clinic/pharmacy candidates | Proxy | B | Provisional include | Valid-coordinate facilities joined as access proxies; AED remains validation only |
 | Safety | KOROAD crash context and 2025 NFA daily fire-station summaries | Validation | C | Validation only | Obtain complete administrative-dong crash and fire counts and verify derivative redistribution |
 | Housing | Yeongdo and Suyeong vacancy | Direct | C | Exclude | One vacancy definition and date across Busan |
-| Services | 2025-01-21 bus-stop locations | Proxy | B | Hold | 7,940 of 8,522 points (93.17%) joined; review 582 unmatched points and add frequency/walk-time evidence |
-| Environment | Heat-shelter locations | Context | B | Hold | Spatial join plus hours and capacity checks |
-| Environment | HEIS daily air quality | Context | C | Hold | Use 2025 as the primary period; use 2026 January-July only for validation, and disclose interpolation error |
+| Services | 2025-01-21 bus-stop locations | Proxy | B | Provisional include | 7,940 of 8,522 points joined; disclose 582 unmatched points |
+| Environment | Heat-shelter locations | Proxy | B | Provisional include | 1,787 facilities joined to all 206 dongs |
+| Environment | HEIS 2025 daily air quality | Proxy | B | Provisional include | Matched coordinates for 32 of 33 stations and generated four-nearest-station IDW estimates for 206 dongs |
 | Environment | Sasang flood traces | Validation | C | Validation only | Same-period citywide geospatial records |
 
 ## Inclusion gate

@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-14T01:14:16+00:00",
+  "reference_year": 2025,
+  "canonical_admin_dong_count": 206,
+  "assessments": [
+    {
+      "dataset_id": "DEM-BUSAN-LIVING-001",
+      "input_2025_records": 14820,
+      "output_records": 206,
+      "complete_12_month_dongs": 205,
+      "unmatched_admin_codes": 0,
+      "decision": "validation-only",
+      "reason": "Complete dong coverage, but telecom living population is a service-demand context measure rather than deprivation itself."
+    },
+    {
+      "dataset_id": "EDU-SCHOOL-001",
+      "input_records": 662,
+      "geocoded_records": 655,
+      "core_school_records": 616,
+      "facility_present_admin_dongs": 185,
+      "output_records": 206,
+      "maximum_nearest_core_school_distance_m": 2987.821,
+      "decision": "provisional-scoring-proxy",
+      "reason": "Official coordinates support facility-access mapping; counts measure education access, not resident educational outcomes."
+    },
+    {
+      "dataset_id": "ENV-AIR-HEIS-DAILY-2025-001",
+      "daily_records": 12045,
+      "heis_station_count": 33,
+      "coordinate_matched_stations": 32,
+      "output_records": 206,
+      "maximum_nearest_station_distance_m": 7467.454,
+      "interpolation": "inverse-distance-squared weighting of four nearest station annual means",
+      "decision": "provisional-scoring-proxy",
+      "reason": "Full-year pollutant observations and official station coordinates support reproducible exposure estimates; interpolation uncertainty must be disclosed."
+    },
+    {
+      "dataset_ids": [
+        "TRN-BUSAN-ROUTE-USAGE-2025-001",
+        "TRN-BUSAN-VILLAGE-BUS-001"
+      ],
+      "route_usage_records": 333,
+      "route_usage_reconciliation_failures": 0,
+      "village_bus_records": 136,
+      "district_output_records": 16,
+      "decision": "validation-only",
+      "reason": "Route demand lacks stop geography and village-bus supply is only attributable to districts; neither can be allocated to 206 dongs without inventing data."
+    }
+  ],
+  "artifacts": {
+    "living_population": {
+      "path": "data/processed/candidates/2025/living_population_2025.csv",
+      "records": 206,
+      "sha256": "621C06AB7C76B8F892EBB066379E243622245A954D2D55A9E71EF4BF3BD54342"
+    },
+    "school_access": {
+      "path": "data/processed/candidates/2025/school_counts_2025.csv",
+      "records": 206,
+      "sha256": "D69952884C2C17825BC4005F03A31AD5350280524076C7DB4A8D826528A76C26"
+    },
+    "air_exposure": {
+      "path": "data/processed/candidates/2025/air_exposure_idw_2025.csv",
+      "records": 206,
+      "sha256": "3B1E0AFC400140D3E0F2EBF091DD8F8AF9CFBC2064AC2283D7A3007152619B2E"
+    },
+    "route_usage": {
+      "path": "data/processed/candidates/2025/bus_route_usage_2025.csv",
+      "records": 333,
+      "sha256": "D55CBFD16A68EDF1CF7A9612556CEB2ADF617F55459890A87B6AD70826E04770"
+    },
+    "village_bus_district": {
+      "path": "data/processed/candidates/2025/village_bus_by_district_2025.csv",
+      "records": 16,
+      "sha256": "5A1F2A85CA335DE6C06F23538F31518CCD21AC62C4C4FE0ABB04F245B7E4959F"
+    }
+  }
+}

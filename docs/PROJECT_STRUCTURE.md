@@ -8,6 +8,7 @@ src/busan_imd/
 ├─ sources/      # 외부 API URL, 요청 파라미터와 응답 파싱 계약
 ├─ core/         # HTTP, 설정, 체크섬, 출처 검증 공통 코드
 ├─ data_catalog.py
+├─ data_quality.py       # 컬럼 사전·결측·범위·품질경고 생성
 └─ standardization.py  # 2025 행정동 공통키·공간결합·단위 표준화
 tests/
 ├─ unit/         # 네트워크와 실제 파일에 의존하지 않는 로직 검사
@@ -35,6 +36,7 @@ scripts/         # 운영체제에 독립적인 보조 명령과 문서 빌드 �
 ```bash
 docker compose run --rm jupyter python -m busan_imd.collectors.fire_incidents
 docker compose run --rm jupyter python -m busan_imd.standardization
+docker compose run --rm jupyter python scripts/rebuild_processed.py
 docker compose run --rm jupyter python -m pytest -q
 ```
 

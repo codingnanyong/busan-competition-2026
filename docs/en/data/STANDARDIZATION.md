@@ -4,7 +4,7 @@
 
 The pipeline joins collected source data to the 206 Busan administrative-dong boundaries for
 SGIS 2025 and creates a candidate profile for later indicator design. The output is not an IMD
-score. Sources with incompatible periods or definitions remain `proxy_hold` or
+score. Sources with incompatible periods or definitions remain `validation_only` or
 `validation_only`.
 
 ## Run
