@@ -59,6 +59,7 @@ def test_project_structure_and_required_documents() -> None:
         "docs/data/manifests/DATA_QUALITY_REPORT_2025.json",
         "docs/data/DATA_DICTIONARY_2025.csv",
         "docs/data/DATA_QUALITY.md",
+        "docs/data/DATA_PORTABILITY.md",
         "docs/data/manifests/CONSUMER_SALES_MANIFEST_2025.json",
         "docs/data/manifests/CITY_PARKS_MANIFEST.json",
         "docs/data/STANDARDIZATION.md",

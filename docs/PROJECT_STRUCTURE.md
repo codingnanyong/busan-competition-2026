@@ -36,9 +36,11 @@ scripts/         # 운영체제에 독립적인 보조 명령과 문서 빌드 �
 ```bash
 docker compose run --rm jupyter python -m busan_imd.collectors.fire_incidents
 docker compose run --rm jupyter python -m busan_imd.standardization
+docker compose run --rm jupyter python -m scripts.bootstrap_data prepare
 docker compose run --rm jupyter python scripts/rebuild_processed.py
 docker compose run --rm jupyter python -m pytest -q
 ```
 
 수집기 이름과 원본 위치는 [원본 데이터 수집 문서](data/RAW_DATA_COLLECTION.md), 필요한
 자료와 분석 채택 여부는 [데이터 감사표](data/DATASET_AUDIT.csv)를 단일 기준으로 사용한다.
+Mac 이전과 API·Drive 분리는 [데이터 이전 정책](data/DATA_PORTABILITY.md)을 따른다.

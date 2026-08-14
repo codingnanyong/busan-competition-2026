@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
 from scripts import data_bundle
 
 
@@ -25,3 +26,14 @@ def test_raw_bundle_round_trip_is_platform_independent(tmp_path, monkeypatch) ->
     assert restored.read_text(encoding="utf-8") == "행정동,값\n중앙동,1\n"
     checksum = Path(str(archive) + ".sha256").read_text(encoding="ascii")
     assert data_bundle.sha256(archive) in checksum
+
+
+def test_bundle_checksum_rejects_tampering(tmp_path: Path) -> None:
+    archive = tmp_path / "raw.tar.gz"
+    archive.write_bytes(b"changed")
+    archive.with_suffix(".gz.sha256").write_text(
+        "0" * 64 + "  raw.tar.gz\n", encoding="ascii"
+    )
+
+    with pytest.raises(ValueError, match="checksum mismatch"):
+        data_bundle.verify_bundle_checksum(archive, required=True)

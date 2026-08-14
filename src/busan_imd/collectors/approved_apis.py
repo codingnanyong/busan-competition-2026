@@ -303,28 +303,51 @@ def main() -> int:
     parser.add_argument("--audit-root", type=Path, default=AUDIT_ROOT)
     parser.add_argument("--output-root", type=Path, default=COLLECTION_ROOT)
     parser.add_argument("--manifest", type=Path, default=MANIFEST_PATH)
+    parser.add_argument(
+        "--dataset",
+        action="append",
+        choices=sorted(API_SOURCES),
+        help="Collect only the selected API dataset; repeat for multiple datasets",
+    )
+    parser.add_argument(
+        "--skip-direct-downloads",
+        action="store_true",
+        help="Do not require or register previously downloaded portal files",
+    )
     args = parser.parse_args()
 
     config = read_env_file(args.env_file)
-    required = ("SGIS_CONSUMER_KEY", "SGIS_CONSUMER_SECRET", "DATA_GO_KR_SERVICE_KEY")
-    require_values(config, required, args.env_file)
+    selected = set(args.dataset or API_SOURCES)
+    required: list[str] = []
+    if "EMP-SGIS-001" in selected:
+        required.extend(("SGIS_CONSUMER_KEY", "SGIS_CONSUMER_SECRET"))
+    if selected - {"EMP-SGIS-001"}:
+        required.append("DATA_GO_KR_SERVICE_KEY")
+    require_values(config, tuple(required), args.env_file)
 
     retrieved_at = datetime.now(UTC).replace(microsecond=0).isoformat()
-    entries = direct_download_entries(args.catalog, args.audit_root)
-    entries.append(
-        collect_sgis_company(
-            config["SGIS_CONSUMER_KEY"],
-            config["SGIS_CONSUMER_SECRET"],
-            args.output_root,
-            retrieved_at,
-        )
+    entries = [] if args.skip_direct_downloads else direct_download_entries(
+        args.catalog, args.audit_root
     )
-    for dataset_id in ("HOU-BUSSTOP-API-001", "HLT-AED-001", "ENV-AIR-REALTIME-001"):
+    if "EMP-SGIS-001" in selected:
         entries.append(
-            collect_portal_api(
-                dataset_id, config["DATA_GO_KR_SERVICE_KEY"], args.output_root, retrieved_at
+            collect_sgis_company(
+                config["SGIS_CONSUMER_KEY"],
+                config["SGIS_CONSUMER_SECRET"],
+                args.output_root,
+                retrieved_at,
             )
         )
+    for dataset_id in ("HOU-BUSSTOP-API-001", "HLT-AED-001", "ENV-AIR-REALTIME-001"):
+        if dataset_id in selected:
+            entries.append(
+                collect_portal_api(
+                    dataset_id,
+                    config["DATA_GO_KR_SERVICE_KEY"],
+                    args.output_root,
+                    retrieved_at,
+                )
+            )
     write_manifest(entries, args.manifest, retrieved_at)
     manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
     write_json(args.output_root / "manifest.json", manifest)
