@@ -33,5 +33,6 @@ Linear와 GitHub Issues는 같은 작업의 1:1 복사본입니다. Linear는 �
 | M5 | [COD-25](https://linear.app/codingnanyong/issue/COD-25) | [#34](https://github.com/codingnanyong/busan-competition-2026/issues/34) | 제출 데이터·코드·문서 재현성 검증 |
 | M6 | [COD-26](https://linear.app/codingnanyong/issue/COD-26) | [#35](https://github.com/codingnanyong/busan-competition-2026/issues/35) | 최종 제출·v1.0.0 태그·Release·Wiki 발행 |
 | M7 | [COD-27](https://linear.app/codingnanyong/issue/COD-27) | [#36](https://github.com/codingnanyong/busan-competition-2026/issues/36) | 발표자료·데모·예상 질의응답 준비 |
+| — | [COD-29](https://linear.app/codingnanyong/issue/COD-29) | [#39](https://github.com/codingnanyong/busan-competition-2026/issues/39) | v0.3.0 릴리스 준비 및 main 배포 |
 
 브랜치는 `feat/<linear-id>-<slug>` 형식을 사용합니다. 예: `feat/cod-15-eda`. PR은 `Closes COD-15`와 `Closes #24`를 함께 포함합니다.
