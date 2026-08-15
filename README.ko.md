@@ -6,14 +6,14 @@
 
 ## 운영 원칙
 
-- 작업 단위는 Linear 이슈로 관리합니다.
+- 작업 단위는 1:1로 연결된 Linear·GitHub 이슈 쌍으로 관리합니다.
 - 모든 구현은 `feat/<linear-id>-<slug>` 브랜치에서 시작합니다.
 - `feat/*`는 PR을 통해 `develop`에 병합합니다.
 - 릴리스 준비가 끝난 `develop`만 PR을 통해 `main`에 병합합니다.
 - `main` 병합 시 `VERSION`을 기준으로 Git 태그와 GitHub Release를 발행합니다.
 - 분석 근거, 의사결정, 데이터 사전과 릴리스 변경사항은 국문·영문 문서에 함께 반영합니다.
 
-자세한 일정은 [프로젝트 계획](docs/PROJECT_PLAN.md), 확정된 제출물은 [공모전 제출 요구사항 및 공식 서식](docs/COMPETITION_REQUIREMENTS.md), 실행 환경은 [Docker 기반 분석 환경](docs/DEVELOPMENT_ENVIRONMENT.md), [macOS 이전 안내](docs/MACOS_SETUP.md), [프로젝트 구조](docs/PROJECT_STRUCTURE.md), 실행 항목은 [Linear 이슈 맵](docs/ISSUES.md)을 참고하세요. 데이터의 현재 가용성과 향후 확장 조건은 [데이터 가용성 매트릭스](docs/data/AVAILABILITY_MATRIX.md)와 [B-IMD 확장 모델](docs/methodology/EXPANSION_MODEL.md)에서 관리합니다.
+자세한 일정은 [프로젝트 계획](docs/PROJECT_PLAN.md), 확정된 제출물은 [공모전 제출 요구사항 및 공식 서식](docs/COMPETITION_REQUIREMENTS.md), 실행 환경은 [Docker 기반 분석 환경](docs/DEVELOPMENT_ENVIRONMENT.md), [macOS 이전 안내](docs/MACOS_SETUP.md), [프로젝트 구조](docs/PROJECT_STRUCTURE.md), 실행 항목은 [Linear·GitHub 이슈 맵](docs/ISSUES.md)을 참고하세요. 데이터의 현재 가용성과 향후 확장 조건은 [데이터 가용성 매트릭스](docs/data/AVAILABILITY_MATRIX.md)와 [B-IMD 확장 모델](docs/methodology/EXPANSION_MODEL.md)에서 관리합니다.
 
 ## 목표 산출물
 
