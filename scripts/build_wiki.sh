@@ -13,41 +13,55 @@ esac
 mkdir -p "$output_dir"
 find "$output_dir" -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
 
-cp README.md "$output_dir/Home.md"
-cp README.ko.md "$output_dir/KO-Home.md"
-cp README.en.md "$output_dir/EN-Home.md"
+page_manifest="$output_dir/.wiki-pages.tsv"
+: > "$page_manifest"
 
-cp docs/PROJECT_PLAN.md "$output_dir/KO-Project-Plan.md"
-cp docs/GIT_WORKFLOW.md "$output_dir/KO-Git-Workflow.md"
-cp docs/RELEASE_POLICY.md "$output_dir/KO-Release-Policy.md"
-cp docs/ISSUES.md "$output_dir/KO-Linear-Issues.md"
-cp docs/data/DATA_CATALOG.md "$output_dir/KO-Data-Catalog.md"
-cp docs/data/AVAILABILITY_MATRIX.md "$output_dir/KO-Data-Availability.md"
-cp docs/data/DATA_REQUEST_ROADMAP.md "$output_dir/KO-Data-Request-Roadmap.md"
-cp docs/methodology/INDICATOR_SPEC.md "$output_dir/KO-Indicator-Spec.md"
-cp docs/methodology/LIMITATIONS.md "$output_dir/KO-Limitations.md"
-cp docs/methodology/EXPANSION_MODEL.md "$output_dir/KO-Expansion-Model.md"
+publish_page() {
+  local source_path="$1"
+  local page_name="$2"
 
-cp docs/en/PROJECT_PLAN.md "$output_dir/EN-Project-Plan.md"
-cp docs/en/GIT_WORKFLOW.md "$output_dir/EN-Git-Workflow.md"
-cp docs/en/RELEASE_POLICY.md "$output_dir/EN-Release-Policy.md"
-cp docs/en/ISSUES.md "$output_dir/EN-Linear-Issues.md"
-cp docs/en/data/DATA_CATALOG.md "$output_dir/EN-Data-Catalog.md"
-cp docs/en/data/AVAILABILITY_MATRIX.md "$output_dir/EN-Data-Availability.md"
-cp docs/en/data/DATA_REQUEST_ROADMAP.md "$output_dir/EN-Data-Request-Roadmap.md"
-cp docs/en/methodology/INDICATOR_SPEC.md "$output_dir/EN-Indicator-Spec.md"
-cp docs/en/methodology/LIMITATIONS.md "$output_dir/EN-Limitations.md"
-cp docs/en/methodology/EXPANSION_MODEL.md "$output_dir/EN-Expansion-Model.md"
+  cp "$source_path" "$output_dir/$page_name.md"
+  printf '%s\t%s\n' "$source_path" "$page_name" >> "$page_manifest"
+}
+
+publish_page README.md Home
+publish_page README.ko.md KO-Home
+publish_page README.en.md EN-Home
+
+publish_page docs/PROJECT_PLAN.md KO-Project-Plan
+publish_page docs/GIT_WORKFLOW.md KO-Git-Workflow
+publish_page docs/RELEASE_POLICY.md KO-Release-Policy
+publish_page docs/ISSUES.md KO-Linear-Issues
+publish_page docs/data/DATA_CATALOG.md KO-Data-Catalog
+publish_page docs/data/AVAILABILITY_MATRIX.md KO-Data-Availability
+publish_page docs/data/DATA_REQUEST_ROADMAP.md KO-Data-Request-Roadmap
+publish_page docs/methodology/INDICATOR_SPEC.md KO-Indicator-Spec
+publish_page docs/methodology/LIMITATIONS.md KO-Limitations
+publish_page docs/methodology/EXPANSION_MODEL.md KO-Expansion-Model
+
+publish_page docs/en/PROJECT_PLAN.md EN-Project-Plan
+publish_page docs/en/GIT_WORKFLOW.md EN-Git-Workflow
+publish_page docs/en/RELEASE_POLICY.md EN-Release-Policy
+publish_page docs/en/ISSUES.md EN-Linear-Issues
+publish_page docs/en/data/DATA_CATALOG.md EN-Data-Catalog
+publish_page docs/en/data/AVAILABILITY_MATRIX.md EN-Data-Availability
+publish_page docs/en/data/DATA_REQUEST_ROADMAP.md EN-Data-Request-Roadmap
+publish_page docs/en/methodology/INDICATOR_SPEC.md EN-Indicator-Spec
+publish_page docs/en/methodology/LIMITATIONS.md EN-Limitations
+publish_page docs/en/methodology/EXPANSION_MODEL.md EN-Expansion-Model
 
 for release_note in docs/releases/v*.md; do
   version="$(basename "$release_note" .md)"
-  cp "$release_note" "$output_dir/KO-Release-${version}.md"
+  publish_page "$release_note" "KO-Release-${version}"
 done
 
 for release_note in docs/en/releases/v*.md; do
   version="$(basename "$release_note" .md)"
-  cp "$release_note" "$output_dir/EN-Release-${version}.md"
+  publish_page "$release_note" "EN-Release-${version}"
 done
+
+python3 scripts/rewrite_wiki_links.py "$output_dir" "$page_manifest"
+rm "$page_manifest"
 
 printf '%s\n' \
   '## 한국어' \
