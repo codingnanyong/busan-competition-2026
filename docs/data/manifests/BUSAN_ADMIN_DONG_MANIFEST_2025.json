@@ -1,0 +1,42 @@
+{
+  "dataset": "Busan administrative-dong codes and boundaries",
+  "provider": "Statistics Korea SGIS",
+  "source_page": "https://sgis.mods.go.kr/developer/html/newOpenApi/api/dataApi/addressBoundary.html",
+  "api_endpoint": "https://sgisapi.mods.go.kr/OpenAPI3/boundary/hadmarea.geojson",
+  "terms_page": "https://sgis.mods.go.kr/developer/html/newOpenApi/policy/policy.html",
+  "access_method": "SGIS OpenAPI with consumer key and secret",
+  "retrieved_at": "2026-08-12T01:58:04.785150+00:00",
+  "reference_year": 2025,
+  "request_parameters": {
+    "adm_cd": "21",
+    "low_search": 2,
+    "year": 2025
+  },
+  "coordinate_reference_system": "EPSG:5179",
+  "feature_count": 206,
+  "geometry_types": [
+    "MultiPolygon",
+    "Polygon"
+  ],
+  "code_length": 8,
+  "response_transaction_id": "cvp6_API_0704_1786499877511",
+  "files": {
+    "busan_admin_dong_boundaries_2025.geojson": {
+      "sha256": "C718CA766DDFEB6EF2B67714C12B33ED10A0D388A94609A8366984205F808CAE"
+    },
+    "busan_admin_dong_codes_2025.csv": {
+      "sha256": "41EEE08B1D3D34D2953BB89007B9714478C5CF20B44CF2F99ED206F57794D7B5"
+    }
+  },
+  "notes": [
+    "The access token and credentials are intentionally excluded.",
+    "The GeoJSON coordinates are SGIS UTM-K (EPSG:5179), not longitude/latitude.",
+    "Review SGIS terms before redistributing the raw boundary file."
+  ],
+  "repository_artifacts": {
+    "BUSAN_ADMIN_DONG_CODES_2025.csv": {
+      "sha256": "41EEE08B1D3D34D2953BB89007B9714478C5CF20B44CF2F99ED206F57794D7B5"
+    },
+    "raw_boundary_committed": false
+  }
+}

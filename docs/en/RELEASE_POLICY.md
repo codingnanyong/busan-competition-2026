@@ -16,7 +16,7 @@ Use Semantic Versioning (`MAJOR.MINOR.PATCH`).
 4. Create and merge the `develop → main` release pull request.
 5. GitHub Actions creates `vX.Y.Z` and the GitHub Release.
 6. The latest Korean and English documentation is published to GitHub Wiki.
-7. Complete the Linear milestone and issues, then share the result in Slack.
+7. Complete the Linear milestone and mirrored Linear/GitHub issues, then share the result in Slack.
 
 Every merge to `main` must carry a unique version. The release fails if the tag already exists.
 
@@ -33,4 +33,3 @@ Every merge to `main` must carry a unique version. The release fails if the tag 
 - Future `docs/methodology/` and `docs/en/methodology/`: indicators, normalization, weights, and sensitivity analysis
 
 Wiki pages are generated with `KO-*` and `EN-*` prefixes plus a shared `_Sidebar.md`. A document change is complete only when its required counterpart is updated or the pull request explicitly explains why translation is not applicable.
-

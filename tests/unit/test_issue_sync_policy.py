@@ -1,0 +1,43 @@
+import re
+from pathlib import Path
+
+REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
+
+
+def read_text(relative_path: str) -> str:
+    return (REPOSITORY_ROOT / relative_path).read_text(encoding="utf-8")
+
+
+def test_pr_template_requires_both_mirrored_issue_references() -> None:
+    template = read_text(".github/pull_request_template.md")
+
+    assert "Closes COD-___" in template
+    assert "Closes #___" in template
+    assert "- Linear:" in template
+    assert "- GitHub:" in template
+
+
+def test_pr_policy_validates_and_closes_the_mirrored_github_issue() -> None:
+    workflow = read_text(".github/workflows/pr-policy.yml")
+
+    assert "Verify Linear and GitHub issue pair" in workflow
+    assert "close-mirrored-github-issue:" in workflow
+    assert "github.event.pull_request.merged == true" in workflow
+    assert 'state_reason: "completed"' in workflow
+    assert "github.event.action != 'closed' && github.base_ref == 'main'" in workflow
+
+
+def test_bilingual_issue_maps_contain_every_mirror_pair() -> None:
+    mappings = {linear_id: linear_id + 9 for linear_id in range(5, 29)}
+    mappings[29] = 39
+
+    for path in ("docs/ISSUES.md", "docs/en/ISSUES.md"):
+        issue_map = read_text(path)
+        for linear_id, github_number in mappings.items():
+            row_pattern = (
+                rf"\| (?:M\d|—) \| \[COD-{linear_id}\]\([^)]*\) \| "
+                rf"\[#{github_number}\]\([^)]*/issues/{github_number}\) \|"
+            )
+            assert re.search(row_pattern, issue_map), (
+                f"Missing COD-{linear_id}/#{github_number} in {path}"
+            )

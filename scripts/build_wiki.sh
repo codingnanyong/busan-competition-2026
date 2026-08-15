@@ -13,29 +13,55 @@ esac
 mkdir -p "$output_dir"
 find "$output_dir" -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
 
-cp README.md "$output_dir/Home.md"
-cp README.ko.md "$output_dir/KO-Home.md"
-cp README.en.md "$output_dir/EN-Home.md"
+page_manifest="$output_dir/.wiki-pages.tsv"
+: > "$page_manifest"
 
-cp docs/PROJECT_PLAN.md "$output_dir/KO-Project-Plan.md"
-cp docs/GIT_WORKFLOW.md "$output_dir/KO-Git-Workflow.md"
-cp docs/RELEASE_POLICY.md "$output_dir/KO-Release-Policy.md"
-cp docs/ISSUES.md "$output_dir/KO-Linear-Issues.md"
+publish_page() {
+  local source_path="$1"
+  local page_name="$2"
 
-cp docs/en/PROJECT_PLAN.md "$output_dir/EN-Project-Plan.md"
-cp docs/en/GIT_WORKFLOW.md "$output_dir/EN-Git-Workflow.md"
-cp docs/en/RELEASE_POLICY.md "$output_dir/EN-Release-Policy.md"
-cp docs/en/ISSUES.md "$output_dir/EN-Linear-Issues.md"
+  cp "$source_path" "$output_dir/$page_name.md"
+  printf '%s\t%s\n' "$source_path" "$page_name" >> "$page_manifest"
+}
+
+publish_page README.md Home
+publish_page README.ko.md KO-Home
+publish_page README.en.md EN-Home
+
+publish_page docs/PROJECT_PLAN.md KO-Project-Plan
+publish_page docs/GIT_WORKFLOW.md KO-Git-Workflow
+publish_page docs/RELEASE_POLICY.md KO-Release-Policy
+publish_page docs/ISSUES.md KO-Linear-Issues
+publish_page docs/data/DATA_CATALOG.md KO-Data-Catalog
+publish_page docs/data/AVAILABILITY_MATRIX.md KO-Data-Availability
+publish_page docs/data/DATA_REQUEST_ROADMAP.md KO-Data-Request-Roadmap
+publish_page docs/methodology/INDICATOR_SPEC.md KO-Indicator-Spec
+publish_page docs/methodology/LIMITATIONS.md KO-Limitations
+publish_page docs/methodology/EXPANSION_MODEL.md KO-Expansion-Model
+
+publish_page docs/en/PROJECT_PLAN.md EN-Project-Plan
+publish_page docs/en/GIT_WORKFLOW.md EN-Git-Workflow
+publish_page docs/en/RELEASE_POLICY.md EN-Release-Policy
+publish_page docs/en/ISSUES.md EN-Linear-Issues
+publish_page docs/en/data/DATA_CATALOG.md EN-Data-Catalog
+publish_page docs/en/data/AVAILABILITY_MATRIX.md EN-Data-Availability
+publish_page docs/en/data/DATA_REQUEST_ROADMAP.md EN-Data-Request-Roadmap
+publish_page docs/en/methodology/INDICATOR_SPEC.md EN-Indicator-Spec
+publish_page docs/en/methodology/LIMITATIONS.md EN-Limitations
+publish_page docs/en/methodology/EXPANSION_MODEL.md EN-Expansion-Model
 
 for release_note in docs/releases/v*.md; do
   version="$(basename "$release_note" .md)"
-  cp "$release_note" "$output_dir/KO-Release-${version}.md"
+  publish_page "$release_note" "KO-Release-${version}"
 done
 
 for release_note in docs/en/releases/v*.md; do
   version="$(basename "$release_note" .md)"
-  cp "$release_note" "$output_dir/EN-Release-${version}.md"
+  publish_page "$release_note" "EN-Release-${version}"
 done
+
+python3 scripts/rewrite_wiki_links.py "$output_dir" "$page_manifest"
+rm "$page_manifest"
 
 printf '%s\n' \
   '## 한국어' \
@@ -44,6 +70,12 @@ printf '%s\n' \
   '- [[Git 워크플로|KO-Git-Workflow]]' \
   '- [[릴리스 정책|KO-Release-Policy]]' \
   '- [[Linear 이슈|KO-Linear-Issues]]' \
+  '- [[데이터 카탈로그|KO-Data-Catalog]]' \
+  '- [[데이터 가용성|KO-Data-Availability]]' \
+  '- [[필요 데이터 로드맵|KO-Data-Request-Roadmap]]' \
+  '- [[지표 명세|KO-Indicator-Spec]]' \
+  '- [[한계 및 해석|KO-Limitations]]' \
+  '- [[확장 모델|KO-Expansion-Model]]' \
   '' \
   '## English' \
   '- [[Home|EN-Home]]' \
@@ -51,5 +83,10 @@ printf '%s\n' \
   '- [[Git Workflow|EN-Git-Workflow]]' \
   '- [[Release Policy|EN-Release-Policy]]' \
   '- [[Linear Issues|EN-Linear-Issues]]' \
+  '- [[Data Catalog|EN-Data-Catalog]]' \
+  '- [[Data Availability|EN-Data-Availability]]' \
+  '- [[Data Request Roadmap|EN-Data-Request-Roadmap]]' \
+  '- [[Indicator Specification|EN-Indicator-Spec]]' \
+  '- [[Limitations|EN-Limitations]]' \
+  '- [[Expansion Model|EN-Expansion-Model]]' \
   > "$output_dir/_Sidebar.md"
-

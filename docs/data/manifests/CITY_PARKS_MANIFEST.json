@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-13T23:22:56+00:00",
+  "dataset_id": "ENV-CITY-PARK-001",
+  "provider": "Local governments via Public Data Portal",
+  "source_page": "https://www.data.go.kr/data/15012890/standard.do",
+  "source_attribution": "Source: Public Data Portal, city-park standard data",
+  "access_method": "authenticated Public Data Portal Open API",
+  "reference_period": "current register at retrieval time",
+  "analysis_cutoff": "2025-12-31",
+  "analysis_role": "validation",
+  "eligible_for_primary_analysis": false,
+  "limitations": "The API exposes a current register rather than a preserved 2025-12-31 snapshot. Designation date can exclude explicit post-cutoff parks but cannot prove that an older park was still operating at the cutoff. Use only as accessibility context.",
+  "record_count": 652,
+  "duplicate_records_removed": 14,
+  "missing_coordinate_records": 0,
+  "cutoff_status_counts": {
+    "eligible_by_designation_date": 652,
+    "post_cutoff_designation": 0,
+    "unverified_designation_date": 0
+  },
+  "csv_path": "data/raw/public_data_portal/city_parks/current/busan_city_parks_current.csv",
+  "csv_sha256": "76781BA1C6CE960DD03318F44B5DC1C7106902A0462CB4B3EA01A94888840767",
+  "raw_directory": "data/raw/public_data_portal/city_parks/current/raw",
+  "raw_aggregate_sha256": "234DFD21DB04942CCBE73AF65CF987F06ED655E32402898E7DB924C3895E5FC7"
+}

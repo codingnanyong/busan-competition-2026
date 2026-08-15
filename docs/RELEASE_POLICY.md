@@ -16,7 +16,7 @@ Semantic Versioning(`MAJOR.MINOR.PATCH`)을 사용합니다.
 4. `develop → main` PR을 생성하고 승인·병합합니다.
 5. GitHub Actions가 `vX.Y.Z` 태그와 GitHub Release를 생성합니다.
 6. 최신 국문·영문 문서를 GitHub Wiki에 동기화합니다.
-7. Linear 마일스톤과 관련 이슈를 완료 처리하고 Slack에 릴리스 결과를 공유합니다.
+7. Linear 마일스톤과 Linear·GitHub 미러 이슈를 완료 처리하고 Slack에 릴리스 결과를 공유합니다.
 
 `main`의 각 병합은 하나의 고유 버전을 가져야 합니다. 이미 존재하는 태그의 버전이면 릴리스 작업은 실패합니다.
 

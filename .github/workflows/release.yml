@@ -43,6 +43,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           REPOSITORY: ${{ github.repository }}
+          WIKI_SOURCE_REF: ${{ github.sha }}
         run: |
           set -euo pipefail
           git clone "https://x-access-token:${GH_TOKEN}@github.com/${REPOSITORY}.wiki.git" wiki
