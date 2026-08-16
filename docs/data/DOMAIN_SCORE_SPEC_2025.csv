@@ -1,0 +1,10 @@
+domain,indicator,source_dataset_id,input_transform,deprivation_direction,normalization,within_domain_weight,evidence_status,quality_note
+income,basic_livelihood_recipients_per_1000_population_2025_inferred,INC-BLF-INFERRED-2025-001,identity,higher,percentile_rank,1.0,conditional,"All dong values are inferred from observed district totals"
+employment,workplace_workers_2024,EMP-SGIS-001,log1p,lower,percentile_rank,1.0,conditional,"Workplace opportunity is a one-year-lag proxy rather than resident unemployment"
+education,nearest_core_school_distance_m_2025,EDU-SCHOOL-001,identity,higher,percentile_rank,1.0,conditional,"Measures geographic access rather than resident educational outcomes"
+health,hospital_count_2025_candidate_per_10000_population,HLT-HOSPITAL-001,identity,lower,percentile_rank,0.5,conditional,"Historical completeness is reconstructed from the current licence register"
+health,clinic_count_2025_candidate_per_10000_population,HLT-CLINIC-001,identity,lower,percentile_rank,0.5,conditional,"Historical completeness is reconstructed from the current licence register"
+housing_access,old_house_share_30plus_2024_lower_bound_pct,HOU-SGIS-OLD-001,identity,higher,percentile_rank,0.5,conditional,"One-year-lag lower bound affected by suppressed housing-age cells"
+housing_access,bus_stop_count_2025_per_10000_population,HOU-BUSSTOP-001,identity,lower,percentile_rank,0.5,conditional,"582 source points fall outside canonical polygons"
+living_environment,heat_shelter_count_2025_per_10000_population,ENV-HEAT-SHELTER-001,identity,lower,percentile_rank,0.5,conditional,"Response-access proxy rather than direct heat exposure"
+living_environment,annual_pm25_ug_m3_idw_2025,ENV-AIR-HEIS-DAILY-2025-001,identity,higher,percentile_rank,0.5,conditional,"IDW interpolation adds spatial smoothing and exposure uncertainty"

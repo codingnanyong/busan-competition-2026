@@ -62,11 +62,15 @@ def test_project_structure_and_required_documents() -> None:
         "docs/data/EDA_2025.md",
         "docs/data/EDA_INDICATOR_DECISIONS_2025.csv",
         "docs/data/manifests/EDA_REPORT_2025.json",
+        "docs/data/DOMAIN_SCORE_SPEC_2025.csv",
+        "docs/data/manifests/DOMAIN_SCORE_REPORT_2025.json",
         "docs/data/DATA_PORTABILITY.md",
         "docs/data/manifests/CONSUMER_SALES_MANIFEST_2025.json",
         "docs/data/manifests/CITY_PARKS_MANIFEST.json",
         "docs/data/STANDARDIZATION.md",
         "docs/en/data/EDA_2025.md",
+        "docs/methodology/DOMAIN_SCORES_2025.md",
+        "docs/en/methodology/DOMAIN_SCORES_2025.md",
         "notebooks/01_candidate_profile_eda.ipynb",
     )
 
@@ -96,6 +100,27 @@ def test_eda_report_covers_the_canonical_profile() -> None:
     assert report["high_correlation_pair_count"] == 5
     assert report["contiguity_edge_count"] == 532
     assert report["isolated_admin_dong_count"] == len(report["isolated_admin_dongs"]) == 6
+    assert all(re.fullmatch(r"[0-9A-F]{64}", value) for value in report["output_sha256"].values())
+
+
+def test_domain_score_report_preserves_cod16_scope() -> None:
+    report = read_json("docs/data/manifests/DOMAIN_SCORE_REPORT_2025.json")
+
+    assert report["record_count"] == 206
+    assert report["indicator_count"] == 9
+    assert report["scored_domains"] == [
+        "education",
+        "employment",
+        "health",
+        "housing_access",
+        "income",
+        "living_environment",
+    ]
+    assert report["held_domains"] == {
+        "safety": "No direct administrative-dong incident indicator is available"
+    }
+    assert report["score_direction"] == "higher means greater relative deprivation"
+    assert report["composite_score_created"] is False
     assert all(re.fullmatch(r"[0-9A-F]{64}", value) for value in report["output_sha256"].values())
 
 
