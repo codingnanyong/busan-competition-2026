@@ -59,14 +59,44 @@ def test_project_structure_and_required_documents() -> None:
         "docs/data/manifests/DATA_QUALITY_REPORT_2025.json",
         "docs/data/DATA_DICTIONARY_2025.csv",
         "docs/data/DATA_QUALITY.md",
+        "docs/data/EDA_2025.md",
+        "docs/data/EDA_INDICATOR_DECISIONS_2025.csv",
+        "docs/data/manifests/EDA_REPORT_2025.json",
         "docs/data/DATA_PORTABILITY.md",
         "docs/data/manifests/CONSUMER_SALES_MANIFEST_2025.json",
         "docs/data/manifests/CITY_PARKS_MANIFEST.json",
         "docs/data/STANDARDIZATION.md",
+        "docs/en/data/EDA_2025.md",
+        "notebooks/01_candidate_profile_eda.ipynb",
     )
 
     assert all((REPOSITORY_ROOT / path).is_dir() for path in required_directories)
     assert all((REPOSITORY_ROOT / path).is_file() for path in required_documents)
+
+
+def test_eda_notebook_is_clean_and_reuses_the_pipeline() -> None:
+    notebook_path = REPOSITORY_ROOT / "notebooks/01_candidate_profile_eda.ipynb"
+    notebook = json.loads(notebook_path.read_text(encoding="utf-8"))
+
+    assert notebook["nbformat"] == 4
+    code_cells = [cell for cell in notebook["cells"] if cell["cell_type"] == "code"]
+    assert any("from busan_imd.eda import run" in "".join(cell["source"]) for cell in code_cells)
+    assert all(cell["execution_count"] is None for cell in code_cells)
+    assert all(cell["outputs"] == [] for cell in code_cells)
+
+
+def test_eda_report_covers_the_canonical_profile() -> None:
+    report = read_json("docs/data/manifests/EDA_REPORT_2025.json")
+
+    assert report["profile_record_count"] == 206
+    assert report["numeric_indicator_count"] == 48
+    assert report["scoring_candidate_numeric_count"] == 36
+    assert report["constant_numeric_columns"] == ["air_idw_station_count"]
+    assert report["columns_with_missing_values"] == {}
+    assert report["high_correlation_pair_count"] == 5
+    assert report["contiguity_edge_count"] == 532
+    assert report["isolated_admin_dong_count"] == len(report["isolated_admin_dongs"]) == 6
+    assert all(re.fullmatch(r"[0-9A-F]{64}", value) for value in report["output_sha256"].values())
 
 
 def test_dataset_audit_is_valid() -> None:

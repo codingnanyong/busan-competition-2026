@@ -5,12 +5,10 @@
 ## COD-10 감사 결과
 
 - 감사일: 2026-08-11
-- 등록 후보: 23개
-- 실제 원본 검증: 23개 데이터셋의 직접 다운로드·인증 API·공개 조회
-  (파일 크기, 레코드 수, SHA-256 확인)
-- 현재 `include`: 9개
-- 결론: 소득을 제외한 6개 IMD 영역은 부산 206개 동 잠정 대리지표를 구성했다.
-  소득은 동일 정의의 부산 전역 행정동 자료가 없어 최소 7영역 지수의 유일한 결손이다.
+- 등록 후보: 40개
+- 현재 판정: `include` 11개, `validation-only` 13개, `hold` 6개, `exclude` 10개
+- 결론: 소득 추정 대리를 포함한 6개 영역은 부산 206개 동 잠정 대리지표를 구성했다.
+  안전 영역은 행정동 직접 사건자료가 없어 기본 점수를 계속 보류한다.
 
 부산시 행정 읍·면·동 페이지는 표 제목에 205라고 쓰면서 구·군별 행 수의 합은 206이다. COD-11의 SGIS 2025년 동일 응답에서 행정동 코드와 경계가 각각 206개로 일치했으므로 프로젝트 기준지리는 206개로 확정한다. 세부 내용은 [행정동 기준코드와 경계](ADMIN_BOUNDARIES.md)를 따른다.
 
@@ -96,6 +94,7 @@ python -m busan_imd.data_catalog docs/data/DATASET_AUDIT.csv --raw-dir data/raw/
 - [데이터 기준기간 정책](REFERENCE_PERIOD_POLICY.md)
 - [원본 데이터 수집과 출처 기록](RAW_DATA_COLLECTION.md)
 - [2025 행정동 데이터 표준화와 검증](STANDARDIZATION.md)
+- [2025 후보지표 탐색 분석](EDA_2025.md)
 - [필요 데이터 요청 로드맵](DATA_REQUEST_ROADMAP.md)
 - [기관 데이터 요청 문안](DATA_REQUEST_TEMPLATES.md)
 - [부산 AED 과거자료 가용성 검토](AED_HISTORY_ASSESSMENT.md)

@@ -5,10 +5,11 @@ This document manages candidate sources for the Busan Index of Multiple Deprivat
 ## COD-10 audit result
 
 - Audit date: 2026-08-11
-- Registered candidates: 20
-- Raw sources inspected: ten direct downloads and four authenticated APIs, including bytes, record counts, and SHA-256
-- Current `include` decisions: 0
-- Conclusion: public candidates exist, but they do not yet form a seven-domain set that compares every Busan administrative dong at one reference period and geography.
+- Registered candidates: 40
+- Current decisions: 11 `include`, 13 `validation-only`, 6 `hold`, and 10 `exclude`
+- Conclusion: six domains, including a disclosed inferred income proxy, now have provisional
+  206-dong indicators. The safety domain remains outside the base score because complete
+  administrative-dong incident data is unavailable.
 
 The Busan administrative-area page labels its table as 205 units while the district row counts sum to 206. COD-11's single SGIS 2025 response contains 206 codes and 206 matching boundaries, so the project fixes its reference geography at 206 units. See [administrative-dong codes and boundaries](ADMIN_BOUNDARIES.md).
 
@@ -26,7 +27,9 @@ The primary analysis year is 2025. Complete 2025 data or a 2025-12-31 snapshot d
 | Housing/access | Yeongdo/Suyeong vacancy and 2025 Busan bus stops | B–C | Provisional include/exclude | 7,940 dated stops joined; vacancy remains partial and inconsistent |
 | Living environment | Heat shelters and HEIS 2025 air quality | B | Provisional include | Heat shelters joined and air exposure interpolated to all 206 dongs |
 
-The absence of an A-grade source is an audit finding. Filling uncovered districts with zero or repeating district values across their dongs would create false comparability and is prohibited.
+The absence of an A-grade source is an audit finding. The `include` decisions are provisional
+proxies rather than direct deprivation measures. Filling uncovered districts with zero or
+repeating district values across their dongs would create false comparability and is prohibited.
 
 ## Raw-file findings
 
@@ -86,6 +89,7 @@ Secrets belong only in the local `.env`; they must not be pasted into chat or co
 - [Reference-period policy](REFERENCE_PERIOD_POLICY.md)
 - [Raw-data collection and provenance](RAW_DATA_COLLECTION.md)
 - [2025 administrative-dong data standardization](STANDARDIZATION.md)
+- [2025 candidate-indicator EDA](EDA_2025.md)
 - [Data request roadmap](DATA_REQUEST_ROADMAP.md)
 - [Indicator specification](../methodology/INDICATOR_SPEC.md)
 - [Limitations](../methodology/LIMITATIONS.md)

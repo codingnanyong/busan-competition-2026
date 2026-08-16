@@ -9,6 +9,8 @@ COD-14는 2025년 부산 206개 행정동 후보 프로필의 컬럼 정의, 출
 - 품질 리포트: [DATA_QUALITY_REPORT_2025.json](manifests/DATA_QUALITY_REPORT_2025.json)
 - 공간·코드 결합 상세: [STANDARDIZATION_REPORT_2025.json](manifests/STANDARDIZATION_REPORT_2025.json)
 - 사용 역할: [DATA_USAGE_REGISTER_2025.md](DATA_USAGE_REGISTER_2025.md)
+- 탐색 분석: [EDA_2025.md](EDA_2025.md)
+- COD-16 지표 전달 결정: [EDA_INDICATOR_DECISIONS_2025.csv](EDA_INDICATOR_DECISIONS_2025.csv)
 
 데이터 사전은 후보 프로필의 모든 컬럼에 대해 다음을 기록한다.
 
@@ -37,6 +39,7 @@ docker compose run --rm jupyter python scripts/rebuild_processed.py
 4. 최종 206개 행정동 후보 프로필 재생성
 5. 소비매출 검증자료 가공
 6. 데이터 사전과 품질 리포트 생성
+7. 분포·상관·공간 패턴 EDA와 COD-16 전달 산출물 생성
 
 도시공원처럼 현재 등록부인 검증자료는 별도 매니페스트로 관리하며 2025 주 점수
 프로필에 자동 결합하지 않는다.
