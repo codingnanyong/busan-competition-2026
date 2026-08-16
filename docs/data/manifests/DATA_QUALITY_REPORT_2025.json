@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-14T01:14:19+00:00",
+  "generated_at": "2026-08-16T05:05:33+00:00",
   "reference_year": 2025,
   "profile_record_count": 206,
   "profile_column_count": 63,
@@ -74,9 +74,9 @@
   "standardized_dataset_count": 15,
   "minimum_source_match_rate": 0.931706,
   "profile_path": "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv",
-  "profile_sha256": "D121FD3CAC99CDFC9E2473993ADE6D25654339CF54477A3AC0B98B5DF2981347",
+  "profile_sha256": "DA9FD3DF576A6C373312D61957AD362EC26BDD4469F713A34BE1442FB759C88F",
   "dictionary_path": "docs/data/DATA_DICTIONARY_2025.csv",
-  "dictionary_sha256": "DA52B122EADA93C256C6D57F87A67CF24E6882700780AD19443D2CDC06F9E81C",
+  "dictionary_sha256": "B56B3A20B2CEA829EB6E755F21F2D4E055F0E192A7E7BEAFD5A25F13F5A8E8AE",
   "standardization_report_path": "docs/data/manifests/STANDARDIZATION_REPORT_2025.json",
-  "standardization_report_sha256": "ACB83E5574158C36A56A8C578FE97BDA41BD58085B5820B6DB4D7C2C40115758"
+  "standardization_report_sha256": "F6B798D195E6DFF8EE5F77187E48AE686C730651E6A744AF930173154FF84E00"
 }

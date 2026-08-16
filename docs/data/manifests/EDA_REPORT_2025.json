@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-16T05:05:33+00:00",
+  "reference_year": 2025,
+  "profile_record_count": 206,
+  "profile_column_count": 63,
+  "numeric_indicator_count": 48,
+  "scoring_candidate_numeric_count": 36,
+  "constant_numeric_columns": [
+    "air_idw_station_count"
+  ],
+  "columns_with_missing_values": {},
+  "iqr_outlier_count": 411,
+  "high_correlation_threshold": 0.8,
+  "high_correlation_pair_count": 5,
+  "contiguity_edge_count": 532,
+  "isolated_admin_dong_count": 6,
+  "isolated_admin_dongs": [
+    {
+      "admin_dong_code": "21050740",
+      "sigungu_name": "부산진구",
+      "admin_dong_name": "개금1동"
+    },
+    {
+      "admin_dong_code": "21100620",
+      "sigungu_name": "사하구",
+      "admin_dong_name": "다대1동"
+    },
+    {
+      "admin_dong_code": "21110570",
+      "sigungu_name": "금정구",
+      "admin_dong_name": "부곡1동"
+    },
+    {
+      "admin_dong_code": "21120561",
+      "sigungu_name": "강서구",
+      "admin_dong_name": "녹산동"
+    },
+    {
+      "admin_dong_code": "21120562",
+      "sigungu_name": "강서구",
+      "admin_dong_name": "신호동"
+    },
+    {
+      "admin_dong_code": "21120580",
+      "sigungu_name": "강서구",
+      "admin_dong_name": "가덕도동"
+    }
+  ],
+  "spatial_indicator_count": 35,
+  "profile_path": "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv",
+  "profile_sha256": "DA9FD3DF576A6C373312D61957AD362EC26BDD4469F713A34BE1442FB759C88F",
+  "dictionary_path": "docs/data/DATA_DICTIONARY_2025.csv",
+  "dictionary_sha256": "B56B3A20B2CEA829EB6E755F21F2D4E055F0E192A7E7BEAFD5A25F13F5A8E8AE",
+  "boundaries_path": "data/raw/sgis/admin_boundaries/2025/busan_admin_dong_boundaries_2025_valid.geojson",
+  "boundaries_sha256": "7CC99595FC753F81C7B9A9D480B8EBBF3114808A1496D46FC6662C21BF362487",
+  "output_paths": {
+    "indicator_summary": "outputs/eda/2025/indicator_summary.csv",
+    "correlation_matrix": "outputs/eda/2025/correlation_matrix.csv",
+    "high_correlations": "outputs/eda/2025/high_correlations.csv",
+    "spatial_autocorrelation": "outputs/eda/2025/spatial_autocorrelation.csv",
+    "district_summary": "outputs/eda/2025/district_summary.csv"
+  },
+  "output_sha256": {
+    "indicator_summary": "518A9889CAEC9ED558ABBD60FF7CE414335DB13BB2801778BA744710D9A767CA",
+    "correlation_matrix": "D15E01A73BC5224B633D61CBF20D445EB05D06C3F51FF564CA80A565F3C5937C",
+    "high_correlations": "9DF481F59D80B21850C277F97E06FEAF2CD898E76AD15D1DA9C3358D7B363561",
+    "spatial_autocorrelation": "95F3C0AE763377C39B291A55221C8B0950171354F490C5C7AEEFA30220B3404D",
+    "district_summary": "FC0E982C7D1074B9201CEA56FAF6B6436AA2195B16CB5E5AF6567036AF5B34E2"
+  }
+}

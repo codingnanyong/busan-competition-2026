@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-14T01:14:16+00:00",
+  "generated_at": "2026-08-16T05:05:32+00:00",
   "reference_year": 2025,
   "canonical_admin_dong_count": 206,
   "assessments": [
@@ -52,27 +52,27 @@
     "living_population": {
       "path": "data/processed/candidates/2025/living_population_2025.csv",
       "records": 206,
-      "sha256": "621C06AB7C76B8F892EBB066379E243622245A954D2D55A9E71EF4BF3BD54342"
+      "sha256": "3EEB4E6E0A15E26211C038B4CFDEBBB722FCB9F5DF0639C45F59DDEF94F30E85"
     },
     "school_access": {
       "path": "data/processed/candidates/2025/school_counts_2025.csv",
       "records": 206,
-      "sha256": "D69952884C2C17825BC4005F03A31AD5350280524076C7DB4A8D826528A76C26"
+      "sha256": "09FACF987C0184AC4D4B1BED7B2A57BAA2B569E2A57F3B379F78313BEA38AB2D"
     },
     "air_exposure": {
       "path": "data/processed/candidates/2025/air_exposure_idw_2025.csv",
       "records": 206,
-      "sha256": "3B1E0AFC400140D3E0F2EBF091DD8F8AF9CFBC2064AC2283D7A3007152619B2E"
+      "sha256": "D4A471EC2A31A060408B4736C5A1958D50C5C7050402B88C86CADBB08662D508"
     },
     "route_usage": {
       "path": "data/processed/candidates/2025/bus_route_usage_2025.csv",
       "records": 333,
-      "sha256": "D55CBFD16A68EDF1CF7A9612556CEB2ADF617F55459890A87B6AD70826E04770"
+      "sha256": "2706D42EB02EDF86F701F70B082F270E3DCB2B789C13B33A552C599168D98F5D"
     },
     "village_bus_district": {
       "path": "data/processed/candidates/2025/village_bus_by_district_2025.csv",
       "records": 16,
-      "sha256": "5A1F2A85CA335DE6C06F23538F31518CCD21AC62C4C4FE0ABB04F245B7E4959F"
+      "sha256": "FB420598431402825426BBB3A27409C89604CD86402C32163DB41197E14BFDEC"
     }
   }
 }
