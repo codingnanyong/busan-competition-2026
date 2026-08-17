@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-14T01:14:17+00:00",
+  "generated_at": "2026-08-16T05:05:32+00:00",
   "reference_year": 2025,
   "reference_crs": "EPSG:5179",
   "canonical_admin_dong_count": 206,
@@ -264,7 +264,7 @@
       "missing_admin_dongs": 0,
       "match_rate": 1.0,
       "source_path": "data/processed/candidates/2025/basic_livelihood_inferred_2025.csv",
-      "source_sha256": "59FABD3A67A3B0039880186EE193486B1C6CD8C30C3506FF7005A5CF5E96EE81"
+      "source_sha256": "7CBD04F1DF8C987B119C50BBAB5280ED695AE6D93C8F510288A4B7BFE609E6FE"
     },
     {
       "dataset_id": "DEM-BUSAN-LIVING-001",
@@ -277,7 +277,7 @@
       "missing_admin_dongs": 0,
       "match_rate": 1.0,
       "source_path": "data/processed/candidates/2025/living_population_2025.csv",
-      "source_sha256": "621C06AB7C76B8F892EBB066379E243622245A954D2D55A9E71EF4BF3BD54342"
+      "source_sha256": "3EEB4E6E0A15E26211C038B4CFDEBBB722FCB9F5DF0639C45F59DDEF94F30E85"
     },
     {
       "dataset_id": "EDU-SCHOOL-001",
@@ -290,7 +290,7 @@
       "missing_admin_dongs": 0,
       "match_rate": 1.0,
       "source_path": "data/processed/candidates/2025/school_counts_2025.csv",
-      "source_sha256": "D69952884C2C17825BC4005F03A31AD5350280524076C7DB4A8D826528A76C26"
+      "source_sha256": "09FACF987C0184AC4D4B1BED7B2A57BAA2B569E2A57F3B379F78313BEA38AB2D"
     },
     {
       "dataset_id": "ENV-AIR-HEIS-DAILY-2025-001",
@@ -303,7 +303,7 @@
       "missing_admin_dongs": 0,
       "match_rate": 1.0,
       "source_path": "data/processed/candidates/2025/air_exposure_idw_2025.csv",
-      "source_sha256": "3B1E0AFC400140D3E0F2EBF091DD8F8AF9CFBC2064AC2283D7A3007152619B2E"
+      "source_sha256": "D4A471EC2A31A060408B4736C5A1958D50C5C7050402B88C86CADBB08662D508"
     }
   ],
   "zero_is_observed_count_only": true,
@@ -332,5 +332,5 @@
     ]
   },
   "profile_path": "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv",
-  "profile_sha256": "D121FD3CAC99CDFC9E2473993ADE6D25654339CF54477A3AC0B98B5DF2981347"
+  "profile_sha256": "DA9FD3DF576A6C373312D61957AD362EC26BDD4469F713A34BE1442FB759C88F"
 }

@@ -1,0 +1,7 @@
+domain,source_domain,published_weight,scored_model_weight,evidence_status,quality_note
+income,English IoD Income Deprivation,0.225,0.248344370861,conditional,"All dong values use an inferred basic-livelihood proxy"
+employment,English IoD Employment Deprivation,0.225,0.248344370861,conditional,"Workplace opportunity proxies resident labour-market exclusion"
+education,"English IoD Education, Skills and Training Deprivation",0.135,0.149006622517,conditional,"School proximity proxies educational opportunity"
+health,English IoD Health Deprivation and Disability,0.135,0.149006622517,conditional,"Healthcare access proxies health deprivation"
+housing_access,English IoD Barriers to Housing and Services,0.093,0.102649006623,conditional,"Old housing and bus access are partial proxies"
+living_environment,English IoD Living Environment Deprivation,0.093,0.102649006623,conditional,"Heat response access and PM2.5 are partial proxies"

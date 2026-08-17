@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-16T06:38:54+00:00",
+  "reference_year": 2025,
+  "record_count": 206,
+  "indicator_count": 9,
+  "scored_domains": [
+    "education",
+    "employment",
+    "health",
+    "housing_access",
+    "income",
+    "living_environment"
+  ],
+  "held_domains": {
+    "safety": "No direct administrative-dong incident indicator is available"
+  },
+  "normalization": "average percentile rank mapped to 0-100",
+  "score_direction": "higher means greater relative deprivation",
+  "within_domain_aggregation": "weighted arithmetic mean",
+  "domain_summaries": {
+    "education": {
+      "minimum": 0.0,
+      "median": 50.0,
+      "maximum": 100.0
+    },
+    "employment": {
+      "minimum": 0.0,
+      "median": 50.0,
+      "maximum": 100.0
+    },
+    "health": {
+      "minimum": 1.463415,
+      "median": 49.634146,
+      "maximum": 91.95122
+    },
+    "housing_access": {
+      "minimum": 3.658536,
+      "median": 50.731707,
+      "maximum": 99.634147
+    },
+    "income": {
+      "minimum": 0.0,
+      "median": 50.0,
+      "maximum": 100.0
+    },
+    "living_environment": {
+      "minimum": 3.414634,
+      "median": 50.609756,
+      "maximum": 94.878049
+    }
+  },
+  "composite_score_created": false,
+  "profile_path": "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv",
+  "profile_sha256": "DA9FD3DF576A6C373312D61957AD362EC26BDD4469F713A34BE1442FB759C88F",
+  "spec_path": "docs/data/DOMAIN_SCORE_SPEC_2025.csv",
+  "spec_sha256": "72748F96A742A6CDE9F7E69134FD7849E5B603AE5194B7828761E8528B7A6A2B",
+  "output_paths": {
+    "indicator_scores": "data/processed/scores/2025/busan_admin_dong_indicator_scores_2025.csv",
+    "domain_scores": "data/processed/scores/2025/busan_admin_dong_domain_scores_2025.csv"
+  },
+  "output_sha256": {
+    "indicator_scores": "967AC71531BBA34E7639D66239513E9EC73CAE07EECF554E269ED0D1DF17DDAF",
+    "domain_scores": "04AC94AE18A5929C83297BCFA8D08B55E5797FACF324ABB800969736D91805BF"
+  }
+}

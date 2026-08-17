@@ -13,7 +13,7 @@
 - `main` 병합 시 `VERSION`을 기준으로 Git 태그와 GitHub Release를 발행합니다.
 - 분석 근거, 의사결정, 데이터 사전과 릴리스 변경사항은 국문·영문 문서에 함께 반영합니다.
 
-자세한 일정은 [프로젝트 계획](docs/PROJECT_PLAN.md), 확정된 제출물은 [공모전 제출 요구사항 및 공식 서식](docs/COMPETITION_REQUIREMENTS.md), 실행 환경은 [Docker 기반 분석 환경](docs/DEVELOPMENT_ENVIRONMENT.md), [macOS 이전 안내](docs/MACOS_SETUP.md), [프로젝트 구조](docs/PROJECT_STRUCTURE.md), 실행 항목은 [Linear·GitHub 이슈 맵](docs/ISSUES.md)을 참고하세요. 데이터의 현재 가용성과 향후 확장 조건은 [데이터 가용성 매트릭스](docs/data/AVAILABILITY_MATRIX.md)와 [B-IMD 확장 모델](docs/methodology/EXPANSION_MODEL.md)에서 관리합니다.
+자세한 일정은 [프로젝트 계획](docs/PROJECT_PLAN.md), 확정된 제출물은 [공모전 제출 요구사항 및 공식 서식](docs/COMPETITION_REQUIREMENTS.md), 실행 환경은 [Docker 기반 분석 환경](docs/DEVELOPMENT_ENVIRONMENT.md), [macOS 이전 안내](docs/MACOS_SETUP.md), [프로젝트 구조](docs/PROJECT_STRUCTURE.md), 실행 항목은 [Linear·GitHub 이슈 맵](docs/ISSUES.md)을 참고하세요. 데이터의 현재 가용성과 향후 확장 조건은 [데이터 가용성 매트릭스](docs/data/AVAILABILITY_MATRIX.md)와 [B-IMD 확장 모델](docs/methodology/EXPANSION_MODEL.md)에서 관리하며, 최신 후보지표 판정은 [2025 EDA](docs/data/EDA_2025.md), 정규화와 영역 점수는 [2025 영역 점수 계산](docs/methodology/DOMAIN_SCORES_2025.md), 종합점수·순위·10분위는 [2025 B-IMD 종합지수](docs/methodology/COMPOSITE_INDEX_2025.md), 결과 안정성은 [2025 민감도 분석](docs/methodology/SENSITIVITY_ANALYSIS_2025.md)에 기록합니다.
 
 ## 목표 산출물
 

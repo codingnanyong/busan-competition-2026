@@ -34,5 +34,7 @@ Linear and GitHub Issues are one-to-one copies of the same work item. Linear man
 | M6 | [COD-26](https://linear.app/codingnanyong/issue/COD-26) | [#35](https://github.com/codingnanyong/busan-competition-2026/issues/35) | Publish final submission, v1.0.0, GitHub Release, and Wiki |
 | M7 | [COD-27](https://linear.app/codingnanyong/issue/COD-27) | [#36](https://github.com/codingnanyong/busan-competition-2026/issues/36) | Prepare presentation, demo, and anticipated Q&A |
 | — | [COD-29](https://linear.app/codingnanyong/issue/COD-29) | [#39](https://github.com/codingnanyong/busan-competition-2026/issues/39) | Prepare the v0.3.0 release and deploy to main |
+| — | [COD-30](https://linear.app/codingnanyong/issue/COD-30) | [#44](https://github.com/codingnanyong/busan-competition-2026/issues/44) | Automate Slack notification after PR completion |
+| — | [COD-31](https://linear.app/codingnanyong/issue/COD-31) | [#48](https://github.com/codingnanyong/busan-competition-2026/issues/48) | Prepare v0.4.0 analysis-model release metadata |
 
 Use `feat/<linear-id>-<slug>` branches, for example `feat/cod-15-eda`. Pull requests include both `Closes COD-15` and `Closes #24`.

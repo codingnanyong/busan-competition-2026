@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.4.0] - 2026-08-17
+
+### Added
+
+- 2025년 부산 206개 행정동 후보지표 EDA와 재현 가능한 노트북
+- 6개 영역의 방향성·백분위 정규화·영역 점수 산출 파이프라인
+- B-IMD 종합점수, 부산 내부 순위와 10분위 산출
+- 기준가중·동일가중·영역 이용 불가 9개 시나리오 민감도 분석
+- PR 병합 후 GitHub·Linear 완료 상태를 검증하는 Slack DM 자동 알림
+- Reproducible EDA, six-domain scoring, composite ranks and deciles for 206 Busan dongs
+- Nine-scenario weight and domain-availability sensitivity analysis
+
+### Changed
+
+- 전체 로컬 재생성 파이프라인에 EDA, 영역 점수, 종합지수와 민감도 분석 단계를 연결
+- 국문·영문 Wiki에 분석 방법론과 결과 안정성 문서를 추가
+- Extended the offline rebuild and bilingual Wiki through the sensitivity-analysis stage
+
+### Fixed
+
+- 완료 알림이 GitHub Issue Closed와 Linear Done을 모두 확인한 뒤에만 Slack으로 전송되도록 강화
+- Ensured Slack completion notices are sent only after GitHub and Linear both report completion
+
 ## [0.3.0] - 2026-08-15
 
 ### Added

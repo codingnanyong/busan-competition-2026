@@ -59,14 +59,108 @@ def test_project_structure_and_required_documents() -> None:
         "docs/data/manifests/DATA_QUALITY_REPORT_2025.json",
         "docs/data/DATA_DICTIONARY_2025.csv",
         "docs/data/DATA_QUALITY.md",
+        "docs/data/EDA_2025.md",
+        "docs/data/EDA_INDICATOR_DECISIONS_2025.csv",
+        "docs/data/manifests/EDA_REPORT_2025.json",
+        "docs/data/DOMAIN_SCORE_SPEC_2025.csv",
+        "docs/data/manifests/DOMAIN_SCORE_REPORT_2025.json",
+        "docs/data/COMPOSITE_INDEX_SPEC_2025.csv",
+        "docs/data/manifests/COMPOSITE_INDEX_REPORT_2025.json",
+        "docs/data/SENSITIVITY_SCENARIOS_2025.csv",
+        "docs/data/manifests/SENSITIVITY_ANALYSIS_REPORT_2025.json",
         "docs/data/DATA_PORTABILITY.md",
         "docs/data/manifests/CONSUMER_SALES_MANIFEST_2025.json",
         "docs/data/manifests/CITY_PARKS_MANIFEST.json",
         "docs/data/STANDARDIZATION.md",
+        "docs/en/data/EDA_2025.md",
+        "docs/methodology/DOMAIN_SCORES_2025.md",
+        "docs/en/methodology/DOMAIN_SCORES_2025.md",
+        "docs/methodology/COMPOSITE_INDEX_2025.md",
+        "docs/en/methodology/COMPOSITE_INDEX_2025.md",
+        "docs/methodology/SENSITIVITY_ANALYSIS_2025.md",
+        "docs/en/methodology/SENSITIVITY_ANALYSIS_2025.md",
+        "notebooks/01_candidate_profile_eda.ipynb",
     )
 
     assert all((REPOSITORY_ROOT / path).is_dir() for path in required_directories)
     assert all((REPOSITORY_ROOT / path).is_file() for path in required_documents)
+
+
+def test_eda_notebook_is_clean_and_reuses_the_pipeline() -> None:
+    notebook_path = REPOSITORY_ROOT / "notebooks/01_candidate_profile_eda.ipynb"
+    notebook = json.loads(notebook_path.read_text(encoding="utf-8"))
+
+    assert notebook["nbformat"] == 4
+    code_cells = [cell for cell in notebook["cells"] if cell["cell_type"] == "code"]
+    assert any("from busan_imd.eda import run" in "".join(cell["source"]) for cell in code_cells)
+    assert all(cell["execution_count"] is None for cell in code_cells)
+    assert all(cell["outputs"] == [] for cell in code_cells)
+
+
+def test_eda_report_covers_the_canonical_profile() -> None:
+    report = read_json("docs/data/manifests/EDA_REPORT_2025.json")
+
+    assert report["profile_record_count"] == 206
+    assert report["numeric_indicator_count"] == 48
+    assert report["scoring_candidate_numeric_count"] == 36
+    assert report["constant_numeric_columns"] == ["air_idw_station_count"]
+    assert report["columns_with_missing_values"] == {}
+    assert report["high_correlation_pair_count"] == 5
+    assert report["contiguity_edge_count"] == 532
+    assert report["isolated_admin_dong_count"] == len(report["isolated_admin_dongs"]) == 6
+    assert all(re.fullmatch(r"[0-9A-F]{64}", value) for value in report["output_sha256"].values())
+
+
+def test_domain_score_report_preserves_cod16_scope() -> None:
+    report = read_json("docs/data/manifests/DOMAIN_SCORE_REPORT_2025.json")
+
+    assert report["record_count"] == 206
+    assert report["indicator_count"] == 9
+    assert report["scored_domains"] == [
+        "education",
+        "employment",
+        "health",
+        "housing_access",
+        "income",
+        "living_environment",
+    ]
+    assert report["held_domains"] == {
+        "safety": "No direct administrative-dong incident indicator is available"
+    }
+    assert report["score_direction"] == "higher means greater relative deprivation"
+    assert report["composite_score_created"] is False
+    assert all(re.fullmatch(r"[0-9A-F]{64}", value) for value in report["output_sha256"].values())
+
+
+def test_composite_index_report_covers_cod17_scope() -> None:
+    report = read_json("docs/data/manifests/COMPOSITE_INDEX_REPORT_2025.json")
+
+    assert report["record_count"] == 206
+    assert report["score_direction"] == "higher means greater relative deprivation"
+    assert report["rank_direction"] == "rank 1 is most deprived"
+    assert report["decile_direction"] == "decile 1 is most deprived 10 percent"
+    assert set(report["decile_counts"]) == {str(value) for value in range(1, 11)}
+    assert re.fullmatch(r"[0-9A-F]{64}", report["output_sha256"])
+
+
+def test_sensitivity_report_covers_cod18_scope() -> None:
+    report = read_json("docs/data/manifests/SENSITIVITY_ANALYSIS_REPORT_2025.json")
+
+    assert report["record_count"] == 206
+    assert report["scenario_count"] == 9
+    assert report["actual_missing_domain_score_count"] == 0
+    assert set(report["scenario_summaries"]) == {
+        "baseline",
+        "equal_domain_weights",
+        "median_imputation_observed",
+        "omit_income",
+        "omit_employment",
+        "omit_education",
+        "omit_health",
+        "omit_housing_access",
+        "omit_living_environment",
+    }
+    assert re.fullmatch(r"[0-9A-F]{64}", report["output_sha256"])
 
 
 def test_dataset_audit_is_valid() -> None:
