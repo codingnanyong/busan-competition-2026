@@ -24,3 +24,5 @@ domain. Safety remains held without direct incident evidence. COD-17 handles cro
 aggregation and COD-18 tests proxy and weight sensitivity. See the
 [2025 domain-score method](DOMAIN_SCORES_2025.md) for the executable contract and interpretation
 limits.
+The baseline cross-domain weights, composite, rank, and decile are documented in the
+[2025 B-IMD composite method](COMPOSITE_INDEX_2025.md).
