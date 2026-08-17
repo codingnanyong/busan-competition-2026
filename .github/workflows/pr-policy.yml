@@ -130,6 +130,27 @@ jobs:
               state_reason: "completed",
             });
 
+  notify-completion:
+    needs: close-mirrored-github-issue
+    if: >-
+      github.event.action == 'closed' &&
+      github.event.pull_request.merged == true &&
+      github.base_ref == 'develop' &&
+      vars.COMPLETION_NOTIFICATIONS_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: read
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify mirrored completion and notify Slack
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LINEAR_API_KEY: ${{ secrets.LINEAR_API_KEY }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: python3 .github/scripts/notify_completion.py
+
   validate-release:
     if: github.event.action != 'closed' && github.base_ref == 'main'
     runs-on: ubuntu-latest
