@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-17T05:57:38+00:00",
+  "reference_year": 2025,
+  "record_count": 206,
+  "scored_domains": [
+    "income",
+    "employment",
+    "education",
+    "health",
+    "housing_access",
+    "living_environment"
+  ],
+  "held_domains": {
+    "safety": "No direct administrative-dong incident indicator is available"
+  },
+  "aggregation": "weighted arithmetic mean of 0-100 domain scores",
+  "weight_basis": "English Indices of Deprivation 2025 published domain weights, renormalized across six scored domains",
+  "score_direction": "higher means greater relative deprivation",
+  "rank_direction": "rank 1 is most deprived",
+  "decile_direction": "decile 1 is most deprived 10 percent",
+  "tie_break": "descending score then ascending administrative-dong code",
+  "score_summary": {
+    "minimum": 20.956227,
+    "median": 51.048498,
+    "maximum": 82.821838
+  },
+  "decile_counts": {
+    "1": 21,
+    "2": 21,
+    "3": 20,
+    "4": 21,
+    "5": 20,
+    "6": 21,
+    "7": 21,
+    "8": 20,
+    "9": 21,
+    "10": 20
+  },
+  "domain_scores_path": "data/processed/scores/2025/busan_admin_dong_domain_scores_2025.csv",
+  "domain_scores_sha256": "04AC94AE18A5929C83297BCFA8D08B55E5797FACF324ABB800969736D91805BF",
+  "spec_path": "docs/data/COMPOSITE_INDEX_SPEC_2025.csv",
+  "spec_sha256": "F6631F156E48F0BC3C86CB1807C83BD5DD2E81DC88A3CD769EAE48B38C06F444",
+  "output_path": "data/processed/scores/2025/busan_admin_dong_imd_2025.csv",
+  "output_sha256": "380EB11360B40A6C8E480B3A1D2EBE40DD0EC11FFED20580E0D72563CBB1EC07"
+}

@@ -5,7 +5,8 @@
 COD-16 aligns candidate indicators to one deprivation direction, converts them to 0-100
 percentile scores, and calculates within-domain scores for all 206 Busan administrative dongs. A
 higher value means greater relative deprivation within Busan. This stage deliberately creates no
-cross-domain composite, rank, or decile; those belong to COD-17.
+cross-domain composite, rank, or decile; those belong to the
+[COD-17 composite-index stage](COMPOSITE_INDEX_2025.md).
 
 ## Run
 

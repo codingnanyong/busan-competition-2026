@@ -64,6 +64,8 @@ def test_project_structure_and_required_documents() -> None:
         "docs/data/manifests/EDA_REPORT_2025.json",
         "docs/data/DOMAIN_SCORE_SPEC_2025.csv",
         "docs/data/manifests/DOMAIN_SCORE_REPORT_2025.json",
+        "docs/data/COMPOSITE_INDEX_SPEC_2025.csv",
+        "docs/data/manifests/COMPOSITE_INDEX_REPORT_2025.json",
         "docs/data/DATA_PORTABILITY.md",
         "docs/data/manifests/CONSUMER_SALES_MANIFEST_2025.json",
         "docs/data/manifests/CITY_PARKS_MANIFEST.json",
@@ -71,6 +73,8 @@ def test_project_structure_and_required_documents() -> None:
         "docs/en/data/EDA_2025.md",
         "docs/methodology/DOMAIN_SCORES_2025.md",
         "docs/en/methodology/DOMAIN_SCORES_2025.md",
+        "docs/methodology/COMPOSITE_INDEX_2025.md",
+        "docs/en/methodology/COMPOSITE_INDEX_2025.md",
         "notebooks/01_candidate_profile_eda.ipynb",
     )
 
@@ -122,6 +126,17 @@ def test_domain_score_report_preserves_cod16_scope() -> None:
     assert report["score_direction"] == "higher means greater relative deprivation"
     assert report["composite_score_created"] is False
     assert all(re.fullmatch(r"[0-9A-F]{64}", value) for value in report["output_sha256"].values())
+
+
+def test_composite_index_report_covers_cod17_scope() -> None:
+    report = read_json("docs/data/manifests/COMPOSITE_INDEX_REPORT_2025.json")
+
+    assert report["record_count"] == 206
+    assert report["score_direction"] == "higher means greater relative deprivation"
+    assert report["rank_direction"] == "rank 1 is most deprived"
+    assert report["decile_direction"] == "decile 1 is most deprived 10 percent"
+    assert set(report["decile_counts"]) == {str(value) for value in range(1, 11)}
+    assert re.fullmatch(r"[0-9A-F]{64}", report["output_sha256"])
 
 
 def test_dataset_audit_is_valid() -> None:

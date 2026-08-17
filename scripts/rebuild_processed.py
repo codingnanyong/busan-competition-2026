@@ -7,6 +7,7 @@ from pathlib import Path
 
 from busan_imd.candidate_processing import CandidatePaths, process_all
 from busan_imd.collectors.consumer_sales import run as process_consumer_sales
+from busan_imd.composite_index import run as write_composite_index
 from busan_imd.data_quality import run as write_quality_report
 from busan_imd.domain_scores import run as write_domain_scores
 from busan_imd.eda import run as write_eda_report
@@ -35,6 +36,7 @@ def rebuild() -> None:
     write_quality_report()
     write_eda_report()
     write_domain_scores()
+    write_composite_index()
 
 
 def main() -> int:
@@ -42,7 +44,7 @@ def main() -> int:
     rebuild()
     print(
         "rebuilt candidate, inference, standardized, consumer-sales, quality, EDA, "
-        "and domain-score artifacts"
+        "domain-score, and composite-index artifacts"
     )
     return 0
 
