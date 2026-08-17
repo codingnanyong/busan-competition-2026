@@ -48,8 +48,8 @@ published weights, which total `0.906`, are therefore renormalized to sum to one
 | Living environment | 9.3% | 10.2649% |
 
 This mapping is a documented, reproducible baseline; it does not claim that the English and Busan
-indicators are equivalent. COD-18 tests rank stability under equal and Busan-context alternative
-weights.
+indicators are equivalent. The [2025 sensitivity analysis](SENSITIVITY_ANALYSIS_2025.md) tests rank
+stability under equal weights and systematic domain-unavailability scenarios.
 
 ## Calculation contract
 
@@ -72,4 +72,5 @@ separately interprets priority areas and domain contributions.
 - This is a six-domain baseline with safety held, not a complete seven-domain index.
 - Every scored domain still contains direct-measure or conditional-proxy limitations.
 - Ranks and deciles can visually magnify small score differences and must accompany raw scores.
-- Weight and proxy uncertainty remains unresolved until the COD-18 sensitivity analysis.
+- Rank shifts under equal weights and domain-unavailability scenarios must be read alongside the
+  sensitivity results.

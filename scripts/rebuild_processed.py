@@ -13,6 +13,7 @@ from busan_imd.domain_scores import run as write_domain_scores
 from busan_imd.eda import run as write_eda_report
 from busan_imd.income_inference import infer
 from busan_imd.income_inference import write_outputs as write_income_outputs
+from busan_imd.sensitivity_analysis import run as write_sensitivity_analysis
 from busan_imd.standardization import build_standardized_profile, write_outputs
 
 BOOTSTRAP_DIR = Path("data/processed/bootstrap/2025")
@@ -37,6 +38,7 @@ def rebuild() -> None:
     write_eda_report()
     write_domain_scores()
     write_composite_index()
+    write_sensitivity_analysis()
 
 
 def main() -> int:
@@ -44,7 +46,7 @@ def main() -> int:
     rebuild()
     print(
         "rebuilt candidate, inference, standardized, consumer-sales, quality, EDA, "
-        "domain-score, and composite-index artifacts"
+        "domain-score, composite-index, and sensitivity-analysis artifacts"
     )
     return 0
 

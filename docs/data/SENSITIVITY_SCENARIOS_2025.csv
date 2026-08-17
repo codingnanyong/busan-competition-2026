@@ -1,0 +1,10 @@
+scenario_id,scenario_type,weight_policy,missing_policy,omitted_domain,rationale
+baseline,reference,baseline,complete_case,,Published weights renormalized across the six scored domains
+equal_domain_weights,weight,equal,complete_case,,Equal weights test normative dependence on the published weighting structure
+median_imputation_observed,missing_data,baseline,median_imputation,,Observed missing-data alternative; identical to baseline when no domain score is missing
+omit_income,systematic_missing_domain,baseline,renormalize_after_systematic_omission,income,Stress test reliance on the fully inferred income proxy
+omit_employment,systematic_missing_domain,baseline,renormalize_after_systematic_omission,employment,Stress test reliance on the one-year-lag workplace opportunity proxy
+omit_education,systematic_missing_domain,baseline,renormalize_after_systematic_omission,education,Stress test reliance on the school-access proxy
+omit_health,systematic_missing_domain,baseline,renormalize_after_systematic_omission,health,Stress test reliance on reconstructed healthcare accessibility
+omit_housing_access,systematic_missing_domain,baseline,renormalize_after_systematic_omission,housing_access,Stress test reliance on housing lower bounds and bus-stop mapping
+omit_living_environment,systematic_missing_domain,baseline,renormalize_after_systematic_omission,living_environment,Stress test reliance on heat-response access and interpolated air pollution
