@@ -30,6 +30,7 @@ def test_pr_policy_validates_and_closes_the_mirrored_github_issue() -> None:
 def test_bilingual_issue_maps_contain_every_mirror_pair() -> None:
     mappings = {linear_id: linear_id + 9 for linear_id in range(5, 29)}
     mappings[29] = 39
+    mappings[30] = 44
 
     for path in ("docs/ISSUES.md", "docs/en/ISSUES.md"):
         issue_map = read_text(path)
