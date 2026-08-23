@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.5.0] - 2026-08-23
+
+### Added
+
+- B-IMD 1분위 21개 행정동의 영역·지표별 가중 기여도 분석
+- 부산 중앙값 대비 가중 초과점수에 기반한 지역별 대표 취약 원인
+- 우선지역 프로필·지표 기여도 CSV와 재현 가능한 체크섬 매니페스트
+- Domain- and indicator-level contribution analysis for 21 first-decile B-IMD priority areas
+- Area-specific leading drivers based on weighted excess above citywide medians
+
+### Changed
+
+- 전체 로컬 재생성 파이프라인에 우선지역 기여도 분석 단계를 연결
+- 국문·영문 방법론에 계산식, 상위지역 결과와 대리지표 해석 한계를 추가
+- Extended the offline rebuild and bilingual methodology through priority-area explanations
+
+### Fixed
+
+- 큰 영역 가중치와 지역별 고유 취약 원인을 구분하도록 중앙값 대비 초과 기여도를 함께 제공
+- Distinguished mechanical domain-weight effects from area-specific drivers using median-relative contributions
+
 ## [0.4.0] - 2026-08-17
 
 ### Added
