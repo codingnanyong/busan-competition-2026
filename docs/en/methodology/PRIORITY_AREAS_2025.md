@@ -52,3 +52,7 @@ measure is an inferred basic-livelihood-recipient proxy based partly on district
 the employment measure uses workplace workers as a proxy for local opportunity. Contributions
 are arithmetic score decompositions, not causal effects. Use them as signals for administrative
 data validation and field review, together with the documented sensitivity analysis.
+
+The subsequent [cluster-analysis review](CLUSTER_ANALYSIS_2025.md) did not find a stable
+discrete typology, so later policy and visualization work continues to use these continuous
+contribution vectors.

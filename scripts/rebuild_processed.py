@@ -6,6 +6,7 @@ import argparse
 from pathlib import Path
 
 from busan_imd.candidate_processing import CandidatePaths, process_all
+from busan_imd.cluster_analysis import run as write_cluster_analysis
 from busan_imd.collectors.consumer_sales import run as process_consumer_sales
 from busan_imd.composite_index import run as write_composite_index
 from busan_imd.data_quality import run as write_quality_report
@@ -41,6 +42,7 @@ def rebuild() -> None:
     write_composite_index()
     write_sensitivity_analysis()
     write_priority_areas()
+    write_cluster_analysis()
 
 
 def main() -> int:
@@ -48,7 +50,8 @@ def main() -> int:
     rebuild()
     print(
         "rebuilt candidate, inference, standardized, consumer-sales, quality, EDA, "
-        "domain-score, composite-index, sensitivity-analysis, and priority-area artifacts"
+        "domain-score, composite-index, sensitivity-analysis, priority-area, and "
+        "cluster-analysis artifacts"
     )
     return 0
 

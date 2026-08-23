@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-23T07:29:37+00:00",
+  "reference_year": 2025,
+  "record_count": 206,
+  "domains": [
+    "education",
+    "employment",
+    "health",
+    "housing_access",
+    "income",
+    "living_environment"
+  ],
+  "algorithm": "KMeans on six StandardScaler-transformed domain scores",
+  "candidate_cluster_counts": [
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "bootstrap_iterations": 100,
+  "random_state": 2025,
+  "adoption_gates": {
+    "minimum_silhouette": 0.25,
+    "minimum_bootstrap_median_ari": 0.7,
+    "minimum_bootstrap_p10_ari": 0.5,
+    "minimum_cluster_size": 10,
+    "minimum_distinctive_cluster_rate": 1.0,
+    "distinctive_centroid_absolute_z": 0.5
+  },
+  "adoption_decision": "not_adopted",
+  "policy_typology_eligible": false,
+  "selected_cluster_count": null,
+  "best_candidate_by_silhouette": 2,
+  "best_candidate_silhouette": 0.199017,
+  "best_candidate_bootstrap_median_ari": 0.679481,
+  "decision_rationale": "No candidate passed every documented separation, stability, size, and distinctiveness gate; cluster labels must not be used for policy typology.",
+  "assignment_record_count": 0,
+  "domain_scores_path": "data/processed/scores/2025/busan_admin_dong_domain_scores_2025.csv",
+  "domain_scores_sha256": "04AC94AE18A5929C83297BCFA8D08B55E5797FACF324ABB800969736D91805BF",
+  "output_paths": {
+    "candidate_evaluation": "data/processed/scores/2025/cluster_candidate_evaluation_2025.csv",
+    "candidate_profiles": "data/processed/scores/2025/cluster_candidate_profiles_2025.csv",
+    "assignments": "data/processed/scores/2025/admin_dong_cluster_typology_2025.csv"
+  },
+  "output_sha256": {
+    "candidate_evaluation": "CC6082172082A86C9D2B0C2E4C921607A26ABBA241A5F00F24F1656036DB215B",
+    "candidate_profiles": "95A0548BADD07A2A9AC4F0E2BE47A8BE1A7D90A8D9DAAC4DAFFFD440F73172C7",
+    "assignments": "D054F8D8A511651141D9F7118D0D82CE0752AF8737B0A9724FA5433060AB8255"
+  }
+}

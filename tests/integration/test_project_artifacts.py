@@ -69,6 +69,7 @@ def test_project_structure_and_required_documents() -> None:
         "docs/data/SENSITIVITY_SCENARIOS_2025.csv",
         "docs/data/manifests/SENSITIVITY_ANALYSIS_REPORT_2025.json",
         "docs/data/manifests/PRIORITY_AREA_REPORT_2025.json",
+        "docs/data/manifests/CLUSTER_ANALYSIS_REPORT_2025.json",
         "docs/data/DATA_PORTABILITY.md",
         "docs/data/manifests/CONSUMER_SALES_MANIFEST_2025.json",
         "docs/data/manifests/CITY_PARKS_MANIFEST.json",
@@ -82,6 +83,8 @@ def test_project_structure_and_required_documents() -> None:
         "docs/en/methodology/SENSITIVITY_ANALYSIS_2025.md",
         "docs/methodology/PRIORITY_AREAS_2025.md",
         "docs/en/methodology/PRIORITY_AREAS_2025.md",
+        "docs/methodology/CLUSTER_ANALYSIS_2025.md",
+        "docs/en/methodology/CLUSTER_ANALYSIS_2025.md",
         "notebooks/01_candidate_profile_eda.ipynb",
     )
 
@@ -175,6 +178,22 @@ def test_priority_area_report_covers_cod19_scope() -> None:
     assert report["indicator_count"] == 9
     assert sum(report["leading_domain_counts"].values()) == 21
     assert len(report["top_10_priority_areas"]) == 10
+    assert all(
+        re.fullmatch(r"[0-9A-F]{64}", value)
+        for value in report["output_sha256"].values()
+    )
+
+
+def test_cluster_analysis_report_records_cod20_rejection() -> None:
+    report = read_json("docs/data/manifests/CLUSTER_ANALYSIS_REPORT_2025.json")
+
+    assert report["record_count"] == 206
+    assert report["candidate_cluster_counts"] == [2, 3, 4, 5, 6]
+    assert report["adoption_decision"] == "not_adopted"
+    assert report["policy_typology_eligible"] is False
+    assert report["selected_cluster_count"] is None
+    assert report["assignment_record_count"] == 0
+    assert report["best_candidate_by_silhouette"] == 2
     assert all(
         re.fullmatch(r"[0-9A-F]{64}", value)
         for value in report["output_sha256"].values()
