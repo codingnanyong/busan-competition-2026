@@ -39,6 +39,8 @@ publish_page docs/data/EDA_2025.md KO-EDA-2025
 publish_page docs/methodology/DOMAIN_SCORES_2025.md KO-Domain-Scores-2025
 publish_page docs/methodology/COMPOSITE_INDEX_2025.md KO-Composite-Index-2025
 publish_page docs/methodology/SENSITIVITY_ANALYSIS_2025.md KO-Sensitivity-Analysis-2025
+publish_page docs/methodology/PRIORITY_AREAS_2025.md KO-Priority-Areas-2025
+publish_page docs/methodology/CLUSTER_ANALYSIS_2025.md KO-Cluster-Analysis-2025
 publish_page docs/methodology/INDICATOR_SPEC.md KO-Indicator-Spec
 publish_page docs/methodology/LIMITATIONS.md KO-Limitations
 publish_page docs/methodology/EXPANSION_MODEL.md KO-Expansion-Model
@@ -54,6 +56,8 @@ publish_page docs/en/data/EDA_2025.md EN-EDA-2025
 publish_page docs/en/methodology/DOMAIN_SCORES_2025.md EN-Domain-Scores-2025
 publish_page docs/en/methodology/COMPOSITE_INDEX_2025.md EN-Composite-Index-2025
 publish_page docs/en/methodology/SENSITIVITY_ANALYSIS_2025.md EN-Sensitivity-Analysis-2025
+publish_page docs/en/methodology/PRIORITY_AREAS_2025.md EN-Priority-Areas-2025
+publish_page docs/en/methodology/CLUSTER_ANALYSIS_2025.md EN-Cluster-Analysis-2025
 publish_page docs/en/methodology/INDICATOR_SPEC.md EN-Indicator-Spec
 publish_page docs/en/methodology/LIMITATIONS.md EN-Limitations
 publish_page docs/en/methodology/EXPANSION_MODEL.md EN-Expansion-Model
@@ -85,6 +89,8 @@ printf '%s\n' \
   '- [[2025 영역 점수|KO-Domain-Scores-2025]]' \
   '- [[2025 종합지수|KO-Composite-Index-2025]]' \
   '- [[2025 민감도 분석|KO-Sensitivity-Analysis-2025]]' \
+  '- [[2025 우선지역 기여도|KO-Priority-Areas-2025]]' \
+  '- [[2025 취약유형 군집 검토|KO-Cluster-Analysis-2025]]' \
   '- [[지표 명세|KO-Indicator-Spec]]' \
   '- [[한계 및 해석|KO-Limitations]]' \
   '- [[확장 모델|KO-Expansion-Model]]' \
@@ -102,6 +108,8 @@ printf '%s\n' \
   '- [[2025 Domain Scores|EN-Domain-Scores-2025]]' \
   '- [[2025 Composite Index|EN-Composite-Index-2025]]' \
   '- [[2025 Sensitivity Analysis|EN-Sensitivity-Analysis-2025]]' \
+  '- [[2025 Priority-Area Contributions|EN-Priority-Areas-2025]]' \
+  '- [[2025 Deprivation Clustering Review|EN-Cluster-Analysis-2025]]' \
   '- [[Indicator Specification|EN-Indicator-Spec]]' \
   '- [[Limitations|EN-Limitations]]' \
   '- [[Expansion Model|EN-Expansion-Model]]' \

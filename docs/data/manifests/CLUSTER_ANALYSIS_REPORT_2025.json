@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-23T23:52:21+00:00",
+  "reference_year": 2025,
+  "analysis_population": "21 B-IMD decile-1 priority areas",
+  "record_count": 21,
+  "feature_definition": "weighted domain excess points above the Busan median",
+  "features": [
+    "income_excess_points",
+    "employment_excess_points",
+    "education_excess_points",
+    "health_excess_points",
+    "housing_access_excess_points",
+    "living_environment_excess_points"
+  ],
+  "candidate_cluster_counts": [
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "selection_rule": "highest silhouette among candidates with at least three members per cluster; ties use seed stability then fewer clusters",
+  "selected_cluster_count": 2,
+  "selected_metrics": {
+    "silhouette_score": 0.280819,
+    "mean_seed_stability_ari": 0.371521,
+    "minimum_seed_stability_ari": -0.061798,
+    "minimum_cluster_size": 5,
+    "maximum_cluster_size": 16
+  },
+  "quality_gate": {
+    "minimum_silhouette": 0.25,
+    "minimum_mean_seed_stability_ari": 0.8,
+    "minimum_cluster_size": 3
+  },
+  "recommended_for_policy_typology": false,
+  "decision": "do_not_use_as_policy_typology",
+  "cluster_summaries": [
+    {
+      "dominant_domain": "employment",
+      "secondary_domain": "income",
+      "member_count": 16,
+      "mean_excess_points": {
+        "income": 10.592493,
+        "employment": 10.600065,
+        "education": -0.840434,
+        "health": 3.200462,
+        "housing_access": 1.617974,
+        "living_environment": -1.796358
+      },
+      "cluster_id": "type_1"
+    },
+    {
+      "dominant_domain": "income",
+      "secondary_domain": "employment",
+      "member_count": 5,
+      "mean_excess_points": {
+        "income": 6.384268,
+        "employment": 5.730092,
+        "education": 3.975933,
+        "health": 4.408416,
+        "housing_access": -0.170247,
+        "living_environment": -0.252867
+      },
+      "cluster_id": "type_2"
+    }
+  ],
+  "input_path": "data/processed/scores/2025/busan_admin_dong_priority_areas_2025.csv",
+  "input_sha256": "848546B9B7BE40932CBF9B4D5B3B79D6151B8FF680F987A4E1EB9A85705566C9",
+  "output_paths": {
+    "assignments": "data/processed/scores/2025/busan_admin_dong_deprivation_clusters_2025.csv",
+    "candidate_metrics": "data/processed/scores/2025/busan_admin_dong_cluster_metrics_2025.csv"
+  },
+  "output_sha256": {
+    "assignments": "648654A7E389D4FD3B06CA54A6FFEEE77A669EA123DE4174754DE7B1B0E15371",
+    "candidate_metrics": "1A37EB4D196559B72B84E3601293F3678CC4F10871E4474B722E2C0E4616E19B"
+  }
+}
