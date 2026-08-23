@@ -12,6 +12,7 @@ import numpy as np
 import pandas as pd
 
 from busan_imd.core.artifacts import sha256_file, write_json
+from busan_imd.core.paths import repository_path
 from busan_imd.standardization import load_boundaries
 
 DEFAULT_PROFILE = Path(
@@ -266,31 +267,42 @@ def run(
     report_path: Path = DEFAULT_REPORT,
 ) -> dict[str, Any]:
     """Read canonical inputs and write reproducible EDA artifacts."""
-    profile = pd.read_csv(profile_path, dtype={"admin_dong_code": str})
-    dictionary = pd.read_csv(dictionary_path)
-    boundaries = load_boundaries(boundaries_path)[["admin_dong_code", "geometry"]]
+    resolved_profile_path = repository_path(profile_path)
+    resolved_dictionary_path = repository_path(dictionary_path)
+    resolved_boundaries_path = repository_path(boundaries_path)
+    resolved_output_dir = repository_path(output_dir)
+    resolved_report_path = repository_path(report_path)
+
+    profile = pd.read_csv(resolved_profile_path, dtype={"admin_dong_code": str})
+    dictionary = pd.read_csv(resolved_dictionary_path)
+    boundaries = load_boundaries(resolved_boundaries_path)[["admin_dong_code", "geometry"]]
     tables, report = build(profile, dictionary, boundaries)
-    output_dir.mkdir(parents=True, exist_ok=True)
+    resolved_output_dir.mkdir(parents=True, exist_ok=True)
     output_paths: dict[str, str] = {}
     output_hashes: dict[str, str] = {}
     for name, table in tables.items():
-        path = output_dir / f"{name}.csv"
-        table.to_csv(path, index=name == "correlation_matrix", encoding="utf-8-sig")
-        output_paths[name] = path.as_posix()
-        output_hashes[name] = sha256_file(path)
+        resolved_path = resolved_output_dir / f"{name}.csv"
+        reported_path = output_dir / f"{name}.csv"
+        table.to_csv(
+            resolved_path,
+            index=name == "correlation_matrix",
+            encoding="utf-8-sig",
+        )
+        output_paths[name] = reported_path.as_posix()
+        output_hashes[name] = sha256_file(resolved_path)
     report.update(
         {
             "profile_path": profile_path.as_posix(),
-            "profile_sha256": sha256_file(profile_path),
+            "profile_sha256": sha256_file(resolved_profile_path),
             "dictionary_path": dictionary_path.as_posix(),
-            "dictionary_sha256": sha256_file(dictionary_path),
+            "dictionary_sha256": sha256_file(resolved_dictionary_path),
             "boundaries_path": boundaries_path.as_posix(),
-            "boundaries_sha256": sha256_file(boundaries_path),
+            "boundaries_sha256": sha256_file(resolved_boundaries_path),
             "output_paths": output_paths,
             "output_sha256": output_hashes,
         }
     )
-    write_json(report_path, report)
+    write_json(resolved_report_path, report)
     return report
 
 

@@ -8,6 +8,7 @@ import pytest
 from busan_imd.core.artifacts import sha256_file, write_csv, write_json
 from busan_imd.core.config import read_env_file, require_values
 from busan_imd.core.http import encoded_secret_url
+from busan_imd.core.paths import REPOSITORY_ROOT, repository_path
 from busan_imd.core.provenance import cutoff_status, ensure_secret_free
 
 
@@ -51,3 +52,12 @@ def test_artifact_helpers_write_stable_files(tmp_path: Path) -> None:
     assert '"name": "부산"' in json_path.read_text(encoding="utf-8")
     assert csv_path.read_text(encoding="utf-8-sig").splitlines() == ["a,b", "1,2"]
     assert len(sha256_file(json_path)) == 64
+
+
+def test_repository_path_does_not_depend_on_working_directory(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.chdir(tmp_path)
+
+    assert repository_path("data/example.csv") == REPOSITORY_ROOT / "data/example.csv"
+    assert repository_path(tmp_path / "absolute.csv") == tmp_path / "absolute.csv"
