@@ -68,6 +68,7 @@ def test_project_structure_and_required_documents() -> None:
         "docs/data/manifests/COMPOSITE_INDEX_REPORT_2025.json",
         "docs/data/SENSITIVITY_SCENARIOS_2025.csv",
         "docs/data/manifests/SENSITIVITY_ANALYSIS_REPORT_2025.json",
+        "docs/data/manifests/PRIORITY_AREA_REPORT_2025.json",
         "docs/data/DATA_PORTABILITY.md",
         "docs/data/manifests/CONSUMER_SALES_MANIFEST_2025.json",
         "docs/data/manifests/CITY_PARKS_MANIFEST.json",
@@ -79,6 +80,8 @@ def test_project_structure_and_required_documents() -> None:
         "docs/en/methodology/COMPOSITE_INDEX_2025.md",
         "docs/methodology/SENSITIVITY_ANALYSIS_2025.md",
         "docs/en/methodology/SENSITIVITY_ANALYSIS_2025.md",
+        "docs/methodology/PRIORITY_AREAS_2025.md",
+        "docs/en/methodology/PRIORITY_AREAS_2025.md",
         "notebooks/01_candidate_profile_eda.ipynb",
     )
 
@@ -161,6 +164,21 @@ def test_sensitivity_report_covers_cod18_scope() -> None:
         "omit_living_environment",
     }
     assert re.fullmatch(r"[0-9A-F]{64}", report["output_sha256"])
+
+
+def test_priority_area_report_covers_cod19_scope() -> None:
+    report = read_json("docs/data/manifests/PRIORITY_AREA_REPORT_2025.json")
+
+    assert report["record_count"] == 206
+    assert report["priority_area_rule"] == "B-IMD decile 1"
+    assert report["priority_area_count"] == 21
+    assert report["indicator_count"] == 9
+    assert sum(report["leading_domain_counts"].values()) == 21
+    assert len(report["top_10_priority_areas"]) == 10
+    assert all(
+        re.fullmatch(r"[0-9A-F]{64}", value)
+        for value in report["output_sha256"].values()
+    )
 
 
 def test_dataset_audit_is_valid() -> None:
