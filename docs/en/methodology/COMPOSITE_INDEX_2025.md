@@ -64,8 +64,9 @@ B_IMD_score = sum(w_d * domain_score_d)
 - Ordered ranks are split into ten deciles; `1` is the most deprived approximately 10%.
 - With 206 dongs, each decile contains 20 or 21 dongs.
 
-The 2025 run ranges from `20.956227` to `82.821838`, with a median of `51.048498`. COD-19
-separately interprets priority areas and domain contributions.
+The 2025 run ranges from `20.956227` to `82.821838`, with a median of `51.048498`. The
+[2025 priority-area contribution analysis](PRIORITY_AREAS_2025.md) interprets priority areas
+and their domain contributions.
 
 ## Limitations
 
