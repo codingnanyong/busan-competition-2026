@@ -1,0 +1,296 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-23T01:13:43+00:00",
+  "reference_year": 2025,
+  "record_count": 206,
+  "priority_area_rule": "B-IMD decile 1",
+  "priority_area_count": 21,
+  "indicator_count": 9,
+  "contribution_definition": "indicator percentile score multiplied by within-domain and composite-domain weights",
+  "driver_definition": "largest positive weighted contribution above the citywide indicator or domain median",
+  "score_direction": "higher means greater relative deprivation",
+  "leading_domain_counts": {
+    "employment": 12,
+    "income": 9
+  },
+  "top_10_priority_areas": [
+    {
+      "admin_dong_code": "21150540",
+      "sigungu_name": "사상구",
+      "admin_dong_name": "모라3동",
+      "b_imd_score_0_100": 82.821838,
+      "b_imd_rank": 1,
+      "leading_domain": "income",
+      "leading_indicator": "basic_livelihood_recipients_per_1000_population_2025_inferred",
+      "top_indicator_drivers": [
+        {
+          "indicator": "basic_livelihood_recipients_per_1000_population_2025_inferred",
+          "domain": "income",
+          "weighted_excess_over_city_median": 12.417219
+        },
+        {
+          "indicator": "workplace_workers_2024",
+          "domain": "employment",
+          "weighted_excess_over_city_median": 11.569213
+        },
+        {
+          "indicator": "nearest_core_school_distance_m_2025",
+          "domain": "education",
+          "weighted_excess_over_city_median": 2.725731
+        }
+      ]
+    },
+    {
+      "admin_dong_code": "21030550",
+      "sigungu_name": "동구",
+      "admin_dong_name": "초량6동",
+      "b_imd_score_0_100": 80.255209,
+      "b_imd_rank": 2,
+      "leading_domain": "employment",
+      "leading_indicator": "workplace_workers_2024",
+      "top_indicator_drivers": [
+        {
+          "indicator": "workplace_workers_2024",
+          "domain": "employment",
+          "weighted_excess_over_city_median": 10.963495
+        },
+        {
+          "indicator": "basic_livelihood_recipients_per_1000_population_2025_inferred",
+          "domain": "income",
+          "weighted_excess_over_city_median": 9.994347
+        },
+        {
+          "indicator": "nearest_core_school_distance_m_2025",
+          "domain": "education",
+          "weighted_excess_over_city_median": 3.452593
+        }
+      ]
+    },
+    {
+      "admin_dong_code": "21090590",
+      "sigungu_name": "해운대구",
+      "admin_dong_name": "반여3동",
+      "b_imd_score_0_100": 79.701987,
+      "b_imd_rank": 3,
+      "leading_domain": "employment",
+      "leading_indicator": "basic_livelihood_recipients_per_1000_population_2025_inferred",
+      "top_indicator_drivers": [
+        {
+          "indicator": "basic_livelihood_recipients_per_1000_population_2025_inferred",
+          "domain": "income",
+          "weighted_excess_over_city_median": 11.44807
+        },
+        {
+          "indicator": "workplace_workers_2024",
+          "domain": "employment",
+          "weighted_excess_over_city_median": 11.44807
+        },
+        {
+          "indicator": "hospital_count_2025_candidate_per_10000_population",
+          "domain": "health",
+          "weighted_excess_over_city_median": 2.634873
+        }
+      ]
+    },
+    {
+      "admin_dong_code": "21030590",
+      "sigungu_name": "동구",
+      "admin_dong_name": "수정4동",
+      "b_imd_score_0_100": 77.215312,
+      "b_imd_rank": 4,
+      "leading_domain": "employment",
+      "leading_indicator": "workplace_workers_2024",
+      "top_indicator_drivers": [
+        {
+          "indicator": "workplace_workers_2024",
+          "domain": "employment",
+          "weighted_excess_over_city_median": 12.174931
+        },
+        {
+          "indicator": "basic_livelihood_recipients_per_1000_population_2025_inferred",
+          "domain": "income",
+          "weighted_excess_over_city_median": 10.963495
+        },
+        {
+          "indicator": "nearest_core_school_distance_m_2025",
+          "domain": "education",
+          "weighted_excess_over_city_median": 4.542885
+        }
+      ]
+    },
+    {
+      "admin_dong_code": "21080580",
+      "sigungu_name": "북구",
+      "admin_dong_name": "덕천3동",
+      "b_imd_score_0_100": 76.358423,
+      "b_imd_rank": 5,
+      "leading_domain": "employment",
+      "leading_indicator": "basic_livelihood_recipients_per_1000_population_2025_inferred",
+      "top_indicator_drivers": [
+        {
+          "indicator": "basic_livelihood_recipients_per_1000_population_2025_inferred",
+          "domain": "income",
+          "weighted_excess_over_city_median": 11.326926
+        },
+        {
+          "indicator": "workplace_workers_2024",
+          "domain": "employment",
+          "weighted_excess_over_city_median": 11.326926
+        },
+        {
+          "indicator": "clinic_count_2025_candidate_per_10000_population",
+          "domain": "health",
+          "weighted_excess_over_city_median": 3.361735
+        }
+      ]
+    },
+    {
+      "admin_dong_code": "21100660",
+      "sigungu_name": "사하구",
+      "admin_dong_name": "감천2동",
+      "b_imd_score_0_100": 76.321272,
+      "b_imd_rank": 6,
+      "leading_domain": "employment",
+      "leading_indicator": "workplace_workers_2024",
+      "top_indicator_drivers": [
+        {
+          "indicator": "workplace_workers_2024",
+          "domain": "employment",
+          "weighted_excess_over_city_median": 12.053788
+        },
+        {
+          "indicator": "basic_livelihood_recipients_per_1000_population_2025_inferred",
+          "domain": "income",
+          "weighted_excess_over_city_median": 11.932644
+        },
+        {
+          "indicator": "nearest_core_school_distance_m_2025",
+          "domain": "education",
+          "weighted_excess_over_city_median": 4.906316
+        }
+      ]
+    },
+    {
+      "admin_dong_code": "21030600",
+      "sigungu_name": "동구",
+      "admin_dong_name": "수정5동",
+      "b_imd_score_0_100": 74.582458,
+      "b_imd_rank": 7,
+      "leading_domain": "employment",
+      "leading_indicator": "workplace_workers_2024",
+      "top_indicator_drivers": [
+        {
+          "indicator": "workplace_workers_2024",
+          "domain": "employment",
+          "weighted_excess_over_city_median": 11.811501
+        },
+        {
+          "indicator": "basic_livelihood_recipients_per_1000_population_2025_inferred",
+          "domain": "income",
+          "weighted_excess_over_city_median": 10.478921
+        },
+        {
+          "indicator": "clinic_count_2025_candidate_per_10000_population",
+          "domain": "health",
+          "weighted_excess_over_city_median": 2.998304
+        }
+      ]
+    },
+    {
+      "admin_dong_code": "21030560",
+      "sigungu_name": "동구",
+      "admin_dong_name": "수정1동",
+      "b_imd_score_0_100": 73.724762,
+      "b_imd_rank": 8,
+      "leading_domain": "employment",
+      "leading_indicator": "workplace_workers_2024",
+      "top_indicator_drivers": [
+        {
+          "indicator": "workplace_workers_2024",
+          "domain": "employment",
+          "weighted_excess_over_city_median": 10.478921
+        },
+        {
+          "indicator": "basic_livelihood_recipients_per_1000_population_2025_inferred",
+          "domain": "income",
+          "weighted_excess_over_city_median": 7.0869
+        },
+        {
+          "indicator": "clinic_count_2025_candidate_per_10000_population",
+          "domain": "health",
+          "weighted_excess_over_city_median": 3.616136
+        }
+      ]
+    },
+    {
+      "admin_dong_code": "21020630",
+      "sigungu_name": "서구",
+      "admin_dong_name": "초장동",
+      "b_imd_score_0_100": 73.655306,
+      "b_imd_rank": 9,
+      "leading_domain": "employment",
+      "leading_indicator": "workplace_workers_2024",
+      "top_indicator_drivers": [
+        {
+          "indicator": "workplace_workers_2024",
+          "domain": "employment",
+          "weighted_excess_over_city_median": 12.417219
+        },
+        {
+          "indicator": "basic_livelihood_recipients_per_1000_population_2025_inferred",
+          "domain": "income",
+          "weighted_excess_over_city_median": 12.053788
+        },
+        {
+          "indicator": "clinic_count_2025_candidate_per_10000_population",
+          "domain": "health",
+          "weighted_excess_over_city_median": 3.616136
+        }
+      ]
+    },
+    {
+      "admin_dong_code": "21090580",
+      "sigungu_name": "해운대구",
+      "admin_dong_name": "반여2동",
+      "b_imd_score_0_100": 73.438863,
+      "b_imd_rank": 10,
+      "leading_domain": "income",
+      "leading_indicator": "basic_livelihood_recipients_per_1000_population_2025_inferred",
+      "top_indicator_drivers": [
+        {
+          "indicator": "basic_livelihood_recipients_per_1000_population_2025_inferred",
+          "domain": "income",
+          "weighted_excess_over_city_median": 10.236634
+        },
+        {
+          "indicator": "workplace_workers_2024",
+          "domain": "employment",
+          "weighted_excess_over_city_median": 9.994347
+        },
+        {
+          "indicator": "hospital_count_2025_candidate_per_10000_population",
+          "domain": "health",
+          "weighted_excess_over_city_median": 2.634873
+        }
+      ]
+    }
+  ],
+  "input_paths": {
+    "composite": "data/processed/scores/2025/busan_admin_dong_imd_2025.csv",
+    "indicator_scores": "data/processed/scores/2025/busan_admin_dong_indicator_scores_2025.csv",
+    "weight_spec": "docs/data/COMPOSITE_INDEX_SPEC_2025.csv"
+  },
+  "input_sha256": {
+    "composite": "380EB11360B40A6C8E480B3A1D2EBE40DD0EC11FFED20580E0D72563CBB1EC07",
+    "indicator_scores": "967AC71531BBA34E7639D66239513E9EC73CAE07EECF554E269ED0D1DF17DDAF",
+    "weight_spec": "F6631F156E48F0BC3C86CB1807C83BD5DD2E81DC88A3CD769EAE48B38C06F444"
+  },
+  "output_paths": {
+    "priority_areas": "data/processed/scores/2025/busan_admin_dong_priority_areas_2025.csv",
+    "indicator_contributions": "data/processed/scores/2025/busan_admin_dong_priority_indicator_contributions_2025.csv"
+  },
+  "output_sha256": {
+    "priority_areas": "848546B9B7BE40932CBF9B4D5B3B79D6151B8FF680F987A4E1EB9A85705566C9",
+    "indicator_contributions": "93F605A71DF7DCACC0DEA66D2F5DB4FA3BA420734370D2961EBFE63B40B816B5"
+  }
+}

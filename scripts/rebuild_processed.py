@@ -13,6 +13,7 @@ from busan_imd.domain_scores import run as write_domain_scores
 from busan_imd.eda import run as write_eda_report
 from busan_imd.income_inference import infer
 from busan_imd.income_inference import write_outputs as write_income_outputs
+from busan_imd.priority_areas import run as write_priority_areas
 from busan_imd.sensitivity_analysis import run as write_sensitivity_analysis
 from busan_imd.standardization import build_standardized_profile, write_outputs
 
@@ -39,6 +40,7 @@ def rebuild() -> None:
     write_domain_scores()
     write_composite_index()
     write_sensitivity_analysis()
+    write_priority_areas()
 
 
 def main() -> int:
@@ -46,7 +48,7 @@ def main() -> int:
     rebuild()
     print(
         "rebuilt candidate, inference, standardized, consumer-sales, quality, EDA, "
-        "domain-score, composite-index, and sensitivity-analysis artifacts"
+        "domain-score, composite-index, sensitivity-analysis, and priority-area artifacts"
     )
     return 0
 
