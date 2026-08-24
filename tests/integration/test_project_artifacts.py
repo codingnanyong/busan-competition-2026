@@ -69,6 +69,7 @@ def test_project_structure_and_required_documents() -> None:
         "docs/data/SENSITIVITY_SCENARIOS_2025.csv",
         "docs/data/manifests/SENSITIVITY_ANALYSIS_REPORT_2025.json",
         "docs/data/manifests/PRIORITY_AREA_REPORT_2025.json",
+        "docs/data/manifests/CLUSTER_ANALYSIS_REPORT_2025.json",
         "docs/data/DATA_PORTABILITY.md",
         "docs/data/manifests/CONSUMER_SALES_MANIFEST_2025.json",
         "docs/data/manifests/CITY_PARKS_MANIFEST.json",
@@ -82,7 +83,10 @@ def test_project_structure_and_required_documents() -> None:
         "docs/en/methodology/SENSITIVITY_ANALYSIS_2025.md",
         "docs/methodology/PRIORITY_AREAS_2025.md",
         "docs/en/methodology/PRIORITY_AREAS_2025.md",
+        "docs/methodology/CLUSTER_ANALYSIS_2025.md",
+        "docs/en/methodology/CLUSTER_ANALYSIS_2025.md",
         "notebooks/01_candidate_profile_eda.ipynb",
+        "notebooks/02_deprivation_cluster_review.ipynb",
     )
 
     assert all((REPOSITORY_ROOT / path).is_dir() for path in required_directories)
@@ -96,6 +100,22 @@ def test_eda_notebook_is_clean_and_reuses_the_pipeline() -> None:
     assert notebook["nbformat"] == 4
     code_cells = [cell for cell in notebook["cells"] if cell["cell_type"] == "code"]
     assert any("from busan_imd.eda import run" in "".join(cell["source"]) for cell in code_cells)
+    assert any("os.chdir(project_root)" in "".join(cell["source"]) for cell in code_cells)
+    assert all(cell["execution_count"] is None for cell in code_cells)
+    assert all(cell["outputs"] == [] for cell in code_cells)
+
+
+def test_cluster_notebook_is_clean_and_portable() -> None:
+    notebook_path = REPOSITORY_ROOT / "notebooks/02_deprivation_cluster_review.ipynb"
+    notebook = json.loads(notebook_path.read_text(encoding="utf-8"))
+
+    assert notebook["nbformat"] == 4
+    code_cells = [cell for cell in notebook["cells"] if cell["cell_type"] == "code"]
+    sources = ["".join(cell["source"]) for cell in code_cells]
+    assert any("os.chdir(project_root)" in source for source in sources)
+    assert any("from busan_imd.cluster_analysis import" in source for source in sources)
+    assert any("px.scatter" in source for source in sources)
+    assert any("px.imshow" in source for source in sources)
     assert all(cell["execution_count"] is None for cell in code_cells)
     assert all(cell["outputs"] == [] for cell in code_cells)
 
@@ -175,6 +195,29 @@ def test_priority_area_report_covers_cod19_scope() -> None:
     assert report["indicator_count"] == 9
     assert sum(report["leading_domain_counts"].values()) == 21
     assert len(report["top_10_priority_areas"]) == 10
+    assert all(
+        re.fullmatch(r"[0-9A-F]{64}", value)
+        for value in report["output_sha256"].values()
+    )
+
+
+def test_cluster_analysis_report_records_cod20_typology_decision() -> None:
+    report = read_json("docs/data/manifests/CLUSTER_ANALYSIS_REPORT_2025.json")
+    priority_report = read_json("docs/data/manifests/PRIORITY_AREA_REPORT_2025.json")
+
+    assert report["record_count"] == 21
+    assert report["candidate_cluster_counts"] == [2, 3, 4, 5, 6]
+    assert report["selected_cluster_count"] == 2
+    assert report["recommended_for_policy_typology"] is True
+    assert report["decision"] == "use_as_exploratory_policy_typology"
+    assert report["input_sha256"] == priority_report["output_sha256"]["priority_areas"]
+    assert report["selected_metrics"]["mean_seed_stability_ari"] >= report[
+        "quality_gate"
+    ]["minimum_mean_seed_stability_ari"]
+    assert {item["cluster_label"] for item in report["cluster_summaries"]} == {
+        "education_living_environment",
+        "employment_income",
+    }
     assert all(
         re.fullmatch(r"[0-9A-F]{64}", value)
         for value in report["output_sha256"].values()
