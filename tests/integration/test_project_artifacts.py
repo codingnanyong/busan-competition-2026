@@ -3,6 +3,8 @@ import json
 import re
 from pathlib import Path
 
+import pandas as pd
+
 from busan_imd.collectors.approved_apis import validate_manifest as validate_raw_manifest
 from busan_imd.collectors.fire_incidents import validate_manifest as validate_fire_manifest
 from busan_imd.collectors.healthcare_facilities import (
@@ -323,6 +325,7 @@ def test_infographic_report_and_outputs_cover_cod23_scope() -> None:
 
     assert report["artifact_status"] == "submission_draft"
     assert report["page_count"] == 1
+    assert report["dong_action_profile_count"] == 206
     assert report["priority_area_count"] == 21
     assert report["double_burden_area_count"] == 4
     assert report["policy_candidate_count"] == 5
@@ -334,7 +337,19 @@ def test_infographic_report_and_outputs_cover_cod23_scope() -> None:
     pdf = (REPOSITORY_ROOT / report["output_paths"]["pdf"]).read_bytes()
     assert len(re.findall(rb"/Type\s*/Page\b", pdf)) == 1
     svg = (REPOSITORY_ROOT / report["output_paths"]["svg"]).read_text(encoding="utf-8")
-    assert "부산의 생활취약성" in svg
+    assert "행정동별 취약 원인" in svg
+    profiles = pd.read_csv(
+        REPOSITORY_ROOT / report["output_paths"]["action_profile_csv"],
+        dtype={"admin_dong_code": str},
+    )
+    assert len(profiles) == 206
+    assert profiles["admin_dong_code"].nunique() == 206
+    assert profiles["improvement_direction"].notna().all()
+    assert profiles["specialization_evidence_status"].str.contains("특화 확정 불가").all()
+    action_map = (
+        REPOSITORY_ROOT / report["output_paths"]["interactive_action_map"]
+    ).read_text(encoding="utf-8")
+    assert action_map.count("data-code=") == 206
 
 
 def test_dataset_audit_is_valid() -> None:

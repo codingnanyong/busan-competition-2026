@@ -7,7 +7,7 @@ import pandas as pd
 import pytest
 from shapely.geometry import box
 
-from busan_imd.infographic import render
+from busan_imd.infographic import build_action_profiles, render, write_action_map
 
 
 def inputs() -> tuple[
@@ -26,6 +26,12 @@ def inputs() -> tuple[
             "b_imd_score_0_100": [100 - index / 3 for index in range(206)],
             "b_imd_rank": list(range(1, 207)),
             "b_imd_decile": [min(index * 10 // 206 + 1, 10) for index in range(206)],
+            "education_score_0_100": [90 - index / 4 for index in range(206)],
+            "employment_score_0_100": [80 - index / 4 for index in range(206)],
+            "health_score_0_100": [70 - index / 4 for index in range(206)],
+            "housing_access_score_0_100": [60 - index / 4 for index in range(206)],
+            "income_score_0_100": [50 - index / 4 for index in range(206)],
+            "living_environment_score_0_100": [40 - index / 4 for index in range(206)],
         }
     )
     boundaries = gpd.GeoDataFrame(
@@ -70,6 +76,22 @@ def test_render_writes_one_page_vector_pdf_and_preview(tmp_path) -> None:
     assert svg_path.read_text(encoding="utf-8").count("<svg") == 1
     assert len(re.findall(rb"/Type\s*/Page\b", pdf_path.read_bytes())) == 1
     assert png_path.stat().st_size > 10_000
+
+
+def test_action_profiles_and_map_cover_every_dong(tmp_path) -> None:
+    composite, boundaries, *_ = inputs()
+    profiles = build_action_profiles(composite)
+    html_path = tmp_path / "action-map.html"
+
+    write_action_map(profiles, boundaries, html_path)
+
+    assert len(profiles) == 206
+    assert profiles.loc[0, "primary_vulnerability_ko"] == "교육"
+    assert profiles.loc[0, "relative_low_deprivation_ko"] == "생활환경"
+    assert profiles["specialization_evidence_status"].str.contains("특화 확정 불가").all()
+    html = html_path.read_text(encoding="utf-8")
+    assert html.count("data-code=") == 206
+    assert "취약영역에서 개선방향까지" in html
 
 
 def test_render_rejects_incomplete_canonical_population(tmp_path) -> None:

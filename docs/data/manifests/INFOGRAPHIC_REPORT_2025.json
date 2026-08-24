@@ -1,9 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-24T02:57:47+00:00",
+  "generated_at": "2026-08-24T03:15:02+00:00",
   "reference_year": 2025,
   "artifact_status": "submission_draft",
   "format": "A4 portrait one-page infographic",
+  "dong_action_profile_count": 206,
   "page_count": 1,
   "priority_area_count": 21,
   "double_burden_area_count": 4,
@@ -38,12 +39,16 @@
   "output_paths": {
     "svg": "outputs/infographic/busan_imd_one_page_2025.svg",
     "pdf": "outputs/infographic/busan_imd_one_page_2025.pdf",
-    "png": "outputs/infographic/busan_imd_one_page_2025.png"
+    "png": "outputs/infographic/busan_imd_one_page_2025.png",
+    "action_profile_csv": "outputs/infographic/busan_admin_dong_action_profile_2025.csv",
+    "interactive_action_map": "outputs/infographic/busan_admin_dong_action_map_2025.html"
   },
   "output_sha256": {
-    "svg": "38AB1B9F6B6ADFF932B730F651F9B02FDCFDBB0C695DE1424534106ABC84ED70",
-    "pdf": "05A2FB15C41D272D582AA80381005320AEDE5A37E09F6DFA26F3485B04529D15",
-    "png": "B2D5D6175CFA72EBD0E96A6C27E025BAA5EAE74B647E30FDEADF1FF3D890A4BC"
+    "svg": "4A84F065C95F17A718118F5582541D3FF4356B9DEDD6CAC6D52944863D786C21",
+    "pdf": "33A5CD88FEE00D9526819EAA7FAAFB55F45996F3B8154673053A170B1F01E341",
+    "png": "A0E17B9CC1A81BB129A86799F87772F6C3D7EB46DE82EED85B0B03DD8C0C2005",
+    "action_profile_csv": "8B7976BDFF3D7A75D23EBA5671F3530E82196225A1DB2BBD1543CAF6A573D3C7",
+    "interactive_action_map": "DB2BEBAC942B813472DBDE12DE699479510245D2ED5C4FF4EB6DE92B357FC69C"
   },
   "interpretation": "Public-data experimental screening; not an official index, causal estimate, individual eligibility rule, or final funding decision"
 }

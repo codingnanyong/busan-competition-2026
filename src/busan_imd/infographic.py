@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 from datetime import UTC, datetime
+from html import escape
 from pathlib import Path
 from typing import Any
 
@@ -27,6 +28,8 @@ DEFAULT_OUTPUT_DIR = Path("outputs/infographic")
 DEFAULT_SVG_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_imd_one_page_2025.svg"
 DEFAULT_PDF_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_imd_one_page_2025.pdf"
 DEFAULT_PNG_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_imd_one_page_2025.png"
+DEFAULT_PROFILE_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_admin_dong_action_profile_2025.csv"
+DEFAULT_HTML_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_admin_dong_action_map_2025.html"
 DEFAULT_REPORT = Path("docs/data/manifests/INFOGRAPHIC_REPORT_2025.json")
 EXPECTED_DONG_COUNT = 206
 EXPECTED_PRIORITY_COUNT = 21
@@ -40,6 +43,107 @@ PALETTE = {
     "gold": "#D99A25",
     "line": "#D7DED9",
 }
+DOMAIN_COLUMNS = {
+    "education": ("education_score_0_100", "교육"),
+    "employment": ("employment_score_0_100", "고용"),
+    "health": ("health_score_0_100", "건강"),
+    "housing_access": ("housing_access_score_0_100", "주거·접근성"),
+    "income": ("income_score_0_100", "소득"),
+    "living_environment": ("living_environment_score_0_100", "생활환경"),
+}
+DOMAIN_COLORS = {
+    "education": "#D99A25",
+    "employment": "#087E8B",
+    "health": "#A44A7A",
+    "housing_access": "#596FB7",
+    "income": "#D84A3A",
+    "living_environment": "#4F8A5B",
+}
+IMPROVEMENT_ACTIONS = {
+    "education": "학습지원·학교 접근성 점검",
+    "employment": "주민 고용자료 검증 후 일자리·훈련 연계",
+    "health": "의료·건강관리 접근성 점검",
+    "housing_access": "주거·교통·생활시설 접근 개선",
+    "income": "복지급여 누락 점검·통합사례관리",
+    "living_environment": "생활환경·안전·대기질 현장점검",
+}
+PRESERVATION_DIRECTIONS = {
+    "education": "교육 기반 보전·연계 검토",
+    "employment": "지역 일자리 기반 보전 검토",
+    "health": "건강·의료 접근 기반 보전 검토",
+    "housing_access": "주거·교통 접근 기반 보전 검토",
+    "income": "경제 안정 기반 보전 검토",
+    "living_environment": "생활환경 기반 보전 검토",
+}
+
+
+def build_action_profiles(composite: pd.DataFrame) -> pd.DataFrame:
+    """Translate six-domain scores into transparent dong-level review directions."""
+    required = {
+        "admin_dong_code",
+        "sigungu_name",
+        "admin_dong_name",
+        "b_imd_score_0_100",
+        "b_imd_rank",
+        "b_imd_decile",
+        *(column for column, _ in DOMAIN_COLUMNS.values()),
+    }
+    missing = sorted(required - set(composite.columns))
+    if missing:
+        raise ValueError(f"Composite input is missing action-profile columns: {missing}")
+    profiles = composite.copy()
+    score_columns = [column for column, _ in DOMAIN_COLUMNS.values()]
+    ordered = profiles[score_columns].apply(
+        lambda row: row.sort_values(ascending=False, kind="stable").index.tolist(), axis=1
+    )
+    column_to_domain = {column: domain for domain, (column, _) in DOMAIN_COLUMNS.items()}
+    profiles["primary_vulnerability_domain"] = ordered.map(
+        lambda values: column_to_domain[values[0]]
+    )
+    profiles["secondary_vulnerability_domain"] = ordered.map(
+        lambda values: column_to_domain[values[1]]
+    )
+    profiles["relative_low_deprivation_domain"] = ordered.map(
+        lambda values: column_to_domain[values[-1]]
+    )
+    label = {domain: values[1] for domain, values in DOMAIN_COLUMNS.items()}
+    profiles["primary_vulnerability_ko"] = profiles["primary_vulnerability_domain"].map(label)
+    profiles["secondary_vulnerability_ko"] = profiles["secondary_vulnerability_domain"].map(label)
+    profiles["relative_low_deprivation_ko"] = profiles["relative_low_deprivation_domain"].map(label)
+    profiles["improvement_direction"] = profiles["primary_vulnerability_domain"].map(
+        IMPROVEMENT_ACTIONS
+    )
+    profiles["preservation_direction"] = profiles["relative_low_deprivation_domain"].map(
+        PRESERVATION_DIRECTIONS
+    )
+    profiles["review_level"] = pd.cut(
+        profiles["b_imd_decile"],
+        bins=[0, 1, 3, 7, 10],
+        labels=["현장검증 우선", "집중 모니터링", "정기 모니터링", "상대 저취약"],
+    ).astype(str)
+    profiles["specialization_evidence_status"] = (
+        "특화 확정 불가: 산업·상권·관광·생활SOC 자산 데이터 결합 필요"
+    )
+    columns = [
+        "admin_dong_code",
+        "sigungu_name",
+        "admin_dong_name",
+        "b_imd_score_0_100",
+        "b_imd_rank",
+        "b_imd_decile",
+        *score_columns,
+        "primary_vulnerability_domain",
+        "primary_vulnerability_ko",
+        "secondary_vulnerability_domain",
+        "secondary_vulnerability_ko",
+        "improvement_direction",
+        "relative_low_deprivation_domain",
+        "relative_low_deprivation_ko",
+        "preservation_direction",
+        "review_level",
+        "specialization_evidence_status",
+    ]
+    return profiles[columns].sort_values("b_imd_rank", kind="stable").reset_index(drop=True)
 
 
 def _font_family() -> str:
@@ -93,6 +197,117 @@ def _panel(ax: plt.Axes) -> None:
         spine.set_linewidth(0.8)
 
 
+def _geometry_svg_path(geometry: Any, bounds: tuple[float, float, float, float]) -> str:
+    min_x, min_y, max_x, max_y = bounds
+    width = max_x - min_x
+    height = max_y - min_y
+
+    def point(x: float, y: float) -> str:
+        return f"{(x - min_x) / width * 900:.2f},{(max_y - y) / height * 900:.2f}"
+
+    polygons = [geometry] if geometry.geom_type == "Polygon" else list(geometry.geoms)
+    parts: list[str] = []
+    for polygon in polygons:
+        for ring in (polygon.exterior, *polygon.interiors):
+            coordinates = list(ring.coords)
+            parts.append("M" + " L".join(point(x, y) for x, y in coordinates) + " Z")
+    return " ".join(parts)
+
+
+def write_action_map(
+    profiles: pd.DataFrame,
+    boundaries: gpd.GeoDataFrame,
+    output_path: Path,
+) -> None:
+    """Write a dependency-free interactive map for all 206 dong profiles."""
+    map_data = boundaries.copy()
+    map_data["adm_cd"] = map_data["adm_cd"].astype(str)
+    map_data = map_data.merge(
+        profiles,
+        left_on="adm_cd",
+        right_on="admin_dong_code",
+        validate="one_to_one",
+    )
+    bounds = tuple(float(value) for value in map_data.total_bounds)
+    paths: list[str] = []
+    for row in map_data.itertuples(index=False):
+        domain = row.primary_vulnerability_domain
+        scores = " · ".join(
+            f"{label} {getattr(row, column):.1f}" for column, label in DOMAIN_COLUMNS.values()
+        )
+        attributes = {
+            "code": row.admin_dong_code,
+            "name": f"{row.sigungu_name} {row.admin_dong_name}",
+            "rank": f"{int(row.b_imd_rank)}위 / 206개 · B-IMD {row.b_imd_score_0_100:.1f}",
+            "domains": (
+                f"주요 취약: {row.primary_vulnerability_ko} · "
+                f"차순위: {row.secondary_vulnerability_ko}"
+            ),
+            "scores": scores,
+            "action": f"개선 검토: {row.improvement_direction}",
+            "preserve": (
+                f"상대 저취약: {row.relative_low_deprivation_ko} · "
+                f"{row.preservation_direction}"
+            ),
+            "level": row.review_level,
+        }
+        encoded = " ".join(
+            f'data-{key}="{escape(str(value), quote=True)}"' for key, value in attributes.items()
+        )
+        paths.append(
+            f'<path d="{_geometry_svg_path(row.geometry, bounds)}" '
+            f'fill="{DOMAIN_COLORS[domain]}" {encoded}/>'
+        )
+    legend = "".join(
+        f'<span><i style="background:{DOMAIN_COLORS[domain]}"></i>{label}</span>'
+        for domain, (_, label) in DOMAIN_COLUMNS.items()
+    )
+    document = f"""<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>2025 부산 행정동별 취약영역·개선방향</title><style>
+body{{margin:0;background:#f7f4ed;color:#18323d;font-family:Arial,'Noto Sans KR',sans-serif}}
+main{{max-width:1180px;margin:auto;padding:24px}} h1{{margin:0 0 8px;font-size:28px}}
+.note{{color:#5d7078;line-height:1.55}}
+.layout{{display:grid;grid-template-columns:2fr 1fr;gap:20px}}
+.map,.card{{background:white;border:1px solid #d7ded9;border-radius:12px;padding:16px}}
+svg{{width:100%;height:72vh;min-height:560px}} path{{stroke:white;stroke-width:.55;cursor:pointer}}
+path:hover,path:focus{{stroke:#18323d;stroke-width:2;filter:brightness(1.08)}}
+.legend{{display:flex;flex-wrap:wrap;gap:12px;margin:14px 0}} .legend span{{font-size:13px}}
+.legend i{{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:5px}}
+.card h2{{margin-top:0}} .card p{{line-height:1.55}} .action{{font-weight:700;color:#d84a3a}}
+.scores{{font-size:13px;color:#5d7078}}
+.warning{{border-top:1px solid #d7ded9;padding-top:12px;font-size:12px}}
+@media(max-width:800px){{.layout{{grid-template-columns:1fr}} svg{{height:60vh;min-height:420px}}}}
+</style></head><body><main><h1>부산 206개 행정동: 취약영역에서 개선방향까지</h1>
+<p class="note">동을 선택하면 6개 영역 점수와 개선 검토 방향을 확인할 수 있습니다.
+지도 색은 각 동에서 점수가 가장 높은 상대적 취약영역입니다.</p>
+<div class="legend">{legend}</div><div class="layout"><div class="map">
+<svg viewBox="0 0 900 900" role="img"
+aria-label="부산 행정동별 주요 취약영역 지도">{''.join(paths)}</svg>
+</div><aside class="card" id="detail"><h2>지도의 행정동을 선택하세요</h2>
+<p>마우스를 올리거나 클릭하면 동별 진단이 표시됩니다.</p></aside></div>
+<p class="note warning">높은 점수는 부산 내 상대적 취약성을 뜻합니다.
+개선방향은 현장검증 후보이며 공식 지수·개인 자격·인과효과 판정이 아닙니다.
+상대 저취약 영역도 특화산업을 뜻하지 않으며, 특화 전략에는
+산업·상권·관광·생활SOC 자산 데이터가 추가로 필요합니다.</p>
+</main><script>
+const detail=document.getElementById('detail');
+function show(e){{
+ const d=e.target.dataset;if(!d.name)return;
+ detail.innerHTML=`<h2>${{d.name}}</h2><p>${{d.rank}} · ${{d.level}}</p>
+ <p><b>${{d.domains}}</b></p><p class="scores">${{d.scores}}</p>
+ <p class="action">${{d.action}}</p><p>${{d.preserve}}</p>
+ <p class="warning">행정동 코드 ${{d.code}} · 특화 여부는 지역자산 자료 결합 후 판단</p>`;
+}}
+document.querySelectorAll('path').forEach(p=>{{
+ p.tabIndex=0;p.addEventListener('mouseenter',show);
+ p.addEventListener('click',show);p.addEventListener('focus',show);
+}});
+</script></body></html>"""
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(document, encoding="utf-8", newline="\n")
+
+
 def render(
     composite: pd.DataFrame,
     boundaries: gpd.GeoDataFrame,
@@ -140,7 +355,22 @@ def render(
     priority_codes = set(priority["admin_dong_code"])
     priority_map = page[page["admin_dong_code"].isin(priority_codes)]
     burden_map = page[page["double_burden"].astype(str).str.lower() == "true"]
-    ranked = priority.sort_values("b_imd_rank", kind="stable").head(10)
+    profiles = build_action_profiles(composite)
+    ranked = (
+        priority.sort_values("b_imd_rank", kind="stable")
+        .head(10)
+        .merge(
+            profiles[
+                [
+                    "admin_dong_code",
+                    "primary_vulnerability_ko",
+                    "improvement_direction",
+                ]
+            ],
+            on="admin_dong_code",
+            validate="one_to_one",
+        )
+    )
 
     fig = plt.figure(figsize=(8.27, 11.69), facecolor=PALETTE["paper"])
     grid = fig.add_gridspec(
@@ -156,7 +386,7 @@ def render(
     fig.text(
         0.055,
         0.952,
-        "부산의 생활취약성, 어디에 집중되는가",
+        "행정동별 취약 원인에서 맞춤형 개선 방향까지",
         fontsize=22,
         fontweight="bold",
         color=PALETTE["ink"],
@@ -243,7 +473,7 @@ def render(
     ax_rank.text(
         0.06,
         0.94,
-        "상위 10개 우선지역",
+        "상위 10개: 주요 취약 → 개선 검토",
         fontsize=12,
         fontweight="bold",
         color=PALETTE["ink"],
@@ -262,6 +492,13 @@ def render(
             color=PALETTE["ink"],
         )
         ax_rank.text(
+            0.16,
+            y - 0.027,
+            f"{row.primary_vulnerability_ko} → {row.improvement_direction}",
+            fontsize=6.25,
+            color=PALETTE["muted"],
+        )
+        ax_rank.text(
             0.84,
             y,
             f"{row.b_imd_score_0_100:.1f}",
@@ -275,7 +512,7 @@ def render(
     ax_rank.text(
         0.06,
         0.055,
-        "● 대기오염 이중부담  ·  대표 원인: 고용 12개 / 소득 9개",
+        "● 대기오염 이중부담  ·  전체 206개 동은 탐색형 지도에서 조회",
         fontsize=7.3,
         color=PALETTE["muted"],
     )
@@ -289,7 +526,7 @@ def render(
     ax_policy.text(
         0.025,
         0.91,
-        "분석에서 정책 후보로",
+        "취약 원인에서 지역별 개선 후보로",
         fontsize=12,
         fontweight="bold",
         color=PALETTE["ink"],
@@ -346,7 +583,8 @@ def render(
         0.49,
         "9개 공개 대리지표를 6개 영역으로 묶어 부산 안의 상대순위를 비교했습니다. "
         "동일가중에서도 상위 21개 중 18개가 유지되지만, 소득·고용 영역 제외 시 결과가 "
-        "크게 달라져 직접 행정자료 검증이 우선입니다.",
+        "크게 달라져 직접 행정자료 검증이 우선입니다. 낮은 취약점수는 특화산업의 증거가 아니며 "
+        "지역자산 데이터를 결합해야 특화 방향을 판단할 수 있습니다.",
         fontsize=7.8,
         color=PALETTE["ink"],
         wrap=True,
@@ -407,9 +645,11 @@ def run(
     svg_output: Path = DEFAULT_SVG_OUTPUT,
     pdf_output: Path = DEFAULT_PDF_OUTPUT,
     png_output: Path = DEFAULT_PNG_OUTPUT,
+    profile_output: Path = DEFAULT_PROFILE_OUTPUT,
+    html_output: Path = DEFAULT_HTML_OUTPUT,
     report_path: Path = DEFAULT_REPORT,
 ) -> dict[str, Any]:
-    """Read canonical artifacts and write the one-page draft plus its manifest."""
+    """Write the one-page draft, 206-dong action profiles, map, and manifest."""
     composite = pd.read_csv(composite_path, dtype={"admin_dong_code": str})
     boundaries = gpd.read_file(boundaries_path)
     priority = pd.read_csv(priority_path, dtype={"admin_dong_code": str})
@@ -425,12 +665,17 @@ def run(
         pdf_output,
         png_output,
     )
+    profiles = build_action_profiles(composite)
+    profile_output.parent.mkdir(parents=True, exist_ok=True)
+    profiles.to_csv(profile_output, index=False, encoding="utf-8-sig", lineterminator="\n")
+    write_action_map(profiles, boundaries, html_output)
     report = {
         "schema_version": 1,
         "generated_at": datetime.now(UTC).replace(microsecond=0).isoformat(),
         "reference_year": 2025,
         "artifact_status": "submission_draft",
         "format": "A4 portrait one-page infographic",
+        "dong_action_profile_count": len(profiles),
         **summary,
         "input_paths": {
             "composite_index": composite_path.as_posix(),
@@ -450,11 +695,15 @@ def run(
             "svg": svg_output.as_posix(),
             "pdf": pdf_output.as_posix(),
             "png": png_output.as_posix(),
+            "action_profile_csv": profile_output.as_posix(),
+            "interactive_action_map": html_output.as_posix(),
         },
         "output_sha256": {
             "svg": sha256_file(svg_output),
             "pdf": sha256_file(pdf_output),
             "png": sha256_file(png_output),
+            "action_profile_csv": sha256_file(profile_output),
+            "interactive_action_map": sha256_file(html_output),
         },
         "interpretation": (
             "Public-data experimental screening; not an official index, causal estimate, "
@@ -475,6 +724,8 @@ def main() -> int:
     parser.add_argument("--svg-output", type=Path, default=DEFAULT_SVG_OUTPUT)
     parser.add_argument("--pdf-output", type=Path, default=DEFAULT_PDF_OUTPUT)
     parser.add_argument("--png-output", type=Path, default=DEFAULT_PNG_OUTPUT)
+    parser.add_argument("--profile-output", type=Path, default=DEFAULT_PROFILE_OUTPUT)
+    parser.add_argument("--html-output", type=Path, default=DEFAULT_HTML_OUTPUT)
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
     args = parser.parse_args()
     report = run(
@@ -486,6 +737,8 @@ def main() -> int:
         args.svg_output,
         args.pdf_output,
         args.png_output,
+        args.profile_output,
+        args.html_output,
         args.report,
     )
     print(
