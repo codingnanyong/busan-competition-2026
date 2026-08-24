@@ -32,7 +32,7 @@ requires additional local asset data on industry, commerce, tourism, and living 
 - [`busan_imd_one_page_2025.png`](../../../outputs/infographic/busan_imd_one_page_2025.png):
   quick-review preview
 - [`busan_admin_dong_action_map_2025.html`](../../../outputs/infographic/busan_admin_dong_action_map_2025.html):
-  standalone map for selecting any of 206 dongs and reviewing vulnerabilities and actions
+  standalone dashboard for category maps, component indicators, and policy examples in 206 dongs
 - [`busan_admin_dong_action_profile_2025.csv`](../../../outputs/infographic/busan_admin_dong_action_profile_2025.csv):
   six scores, vulnerability order, improvement direction, and relative low-deprivation domain
 - [INFOGRAPHIC_REPORT_2025.json](../../data/manifests/INFOGRAPHIC_REPORT_2025.json):
@@ -40,6 +40,10 @@ requires additional local asset data on industry, commerce, tourism, and living 
 
 The PNG is a screen preview; page-count and submission-format checks use the PDF.
 The HTML opens directly in a browser and has no external map or JavaScript-server dependency.
+Selecting education, employment, health, housing/access, income, or living environment recolors
+the map by that domain score. Selecting a dong then displays raw component indicators,
+deprivation percentiles, weights, policy example, lead implementer, expected effect, monitoring
+indicator, and evidence limitation.
 
 ## Rebuild
 

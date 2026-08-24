@@ -30,7 +30,7 @@
 - [`busan_imd_one_page_2025.png`](../../outputs/infographic/busan_imd_one_page_2025.png):
   빠른 검토용 이미지
 - [`busan_admin_dong_action_map_2025.html`](../../outputs/infographic/busan_admin_dong_action_map_2025.html):
-  206개 동을 선택해 취약영역과 개선방향을 확인하는 독립형 탐색 지도
+  카테고리별 분포·구성 평가지표·정책 예시를 206개 동에서 확인하는 독립형 대시보드
 - [`busan_admin_dong_action_profile_2025.csv`](../../outputs/infographic/busan_admin_dong_action_profile_2025.csv):
   동별 6개 영역 점수·취약순위·개선방향·상대 저취약 영역
 - [INFOGRAPHIC_REPORT_2025.json](../data/manifests/INFOGRAPHIC_REPORT_2025.json):
@@ -38,6 +38,9 @@
 
 PNG는 화면 미리보기용이며, 페이지 수와 제출 형식을 판정할 때는 PDF를 기준으로 한다.
 HTML은 브라우저에서 바로 열 수 있고 외부 지도나 JavaScript 서버에 의존하지 않는다.
+교육·고용·건강·주거·접근성·소득·생활환경 버튼을 선택하면 지도 색이 해당 영역 점수로
+바뀐다. 동을 선택하면 영역을 구성한 원지표, 취약 백분위, 가중치, 정책 예시, 주관부서,
+기대효과, 성과지표와 근거 한계가 함께 표시된다.
 
 ## 재생성
 

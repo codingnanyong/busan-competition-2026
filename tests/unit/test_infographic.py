@@ -7,7 +7,13 @@ import pandas as pd
 import pytest
 from shapely.geometry import box
 
-from busan_imd.infographic import build_action_profiles, render, write_action_map
+from busan_imd.infographic import (
+    DOMAIN_COLUMNS,
+    INDICATOR_PRESENTATION,
+    build_action_profiles,
+    render,
+    write_action_map,
+)
 
 
 def inputs() -> tuple[
@@ -82,8 +88,47 @@ def test_action_profiles_and_map_cover_every_dong(tmp_path) -> None:
     composite, boundaries, *_ = inputs()
     profiles = build_action_profiles(composite)
     html_path = tmp_path / "action-map.html"
+    indicator_to_domain = {
+        "basic_livelihood_recipients_per_1000_population_2025_inferred": "income",
+        "workplace_workers_2024": "employment",
+        "nearest_core_school_distance_m_2025": "education",
+        "hospital_count_2025_candidate_per_10000_population": "health",
+        "clinic_count_2025_candidate_per_10000_population": "health",
+        "old_house_share_30plus_2024_lower_bound_pct": "housing_access",
+        "bus_stop_count_2025_per_10000_population": "housing_access",
+        "heat_shelter_count_2025_per_10000_population": "living_environment",
+        "annual_pm25_ug_m3_idw_2025": "living_environment",
+    }
+    indicator_scores = pd.DataFrame(
+        [
+            {
+                "admin_dong_code": code,
+                "domain": indicator_to_domain[indicator],
+                "indicator": indicator,
+                "raw_value": 10,
+                "deprivation_percentile_0_100": 75,
+                "within_domain_weight": 1,
+            }
+            for code in composite["admin_dong_code"]
+            for indicator in INDICATOR_PRESENTATION
+        ]
+    )
+    policy_catalog = pd.DataFrame(
+        [
+            {
+                "trigger_kind": "domain",
+                "trigger_value": domain,
+                "policy_title_ko": f"{label} 정책",
+                "lead_implementer": "담당부서",
+                "expected_effect": "접근성 개선",
+                "monitoring_indicator": "연계율",
+                "evidence_limit": "현장 검증 필요",
+            }
+            for domain, (_, label) in DOMAIN_COLUMNS.items()
+        ]
+    )
 
-    write_action_map(profiles, boundaries, html_path)
+    write_action_map(profiles, boundaries, indicator_scores, policy_catalog, html_path)
 
     assert len(profiles) == 206
     assert profiles.loc[0, "primary_vulnerability_ko"] == "교육"
@@ -91,7 +136,9 @@ def test_action_profiles_and_map_cover_every_dong(tmp_path) -> None:
     assert profiles["specialization_evidence_status"].str.contains("특화 확정 불가").all()
     html = html_path.read_text(encoding="utf-8")
     assert html.count("data-code=") == 206
-    assert "취약영역에서 개선방향까지" in html
+    assert "카테고리별 평가와 정책 예시" in html
+    assert html.count("data-domain=") == 6
+    assert "취약 백분위" in html
 
 
 def test_render_rejects_incomplete_canonical_population(tmp_path) -> None:

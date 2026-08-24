@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 from datetime import UTC, datetime
 from html import escape
 from pathlib import Path
@@ -30,6 +31,10 @@ DEFAULT_PDF_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_imd_one_page_2025.pdf"
 DEFAULT_PNG_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_imd_one_page_2025.png"
 DEFAULT_PROFILE_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_admin_dong_action_profile_2025.csv"
 DEFAULT_HTML_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_admin_dong_action_map_2025.html"
+DEFAULT_INDICATOR_SCORES = Path(
+    "data/processed/scores/2025/busan_admin_dong_indicator_scores_2025.csv"
+)
+DEFAULT_POLICY_CATALOG = Path("docs/data/POLICY_ACTION_CATALOG_2025.csv")
 DEFAULT_REPORT = Path("docs/data/manifests/INFOGRAPHIC_REPORT_2025.json")
 EXPECTED_DONG_COUNT = 206
 EXPECTED_PRIORITY_COUNT = 21
@@ -74,6 +79,41 @@ PRESERVATION_DIRECTIONS = {
     "housing_access": "주거·교통 접근 기반 보전 검토",
     "income": "경제 안정 기반 보전 검토",
     "living_environment": "생활환경 기반 보전 검토",
+}
+INDICATOR_PRESENTATION = {
+    "basic_livelihood_recipients_per_1000_population_2025_inferred": (
+        "추정 기초생활수급자",
+        "명/1천명",
+        "높을수록 취약",
+    ),
+    "workplace_workers_2024": ("사업장 종사자", "명", "낮을수록 취약"),
+    "nearest_core_school_distance_m_2025": ("핵심학교 최근접 거리", "m", "높을수록 취약"),
+    "hospital_count_2025_candidate_per_10000_population": (
+        "병원 접근량",
+        "개/1만명",
+        "낮을수록 취약",
+    ),
+    "clinic_count_2025_candidate_per_10000_population": (
+        "의원 접근량",
+        "개/1만명",
+        "낮을수록 취약",
+    ),
+    "old_house_share_30plus_2024_lower_bound_pct": (
+        "30년 이상 노후주택 비율",
+        "%",
+        "높을수록 취약",
+    ),
+    "bus_stop_count_2025_per_10000_population": (
+        "버스정류소 접근량",
+        "개/1만명",
+        "낮을수록 취약",
+    ),
+    "heat_shelter_count_2025_per_10000_population": (
+        "무더위쉼터 접근량",
+        "개/1만명",
+        "낮을수록 취약",
+    ),
+    "annual_pm25_ug_m3_idw_2025": ("연평균 PM2.5", "㎍/㎥", "높을수록 취약"),
 }
 
 
@@ -217,9 +257,11 @@ def _geometry_svg_path(geometry: Any, bounds: tuple[float, float, float, float])
 def write_action_map(
     profiles: pd.DataFrame,
     boundaries: gpd.GeoDataFrame,
+    indicator_scores: pd.DataFrame,
+    policy_catalog: pd.DataFrame,
     output_path: Path,
 ) -> None:
-    """Write a dependency-free interactive map for all 206 dong profiles."""
+    """Write a category-first dashboard for scores, indicators, and policy examples."""
     map_data = boundaries.copy()
     map_data["adm_cd"] = map_data["adm_cd"].astype(str)
     map_data = map_data.merge(
@@ -229,42 +271,65 @@ def write_action_map(
         validate="one_to_one",
     )
     bounds = tuple(float(value) for value in map_data.total_bounds)
+    required_indicators = set(INDICATOR_PRESENTATION)
+    if set(indicator_scores["indicator"]) != required_indicators:
+        raise ValueError("Indicator scores must contain the nine presentation indicators")
+    domain_policies = policy_catalog[
+        (policy_catalog["trigger_kind"] == "domain")
+        & (policy_catalog["trigger_value"].isin(DOMAIN_COLUMNS))
+    ]
+    if set(domain_policies["trigger_value"]) != set(DOMAIN_COLUMNS):
+        raise ValueError("Policy catalog must contain one policy for every scored domain")
+
+    indicator_payload: dict[str, dict[str, list[dict[str, Any]]]] = {}
+    for row in indicator_scores.itertuples(index=False):
+        label, unit, direction = INDICATOR_PRESENTATION[row.indicator]
+        item = {
+            "label": label,
+            "unit": unit,
+            "direction": direction,
+            "raw": round(float(row.raw_value), 2),
+            "percentile": round(float(row.deprivation_percentile_0_100), 1),
+            "weight": float(row.within_domain_weight),
+        }
+        indicator_payload.setdefault(str(row.admin_dong_code), {}).setdefault(
+            str(row.domain), []
+        ).append(item)
+    policy_payload = {
+        str(row.trigger_value): {
+            "title": row.policy_title_ko,
+            "lead": row.lead_implementer,
+            "effect": row.expected_effect,
+            "monitor": row.monitoring_indicator,
+            "limit": row.evidence_limit,
+        }
+        for row in domain_policies.itertuples(index=False)
+    }
     paths: list[str] = []
     for row in map_data.itertuples(index=False):
-        domain = row.primary_vulnerability_domain
-        scores = " · ".join(
-            f"{label} {getattr(row, column):.1f}" for column, label in DOMAIN_COLUMNS.values()
-        )
         attributes = {
             "code": row.admin_dong_code,
             "name": f"{row.sigungu_name} {row.admin_dong_name}",
             "rank": f"{int(row.b_imd_rank)}위 / 206개 · B-IMD {row.b_imd_score_0_100:.1f}",
-            "domains": (
-                f"주요 취약: {row.primary_vulnerability_ko} · "
-                f"차순위: {row.secondary_vulnerability_ko}"
-            ),
-            "scores": scores,
-            "action": f"개선 검토: {row.improvement_direction}",
-            "preserve": (
-                f"상대 저취약: {row.relative_low_deprivation_ko} · "
-                f"{row.preservation_direction}"
-            ),
             "level": row.review_level,
         }
+        for domain, (column, _) in DOMAIN_COLUMNS.items():
+            attributes[domain.replace("_", "-")] = f"{getattr(row, column):.1f}"
         encoded = " ".join(
             f'data-{key}="{escape(str(value), quote=True)}"' for key, value in attributes.items()
         )
         paths.append(
             f'<path d="{_geometry_svg_path(row.geometry, bounds)}" '
-            f'fill="{DOMAIN_COLORS[domain]}" {encoded}/>'
+            f'fill="#f4a261" {encoded}/>'
         )
-    legend = "".join(
-        f'<span><i style="background:{DOMAIN_COLORS[domain]}"></i>{label}</span>'
+    buttons = "".join(
+        f'<button data-domain="{domain}">{label}</button>'
         for domain, (_, label) in DOMAIN_COLUMNS.items()
     )
+    domain_labels = {domain: label for domain, (_, label) in DOMAIN_COLUMNS.items()}
     document = f"""<!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
-<title>2025 부산 행정동별 취약영역·개선방향</title><style>
+<title>2025 부산 행정동 카테고리별 평가·정책 대시보드</title><style>
 body{{margin:0;background:#f7f4ed;color:#18323d;font-family:Arial,'Noto Sans KR',sans-serif}}
 main{{max-width:1180px;margin:auto;padding:24px}} h1{{margin:0 0 8px;font-size:28px}}
 .note{{color:#5d7078;line-height:1.55}}
@@ -272,37 +337,65 @@ main{{max-width:1180px;margin:auto;padding:24px}} h1{{margin:0 0 8px;font-size:2
 .map,.card{{background:white;border:1px solid #d7ded9;border-radius:12px;padding:16px}}
 svg{{width:100%;height:72vh;min-height:560px}} path{{stroke:white;stroke-width:.55;cursor:pointer}}
 path:hover,path:focus{{stroke:#18323d;stroke-width:2;filter:brightness(1.08)}}
-.legend{{display:flex;flex-wrap:wrap;gap:12px;margin:14px 0}} .legend span{{font-size:13px}}
-.legend i{{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:5px}}
+.tabs{{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}}
+button{{border:1px solid #d7ded9;background:white;border-radius:20px;padding:9px 16px}}
+button{{cursor:pointer}}
+button.active{{background:#18323d;color:white;border-color:#18323d}}
+.scale{{height:10px;background:linear-gradient(90deg,#fff7bc,#fdae61,#d7301f);border-radius:6px}}
+.scale-label{{display:flex;justify-content:space-between;font-size:12px;color:#5d7078}}
 .card h2{{margin-top:0}} .card p{{line-height:1.55}} .action{{font-weight:700;color:#d84a3a}}
 .scores{{font-size:13px;color:#5d7078}}
+.metric{{margin:13px 0}} .metric-head{{display:flex;justify-content:space-between;font-size:13px}}
+.bar{{height:8px;background:#edf0ed;border-radius:5px;overflow:hidden;margin-top:5px}}
+.bar i{{display:block;height:100%;background:#d84a3a}}
+.policy{{background:#f7f4ed;border-radius:9px;padding:12px;margin-top:18px}}
 .warning{{border-top:1px solid #d7ded9;padding-top:12px;font-size:12px}}
 @media(max-width:800px){{.layout{{grid-template-columns:1fr}} svg{{height:60vh;min-height:420px}}}}
-</style></head><body><main><h1>부산 206개 행정동: 취약영역에서 개선방향까지</h1>
-<p class="note">동을 선택하면 6개 영역 점수와 개선 검토 방향을 확인할 수 있습니다.
-지도 색은 각 동에서 점수가 가장 높은 상대적 취약영역입니다.</p>
-<div class="legend">{legend}</div><div class="layout"><div class="map">
+</style></head><body><main><h1>부산 206개 행정동: 카테고리별 평가와 정책 예시</h1>
+<p class="note">카테고리를 선택하면 해당 영역 점수의 공간분포가 나타납니다.
+행정동을 선택해 구성 평가지표, 취약 백분위, 정책 예시와 성과지표를 확인하세요.</p>
+<div class="tabs">{buttons}</div><div class="layout"><div class="map">
+<h2 id="map-title"></h2><div class="scale"></div>
+<div class="scale-label"><span>0 상대 저취약</span><span>100 상대 고취약</span></div>
 <svg viewBox="0 0 900 900" role="img"
-aria-label="부산 행정동별 주요 취약영역 지도">{''.join(paths)}</svg>
+aria-label="부산 행정동별 카테고리 취약도 지도">{''.join(paths)}</svg>
 </div><aside class="card" id="detail"><h2>지도의 행정동을 선택하세요</h2>
-<p>마우스를 올리거나 클릭하면 동별 진단이 표시됩니다.</p></aside></div>
+<p>평가지표와 정책 예시가 이곳에 표시됩니다.</p></aside></div>
 <p class="note warning">높은 점수는 부산 내 상대적 취약성을 뜻합니다.
 개선방향은 현장검증 후보이며 공식 지수·개인 자격·인과효과 판정이 아닙니다.
-상대 저취약 영역도 특화산업을 뜻하지 않으며, 특화 전략에는
-산업·상권·관광·생활SOC 자산 데이터가 추가로 필요합니다.</p>
+정책은 카테고리별 예시이며 현장 수요와 행정자료 검증 후 확정해야 합니다.</p>
 </main><script>
-const detail=document.getElementById('detail');
-function show(e){{
- const d=e.target.dataset;if(!d.name)return;
+const indicators={json.dumps(indicator_payload, ensure_ascii=False, separators=(',', ':'))};
+const policies={json.dumps(policy_payload, ensure_ascii=False, separators=(',', ':'))};
+const labels={json.dumps(domain_labels, ensure_ascii=False, separators=(',', ':'))};
+const detail=document.getElementById('detail');let domain='education';let selected=null;
+function color(score){{const hue=48-score*.45;return `hsl(${{hue}} 88% ${{62-score*.18}}%)`;}}
+function scoreOf(path){{return Number(path.getAttribute('data-'+domain.replace('_','-')));}}
+function selectDomain(next){{domain=next;document.querySelectorAll('button').forEach(b=>
+ b.classList.toggle('active',b.dataset.domain===domain));
+ document.getElementById('map-title').textContent=labels[domain]+' 취약도 분포';
+ document.querySelectorAll('path').forEach(p=>p.style.fill=color(scoreOf(p)));
+ if(selected)show({{target:selected}});
+}}
+function show(e){{const d=e.target.dataset;if(!d.name)return;selected=e.target;
+ const score=scoreOf(e.target);const policy=policies[domain];
+ const metrics=indicators[d.code][domain].map(m=>`<div class="metric">
+ <div class="metric-head"><b>${{m.label}}</b><span>${{m.raw}} ${{m.unit}}</span></div>
+ <div class="scores">취약 백분위 ${{m.percentile}} · 가중치 ${{m.weight}} · ${{m.direction}}</div>
+ <div class="bar"><i style="width:${{m.percentile}}%"></i></div></div>`).join('');
  detail.innerHTML=`<h2>${{d.name}}</h2><p>${{d.rank}} · ${{d.level}}</p>
- <p><b>${{d.domains}}</b></p><p class="scores">${{d.scores}}</p>
- <p class="action">${{d.action}}</p><p>${{d.preserve}}</p>
- <p class="warning">행정동 코드 ${{d.code}} · 특화 여부는 지역자산 자료 결합 후 판단</p>`;
+ <h3>${{labels[domain]}} 영역 점수 ${{score.toFixed(1)}}</h3>${{metrics}}
+ <div class="policy"><b>정책 예시</b><h3>${{policy.title}}</h3><p>주관: ${{policy.lead}}</p>
+ <p>기대효과: ${{policy.effect}}</p><p>성과지표: ${{policy.monitor}}</p>
+ <p class="warning">${{policy.limit}}</p></div>`;
 }}
 document.querySelectorAll('path').forEach(p=>{{
  p.tabIndex=0;p.addEventListener('mouseenter',show);
  p.addEventListener('click',show);p.addEventListener('focus',show);
 }});
+document.querySelectorAll('button').forEach(b=>
+ b.addEventListener('click',()=>selectDomain(b.dataset.domain)));
+selectDomain(domain);
 </script></body></html>"""
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(document, encoding="utf-8", newline="\n")
@@ -642,6 +735,8 @@ def run(
     priority_path: Path = DEFAULT_PRIORITY_OUTPUT,
     overlay_path: Path = DEFAULT_OVERLAY,
     policy_matrix_path: Path = DEFAULT_POLICY_MATRIX,
+    indicator_scores_path: Path = DEFAULT_INDICATOR_SCORES,
+    policy_catalog_path: Path = DEFAULT_POLICY_CATALOG,
     svg_output: Path = DEFAULT_SVG_OUTPUT,
     pdf_output: Path = DEFAULT_PDF_OUTPUT,
     png_output: Path = DEFAULT_PNG_OUTPUT,
@@ -655,6 +750,8 @@ def run(
     priority = pd.read_csv(priority_path, dtype={"admin_dong_code": str})
     overlay = pd.read_csv(overlay_path, dtype={"admin_dong_code": str})
     policy_matrix = pd.read_csv(policy_matrix_path)
+    indicator_scores = pd.read_csv(indicator_scores_path, dtype={"admin_dong_code": str})
+    policy_catalog = pd.read_csv(policy_catalog_path)
     summary = render(
         composite,
         boundaries,
@@ -668,7 +765,7 @@ def run(
     profiles = build_action_profiles(composite)
     profile_output.parent.mkdir(parents=True, exist_ok=True)
     profiles.to_csv(profile_output, index=False, encoding="utf-8-sig", lineterminator="\n")
-    write_action_map(profiles, boundaries, html_output)
+    write_action_map(profiles, boundaries, indicator_scores, policy_catalog, html_output)
     report = {
         "schema_version": 1,
         "generated_at": datetime.now(UTC).replace(microsecond=0).isoformat(),
@@ -683,6 +780,8 @@ def run(
             "priority_areas": priority_path.as_posix(),
             "environmental_overlay": overlay_path.as_posix(),
             "policy_matrix": policy_matrix_path.as_posix(),
+            "indicator_scores": indicator_scores_path.as_posix(),
+            "policy_catalog": policy_catalog_path.as_posix(),
         },
         "input_sha256": {
             "composite_index": sha256_file(composite_path),
@@ -690,6 +789,8 @@ def run(
             "priority_areas": sha256_file(priority_path),
             "environmental_overlay": sha256_file(overlay_path),
             "policy_matrix": sha256_file(policy_matrix_path),
+            "indicator_scores": sha256_file(indicator_scores_path),
+            "policy_catalog": sha256_file(policy_catalog_path),
         },
         "output_paths": {
             "svg": svg_output.as_posix(),
@@ -721,6 +822,8 @@ def main() -> int:
     parser.add_argument("--priority-areas", type=Path, default=DEFAULT_PRIORITY_OUTPUT)
     parser.add_argument("--environmental-overlay", type=Path, default=DEFAULT_OVERLAY)
     parser.add_argument("--policy-matrix", type=Path, default=DEFAULT_POLICY_MATRIX)
+    parser.add_argument("--indicator-scores", type=Path, default=DEFAULT_INDICATOR_SCORES)
+    parser.add_argument("--policy-catalog", type=Path, default=DEFAULT_POLICY_CATALOG)
     parser.add_argument("--svg-output", type=Path, default=DEFAULT_SVG_OUTPUT)
     parser.add_argument("--pdf-output", type=Path, default=DEFAULT_PDF_OUTPUT)
     parser.add_argument("--png-output", type=Path, default=DEFAULT_PNG_OUTPUT)
@@ -734,6 +837,8 @@ def main() -> int:
         args.priority_areas,
         args.environmental_overlay,
         args.policy_matrix,
+        args.indicator_scores,
+        args.policy_catalog,
         args.svg_output,
         args.pdf_output,
         args.png_output,
