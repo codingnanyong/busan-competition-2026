@@ -629,6 +629,8 @@ def write_action_map(
     category_labels = dict(
         child_rows[["category", "category_label"]].itertuples(index=False, name=None)
     )
+    indicator_key = "indicator" if "indicator" in indicator_scores else "indicator_label"
+    indicator_count = int(indicator_scores[indicator_key].nunique())
     tree_branches: list[str] = []
     for row in major_rows.itertuples(index=False):
         child_nodes = "".join(
@@ -730,7 +732,7 @@ path:hover,path:focus{{stroke:#18323d;stroke-width:2}}
 <p class="aggregation-caption">점수가 높을수록 부산 안에서 상대적으로 더 취약하다는 뜻입니다.
 절대적 결핍 판정이나 정책 확정 점수가 아닙니다.</p></div>
 <div class="guide-card"><h2>점수는 이렇게 만들어집니다</h2><ol class="score-flow">
-<li class="score-level level-1"><strong>1단계 · 평가지표 13개</strong><br>
+<li class="score-level level-1"><strong>1단계 · 평가지표 {indicator_count}개</strong><br>
 교육시설 수, 의료 접근성, 대기오염 노출처럼 측정 가능한 근거를 정리합니다.</li>
 <li class="flow-arrow" aria-hidden="true">↓ 지표별 방향과 가중치 반영</li>
 <li class="score-level level-2"><strong>2단계 · 하위 카테고리 8개</strong><br>

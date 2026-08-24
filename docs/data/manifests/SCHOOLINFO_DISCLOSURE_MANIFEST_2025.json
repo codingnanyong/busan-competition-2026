@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "dataset_id": "EDU-SCHOOLINFO-2025-001",
+  "provider": "Korea Education and Research Information Service SchoolInfo",
+  "source_page": "https://www.schoolinfo.go.kr/ng/go/pnnggo_a01_l0.do",
+  "endpoint": "https://www.schoolinfo.go.kr/openApi.do",
+  "access_method": "SchoolInfo OpenAPI key",
+  "reference_period": "2025 school disclosure year",
+  "period_type": "annual_school_disclosure",
+  "retrieved_at": "2026-08-24T23:01:08+00:00",
+  "analysis_role": "provisional_scoring_proxy",
+  "spatial_unit": "school location",
+  "license": "Korea Open Government License Type 1 (attribution)",
+  "student_record_count": 618,
+  "teacher_record_count": 615,
+  "shared_school_code_count": 615,
+  "district_count": 16,
+  "school_kind_codes": [
+    "02",
+    "03",
+    "04"
+  ],
+  "api_types": {
+    "student_movement": "10",
+    "teachers": "22"
+  },
+  "local_path": "data/raw/reference/EDU-SCHOOLINFO-2025-001/busan_school_disclosures_2025.json",
+  "sha256": "655912620155E9C862AB643097D7BCA1EC8D0E2F7E3C290FD629135FE5D9195C",
+  "notes": "School-level staffing and enrollment are direct disclosures. Their assignment to administrative-dong access areas remains a spatial proxy and does not measure resident educational outcomes. API type 10 currently exposes transfers and total students but no dropout-count field."
+}

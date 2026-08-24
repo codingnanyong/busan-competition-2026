@@ -36,7 +36,7 @@ and then the underlying indicators.
 
 ## Estimation disclosure
 
-Nine of the thirteen indicators use estimation, reconstruction, interpolation, or small-area
+Nine of the fourteen indicators use estimation, reconstruction, interpolation, or small-area
 shrinkage. The dashboard marks each one as `estimated value used` and displays both the method
 and why it was necessary. The reasons distinguish unavailable dong-level income observations,
 small population denominators, reconstructed operating-facility inventories, the absence of an
@@ -46,9 +46,11 @@ not using missing-value estimation, while their proxy or lower-bound limitations
 ## Myeongji regression check
 
 The old education score used only centroid-to-school distance and gave Myeongji 1 and 2 scores
-of 84.9 and 90.7. Combining distance with within-dong and two-kilometre school supply lowers
-the improved scores to 51.9 and 58.6. Neither crosses the policy-review threshold of 70, while
-the centroid-distance limitation remains visible as `medium_low` confidence.
+of 84.9 and 90.7. Combining distance with within-dong supply, two-kilometre school supply, and
+2025 active-teacher disclosures gives improved scores of 58.1 and 67.9. Neither crosses the
+policy-review threshold of 70, although Myeongji 2 is close because its two-kilometre supply is
+low relative to denser Busan dongs. The centroid-radius limitation remains visible as
+`medium_low` confidence.
 
 ## Run
 
@@ -58,6 +60,6 @@ docker compose run --rm jupyter python -m busan_imd.infographic
 ```
 
 The outputs contain 206×3 major-category assessments, 206×8 child-category assessments,
-206×13 indicator evidence rows, and a manifest with reproducibility checksums. They support
+206×14 indicator evidence rows, and a manifest with reproducibility checksums. They support
 screening only; observed administrative data, travel time, capacity, and field demand must
 validate final policy choices.

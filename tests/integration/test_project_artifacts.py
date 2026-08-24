@@ -180,11 +180,11 @@ def test_eda_report_covers_the_canonical_profile() -> None:
     report = read_json("docs/data/manifests/EDA_REPORT_2025.json")
 
     assert report["profile_record_count"] == 206
-    assert report["numeric_indicator_count"] == 48
-    assert report["scoring_candidate_numeric_count"] == 36
+    assert report["numeric_indicator_count"] == 49
+    assert report["scoring_candidate_numeric_count"] == 37
     assert report["constant_numeric_columns"] == ["air_idw_station_count"]
     assert report["columns_with_missing_values"] == {}
-    assert report["high_correlation_pair_count"] == 5
+    assert report["high_correlation_pair_count"] == 7
     assert report["contiguity_edge_count"] == 532
     assert report["isolated_admin_dong_count"] == len(report["isolated_admin_dongs"]) == 6
     assert all(re.fullmatch(r"[0-9A-F]{64}", value) for value in report["output_sha256"].values())
@@ -371,10 +371,10 @@ def test_category_assessment_is_complete_and_flags_estimation() -> None:
     assert report["admin_dong_count"] == 206
     assert report["major_category_count"] == 3
     assert report["category_count"] == 8
-    assert report["indicator_count"] == 13
+    assert report["indicator_count"] == 14
     assert report["category_score_row_count"] == 206 * 8
     assert report["major_category_score_row_count"] == 206 * 3
-    assert report["indicator_score_row_count"] == 206 * 13
+    assert report["indicator_score_row_count"] == 206 * 14
     assert report["policy_trigger_threshold"] == 70
     for name, relative_path in report["output_paths"].items():
         actual = hashlib.sha256((REPOSITORY_ROOT / relative_path).read_bytes()).hexdigest().upper()
@@ -612,6 +612,7 @@ def test_standardization_report_covers_canonical_dongs_and_discloses_failures() 
         "SAF-BUSAN-CCTV-001",
         "ENV-HEAT-SHELTER-001",
         "EDU-SCHOOL-001",
+        "EDU-SCHOOLINFO-2025-001",
         "ENV-AIR-HEIS-DAILY-2025-001",
     }
     assert set(report["analysis_roles"]["validation_only"]) == {
@@ -647,6 +648,8 @@ def test_committed_manifests_do_not_contain_credentials() -> None:
         "docs/data/manifests/DATA_QUALITY_REPORT_2025.json",
         "docs/data/manifests/CONSUMER_SALES_MANIFEST_2025.json",
         "docs/data/manifests/CITY_PARKS_MANIFEST.json",
+        "docs/data/manifests/SCHOOLINFO_DISCLOSURE_MANIFEST_2025.json",
+        "docs/data/manifests/BUS_SERVICE_CURRENT_MANIFEST.json",
     ):
         text = (REPOSITORY_ROOT / relative_path).read_text(encoding="utf-8")
         assert "serviceKey=" not in text

@@ -25,6 +25,7 @@ def profile() -> pd.DataFrame:
             "nearest_core_school_distance_m_2025": 50 + index * 10,
             "school_count_2025": 1 + index % 10,
             "core_schools_within_2000m_2025": 2 + index % 20,
+            "core_school_teachers_within_2000m_2025": 100 + index * 2,
             "old_house_share_30plus_2024_lower_bound_pct": index / 3,
             "annual_pm25_ug_m3_idw_2025": 12 + index / 100,
             "nearest_air_station_distance_m": 500 + index * 20,
@@ -44,8 +45,8 @@ def test_build_creates_complete_transparent_category_contract() -> None:
 
     assert report["major_category_count"] == 3
     assert report["category_count"] == 8
-    assert report["indicator_count"] == 13
-    assert len(indicators) == 206 * 13
+    assert report["indicator_count"] == 14
+    assert len(indicators) == 206 * 14
     assert len(categories) == 206 * 8
     assert len(major_categories) == 206 * 3
     assert categories.groupby("admin_dong_code")["category"].nunique().eq(8).all()

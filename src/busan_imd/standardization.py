@@ -485,6 +485,7 @@ def build_standardized_profile(
                 "school_count_2025",
                 "nearest_core_school_distance_m_2025",
                 "core_schools_within_2000m_2025",
+                "core_school_teachers_within_2000m_2025",
             ],
         ),
         (
@@ -583,6 +584,7 @@ def build_standardized_profile(
                 "SAF-BUSAN-CCTV-001",
                 "ENV-HEAT-SHELTER-001",
                 "EDU-SCHOOL-001",
+                "EDU-SCHOOLINFO-2025-001",
                 "ENV-AIR-HEIS-DAILY-2025-001",
             ],
             "validation_only": [

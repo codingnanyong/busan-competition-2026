@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "dataset_id": "TRN-BUSAN-BIMS-CURRENT-001",
+  "provider": "Busan Metropolitan City",
+  "source_page": "https://www.data.go.kr/data/15092750/openapi.do",
+  "endpoint": "https://apis.data.go.kr/6260000/BusanBIMS/busInfo",
+  "access_method": "Public Data Portal service key",
+  "reference_period": "2026-08-24T23:01:05+00:00",
+  "period_type": "current_inventory_snapshot",
+  "retrieved_at": "2026-08-24T23:01:05+00:00",
+  "analysis_role": "supplemental_validation",
+  "cutoff_status": "outside_2025_primary_period",
+  "spatial_unit": "bus route",
+  "license": "no restriction",
+  "route_count": 290,
+  "routes_with_normal_headway": 259,
+  "routes_with_first_and_last_time": 290,
+  "raw_path": "data/raw/supplemental/bus_service_current/busan_bus_routes_current.xml",
+  "raw_sha256": "941C26CC5353F8CFFF6000AC7BD7EC64B83F846812F3F018727A590890B52A9D",
+  "csv_path": "data/raw/supplemental/bus_service_current/busan_bus_routes_current.csv",
+  "csv_sha256": "B17F674958D09EF32089BD4558641D95C6775E4744DD3C00ADCD9684A71E70CA",
+  "notes": "Current route headways and operating spans improve service context, but the API does not expose a record-level 2025 snapshot. This dataset must remain separate from the 2025 deprivation score."
+}

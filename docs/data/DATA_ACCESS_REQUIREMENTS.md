@@ -99,3 +99,18 @@ Git에는 출처, 요청조건, 기준기간, 레코드 수와 SHA-256을 담은
 복지사업 구·군 통계, 부산 방범용 CCTV, 2023 버스 승하차 자료는 파일 다운로드가 가능해
 별도 활용신청 없이 이미 수집했다. 범죄 발생건수, 2025 행정동별 화재, 2025 전체 버스
 실제 운행횟수는 공공데이터포털의 공개자료만으로 아직 충족되지 않는다.
+
+## 2026-08-25 교육·교통 보강
+
+- 학교알리미 2025년 공시에서 학생 자료 618건, 교원 자료 615건을
+  수집했고, 두 공시에 공통인 615개교를 학교 좌표와 결합했다.
+- 2025년 활동 교원 24,366명을 기준으로 행정동 중심점 2km 내 교육 공급
+  지표를 생성했다. 교원 수는 학교별 관측값이지만 2km 반경 할당은 공간 대리값이다.
+- 부산 BIMS에서 현재 노선 290개의 배차간격·첫·막차를 수집했다. API에
+  2025년 레코드 기준일이 없어 검증 전용으로 보존하고 2025 점수에는 합산하지 않았다.
+
+```powershell
+docker compose exec -T jupyter python -m busan_imd.collectors.school_disclosures
+docker compose exec -T jupyter python -m busan_imd.collectors.transit_service
+docker compose exec -T jupyter python scripts/rebuild_processed.py
+```

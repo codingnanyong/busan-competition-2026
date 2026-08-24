@@ -59,6 +59,12 @@ COLLECTION_STEPS = (
         ),
     ),
     CollectionStep(
+        "EDU-SCHOOLINFO-2025-001",
+        "historical_api",
+        ("SCHOOLINFO_API_KEY",),
+        ("-m", "busan_imd.collectors.school_disclosures"),
+    ),
+    CollectionStep(
         "HLT-HOSPITAL-001|HLT-CLINIC-001|HLT-PHARMACY-001",
         "historical_reconstruction_api",
         ("DATA_GO_KR_SERVICE_KEY",),

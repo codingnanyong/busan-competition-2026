@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from datetime import UTC, datetime
@@ -26,6 +27,9 @@ SCHOOL_COORDINATES = Path(
     "data/raw/reference/EDU-SCHOOL-NEIS-001/busan_school_coordinates_2025.csv"
 )
 AIR_STATIONS = Path("data/raw/heis/stations/busan_air_station_coordinates.csv")
+SCHOOLINFO_2025_NAME_ALIASES = {
+    "계성여자고등학교": "계성여자상업고등학교",
+}
 
 
 @dataclass(frozen=True)
@@ -45,6 +49,9 @@ class CandidatePaths:
         "data/raw/reference/EDU-SCHOOL-NEIS-001/busan_school_info.json"
     )
     school_coordinates: Path = SCHOOL_COORDINATES
+    school_disclosures: Path = Path(
+        "data/raw/reference/EDU-SCHOOLINFO-2025-001/busan_school_disclosures_2025.json"
+    )
     air_daily: Path = Path(
         "data/raw/heis/air_daily/2025/busan_heis_air_daily_2025_01_12.csv"
     )
@@ -222,6 +229,65 @@ def process_living_population(paths: CandidatePaths) -> tuple[pd.DataFrame, dict
     }
 
 
+def _school_district_from_address(value: object) -> str:
+    match = re.search(r"부산광역시\s+(\S+구|기장군)", str(value))
+    return "" if match is None else match.group(1)
+
+
+def load_school_disclosures(path: Path) -> pd.DataFrame:
+    """Join the compatible 2025 SchoolInfo enrollment and active-teacher records."""
+    document = json.loads(path.read_text(encoding="utf-8"))
+    students = pd.DataFrame(document["student_movement"])
+    teachers = pd.DataFrame(document["teachers"])
+    for frame, value_column in ((students, "STDNT_SUM"), (teachers, "COL_S")):
+        if frame["SCHUL_CODE"].duplicated().any():
+            raise ValueError("SchoolInfo school codes must be unique within each disclosure")
+        frame[value_column] = pd.to_numeric(frame[value_column], errors="raise")
+    students = students[students["PBAN_EXCP_YN"].fillna("N") != "Y"].copy()
+    teachers = teachers[teachers["PBAN_EXCP_YN"].fillna("N") != "Y"].copy()
+    disclosures = students[
+        ["SCHUL_CODE", "SCHUL_NM", "_sgg_code", "_school_kind_code", "STDNT_SUM"]
+    ].merge(
+        teachers[["SCHUL_CODE", "COL_S"]],
+        on="SCHUL_CODE",
+        how="inner",
+        validate="one_to_one",
+    )
+    disclosures = disclosures.rename(
+        columns={
+            "SCHUL_NM": "school_name",
+            "STDNT_SUM": "student_count_2025",
+            "COL_S": "active_teacher_count_2025",
+        }
+    )
+    disclosures["school_name"] = disclosures["school_name"].astype(str).str.strip()
+    disclosures["district_name"] = disclosures["_sgg_code"].map(
+        {
+            "26110": "중구",
+            "26140": "서구",
+            "26170": "동구",
+            "26200": "영도구",
+            "26230": "부산진구",
+            "26260": "동래구",
+            "26290": "남구",
+            "26320": "북구",
+            "26350": "해운대구",
+            "26380": "사하구",
+            "26410": "금정구",
+            "26440": "강서구",
+            "26470": "연제구",
+            "26500": "수영구",
+            "26530": "사상구",
+            "26710": "기장군",
+        }
+    )
+    if disclosures["district_name"].isna().any():
+        raise ValueError("SchoolInfo includes an unknown Busan district code")
+    if (disclosures[["student_count_2025", "active_teacher_count_2025"]] < 0).any().any():
+        raise ValueError("SchoolInfo counts cannot be negative")
+    return disclosures
+
+
 def process_schools(paths: CandidatePaths) -> tuple[pd.DataFrame, dict[str, Any]]:
     """Create complete dong school counts and centroid access distances."""
     frame = read_csv_fallback(paths.school_coordinates, dtype=str)
@@ -230,7 +296,34 @@ def process_schools(paths: CandidatePaths) -> tuple[pd.DataFrame, dict[str, Any]
     canonical = set(boundaries["admin_dong_code"])
     matched["admin_dong_code"] = matched["sgis_admin_dong_code"].astype(str)
     matched.loc[~matched["admin_dong_code"].isin(canonical), "admin_dong_code"] = None
-    usable_types = matched[matched["school_type"].isin(["초등학교", "중학교", "고등학교"])]
+    usable_types = matched[
+        matched["school_type"].isin(["초등학교", "중학교", "고등학교"])
+    ].copy()
+    usable_types["school_name"] = usable_types["school_name"].astype(str).str.strip()
+    usable_types["disclosure_school_name"] = usable_types["school_name"].replace(
+        SCHOOLINFO_2025_NAME_ALIASES
+    )
+    usable_types["district_name"] = usable_types["road_address"].map(
+        _school_district_from_address
+    )
+    disclosures = load_school_disclosures(paths.school_disclosures)
+    usable_types = usable_types.merge(
+        disclosures[
+            [
+                "school_name",
+                "district_name",
+                "student_count_2025",
+                "active_teacher_count_2025",
+            ]
+        ],
+        left_on=["disclosure_school_name", "district_name"],
+        right_on=["school_name", "district_name"],
+        how="left",
+        validate="one_to_one",
+        suffixes=("", "_schoolinfo"),
+    )
+    current_register_core_school_count = len(usable_types)
+    usable_types = usable_types[usable_types["active_teacher_count_2025"].notna()].copy()
     pivot = (
         usable_types.pivot_table(
             index="admin_dong_code", columns="school_type", values="school_code", aggfunc="count"
@@ -267,16 +360,33 @@ def process_schools(paths: CandidatePaths) -> tuple[pd.DataFrame, dict[str, Any]
                 "admin_dong_code": dong.admin_dong_code,
                 "nearest_core_school_distance_m_2025": round(float(distances.min()), 3),
                 "core_schools_within_2000m_2025": int((distances <= 2_000).sum()),
+                "core_school_teachers_within_2000m_2025": int(
+                    points.loc[distances <= 2_000, "active_teacher_count_2025"].sum()
+                ),
             }
         )
     result = counts.merge(
         pd.DataFrame(access_rows), on="admin_dong_code", how="left", validate="one_to_one"
     ).sort_values("admin_dong_code")
     return result, {
-        "dataset_id": "EDU-SCHOOL-001",
+        "dataset_ids": ["EDU-SCHOOL-001", "EDU-SCHOOLINFO-2025-001"],
+        "school_register_source": paths.schools.as_posix(),
+        "school_disclosure_source": paths.school_disclosures.as_posix(),
+        "school_disclosure_sha256": sha256_file(paths.school_disclosures),
         "input_records": len(frame),
         "geocoded_records": len(matched),
+        "current_register_core_school_records": current_register_core_school_count,
         "core_school_records": len(usable_types),
+        "schoolinfo_disclosure_records": len(disclosures),
+        "schoolinfo_matched_core_school_records": int(
+            usable_types["active_teacher_count_2025"].notna().sum()
+        ),
+        "schoolinfo_unmatched_core_school_records": (
+            current_register_core_school_count - len(usable_types)
+        ),
+        "active_teacher_count_2025": int(
+            usable_types["active_teacher_count_2025"].sum()
+        ),
         "facility_present_admin_dongs": int((result["school_count_2025"] > 0).sum()),
         "output_records": len(result),
         "maximum_nearest_core_school_distance_m": round(
@@ -284,8 +394,9 @@ def process_schools(paths: CandidatePaths) -> tuple[pd.DataFrame, dict[str, Any]
         ),
         "decision": "provisional-scoring-proxy",
         "reason": (
-            "Official coordinates support facility-access mapping; counts measure education "
-            "access, not resident educational outcomes."
+            "Official coordinates and 2025 active-teacher disclosures strengthen facility "
+            "access and supply measurement; the 2 km allocation remains a spatial proxy and "
+            "does not measure resident educational outcomes."
         ),
     }
 

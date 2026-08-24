@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-16T05:05:32+00:00",
+  "generated_at": "2026-08-24T23:10:35+00:00",
   "dataset_id": "INC-BLF-INFERRED-2025-001",
   "primary_reference_year": 2025,
   "reference_period": "2025-12",
@@ -40,7 +40,7 @@
   },
   "profile_source": {
     "path": "data/processed/bootstrap/2025/busan_admin_dong_candidate_profile_2025.csv",
-    "sha256": "21D4C4C6B8BB6BC1523284372AD21998BB7D48770D35F89786911DD13A1A7B32"
+    "sha256": "3CC3DD4D054CB814723228A6A1442A654B17E05D5C690F7E5805B46AD6619287"
   },
   "pattern_sources": [
     {

@@ -30,7 +30,7 @@
 - [`busan_imd_one_page_2025.png`](../../outputs/infographic/busan_imd_one_page_2025.png):
   빠른 검토용 이미지
 - [`busan_admin_dong_action_map_2025.html`](../../outputs/infographic/busan_admin_dong_action_map_2025.html):
-  펼침·접힘 트리에서 3개 큰 카테고리와 8개 하위 카테고리를 선택하고 13개
+  펼침·접힘 트리에서 3개 큰 카테고리와 8개 하위 카테고리를 선택하고 14개
   평가지표·정책 예시까지 내려가 확인하는 206개 동 독립형 대시보드
 - [`busan_admin_dong_action_profile_2025.csv`](../../outputs/infographic/busan_admin_dong_action_profile_2025.csv):
   동별 6개 영역 점수·취약순위·개선방향·상대 저취약 영역

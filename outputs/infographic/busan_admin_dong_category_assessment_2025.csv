@@ -205,212 +205,212 @@
 21050770,부산진구,범천1동,environment_climate_response,환경·기후 대응,0.5,air_exposure,대기오염 노출,0.97561,0,,monitor,medium_low
 21040660,영도구,동삼2동,environment_climate_response,환경·기후 대응,0.5,air_exposure,대기오염 노출,0.487805,0,,monitor,medium_low
 21030660,동구,범일2동,environment_climate_response,환경·기후 대응,0.5,air_exposure,대기오염 노출,0.0,0,,monitor,medium_low
-21110730,금정구,금사회동동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,95.609756,3,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21110640,금정구,선두구동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,89.853659,3,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21090560,해운대구,송정동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,89.268292,3,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21110710,금정구,금성동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,87.414634,3,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21070600,남구,용호4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,84.390244,3,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21100590,사하구,신평2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,83.21951200000001,3,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21110670,금정구,청룡노포동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,82.926829,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21100640,사하구,구평동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,82.536586,3,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21090580,해운대구,반여2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,82.439024,2,행정동 내 초·중·고 수|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21030590,동구,수정4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,81.951219,2,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수,candidate_after_validation,medium_low
-21510330,기장군,철마면,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,81.75609800000001,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21030530,동구,초량3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,81.658536,2,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수,candidate_after_validation,medium_low
-21120550,강서구,가락동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,81.268292,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21150510,사상구,삼락동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,79.707317,3,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21090540,해운대구,중2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,77.95121900000001,3,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21110590,금정구,부곡3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,77.073171,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21030680,동구,범일5동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,76.975609,2,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수,candidate_after_validation,medium_low
-21120530,강서구,강동동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,75.707317,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21040690,영도구,봉래2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,73.756098,1,행정동 내 초·중·고 수,candidate_after_validation,medium_low
-21120580,강서구,가덕도동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,73.268293,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21150650,사상구,감전동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,73.268293,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21070620,남구,감만1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,72.78048799999999,1,중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21100560,사하구,하단1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,72.682927,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21020680,서구,암남동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,71.609756,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21040540,영도구,영선1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,71.317073,1,행정동 내 초·중·고 수,candidate_after_validation,medium_low
-21050750,부산진구,개금2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,70.926829,1,행정동 내 초·중·고 수,candidate_after_validation,medium_low
-21040590,영도구,봉래1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,70.731707,1,행정동 내 초·중·고 수,candidate_after_validation,medium_low
-21010560,중구,부평동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,70.634146,1,행정동 내 초·중·고 수,candidate_after_validation,medium_low
-21120561,강서구,녹산동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,70.536585,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21510111,기장군,일광읍,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,70.439024,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21090690,해운대구,좌4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,70.243902,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
-21110610,금정구,장전1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,69.463415,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,monitor,medium_low
-21090590,해운대구,반여3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,69.365854,1,중심점 2km 내 초·중·고 수,monitor,medium_low
-21140520,수영구,남천2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,69.073171,1,행정동 내 초·중·고 수,monitor,medium_low
-21120520,강서구,대저2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,68.97560899999999,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,monitor,medium_low
-21040640,영도구,청학2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,68.878049,1,행정동 내 초·중·고 수,monitor,medium_low
-21150570,사상구,괘법동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,68.682927,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,monitor,medium_low
-21080560,북구,덕천1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,68.29268300000001,2,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수,monitor,medium_low
-21010510,중구,중앙동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,67.804877,2,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수,monitor,medium_low
-21140530,수영구,수영동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,67.512195,2,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수,monitor,medium_low
-21020570,서구,서대신4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,66.92683,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,monitor,medium_low
-21090720,해운대구,반송1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,66.634146,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,monitor,medium_low
-21040660,영도구,동삼2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,65.658536,1,중심점 2km 내 초·중·고 수,monitor,medium_low
-21020540,서구,서대신1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,65.463414,2,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수,monitor,medium_low
-21100660,사하구,감천2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,65.365853,2,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수,monitor,medium_low
-21030570,동구,수정2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,64.390244,1,행정동 내 초·중·고 수,monitor,medium_low
-21100600,사하구,장림1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,64.195122,1,중심점 2km 내 초·중·고 수,monitor,medium_low
-21140570,수영구,광안2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,64.097561,0,,monitor,medium_low
-21060580,동래구,사직1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,63.902438,2,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수,monitor,medium_low
-21120510,강서구,대저1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,63.707317,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,monitor,medium_low
-21070580,남구,용호2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,63.609756000000004,1,중심점 2km 내 초·중·고 수,monitor,medium_low
-21110700,금정구,구서2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,63.512196,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,monitor,medium_low
-21050740,부산진구,개금1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,63.317073,1,행정동 내 초·중·고 수,monitor,medium_low
-21010580,중구,남포동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,63.21951200000001,1,행정동 내 초·중·고 수,monitor,medium_low
-21040630,영도구,청학1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,62.536585,1,중심점 2km 내 초·중·고 수,monitor,medium_low
-21110740,금정구,장전2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,62.243903,1,중심점 2km 내 초·중·고 수,monitor,medium_low
-21050680,부산진구,당감2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,61.658536000000005,2,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수,monitor,medium_low
-21080590,북구,만덕1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,60.97561,1,중심점 2km 내 초·중·고 수,monitor,medium_low
-21080610,북구,만덕3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,60.195122,0,,monitor,medium_low
-21510120,기장군,장안읍,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,60.097561,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,monitor,medium_low
-21150540,사상구,모라3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,59.90244,1,중심점 2km 내 초·중·고 수,monitor,medium_low
-21120600,강서구,명지2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,58.634146,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,monitor,medium_low
-21060560,동래구,온천2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,58.536585,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
-21020690,서구,남부민2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,58.439023999999996,0,,monitor,medium_low
-21080570,북구,덕천2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,58.048781000000005,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
-21020650,서구,남부민1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,57.756097000000004,1,행정동 내 초·중·고 수,monitor,medium_low
-21150640,사상구,엄궁동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,57.365852999999994,1,중심점 2km 내 초·중·고 수,monitor,medium_low
-21510110,기장군,기장읍,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,56.780488,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,monitor,medium_low
-21080620,북구,화명2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,56.58536600000001,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,monitor,medium_low
-21120562,강서구,신호동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,56.195123,1,중심점 2km 내 초·중·고 수,monitor,medium_low
-21080580,북구,덕천3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,56.0,1,행정동 내 초·중·고 수,monitor,medium_low
-21150600,사상구,주례1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,56.0,0,,monitor,medium_low
-21070680,남구,문현3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,55.902439,1,행정동 내 초·중·고 수,monitor,medium_low
-21100570,사하구,하단2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,55.804877,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,monitor,medium_low
-21140560,수영구,광안1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,55.707317,0,,monitor,medium_low
-21010520,중구,동광동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,55.707316999999996,1,행정동 내 초·중·고 수,monitor,medium_low
-21040670,영도구,동삼3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,55.609756,0,,monitor,medium_low
-21100630,사하구,다대2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,55.609755,1,중심점 2km 내 초·중·고 수,monitor,medium_low
-21030700,동구,좌천동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,55.219512,1,행정동 내 초·중·고 수,monitor,medium_low
-21100620,사하구,다대1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,55.121950999999996,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,monitor,medium_low
-21070590,남구,용호3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,55.02439,0,,monitor,medium_low
-21090750,해운대구,우3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,55.02439,1,중심점 2km 내 초·중·고 수,monitor,medium_low
-21030710,동구,범일1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,54.92683,0,,monitor,medium_low
-21080540,북구,금곡동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,54.341463,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,monitor,medium_low
-21070610,남구,용당동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,53.658537,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
-21030520,동구,초량2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,53.560975,1,행정동 내 초·중·고 수,monitor,medium_low
-21140600,수영구,민락동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,53.365854,0,,monitor,medium_low
-21030510,동구,초량1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,53.268293,1,행정동 내 초·중·고 수,monitor,medium_low
-21040550,영도구,영선2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,53.170732,0,,monitor,medium_low
-21100530,사하구,괴정3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,53.073170999999995,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
-21020530,서구,동대신3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,52.585366,0,,monitor,medium_low
-21150630,사상구,학장동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,52.585364999999996,1,중심점 2km 내 초·중·고 수,monitor,medium_low
-21040530,영도구,남항동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,52.390243999999996,0,,monitor,medium_low
-21030660,동구,범일2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,52.00000000000001,1,행정동 내 초·중·고 수,monitor,medium_low
-21130530,연제구,거제3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,51.999999,1,행정동 내 초·중·고 수,monitor,medium_low
-21120590,강서구,명지1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,51.902439,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,monitor,medium_low
-21100550,사하구,당리동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,51.707316999999996,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,monitor,medium_low
-21150520,사상구,모라1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,51.609756000000004,0,,monitor,medium_low
-21070550,남구,대연5동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,51.609756,0,,monitor,medium_low
-21140580,수영구,광안3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,51.317074000000005,0,,monitor,medium_low
-21090530,해운대구,중1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,51.31707299999999,0,,monitor,medium_low
-21150620,사상구,주례3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,51.219511999999995,0,,monitor,medium_low
-21510130,기장군,정관읍,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,51.121950999999996,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,monitor,medium_low
-21050520,부산진구,부전2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,50.634147,1,행정동 내 초·중·고 수,monitor,medium_low
-21140550,수영구,망미2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,50.243903,1,행정동 내 초·중·고 수,monitor,medium_low
-21050550,부산진구,초읍동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,50.146341,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
-21060550,동래구,온천1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,50.048781000000005,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
-21020590,서구,부민동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,50.048781,1,행정동 내 초·중·고 수,monitor,medium_low
-21080550,북구,화명1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,50.04878,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
-21080510,북구,구포1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,49.853657999999996,0,,monitor,medium_low
-21070700,남구,대연1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,49.365854000000006,1,행정동 내 초·중·고 수,monitor,medium_low
-21010590,중구,영주1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,49.365854,1,행정동 내 초·중·고 수,monitor,medium_low
-21110680,금정구,남산동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,49.268293,1,중심점 2km 내 초·중·고 수,monitor,medium_low
-21010570,중구,광복동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,48.878049,1,행정동 내 초·중·고 수,monitor,medium_low
-21140510,수영구,남천1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,48.390243999999996,0,,monitor,medium_low
-21030560,동구,수정1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,47.707317,0,,monitor,medium_low
-21140590,수영구,광안4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,47.512195000000006,0,,monitor,medium_low
-21060610,동래구,안락1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,47.121950999999996,2,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수,monitor,medium_low
-21130570,연제구,연산3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,47.024390000000004,1,행정동 내 초·중·고 수,monitor,medium_low
-21100610,사하구,장림2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,46.439023999999996,1,중심점 2km 내 초·중·고 수,monitor,medium_low
-21090620,해운대구,반송2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,46.146341,1,중심점 2km 내 초·중·고 수,monitor,medium_low
-21090740,해운대구,우2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,45.853657999999996,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
-21110520,금정구,서2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,45.756098,1,행정동 내 초·중·고 수,monitor,medium_low
-21020610,서구,아미동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,45.658536999999995,1,행정동 내 초·중·고 수,monitor,medium_low
-21020640,서구,충무동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,45.658536999999995,0,,monitor,medium_low
-21020630,서구,초장동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,45.560976,1,행정동 내 초·중·고 수,monitor,medium_low
-21010600,중구,영주2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,45.560975,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
-21030600,동구,수정5동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,44.292683,0,,monitor,medium_low
-21070630,남구,감만2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,44.292683,0,,monitor,medium_low
-21100520,사하구,괴정2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,44.097561,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
-21050700,부산진구,당감4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,44.0,0,,monitor,medium_low
-21150560,사상구,덕포2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,44.0,0,,monitor,medium_low
-21050720,부산진구,가야2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,43.707318,0,,monitor,medium_low
-21130560,연제구,연산2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,43.609756,1,행정동 내 초·중·고 수,monitor,medium_low
-21130520,연제구,거제2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,43.512195,0,,monitor,medium_low
-21130580,연제구,연산4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,43.121951,1,행정동 내 초·중·고 수,monitor,medium_low
-21020510,서구,동대신1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,43.024390000000004,1,행정동 내 초·중·고 수,monitor,medium_low
-21150610,사상구,주례2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,42.439024,0,,monitor,medium_low
-21150550,사상구,덕포1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,42.341463,1,중심점 2km 내 초·중·고 수,monitor,medium_low
-21050540,부산진구,연지동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,42.048781000000005,1,행정동 내 초·중·고 수,monitor,medium_low
-21050770,부산진구,범천1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,42.04878,1,행정동 내 초·중·고 수,monitor,medium_low
-21080530,북구,구포3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,41.853658,0,,monitor,medium_low
-21020560,서구,서대신3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,41.756097,0,,monitor,medium_low
-21090700,해운대구,반여1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,40.585364999999996,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
-21070690,남구,문현4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,40.195122,0,,monitor,medium_low
-21090670,해운대구,좌2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,40.195122,0,,monitor,medium_low
-21090640,해운대구,재송1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,38.926829,0,,monitor,medium_low
-21080630,북구,화명3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,38.829268,0,,monitor,medium_low
-21090650,해운대구,재송2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,38.829268,0,,monitor,medium_low
-21130600,연제구,연산6동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,37.95122,0,,monitor,medium_low
-21030550,동구,초량6동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,37.560975,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
-21070670,남구,문현2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,37.170731999999994,0,,monitor,medium_low
-21040650,영도구,동삼1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,36.975609,1,중심점 2km 내 초·중·고 수,monitor,medium_low
-21070540,남구,대연4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,36.195122,0,,monitor,medium_low
-21090660,해운대구,좌1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,36.097561,0,,monitor,medium_low
-21050660,부산진구,부암3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,35.414634,0,,monitor,medium_low
-21080600,북구,만덕2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,35.414633,0,,monitor,medium_low
-21010530,중구,대청동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,35.024391,0,,monitor,medium_low
-21100540,사하구,괴정4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,34.731707,0,,monitor,medium_low
-21010540,중구,보수동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,34.439025,0,,monitor,medium_low
-21050810,부산진구,가야1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,34.439025,0,,monitor,medium_low
-21060600,동래구,사직3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,34.439024,0,,monitor,medium_low
-21130590,연제구,연산5동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,34.243903,1,행정동 내 초·중·고 수,monitor,medium_low
-21080520,북구,구포2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,34.146342000000004,0,,monitor,medium_low
-21020520,서구,동대신2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,32.292683,0,,monitor,medium_low
-21050640,부산진구,부암1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,31.02439,0,,monitor,medium_low
-21070710,남구,우암동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,31.02439,0,,monitor,medium_low
-21050820,부산진구,부전1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,30.634147,0,,monitor,medium_low
-21070570,남구,용호1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,30.439023999999996,0,,monitor,medium_low
-21110510,금정구,서1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,30.048779999999997,0,,monitor,medium_low
-21130540,연제구,거제4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,29.853659,0,,monitor,medium_low
-21110570,금정구,부곡1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,29.853658,0,,monitor,medium_low
-21050840,부산진구,범천2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,29.658536999999995,0,,monitor,medium_low
-21070530,남구,대연3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,29.170732,0,,monitor,medium_low
-21100580,사하구,신평1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,29.073169999999998,0,,monitor,medium_low
-21100510,사하구,괴정1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,28.682926000000002,0,,monitor,medium_low
-21130630,연제구,연산9동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,28.292682,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
-21040680,영도구,신선동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,28.195122,0,,monitor,medium_low
-21110720,금정구,서3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,27.902439,0,,monitor,medium_low
-21070660,남구,문현1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,27.707317,0,,monitor,medium_low
-21110600,금정구,부곡4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,27.609757,0,,monitor,medium_low
-21130550,연제구,연산1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,27.219511999999998,0,,monitor,medium_low
-21060520,동래구,복산동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,27.121952,0,,monitor,medium_low
-21060570,동래구,온천3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,27.121951000000003,0,,monitor,medium_low
-21140540,수영구,망미1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,27.02439,0,,monitor,medium_low
-21060590,동래구,사직2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,27.024389999999997,0,,monitor,medium_low
-21050570,부산진구,양정2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,25.853658,0,,monitor,medium_low
-21110690,금정구,구서1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,25.073171000000002,0,,monitor,medium_low
-21050610,부산진구,전포2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,24.780487,0,,monitor,medium_low
-21050800,부산진구,당감1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,24.682927,0,,monitor,medium_low
-21050560,부산진구,양정1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,23.707317,0,,monitor,medium_low
-21090680,해운대구,좌3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,23.414633000000002,0,,monitor,medium_low
-21060510,동래구,수민동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,23.121952,0,,monitor,medium_low
-21090730,해운대구,우1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,22.926828999999998,0,,monitor,medium_low
-21100650,사하구,감천1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,21.951219000000002,0,,monitor,medium_low
-21060650,동래구,명륜동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,21.365854,0,,monitor,medium_low
-21090710,해운대구,반여4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,20.780488000000002,0,,monitor,medium_low
-21070560,남구,대연6동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,20.585366,0,,monitor,medium_low
-21130620,연제구,연산8동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,19.414633,0,,monitor,medium_low
-21060620,동래구,안락2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,19.024389999999997,0,,monitor,medium_low
-21050760,부산진구,개금3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,17.365854,0,,monitor,medium_low
-21110580,금정구,부곡2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,15.609756,0,,monitor,medium_low
-21130510,연제구,거제1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,13.853658,0,,monitor,medium_low
-21060630,동래구,명장1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,9.560976,0,,monitor,medium_low
-21060640,동래구,명장2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,8.0,0,,monitor,medium_low
-21050830,부산진구,전포1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,6.341464,0,,monitor,medium_low
+21110730,금정구,금사회동동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,95.182928,4,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21110640,금정구,선두구동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,91.97560999999999,4,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21090560,해운대구,송정동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,91.195122,4,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21110710,금정구,금성동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,90.817073,4,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21110670,금정구,청룡노포동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,87.926829,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21510330,기장군,철마면,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,87.890244,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21120550,강서구,가락동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,86.426829,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21070600,남구,용호4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,85.792683,4,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21120530,강서구,강동동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,83.682927,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21100590,사하구,신평2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,82.329269,4,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21100640,사하구,구평동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,81.987806,4,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21120580,강서구,가덕도동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,81.865854,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21120561,강서구,녹산동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,81.439024,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21510111,기장군,일광읍,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,81.365853,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21120520,강서구,대저2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,80.01219499999999,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21150510,사상구,삼락동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,79.5,4,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21070620,남구,감만1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,79.353659,2,중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21110590,금정구,부곡3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,79.268293,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21020680,서구,암남동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,79.256098,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21090580,해운대구,반여2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,79.158537,3,행정동 내 초·중·고 수|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21100560,사하구,하단1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,78.52439,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21030530,동구,초량3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,77.463414,2,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수,candidate_after_validation,medium_low
+21150650,사상구,감전동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,77.036586,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21030590,동구,수정4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,76.963415,2,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수,candidate_after_validation,medium_low
+21090720,해운대구,반송1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,75.280488,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21040690,영도구,봉래2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,75.085366,2,행정동 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21090690,해운대구,좌4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,74.52439,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21120510,강서구,대저1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,74.52439,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21510120,기장군,장안읍,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,73.890244,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21090590,해운대구,반여3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,73.42683,2,중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21090540,해운대구,중2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,72.890244,3,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수|중심점 2km 내 초·중·고 수,candidate_after_validation,medium_low
+21040540,영도구,영선1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,72.402439,2,행정동 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21040660,영도구,동삼2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,72.378049,2,중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21030680,동구,범일5동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,72.158536,2,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수,candidate_after_validation,medium_low
+21100600,사하구,장림1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,71.670733,2,중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21150570,사상구,괘법동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,71.463415,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21070580,남구,용호2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,71.170732,2,중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21040590,영도구,봉래1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,70.829268,2,행정동 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21080590,북구,만덕1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,70.426829,2,중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21020570,서구,서대신4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,70.304879,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21040640,영도구,청학2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,70.292683,2,행정동 내 초·중·고 수|중심점 2km 내 활동 교원 수,candidate_after_validation,medium_low
+21510110,기장군,기장읍,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,69.93902399999999,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,monitor,medium_low
+21050750,부산진구,개금2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,69.756097,1,행정동 내 초·중·고 수,monitor,medium_low
+21040630,영도구,청학1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,69.646341,2,중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,monitor,medium_low
+21080540,북구,금곡동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,68.28048700000001,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,monitor,medium_low
+21120600,강서구,명지2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,67.939024,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,monitor,medium_low
+21120562,강서구,신호동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,67.865854,2,중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,monitor,medium_low
+21100620,사하구,다대1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,67.829268,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,monitor,medium_low
+21150640,사상구,엄궁동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,67.573171,2,중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,monitor,medium_low
+21010560,중구,부평동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,67.317073,1,행정동 내 초·중·고 수,monitor,medium_low
+21110610,금정구,장전1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,67.012196,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,monitor,medium_low
+21080620,북구,화명2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,66.365854,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,monitor,medium_low
+21100570,사하구,하단2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,66.256097,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,monitor,medium_low
+21100630,사하구,다대2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,65.95122,2,중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,monitor,medium_low
+21110700,금정구,구서2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,64.329269,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,monitor,medium_low
+21150540,사상구,모라3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,64.012195,2,중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,monitor,medium_low
+21150630,사상구,학장동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,63.939025,2,중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,monitor,medium_low
+21020690,서구,남부민2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,63.585365,1,중심점 2km 내 활동 교원 수,monitor,medium_low
+21080560,북구,덕천1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,62.829269,2,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수,monitor,medium_low
+21140520,수영구,남천2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,62.524390999999994,1,행정동 내 초·중·고 수,monitor,medium_low
+21110740,금정구,장전2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,62.52439,1,중심점 2km 내 초·중·고 수,monitor,medium_low
+21140570,수영구,광안2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,62.158536999999995,0,,monitor,medium_low
+21030570,동구,수정2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,62.134146,1,행정동 내 초·중·고 수,monitor,medium_low
+21080610,북구,만덕3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,62.109756000000004,0,,monitor,medium_low
+21040670,영도구,동삼3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,61.853659,1,중심점 2km 내 활동 교원 수,monitor,medium_low
+21010510,중구,중앙동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,61.731708,2,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수,monitor,medium_low
+21020650,서구,남부민1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,61.52439,2,행정동 내 초·중·고 수|중심점 2km 내 활동 교원 수,monitor,medium_low
+21110680,금정구,남산동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,61.390243999999996,2,중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,monitor,medium_low
+21040550,영도구,영선2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,61.134146,1,중심점 2km 내 활동 교원 수,monitor,medium_low
+21090620,해운대구,반송2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,60.524391,2,중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,monitor,medium_low
+21150600,사상구,주례1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,60.414634,0,,monitor,medium_low
+21080570,북구,덕천2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,59.621951,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
+21100550,사하구,당리동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,59.243903,3,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,monitor,medium_low
+21150620,사상구,주례3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,58.548781000000005,1,중심점 2km 내 활동 교원 수,monitor,medium_low
+21120590,강서구,명지1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,58.060976,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,monitor,medium_low
+21010580,중구,남포동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,57.512196,1,행정동 내 초·중·고 수,monitor,medium_low
+21040530,영도구,남항동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,57.170732,0,,monitor,medium_low
+21100660,사하구,감천2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,57.036584999999995,2,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수,monitor,medium_low
+21070590,남구,용호3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,56.45122,0,,monitor,medium_low
+21070610,남구,용당동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,55.853658,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
+21150520,사상구,모라1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,55.829268,0,,monitor,medium_low
+21020540,서구,서대신1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,55.487804,2,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수,monitor,medium_low
+21150560,사상구,덕포2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,54.597562,1,중심점 2km 내 활동 교원 수,monitor,medium_low
+21030710,동구,범일1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,54.59756,0,,monitor,medium_low
+21030700,동구,좌천동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,54.353658,1,행정동 내 초·중·고 수,monitor,medium_low
+21080510,북구,구포1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,54.256097,0,,monitor,medium_low
+21050740,부산진구,개금1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,54.195122,1,행정동 내 초·중·고 수,monitor,medium_low
+21100610,사하구,장림2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,53.841464,1,중심점 2km 내 초·중·고 수,monitor,medium_low
+21150550,사상구,덕포1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,53.670733,2,중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,monitor,medium_low
+21080550,북구,화명1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,53.451218999999995,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
+21060560,동래구,온천2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,52.804877,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
+21010520,중구,동광동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,52.243902,1,행정동 내 초·중·고 수,monitor,medium_low
+21050550,부산진구,초읍동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,52.231707,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
+21140530,수영구,수영동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,51.878049,2,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수,monitor,medium_low
+21510130,기장군,정관읍,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,51.829269,2,행정동 중심점 최근접 학교 거리|중심점 2km 내 초·중·고 수,monitor,medium_low
+21150610,사상구,주례2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,51.756097,1,중심점 2km 내 활동 교원 수,monitor,medium_low
+21030560,동구,수정1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,51.695122,0,,monitor,medium_low
+21040650,영도구,동삼1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,51.390244,2,중심점 2km 내 초·중·고 수|중심점 2km 내 활동 교원 수,monitor,medium_low
+21080580,북구,덕천3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,51.353659,1,행정동 내 초·중·고 수,monitor,medium_low
+21140560,수영구,광안1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,51.085364999999996,0,,monitor,medium_low
+21090750,해운대구,우3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,50.951220000000006,1,중심점 2km 내 초·중·고 수,monitor,medium_low
+21080530,북구,구포3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,50.768292,0,,monitor,medium_low
+21010570,중구,광복동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,50.439025,1,행정동 내 초·중·고 수,monitor,medium_low
+21050680,부산진구,당감2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,50.060976,2,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수,monitor,medium_low
+21030510,동구,초량1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,49.987805,1,행정동 내 초·중·고 수,monitor,medium_low
+21090700,해운대구,반여1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,49.939024,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
+21140590,수영구,광안4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,49.658537,0,,monitor,medium_low
+21050720,부산진구,가야2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,48.512195,0,,monitor,medium_low
+21100530,사하구,괴정3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,48.0,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
+21020530,서구,동대신3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,47.536585,0,,monitor,medium_low
+21020640,서구,충무동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,47.536585,0,,monitor,medium_low
+21050700,부산진구,당감4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,47.109756000000004,0,,monitor,medium_low
+21030600,동구,수정5동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,46.865853,0,,monitor,medium_low
+21020560,서구,서대신3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,46.597561,0,,monitor,medium_low
+21140600,수영구,민락동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,46.57317,0,,monitor,medium_low
+21140580,수영구,광안3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,45.95122,0,,monitor,medium_low
+21010590,중구,영주1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,45.682928,1,행정동 내 초·중·고 수,monitor,medium_low
+21030520,동구,초량2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,45.451218999999995,1,행정동 내 초·중·고 수,monitor,medium_low
+21080520,북구,구포2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,45.439025,0,,monitor,medium_low
+21060580,동래구,사직1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,45.353657999999996,2,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수,monitor,medium_low
+21020630,서구,초장동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,44.439025,1,행정동 내 초·중·고 수,monitor,medium_low
+21030660,동구,범일2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,44.073171,1,행정동 내 초·중·고 수,monitor,medium_low
+21020590,서구,부민동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,43.914635000000004,1,행정동 내 초·중·고 수,monitor,medium_low
+21140510,수영구,남천1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,43.780488,0,,monitor,medium_low
+21060550,동래구,온천1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,43.707318,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
+21040680,영도구,신선동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,43.195122,1,중심점 2km 내 활동 교원 수,monitor,medium_low
+21080630,북구,화명3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,43.02439,0,,monitor,medium_low
+21090740,해운대구,우2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,42.865853,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
+21070630,남구,감만2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,42.5,0,,monitor,medium_low
+21070550,남구,대연5동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,42.487805,0,,monitor,medium_low
+21100520,사하구,괴정2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,41.487804999999994,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
+21090650,해운대구,재송2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,41.378048,0,,monitor,medium_low
+21090640,해운대구,재송1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,41.195121,0,,monitor,medium_low
+21050520,부산진구,부전2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,40.804879,1,행정동 내 초·중·고 수,monitor,medium_low
+21050810,부산진구,가야1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,40.500001,0,,monitor,medium_low
+21090670,해운대구,좌2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,40.353659,0,,monitor,medium_low
+21140550,수영구,망미2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,40.097561,1,행정동 내 초·중·고 수,monitor,medium_low
+21050660,부산진구,부암3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,39.829269,0,,monitor,medium_low
+21070680,남구,문현3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,39.719512,1,행정동 내 초·중·고 수,monitor,medium_low
+21070710,남구,우암동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,39.585366,0,,monitor,medium_low
+21090530,해운대구,중1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,39.012195,0,,monitor,medium_low
+21080600,북구,만덕2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,38.902438000000004,0,,monitor,medium_low
+21020610,서구,아미동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,38.878049,1,행정동 내 초·중·고 수,monitor,medium_low
+21010600,중구,영주2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,38.853658,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
+21070690,남구,문현4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,37.585366,0,,monitor,medium_low
+21070700,남구,대연1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,37.487805,1,행정동 내 초·중·고 수,monitor,medium_low
+21020510,서구,동대신1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,37.341464,1,행정동 내 초·중·고 수,monitor,medium_low
+21010530,중구,대청동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,36.926829,0,,monitor,medium_low
+21030550,동구,초량6동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,36.853659,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
+21050770,부산진구,범천1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,35.073172,1,행정동 내 초·중·고 수,monitor,medium_low
+21130570,연제구,연산3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,35.073170999999995,1,행정동 내 초·중·고 수,monitor,medium_low
+21130530,연제구,거제3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,34.756097999999994,1,행정동 내 초·중·고 수,monitor,medium_low
+21090660,해운대구,좌1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,34.536586,0,,monitor,medium_low
+21110520,금정구,서2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,34.292684,1,행정동 내 초·중·고 수,monitor,medium_low
+21070570,남구,용호1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,34.109756,0,,monitor,medium_low
+21130560,연제구,연산2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,33.54878,1,행정동 내 초·중·고 수,monitor,medium_low
+21050800,부산진구,당감1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,33.0,0,,monitor,medium_low
+21050540,부산진구,연지동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,32.963415,1,행정동 내 초·중·고 수,monitor,medium_low
+21010540,중구,보수동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,32.329269,0,,monitor,medium_low
+21060610,동래구,안락1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,31.92683,2,행정동 중심점 최근접 학교 거리|행정동 내 초·중·고 수,monitor,medium_low
+21070540,남구,대연4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,31.353658,0,,monitor,medium_low
+21130600,연제구,연산6동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,30.939025,0,,monitor,medium_low
+21130520,연제구,거제2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,30.597561,0,,monitor,medium_low
+21110690,금정구,구서1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,30.195123000000002,0,,monitor,medium_low
+21070530,남구,대연3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,30.012195,0,,monitor,medium_low
+21100580,사하구,신평1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,29.841462,0,,monitor,medium_low
+21100650,사하구,감천1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,29.597561,0,,monitor,medium_low
+21020520,서구,동대신2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,29.329269,0,,monitor,medium_low
+21100510,사하구,괴정1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,29.134145999999998,0,,monitor,medium_low
+21100540,사하구,괴정4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,29.02439,0,,monitor,medium_low
+21070670,남구,문현2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,28.97561,0,,monitor,medium_low
+21130580,연제구,연산4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,28.560976,1,행정동 내 초·중·고 수,monitor,medium_low
+21050640,부산진구,부암1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,28.121951,0,,monitor,medium_low
+21110570,금정구,부곡1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,27.780488,0,,monitor,medium_low
+21110720,금정구,서3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,27.670732,0,,monitor,medium_low
+21060590,동래구,사직2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,27.109755999999997,0,,monitor,medium_low
+21050840,부산진구,범천2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,25.536586,0,,monitor,medium_low
+21140540,수영구,망미1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,25.304878000000002,0,,monitor,medium_low
+21070660,남구,문현1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,25.207318,0,,monitor,medium_low
+21050570,부산진구,양정2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,24.817073,0,,monitor,medium_low
+21050760,부산진구,개금3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,23.609757000000002,0,,monitor,medium_low
+21130550,연제구,연산1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,22.951219000000002,0,,monitor,medium_low
+21130630,연제구,연산9동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,22.731707,1,행정동 중심점 최근접 학교 거리,monitor,medium_low
+21060600,동래구,사직3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,22.426828999999998,0,,monitor,medium_low
+21110510,금정구,서1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,22.207317,0,,monitor,medium_low
+21050820,부산진구,부전1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,22.048780999999998,0,,monitor,medium_low
+21130590,연제구,연산5동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,21.975609999999996,1,행정동 내 초·중·고 수,monitor,medium_low
+21130540,연제구,거제4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,21.146341,0,,monitor,medium_low
+21060570,동래구,온천3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,20.682927,0,,monitor,medium_low
+21050560,부산진구,양정1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,20.59756,0,,monitor,medium_low
+21090680,해운대구,좌3동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,20.378048,0,,monitor,medium_low
+21050610,부산진구,전포2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,19.926828999999998,0,,monitor,medium_low
+21090730,해운대구,우1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,19.378048,0,,monitor,medium_low
+21110600,금정구,부곡4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,19.268293,0,,monitor,medium_low
+21130620,연제구,연산8동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,18.902439,0,,monitor,medium_low
+21090710,해운대구,반여4동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,18.853658,0,,monitor,medium_low
+21060520,동래구,복산동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,17.512195000000002,0,,monitor,medium_low
+21070560,남구,대연6동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,17.45122,0,,monitor,medium_low
+21060650,동래구,명륜동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,16.365854000000002,0,,monitor,medium_low
+21060510,동래구,수민동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,16.073171,0,,monitor,medium_low
+21110580,금정구,부곡2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,15.036585,0,,monitor,medium_low
+21060620,동래구,안락2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,13.048781,0,,monitor,medium_low
+21130510,연제구,거제1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,11.536585,0,,monitor,medium_low
+21060630,동래구,명장1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,8.463415,0,,monitor,medium_low
+21050830,부산진구,전포1동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,8.073171,0,,monitor,medium_low
+21060640,동래구,명장2동,living_services_settlement,생활 인프라·주거,0.25,education_access_supply,교육시설 접근·공급,7.8048779999999995,0,,monitor,medium_low
 21120530,강서구,강동동,living_services_settlement,생활 인프라·주거,0.25,healthcare_supply,의료공급 접근,97.95122,2,소지역 보정 병원 공급량|소지역 보정 의원 공급량,candidate_after_validation,medium_low
 21090710,해운대구,반여4동,living_services_settlement,생활 인프라·주거,0.25,healthcare_supply,의료공급 접근,95.902439,2,소지역 보정 병원 공급량|소지역 보정 의원 공급량,candidate_after_validation,medium_low
 21150600,사상구,주례1동,living_services_settlement,생활 인프라·주거,0.25,healthcare_supply,의료공급 접근,95.609757,2,소지역 보정 병원 공급량|소지역 보정 의원 공급량,candidate_after_validation,medium_low

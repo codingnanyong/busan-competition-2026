@@ -33,7 +33,7 @@ requires additional local asset data on industry, commerce, tourism, and living 
   quick-review preview
 - [`busan_admin_dong_action_map_2025.html`](../../../outputs/infographic/busan_admin_dong_action_map_2025.html):
   standalone 206-dong dashboard with a collapsible tree for three major categories, eight child
-  categories, thirteen indicators, and policy examples
+  categories, fourteen indicators, and policy examples
 - [`busan_admin_dong_action_profile_2025.csv`](../../../outputs/infographic/busan_admin_dong_action_profile_2025.csv):
   six scores, vulnerability order, improvement direction, and relative low-deprivation domain
 - [INFOGRAPHIC_REPORT_2025.json](../../data/manifests/INFOGRAPHIC_REPORT_2025.json):

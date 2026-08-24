@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-16T05:05:32+00:00",
+  "generated_at": "2026-08-24T23:10:34+00:00",
   "reference_year": 2025,
   "canonical_admin_dong_count": 206,
   "assessments": [
@@ -14,15 +14,26 @@
       "reason": "Complete dong coverage, but telecom living population is a service-demand context measure rather than deprivation itself."
     },
     {
-      "dataset_id": "EDU-SCHOOL-001",
+      "dataset_ids": [
+        "EDU-SCHOOL-001",
+        "EDU-SCHOOLINFO-2025-001"
+      ],
+      "school_register_source": "data/raw/reference/EDU-SCHOOL-NEIS-001/busan_school_info.json",
+      "school_disclosure_source": "data/raw/reference/EDU-SCHOOLINFO-2025-001/busan_school_disclosures_2025.json",
+      "school_disclosure_sha256": "655912620155E9C862AB643097D7BCA1EC8D0E2F7E3C290FD629135FE5D9195C",
       "input_records": 662,
       "geocoded_records": 655,
-      "core_school_records": 616,
+      "current_register_core_school_records": 616,
+      "core_school_records": 615,
+      "schoolinfo_disclosure_records": 615,
+      "schoolinfo_matched_core_school_records": 615,
+      "schoolinfo_unmatched_core_school_records": 1,
+      "active_teacher_count_2025": 24366,
       "facility_present_admin_dongs": 185,
       "output_records": 206,
       "maximum_nearest_core_school_distance_m": 2987.821,
       "decision": "provisional-scoring-proxy",
-      "reason": "Official coordinates support facility-access mapping; counts measure education access, not resident educational outcomes."
+      "reason": "Official coordinates and 2025 active-teacher disclosures strengthen facility access and supply measurement; the 2 km allocation remains a spatial proxy and does not measure resident educational outcomes."
     },
     {
       "dataset_id": "ENV-AIR-HEIS-DAILY-2025-001",
@@ -57,7 +68,7 @@
     "school_access": {
       "path": "data/processed/candidates/2025/school_counts_2025.csv",
       "records": 206,
-      "sha256": "09FACF987C0184AC4D4B1BED7B2A57BAA2B569E2A57F3B379F78313BEA38AB2D"
+      "sha256": "AD6A3C652B29A2A8FC516399A09B2B1BA5219216415D206456D5347206BFAF99"
     },
     "air_exposure": {
       "path": "data/processed/candidates/2025/air_exposure_idw_2025.csv",
