@@ -193,7 +193,10 @@ def build_action_profiles(composite: pd.DataFrame) -> pd.DataFrame:
 def _font_family() -> str:
     candidates = [path for path in findSystemFonts() if "NotoSansCJK-Regular" in path]
     if not candidates:
-        return "DejaVu Sans"
+        raise RuntimeError(
+            "Noto Sans CJK is required to render Korean infographic text; "
+            "use the project Docker image or install NotoSansCJK-Regular"
+        )
     mpl.font_manager.fontManager.addfont(candidates[0])
     return FontProperties(fname=candidates[0]).get_name()
 
@@ -226,6 +229,10 @@ def _validate(
         raise ValueError("Priority input requires 21 unique administrative-dong rows")
     if set(composite["admin_dong_code"].astype(str)) != set(boundaries["adm_cd"].astype(str)):
         raise ValueError("Composite and boundary administrative-dong codes must match")
+    if set(composite["admin_dong_code"].astype(str)) != set(
+        overlay["admin_dong_code"].astype(str)
+    ):
+        raise ValueError("Composite and overlay administrative-dong codes must match")
     if not set(priority["admin_dong_code"].astype(str)).issubset(
         set(composite["admin_dong_code"].astype(str))
     ):
@@ -771,7 +778,7 @@ def render(
                 markerfacecolor=PALETTE["blue"],
                 markeredgecolor="white",
                 markersize=6,
-                label="PM 이중부담 4개 동",
+                label=f"PM 이중부담 {len(burden_map)}개 동",
             ),
         ],
         loc="lower left",

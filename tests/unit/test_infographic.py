@@ -7,6 +7,7 @@ import pandas as pd
 import pytest
 from shapely.geometry import box
 
+import busan_imd.infographic as infographic
 from busan_imd.infographic import (
     build_action_profiles,
     render,
@@ -218,3 +219,29 @@ def test_render_rejects_priority_values_from_another_rebuild(tmp_path) -> None:
             tmp_path / "visual.pdf",
             tmp_path / "visual.png",
         )
+
+
+def test_render_rejects_overlay_code_drift(tmp_path) -> None:
+    composite, boundaries, priority, overlay, policy = inputs()
+    overlay.loc[0, "admin_dong_code"] = "missing"
+
+    with pytest.raises(ValueError, match="Composite and overlay"):
+        render(
+            composite,
+            boundaries,
+            priority,
+            overlay,
+            policy,
+            tmp_path / "visual.svg",
+            tmp_path / "visual.pdf",
+            tmp_path / "visual.png",
+        )
+
+
+def test_font_selection_fails_clearly_without_hangul_font(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(infographic, "findSystemFonts", lambda: [])
+
+    with pytest.raises(RuntimeError, match="Noto Sans CJK"):
+        infographic._font_family()
