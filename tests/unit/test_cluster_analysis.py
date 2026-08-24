@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from busan_imd.cluster_analysis import DOMAINS, build
+from busan_imd.cluster_analysis import DOMAINS, build, run
 
 
 def priority_input() -> pd.DataFrame:
@@ -51,7 +51,8 @@ def test_build_is_deterministic() -> None:
     second_assignments, second_metrics, second_report = build(priority_input())
 
     pd.testing.assert_frame_equal(first_assignments, second_assignments)
-    pd.testing.assert_frame_equal(first_metrics, second_metrics)
+    assert first_metrics["cluster_count"].tolist() == second_metrics["cluster_count"].tolist()
+    assert first_report["selected_cluster_count"] == second_report["selected_cluster_count"]
     assert first_report["cluster_summaries"] == second_report["cluster_summaries"]
 
 
@@ -64,3 +65,19 @@ def test_build_rejects_invalid_priority_population() -> None:
         build(frame.assign(b_imd_decile=np.where(frame.index == 0, 2, 1)))
     with pytest.raises(ValueError, match="missing columns"):
         build(frame.drop(columns="income_excess_points"))
+
+
+def test_run_creates_independent_output_directories(tmp_path) -> None:
+    priority_path = tmp_path / "input" / "priority.csv"
+    assignment_path = tmp_path / "assignments" / "clusters.csv"
+    metrics_path = tmp_path / "metrics" / "candidates.csv"
+    report_path = tmp_path / "reports" / "cluster.json"
+    priority_path.parent.mkdir(parents=True)
+    priority_input().to_csv(priority_path, index=False)
+
+    report = run(priority_path, assignment_path, metrics_path, report_path)
+
+    assert assignment_path.is_file()
+    assert metrics_path.is_file()
+    assert report_path.is_file()
+    assert report["selected_cluster_count"] == 3

@@ -253,6 +253,7 @@ def run(
     priority = pd.read_csv(priority_path, dtype={"admin_dong_code": str})
     assignments, metrics, report = build(priority)
     assignment_output_path.parent.mkdir(parents=True, exist_ok=True)
+    metrics_output_path.parent.mkdir(parents=True, exist_ok=True)
     assignments.to_csv(
         assignment_output_path, index=False, encoding="utf-8-sig", lineterminator="\n"
     )
