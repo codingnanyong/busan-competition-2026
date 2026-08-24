@@ -71,6 +71,8 @@ def test_project_structure_and_required_documents() -> None:
         "docs/data/manifests/PRIORITY_AREA_REPORT_2025.json",
         "docs/data/manifests/CLUSTER_ANALYSIS_REPORT_2025.json",
         "docs/data/manifests/ENVIRONMENTAL_OVERLAY_REPORT_2025.json",
+        "docs/data/manifests/POLICY_MATRIX_REPORT_2025.json",
+        "docs/data/POLICY_ACTION_CATALOG_2025.csv",
         "docs/data/DATA_PORTABILITY.md",
         "docs/data/manifests/CONSUMER_SALES_MANIFEST_2025.json",
         "docs/data/manifests/CITY_PARKS_MANIFEST.json",
@@ -88,9 +90,12 @@ def test_project_structure_and_required_documents() -> None:
         "docs/en/methodology/CLUSTER_ANALYSIS_2025.md",
         "docs/methodology/ENVIRONMENTAL_OVERLAY_2025.md",
         "docs/en/methodology/ENVIRONMENTAL_OVERLAY_2025.md",
+        "docs/methodology/POLICY_MATRIX_2025.md",
+        "docs/en/methodology/POLICY_MATRIX_2025.md",
         "notebooks/01_candidate_profile_eda.ipynb",
         "notebooks/02_deprivation_cluster_review.ipynb",
         "notebooks/03_environmental_overlay_review.ipynb",
+        "notebooks/04_policy_matrix_review.ipynb",
     )
 
     assert all((REPOSITORY_ROOT / path).is_dir() for path in required_directories)
@@ -135,6 +140,21 @@ def test_environmental_overlay_notebook_is_clean_and_portable() -> None:
     assert any("from busan_imd.environmental_overlay import" in source for source in sources)
     assert any("px.scatter" in source for source in sources)
     assert any("px.choropleth_mapbox" in source for source in sources)
+    assert all(cell["execution_count"] is None for cell in code_cells)
+    assert all(cell["outputs"] == [] for cell in code_cells)
+
+
+def test_policy_matrix_notebook_is_clean_and_portable() -> None:
+    notebook_path = REPOSITORY_ROOT / "notebooks/04_policy_matrix_review.ipynb"
+    notebook = json.loads(notebook_path.read_text(encoding="utf-8"))
+
+    assert notebook["nbformat"] == 4
+    code_cells = [cell for cell in notebook["cells"] if cell["cell_type"] == "code"]
+    sources = ["".join(cell["source"]) for cell in code_cells]
+    assert any("os.chdir(project_root)" in source for source in sources)
+    assert any("from busan_imd.policy_matrix import" in source for source in sources)
+    assert any("px.bar" in source for source in sources)
+    assert any("px.scatter" in source for source in sources)
     assert all(cell["execution_count"] is None for cell in code_cells)
     assert all(cell["outputs"] == [] for cell in code_cells)
 
@@ -264,6 +284,31 @@ def test_environmental_overlay_report_records_cod21_scope() -> None:
         "profile_sha256"
     ]
     assert re.fullmatch(r"[0-9A-F]{64}", report["output_sha256"])
+
+
+def test_policy_matrix_report_records_cod22_scope() -> None:
+    report = read_json("docs/data/manifests/POLICY_MATRIX_REPORT_2025.json")
+    cluster_report = read_json("docs/data/manifests/CLUSTER_ANALYSIS_REPORT_2025.json")
+    overlay_report = read_json("docs/data/manifests/ENVIRONMENTAL_OVERLAY_REPORT_2025.json")
+
+    assert report["priority_area_count"] == 21
+    assert report["cluster_count"] == 2
+    assert report["matrix_row_count"] == 5
+    assert report["unique_policy_count"] == 4
+    assert report["decision_status"] == "candidate_for_field_validation"
+    assert report["input_sha256"]["cluster_assignments"] == cluster_report[
+        "output_sha256"
+    ]["assignments"]
+    assert report["input_sha256"]["environmental_overlay"] == overlay_report[
+        "output_sha256"
+    ]
+    assert report["cluster_summaries"][0]["excluded_nonpositive_domains"] == [
+        {"domain": "living_environment", "mean_excess_points": -0.252867}
+    ]
+    assert all(
+        re.fullmatch(r"[0-9A-F]{64}", value)
+        for value in (*report["input_sha256"].values(), report["output_sha256"])
+    )
 
 
 def test_dataset_audit_is_valid() -> None:

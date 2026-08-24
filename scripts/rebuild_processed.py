@@ -15,6 +15,7 @@ from busan_imd.eda import run as write_eda_report
 from busan_imd.environmental_overlay import run as write_environmental_overlay
 from busan_imd.income_inference import infer
 from busan_imd.income_inference import write_outputs as write_income_outputs
+from busan_imd.policy_matrix import run as write_policy_matrix
 from busan_imd.priority_areas import run as write_priority_areas
 from busan_imd.sensitivity_analysis import run as write_sensitivity_analysis
 from busan_imd.standardization import build_standardized_profile, write_outputs
@@ -45,6 +46,7 @@ def rebuild() -> None:
     write_priority_areas()
     write_cluster_analysis()
     write_environmental_overlay()
+    write_policy_matrix()
 
 
 def main() -> int:
@@ -53,7 +55,7 @@ def main() -> int:
     print(
         "rebuilt candidate, inference, standardized, consumer-sales, quality, EDA, "
         "domain-score, composite-index, sensitivity-analysis, priority-area, cluster-analysis, "
-        "and environmental-overlay artifacts"
+        "environmental-overlay, and policy-matrix artifacts"
     )
     return 0
 
