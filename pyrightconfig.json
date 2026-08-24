@@ -1,0 +1,19 @@
+{
+  "include": [
+    "src",
+    "scripts",
+    "tests"
+  ],
+  "exclude": [
+    ".venv",
+    "data",
+    "notebooks",
+    "outputs"
+  ],
+  "extraPaths": [
+    "src"
+  ],
+  "venvPath": ".",
+  "venv": ".venv",
+  "typeCheckingMode": "off"
+}

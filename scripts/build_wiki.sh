@@ -80,7 +80,7 @@ for release_note in docs/en/releases/v*.md; do
   publish_page "$release_note" "EN-Release-${version}"
 done
 
-python3 scripts/rewrite_wiki_links.py "$output_dir" "$page_manifest"
+"${PYTHON_EXECUTABLE:-python3}" scripts/rewrite_wiki_links.py "$output_dir" "$page_manifest"
 rm "$page_manifest"
 
 printf '%s\n' \
