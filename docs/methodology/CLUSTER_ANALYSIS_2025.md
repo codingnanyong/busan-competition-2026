@@ -25,6 +25,8 @@ docker compose run --rm jupyter python -m busan_imd.cluster_analysis
   군집의 탐색용 행정동 할당과 영역별 초과 기여점수
 - `data/processed/scores/2025/busan_admin_dong_cluster_metrics_2025.csv`: `k=2~6` 후보별
   품질·안정성 지표
+- [`notebooks/02_deprivation_cluster_review.ipynb`](../../notebooks/02_deprivation_cluster_review.ipynb):
+  게이트, PCA 산점도, 유형별 영역 프로파일과 행정동 목록을 확인하는 대화형 시각화
 - [CLUSTER_ANALYSIS_REPORT_2025.json](../data/manifests/CLUSTER_ANALYSIS_REPORT_2025.json):
   입력·출력 체크섬, 선택 규칙, 품질 게이트와 최종 결정
 

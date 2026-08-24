@@ -26,6 +26,8 @@ docker compose run --rm jupyter python -m busan_imd.cluster_analysis
   assignments and domain excess contributions
 - `data/processed/scores/2025/busan_admin_dong_cluster_metrics_2025.csv`: quality and stability
   metrics for `k=2..6`
+- [`notebooks/02_deprivation_cluster_review.ipynb`](../../../notebooks/02_deprivation_cluster_review.ipynb):
+  interactive quality-gate, PCA, cluster-profile, and area-assignment views
 - [CLUSTER_ANALYSIS_REPORT_2025.json](../../data/manifests/CLUSTER_ANALYSIS_REPORT_2025.json):
   checksums, selection rule, quality gate, and final decision
 

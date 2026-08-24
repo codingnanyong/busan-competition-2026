@@ -86,6 +86,7 @@ def test_project_structure_and_required_documents() -> None:
         "docs/methodology/CLUSTER_ANALYSIS_2025.md",
         "docs/en/methodology/CLUSTER_ANALYSIS_2025.md",
         "notebooks/01_candidate_profile_eda.ipynb",
+        "notebooks/02_deprivation_cluster_review.ipynb",
     )
 
     assert all((REPOSITORY_ROOT / path).is_dir() for path in required_directories)
@@ -99,6 +100,22 @@ def test_eda_notebook_is_clean_and_reuses_the_pipeline() -> None:
     assert notebook["nbformat"] == 4
     code_cells = [cell for cell in notebook["cells"] if cell["cell_type"] == "code"]
     assert any("from busan_imd.eda import run" in "".join(cell["source"]) for cell in code_cells)
+    assert any("os.chdir(project_root)" in "".join(cell["source"]) for cell in code_cells)
+    assert all(cell["execution_count"] is None for cell in code_cells)
+    assert all(cell["outputs"] == [] for cell in code_cells)
+
+
+def test_cluster_notebook_is_clean_and_portable() -> None:
+    notebook_path = REPOSITORY_ROOT / "notebooks/02_deprivation_cluster_review.ipynb"
+    notebook = json.loads(notebook_path.read_text(encoding="utf-8"))
+
+    assert notebook["nbformat"] == 4
+    code_cells = [cell for cell in notebook["cells"] if cell["cell_type"] == "code"]
+    sources = ["".join(cell["source"]) for cell in code_cells]
+    assert any("os.chdir(project_root)" in source for source in sources)
+    assert any("from busan_imd.cluster_analysis import" in source for source in sources)
+    assert any("px.scatter" in source for source in sources)
+    assert any("px.imshow" in source for source in sources)
     assert all(cell["execution_count"] is None for cell in code_cells)
     assert all(cell["outputs"] == [] for cell in code_cells)
 
