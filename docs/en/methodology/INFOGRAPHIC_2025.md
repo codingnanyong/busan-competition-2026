@@ -32,8 +32,8 @@ requires additional local asset data on industry, commerce, tourism, and living 
 - [`busan_imd_one_page_2025.png`](../../../outputs/infographic/busan_imd_one_page_2025.png):
   quick-review preview
 - [`busan_admin_dong_action_map_2025.html`](../../../outputs/infographic/busan_admin_dong_action_map_2025.html):
-  standalone dashboard from three major-category maps to eight child categories, thirteen
-  indicators, and policy examples in 206 dongs
+  standalone 206-dong dashboard with a collapsible tree for three major categories, eight child
+  categories, thirteen indicators, and policy examples
 - [`busan_admin_dong_action_profile_2025.csv`](../../../outputs/infographic/busan_admin_dong_action_profile_2025.csv):
   six scores, vulnerability order, improvement direction, and relative low-deprivation domain
 - [INFOGRAPHIC_REPORT_2025.json](../../data/manifests/INFOGRAPHIC_REPORT_2025.json):
@@ -41,10 +41,11 @@ requires additional local asset data on industry, commerce, tourism, and living 
 
 The PNG is a screen preview; page-count and submission-format checks use the PDF.
 The HTML opens directly in a browser and has no external map or JavaScript-server dependency.
-Selecting one of eight improved categories recolors the map. Selecting a dong displays component
-indicators, deprivation percentiles, weights, estimated/proxy/interpolated evidence, confidence,
-and a conditional policy example. The contract and Myeongji regression check are documented in
-the [2025 category assessment](CATEGORY_ASSESSMENT_2025.md).
+Selecting a major tree node maps its weighted child-category composite. Selecting a child node
+switches the map to that category's score distribution. Selecting a dong then displays indicators,
+deprivation percentiles, weights, estimation reasons, confidence, and a conditional policy example.
+The contract and Myeongji regression check are documented in the
+[2025 category assessment](CATEGORY_ASSESSMENT_2025.md).
 
 ## Rebuild
 

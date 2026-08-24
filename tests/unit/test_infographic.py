@@ -218,7 +218,10 @@ def test_action_profiles_and_map_cover_every_dong(tmp_path) -> None:
     html = html_path.read_text(encoding="utf-8")
     assert html.count("data-code=") == 206
     assert "근거가 보이는 평가와 정책 예시" in html
-    assert html.count("data-major-category=") == 2
+    assert html.count('class="tree-major"') == 2
+    assert html.count('class="tree-child"') == len(categories)
+    assert 'role="tree"' in html
+    assert "function selectNode(nextMajor,nextCategory=null)" in html
     assert "큰 카테고리 점수 =" in html
     assert "하위 카테고리" in html
     assert "취약 백분위" in html

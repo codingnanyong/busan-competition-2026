@@ -358,7 +358,9 @@ def test_infographic_report_and_outputs_cover_cod23_scope() -> None:
         REPOSITORY_ROOT / report["output_paths"]["interactive_action_map"]
     ).read_text(encoding="utf-8")
     assert action_map.count("data-code=") == 206
-    assert action_map.count("data-major-category=") == 3
+    assert action_map.count('class="tree-major"') == 3
+    assert action_map.count('class="tree-child"') == 8
+    assert 'role="tree"' in action_map
     assert "큰 카테고리 점수 =" in action_map
 
 

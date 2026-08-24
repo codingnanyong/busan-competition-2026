@@ -590,10 +590,6 @@ def write_action_map(
             {value: index for index, value in enumerate(major_order)}
         )
     ).sort_values("_display_order")
-    buttons = "".join(
-        f'<button data-major-category="{row.major_category}">{row.major_category_label}</button>'
-        for row in major_rows.itertuples(index=False)
-    )
     labels = dict(
         major_rows[["major_category", "major_category_label"]].itertuples(
             index=False,
@@ -630,20 +626,55 @@ def write_action_map(
         )
         .to_dict()
     )
+    category_labels = dict(
+        child_rows[["category", "category_label"]].itertuples(index=False, name=None)
+    )
+    tree_branches: list[str] = []
+    for row in major_rows.itertuples(index=False):
+        child_nodes = "".join(
+            (
+                f'<button class="tree-child" data-major-category="{row.major_category}" '
+                f'data-category="{child["category"]}" role="treeitem">'
+                f'<span class="tree-line">└</span><span>{escape(child["label"])}</span>'
+                f'<small>{child["weight"]:.0%}</small></button>'
+            )
+            for child in children[row.major_category]
+        )
+        tree_branches.append(
+            f'<details class="tree-branch" data-branch="{row.major_category}" open>'
+            f'<summary class="tree-major" data-major-category="{row.major_category}" '
+            f'role="treeitem"><span>{escape(row.major_category_label)}</span>'
+            f'<small>종합분포</small></summary>'
+            f'<div class="tree-children" role="group">{child_nodes}</div></details>'
+        )
+    category_tree = "".join(tree_branches)
     document = f"""<!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
 <title>2025 부산 행정동 카테고리 평가·정책 대시보드</title><style>
 body{{margin:0;background:#f7f4ed;color:#18323d;font-family:Arial,'Noto Sans KR',sans-serif}}
-main{{max-width:1220px;margin:auto;padding:24px}} h1{{margin:0 0 8px;font-size:28px}}
+main{{max-width:1540px;margin:auto;padding:24px}} h1{{margin:0 0 8px;font-size:28px}}
 .note,.scores{{color:#5d7078;line-height:1.5}}
-.layout{{display:grid;grid-template-columns:2fr 1fr;gap:20px}}
+.layout{{display:grid;grid-template-columns:270px minmax(520px,2fr) minmax(330px,1fr);gap:16px}}
 .map,.card{{background:white;border:1px solid #d7ded9;border-radius:12px;padding:16px}}
 svg{{width:100%;height:70vh;min-height:540px}} path{{stroke:white;stroke-width:.55;cursor:pointer}}
 path:hover,path:focus{{stroke:#18323d;stroke-width:2}}
-.tabs{{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}}
-.tabs-label{{align-self:center;font-size:13px;font-weight:700;margin-right:4px}}
-button{{border:1px solid #d7ded9;background:white;border-radius:20px;padding:9px 15px}}
-button{{cursor:pointer}} button.active{{background:#18323d;color:white}}
+.category-tree{{align-self:start;position:sticky;top:16px}}
+.category-tree h2{{font-size:18px;margin:0 0 5px}}
+.category-tree>.scores{{font-size:12px;margin-top:0}}
+.tree-branch{{border-top:1px solid #d7ded9;padding:7px 0}}
+.tree-branch:last-child{{border-bottom:1px solid #d7ded9}}
+.tree-major{{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 8px;
+ cursor:pointer;border-radius:7px;font-weight:700}}
+.tree-major::marker{{color:#087e8b}}
+.tree-major small,.tree-child small{{margin-left:auto;color:#74858b;font-size:11px}}
+.tree-major.active{{background:#18323d;color:white}}
+.tree-major.active small{{color:#dce8e8}}
+.tree-children{{border-left:2px solid #c9d8d8;margin-left:13px;padding:3px 0 6px 8px}}
+.tree-child{{display:grid;grid-template-columns:18px 1fr auto;align-items:center;text-align:left;
+ width:100%;gap:3px;border:0;background:transparent;border-radius:7px;padding:9px 7px;
+ cursor:pointer;color:#29434c}}
+.tree-child:hover{{background:#eef5f4}} .tree-child.active{{background:#087e8b;color:white}}
+.tree-child.active small{{color:#dce8e8}} .tree-line{{color:#87a5a7}}
 .hierarchy{{background:#eaf2f2;border-left:5px solid #087e8b;border-radius:8px;padding:14px}}
 .hierarchy code{{background:white;padding:2px 5px;border-radius:4px}}
 .scale{{height:10px;background:linear-gradient(90deg,#fff7bc,#fdae61,#d7301f)}}
@@ -654,27 +685,36 @@ button{{cursor:pointer}} button.active{{background:#18323d;color:white}}
 .policy{{background:#f7f4ed;border-radius:9px;padding:12px;margin-top:18px}}
 .subcategory{{border-top:2px solid #d7ded9;margin-top:20px;padding-top:12px}}
 .subcategory h3{{margin-bottom:5px}}
+.child-overview{{display:grid;grid-template-columns:1fr auto;gap:4px 12px;
+ border-top:1px solid #d7ded9;padding:11px 0}}
+.child-overview strong{{color:#d84a3a}} .child-overview .scores{{grid-column:1/-1;font-size:12px}}
 .badge{{display:inline-block;border-radius:12px;padding:3px 8px;background:#edf0ed;font-size:12px}}
 .estimate{{border-left:4px solid #d84a3a;background:#fff4ed;padding:9px;margin:8px 0}}
 .observed{{border-left:4px solid #4f8a5b;background:#f2f8f2;padding:9px;margin:8px 0}}
 .trigger{{color:#d84a3a;font-weight:700}}
 .warning{{border-top:1px solid #d7ded9;padding-top:12px;font-size:12px}}
-@media(max-width:800px){{.layout{{grid-template-columns:1fr}}svg{{height:55vh;min-height:400px}}}}
+@media(max-width:1100px){{.layout{{grid-template-columns:240px 1fr}}.card#detail{{grid-column:1/-1}}
+ .category-tree{{position:static}}}}
+@media(max-width:720px){{.layout{{grid-template-columns:1fr}}.card#detail{{grid-column:auto}}
+ svg{{height:55vh;min-height:400px}}}}
 </style></head><body><main><h1>부산 206개 행정동: 근거가 보이는 평가와 정책 예시</h1>
 <div class="hierarchy"><b>읽는 순서</b><br>
-① 큰 카테고리 선택 → ② 지도에서 큰 카테고리 종합분포 확인 → ③ 행정동 선택 →
-④ 하위 카테고리와 평가지표·추정 사유 확인<br>
+① 왼쪽 트리에서 큰 카테고리 또는 하위 항목 선택 → ② 지도에서 선택 점수 분포 확인 →
+③ 행정동 선택 → ④ 평가지표·추정 사유·정책 예시 확인<br>
 <code>큰 카테고리 점수 = Σ(하위 카테고리 점수 × 표시된 가중치)</code></div>
 <p class="note">지도 색상은 13개 평가지표를 바로 섞은 값이 아닙니다. 먼저 지표를 이용해
 8개 하위 카테고리를 평가하고, 그 결과를 다시 가중합해 3개 큰 카테고리 분포를 만듭니다.
 추정·보정값은 <b>⚠ 추정값 사용</b>과 사용 사유로 표시합니다.</p>
-<div class="tabs"><span class="tabs-label">큰 카테고리</span>{buttons}</div>
-<div class="layout"><div class="map"><h2 id="map-title"></h2>
+<div class="layout"><nav class="card category-tree" aria-label="카테고리 선택 트리" role="tree">
+<h2>분석 카테고리</h2><p class="scores">▸를 눌러 하위 항목을 접거나 펼치고, 항목명을 선택하세요.</p>
+{category_tree}</nav><div class="map"><h2 id="map-title"></h2>
 <div class="scale"></div><div class="scale-label">
 <span>0 상대 저취약</span><span>100 상대 고취약</span></div>
-<svg viewBox="0 0 900 900" aria-label="부산 행정동별 큰 카테고리 종합분포">{''.join(paths)}</svg>
+<svg viewBox="0 0 900 900" aria-label="부산 행정동별 선택 카테고리 취약도 분포">
+{''.join(paths)}</svg>
 </div><aside class="card" id="detail"><h2>행정동을 선택하세요</h2>
-<p>큰 카테고리 구성, 하위 카테고리, 평가지표 순서로 표시됩니다.</p></aside></div>
+<p>트리에서 큰 카테고리를 선택하면 종합 결과를, 하위 항목을 선택하면
+세부 평가지표와 정책 예시를 표시합니다.</p></aside></div>
 <p class="note warning">70점 이상은 정책 확정이 아니라 추가 행정자료·현장 검증 후보입니다.
 기존 B-IMD 순위는 비교용이며 개선형 카테고리 점수와 혼합하지 않습니다.</p></main><script>
 const indicators={json.dumps(indicator_payload, ensure_ascii=False, separators=(',', ':'))};
@@ -683,14 +723,21 @@ const majorAssessments={json.dumps(major_payload, ensure_ascii=False, separators
 const children={json.dumps(children, ensure_ascii=False, separators=(',', ':'))};
 const policies={json.dumps(policy_payload, ensure_ascii=False, separators=(',', ':'))};
 const labels={json.dumps(labels, ensure_ascii=False, separators=(',', ':'))};
+const categoryLabels={json.dumps(category_labels, ensure_ascii=False, separators=(',', ':'))};
 const detail=document.getElementById('detail');
-let majorCategory='{major_categories[0]}';let selected=null;
+let majorCategory='{major_categories[0]}';let category=null;let selected=null;
 function color(score){{const hue=48-score*.45;return `hsl(${{hue}} 88% ${{62-score*.18}}%)`;}}
-function scoreOf(path){{return majorAssessments[path.dataset.code][majorCategory].score;}}
-function selectMajorCategory(next){{majorCategory=next;
- document.querySelectorAll('button').forEach(b=>
- b.classList.toggle('active',b.dataset.majorCategory===majorCategory));
- document.getElementById('map-title').textContent=labels[majorCategory]+' 종합 취약도 분포';
+function scoreOf(path){{return category
+ ?assessments[path.dataset.code][category].score
+ :majorAssessments[path.dataset.code][majorCategory].score;}}
+function selectNode(nextMajor,nextCategory=null){{majorCategory=nextMajor;category=nextCategory;
+ document.querySelectorAll('.tree-major').forEach(node=>node.classList.toggle('active',
+  category===null&&node.dataset.majorCategory===majorCategory));
+ document.querySelectorAll('.tree-child').forEach(node=>node.classList.toggle('active',
+  node.dataset.category===category));
+ const selectedLabel=category?categoryLabels[category]:labels[majorCategory];
+ const levelLabel=category?'하위 카테고리':'큰 카테고리 종합';
+ document.getElementById('map-title').textContent=selectedLabel+' · '+levelLabel+' 취약도 분포';
  document.querySelectorAll('path').forEach(p=>p.style.fill=color(scoreOf(p)));
  if(selected)show({{target:selected}});
 }}
@@ -717,24 +764,34 @@ function childHtml(code,child){{const a=assessments[code][child.category];
  <p>주관: ${{policy.lead}}</p><p>${{policy.example}}</p>
  <p>성과지표: ${{policy.monitor}}</p><p class="warning">${{policy.limit}}</p></div>
  </section>`;}}
+function childOverviewHtml(code,child){{const a=assessments[code][child.category];return `
+ <div class="child-overview"><span>${{child.label}} · 가중치 ${{child.weight}}</span>
+ <strong>${{a.score.toFixed(1)}}</strong><span class="scores">신뢰 ${{a.confidence}} ·
+ 임계지표 ${{a.triggers}}</span></div>`;}}
 function show(e){{const d=e.target.dataset;if(!d.name)return;selected=e.target;
  const major=majorAssessments[d.code][majorCategory];
  const gate=major.status==='candidate_after_validation'
   ?'<span class="trigger">검증 후 큰 카테고리 정책검토 후보</span>'
   :'<span class="badge">모니터링</span>';
- const childSections=children[majorCategory].map(c=>childHtml(d.code,c)).join('');
- detail.innerHTML=`<h2>${{d.name}}</h2><p class="scores">${{d.rank}}</p>
- <h3>큰 카테고리 · ${{labels[majorCategory]}} ${{major.score.toFixed(1)}}</h3>
- <p>종합 신뢰 <span class="badge">${{major.confidence}}</span> · ${{gate}}</p>
- <p class="scores">70점 이상 하위 카테고리: ${{major.triggered_children}}</p>
- <p class="scores">아래 하위 카테고리 점수에 표시된 가중치를 곱해 합산한 결과입니다.</p>
- ${{childSections}}`;
+ const heading=`<h2>${{d.name}}</h2><p class="scores">${{d.rank}}</p>`;
+ if(category){{const child=children[majorCategory].find(c=>c.category===category);
+  detail.innerHTML=heading+`<p class="scores">상위 · ${{labels[majorCategory]}}
+  종합점수 ${{major.score.toFixed(1)}}</p>`+childHtml(d.code,child);return;}}
+ const childOverview=children[majorCategory].map(c=>childOverviewHtml(d.code,c)).join('');
+ detail.innerHTML=heading+`<h3>큰 카테고리 · ${{labels[majorCategory]}}
+ ${{major.score.toFixed(1)}}</h3><p>종합 신뢰 <span class="badge">${{major.confidence}}</span>
+ · ${{gate}}</p><p class="scores">70점 이상 하위 카테고리:
+ ${{major.triggered_children}}</p><p class="scores">하위 점수 × 가중치의 합산 결과입니다.
+ 트리에서 하위 항목을 선택하면 평가지표와 정책 예시가 열립니다.</p>${{childOverview}}`;
 }}
 document.querySelectorAll('path').forEach(p=>{{p.tabIndex=0;p.addEventListener('mouseenter',show);
 p.addEventListener('click',show);p.addEventListener('focus',show);}});
-document.querySelectorAll('button').forEach(b=>
-b.addEventListener('click',()=>selectMajorCategory(b.dataset.majorCategory)));
-selectMajorCategory(majorCategory);
+document.querySelectorAll('.tree-major').forEach(node=>node.addEventListener('click',()=>
+ selectNode(node.dataset.majorCategory)));
+document.querySelectorAll('.tree-child').forEach(node=>node.addEventListener('click',()=>{{
+ node.closest('details').open=true;selectNode(node.dataset.majorCategory,node.dataset.category);
+}}));
+selectNode(majorCategory);
 </script></body></html>"""
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(document, encoding="utf-8", newline="\n")
