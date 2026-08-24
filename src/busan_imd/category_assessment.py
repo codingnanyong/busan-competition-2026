@@ -32,6 +32,10 @@ SPEC_COLUMNS = [
     "direction",
     "weight",
     "evidence_type",
+    "value_status_ko",
+    "estimate_used",
+    "estimation_method_ko",
+    "estimation_reason",
     "base_confidence",
     "quality_note",
 ]
@@ -79,6 +83,11 @@ def load_spec(path: Path = DEFAULT_SPEC) -> pd.DataFrame:
         raise ValueError("Category assessment indicators must be unique")
     if not set(spec["direction"]) <= {"higher", "lower"}:
         raise ValueError("Category assessment direction must be higher or lower")
+    estimate_flags = spec["estimate_used"].astype(str).str.lower()
+    if not set(estimate_flags) <= {"true", "false"}:
+        raise ValueError("Category assessment estimate_used must be true or false")
+    if spec[["value_status_ko", "estimation_method_ko", "estimation_reason"]].isna().any().any():
+        raise ValueError("Category assessment estimation disclosure must be complete")
     weights = spec.groupby("category")["weight"].sum()
     if not np.allclose(weights.to_numpy(dtype=float), 1.0):
         raise ValueError("Category assessment weights must sum to one within each category")
@@ -135,6 +144,10 @@ def build(
                     "within_category_weight": float(rule.weight),
                     "weighted_score": (score * float(rule.weight)).round(6),
                     "evidence_type": rule.evidence_type,
+                    "value_status_ko": rule.value_status_ko,
+                    "estimate_used": str(rule.estimate_used).lower() == "true",
+                    "estimation_method_ko": rule.estimation_method_ko,
+                    "estimation_reason": rule.estimation_reason,
                     "confidence_level": _confidence(derived, rule),
                     "quality_note": rule.quality_note,
                     "indicator_policy_triggered": score >= 70,

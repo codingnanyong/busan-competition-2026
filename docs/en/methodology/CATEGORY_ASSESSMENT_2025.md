@@ -10,13 +10,23 @@ usable, but their evidence type, row-level confidence, and policy limitation are
 
 - Split housing from transit and air exposure from heat response, producing eight categories.
 - Stabilize small-area facility rates toward the Busan-wide rate using a 5,000-person prior.
-- Record `evidence_type`, `confidence_level`, and `quality_note` for every indicator.
+- Record `estimate_used`, estimation method and reason, `confidence_level`, and
+  `quality_note` for every indicator.
 - Treat a Busan-relative percentile of 70 or more as a validation candidate, not a decision.
 - Keep the baseline B-IMD rank for comparison only; do not combine it with improved scores.
 
 The versioned indicator contract is
 [CATEGORY_ASSESSMENT_SPEC_2025.csv](../../data/CATEGORY_ASSESSMENT_SPEC_2025.csv), and conditional
 examples are in [CATEGORY_POLICY_CATALOG_2025.csv](../../data/CATEGORY_POLICY_CATALOG_2025.csv).
+
+## Estimation disclosure
+
+Nine of the thirteen indicators use estimation, reconstruction, interpolation, or small-area
+shrinkage. The dashboard marks each one as `estimated value used` and displays both the method
+and why it was necessary. The reasons distinguish unavailable dong-level income observations,
+small population denominators, reconstructed operating-facility inventories, the absence of an
+air monitor in every dong, and mixed reference dates. The other four indicators are marked as
+not using missing-value estimation, while their proxy or lower-bound limitations remain visible.
 
 ## Myeongji regression check
 

@@ -48,6 +48,9 @@ def test_build_creates_complete_transparent_category_contract() -> None:
     assert len(categories) == 206 * 8
     assert categories.groupby("admin_dong_code")["category"].nunique().eq(8).all()
     assert set(indicators["confidence_level"]) == {"low", "medium_low", "medium"}
+    assert indicators["estimate_used"].sum() == 206 * 9
+    assert indicators.loc[indicators["estimate_used"], "estimation_reason"].str.len().gt(0).all()
+    assert indicators.loc[indicators["estimate_used"], "estimation_method_ko"].ne("해당 없음").all()
     assert set(categories["policy_review_status"]) <= {
         "candidate_after_validation",
         "monitor",

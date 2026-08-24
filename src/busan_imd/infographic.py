@@ -501,12 +501,17 @@ def write_action_map(
 
     indicator_payload: dict[str, dict[str, list[dict[str, Any]]]] = {}
     for row in indicator_scores.itertuples(index=False):
+        estimate_used = str(row.estimate_used).strip().lower() in {"true", "1"}
         item = {
             "label": row.indicator_label,
             "raw": round(float(row.raw_or_derived_value), 2),
             "percentile": round(float(row.deprivation_percentile_0_100), 1),
             "weight": float(row.within_category_weight),
             "evidence": row.evidence_type,
+            "value_status": row.value_status_ko,
+            "estimate_used": estimate_used,
+            "estimation_method": row.estimation_method_ko,
+            "estimation_reason": row.estimation_reason,
             "confidence": row.confidence_level,
             "quality": row.quality_note,
             "triggered": bool(row.indicator_policy_triggered),
@@ -576,11 +581,13 @@ button{{cursor:pointer}} button.active{{background:#18323d;color:white}}
 .bar i{{display:block;height:100%;background:#d84a3a}}
 .policy{{background:#f7f4ed;border-radius:9px;padding:12px;margin-top:18px}}
 .badge{{display:inline-block;border-radius:12px;padding:3px 8px;background:#edf0ed;font-size:12px}}
+.estimate{{border-left:4px solid #d84a3a;background:#fff4ed;padding:9px;margin:8px 0}}
+.observed{{border-left:4px solid #4f8a5b;background:#f2f8f2;padding:9px;margin:8px 0}}
 .trigger{{color:#d84a3a;font-weight:700}}
 .warning{{border-top:1px solid #d7ded9;padding-top:12px;font-size:12px}}
 @media(max-width:800px){{.layout{{grid-template-columns:1fr}}svg{{height:55vh;min-height:400px}}}}
 </style></head><body><main><h1>부산 206개 행정동: 근거가 보이는 평가와 정책 예시</h1>
-<p class="note">추정값은 제외하지 않고 추정·대리·보간 여부와 신뢰도를 표시합니다.
+<p class="note">추정·보정값은 숨기지 않고 <b>추정값 사용</b> 표시와 사용 사유를 제공합니다.
 카테고리를 선택한 뒤 행정동을 선택하면 세부지표와 조건부 정책 예시가 나타납니다.</p>
 <div class="tabs">{buttons}</div><div class="layout"><div class="map"><h2 id="map-title"></h2>
 <div class="scale"></div><div class="scale-label">
@@ -605,12 +612,17 @@ function selectCategory(next){{category=next;document.querySelectorAll('button')
 }}
 function show(e){{const d=e.target.dataset;if(!d.name)return;selected=e.target;
  const a=assessments[d.code][category];const policy=policies[category];
- const metrics=indicators[d.code][category].map(m=>`<div class="metric">
+ const metrics=indicators[d.code][category].map(m=>{{const disclosure=m.estimate_used
+  ?`<div class="estimate"><b>⚠ 추정값 사용</b><br>방법: ${{m.estimation_method}}<br>
+  사용 사유: ${{m.estimation_reason}}</div>`
+  :`<div class="observed"><b>추정값 미사용</b> · ${{m.value_status}}<br>
+  산출 설명: ${{m.estimation_reason}}</div>`;return `<div class="metric">
  <div class="metric-head"><b>${{m.label}}</b><span>${{m.raw}}</span></div>
  <div class="scores">취약 백분위 ${{m.percentile}} · 가중치 ${{m.weight}} ·
- 근거 ${{m.evidence}} · 신뢰 ${{m.confidence}}</div>
+ 값 구분 ${{m.value_status}} · 신뢰 ${{m.confidence}}</div>${{disclosure}}
  <div class="bar"><i style="width:${{m.percentile}}%"></i></div>
- <div class="scores">${{m.quality}}</div></div>`).join('');
+ <div class="scores">원자료 한계: ${{m.quality}} ·
+ 기술 근거: ${{m.evidence}}</div></div>`;}}).join('');
  const gate=a.status==='candidate_after_validation'
   ?'<span class="trigger">검증 후 정책검토 후보</span>':'<span class="badge">모니터링</span>';
  detail.innerHTML=`<h2>${{d.name}}</h2><p class="scores">${{d.rank}}</p>

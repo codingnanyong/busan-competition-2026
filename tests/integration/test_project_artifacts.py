@@ -382,6 +382,15 @@ def test_category_assessment_is_complete_and_flags_estimation() -> None:
     ]
     assert len(myeongji) == 2
     assert myeongji["category_score_0_100"].lt(70).all()
+    indicators = pd.read_csv(
+        REPOSITORY_ROOT / report["output_paths"]["indicator_scores"]
+    )
+    assert {"estimate_used", "estimation_method_ko", "estimation_reason"} <= set(
+        indicators.columns
+    )
+    estimated = indicators[indicators["estimate_used"]]
+    assert len(estimated) == 206 * 9
+    assert estimated["estimation_reason"].str.len().gt(0).all()
 
 
 def test_dataset_audit_is_valid() -> None:

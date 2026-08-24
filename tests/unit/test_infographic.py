@@ -151,6 +151,10 @@ def test_action_profiles_and_map_cover_every_dong(tmp_path) -> None:
                 "deprivation_percentile_0_100": 75,
                 "within_category_weight": 1,
                 "evidence_type": "proxy",
+                "value_status_ko": "추정·보정값",
+                "estimate_used": True,
+                "estimation_method_ko": "소지역 보정",
+                "estimation_reason": "작은 인구 분모의 과대변동 완화",
                 "confidence_level": "medium_low",
                 "quality_note": "현장 검증 필요",
                 "indicator_policy_triggered": True,
@@ -191,6 +195,8 @@ def test_action_profiles_and_map_cover_every_dong(tmp_path) -> None:
     assert "근거가 보이는 평가와 정책 예시" in html
     assert html.count("data-category=") == 8
     assert "취약 백분위" in html
+    assert "추정값 사용" in html
+    assert "사용 사유" in html
 
 
 def test_render_rejects_incomplete_canonical_population(tmp_path) -> None:
