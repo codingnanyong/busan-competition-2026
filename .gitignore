@@ -12,3 +12,7 @@ outputs/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 !outputs/.gitkeep
+!outputs/infographic/
+!outputs/infographic/busan_imd_one_page_2025.svg
+!outputs/infographic/busan_imd_one_page_2025.pdf
+!outputs/infographic/busan_imd_one_page_2025.png

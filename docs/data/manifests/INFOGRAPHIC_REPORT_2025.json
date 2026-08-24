@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-24T02:57:47+00:00",
+  "reference_year": 2025,
+  "artifact_status": "submission_draft",
+  "format": "A4 portrait one-page infographic",
+  "page_count": 1,
+  "priority_area_count": 21,
+  "double_burden_area_count": 4,
+  "top_10_names": [
+    "사상구 모라3동",
+    "동구 초량6동",
+    "해운대구 반여3동",
+    "동구 수정4동",
+    "북구 덕천3동",
+    "사하구 감천2동",
+    "동구 수정5동",
+    "동구 수정1동",
+    "서구 초장동",
+    "해운대구 반여2동"
+  ],
+  "policy_candidate_count": 5,
+  "font_family": "Noto Sans CJK JP",
+  "input_paths": {
+    "composite_index": "data/processed/scores/2025/busan_admin_dong_imd_2025.csv",
+    "boundaries": "data/raw/sgis/admin_boundaries/2025/busan_admin_dong_boundaries_2025_valid.geojson",
+    "priority_areas": "data/processed/scores/2025/busan_admin_dong_priority_areas_2025.csv",
+    "environmental_overlay": "data/processed/scores/2025/busan_admin_dong_environmental_overlay_2025.csv",
+    "policy_matrix": "data/processed/scores/2025/busan_admin_dong_policy_matrix_2025.csv"
+  },
+  "input_sha256": {
+    "composite_index": "380EB11360B40A6C8E480B3A1D2EBE40DD0EC11FFED20580E0D72563CBB1EC07",
+    "boundaries": "7CC99595FC753F81C7B9A9D480B8EBBF3114808A1496D46FC6662C21BF362487",
+    "priority_areas": "848546B9B7BE40932CBF9B4D5B3B79D6151B8FF680F987A4E1EB9A85705566C9",
+    "environmental_overlay": "01BEBFDEE28F4CDC8C3F2120392B6D31210856844667CA2556B67FA244685FA0",
+    "policy_matrix": "0B85E066632D6A7C6C004ED593982A1B744592EFF2E674A9B4A79C92A2FA354F"
+  },
+  "output_paths": {
+    "svg": "outputs/infographic/busan_imd_one_page_2025.svg",
+    "pdf": "outputs/infographic/busan_imd_one_page_2025.pdf",
+    "png": "outputs/infographic/busan_imd_one_page_2025.png"
+  },
+  "output_sha256": {
+    "svg": "38AB1B9F6B6ADFF932B730F651F9B02FDCFDBB0C695DE1424534106ABC84ED70",
+    "pdf": "05A2FB15C41D272D582AA80381005320AEDE5A37E09F6DFA26F3485B04529D15",
+    "png": "B2D5D6175CFA72EBD0E96A6C27E025BAA5EAE74B647E30FDEADF1FF3D890A4BC"
+  },
+  "interpretation": "Public-data experimental screening; not an official index, causal estimate, individual eligibility rule, or final funding decision"
+}

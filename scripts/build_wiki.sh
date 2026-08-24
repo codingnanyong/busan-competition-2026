@@ -43,6 +43,7 @@ publish_page docs/methodology/PRIORITY_AREAS_2025.md KO-Priority-Areas-2025
 publish_page docs/methodology/CLUSTER_ANALYSIS_2025.md KO-Cluster-Analysis-2025
 publish_page docs/methodology/ENVIRONMENTAL_OVERLAY_2025.md KO-Environmental-Overlay-2025
 publish_page docs/methodology/POLICY_MATRIX_2025.md KO-Policy-Matrix-2025
+publish_page docs/methodology/INFOGRAPHIC_2025.md KO-Infographic-2025
 publish_page docs/methodology/INDICATOR_SPEC.md KO-Indicator-Spec
 publish_page docs/methodology/LIMITATIONS.md KO-Limitations
 publish_page docs/methodology/EXPANSION_MODEL.md KO-Expansion-Model
@@ -62,6 +63,7 @@ publish_page docs/en/methodology/PRIORITY_AREAS_2025.md EN-Priority-Areas-2025
 publish_page docs/en/methodology/CLUSTER_ANALYSIS_2025.md EN-Cluster-Analysis-2025
 publish_page docs/en/methodology/ENVIRONMENTAL_OVERLAY_2025.md EN-Environmental-Overlay-2025
 publish_page docs/en/methodology/POLICY_MATRIX_2025.md EN-Policy-Matrix-2025
+publish_page docs/en/methodology/INFOGRAPHIC_2025.md EN-Infographic-2025
 publish_page docs/en/methodology/INDICATOR_SPEC.md EN-Indicator-Spec
 publish_page docs/en/methodology/LIMITATIONS.md EN-Limitations
 publish_page docs/en/methodology/EXPANSION_MODEL.md EN-Expansion-Model
@@ -97,6 +99,7 @@ printf '%s\n' \
   '- [[2025 취약유형 군집 검토|KO-Cluster-Analysis-2025]]' \
   '- [[2025 환경노출 오버레이|KO-Environmental-Overlay-2025]]' \
   '- [[2025 정책 우선순위 매트릭스|KO-Policy-Matrix-2025]]' \
+  '- [[2025 1페이지 인포그래픽|KO-Infographic-2025]]' \
   '- [[지표 명세|KO-Indicator-Spec]]' \
   '- [[한계 및 해석|KO-Limitations]]' \
   '- [[확장 모델|KO-Expansion-Model]]' \
@@ -118,6 +121,7 @@ printf '%s\n' \
   '- [[2025 Deprivation Clustering Review|EN-Cluster-Analysis-2025]]' \
   '- [[2025 Environmental Overlay|EN-Environmental-Overlay-2025]]' \
   '- [[2025 Policy-Priority Matrix|EN-Policy-Matrix-2025]]' \
+  '- [[2025 One-Page Infographic|EN-Infographic-2025]]' \
   '- [[Indicator Specification|EN-Indicator-Spec]]' \
   '- [[Limitations|EN-Limitations]]' \
   '- [[Expansion Model|EN-Expansion-Model]]' \

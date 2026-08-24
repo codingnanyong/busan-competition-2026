@@ -7,3 +7,4 @@
 *.md text eol=lf
 *.csv text eol=lf
 *.json text eol=lf
+*.svg text eol=lf

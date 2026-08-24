@@ -1,3 +1,4 @@
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -72,6 +73,7 @@ def test_project_structure_and_required_documents() -> None:
         "docs/data/manifests/CLUSTER_ANALYSIS_REPORT_2025.json",
         "docs/data/manifests/ENVIRONMENTAL_OVERLAY_REPORT_2025.json",
         "docs/data/manifests/POLICY_MATRIX_REPORT_2025.json",
+        "docs/data/manifests/INFOGRAPHIC_REPORT_2025.json",
         "docs/data/POLICY_ACTION_CATALOG_2025.csv",
         "docs/data/DATA_PORTABILITY.md",
         "docs/data/manifests/CONSUMER_SALES_MANIFEST_2025.json",
@@ -92,6 +94,11 @@ def test_project_structure_and_required_documents() -> None:
         "docs/en/methodology/ENVIRONMENTAL_OVERLAY_2025.md",
         "docs/methodology/POLICY_MATRIX_2025.md",
         "docs/en/methodology/POLICY_MATRIX_2025.md",
+        "docs/methodology/INFOGRAPHIC_2025.md",
+        "docs/en/methodology/INFOGRAPHIC_2025.md",
+        "outputs/infographic/busan_imd_one_page_2025.svg",
+        "outputs/infographic/busan_imd_one_page_2025.pdf",
+        "outputs/infographic/busan_imd_one_page_2025.png",
         "notebooks/01_candidate_profile_eda.ipynb",
         "notebooks/02_deprivation_cluster_review.ipynb",
         "notebooks/03_environmental_overlay_review.ipynb",
@@ -309,6 +316,25 @@ def test_policy_matrix_report_records_cod22_scope() -> None:
         re.fullmatch(r"[0-9A-F]{64}", value)
         for value in (*report["input_sha256"].values(), report["output_sha256"])
     )
+
+
+def test_infographic_report_and_outputs_cover_cod23_scope() -> None:
+    report = read_json("docs/data/manifests/INFOGRAPHIC_REPORT_2025.json")
+
+    assert report["artifact_status"] == "submission_draft"
+    assert report["page_count"] == 1
+    assert report["priority_area_count"] == 21
+    assert report["double_burden_area_count"] == 4
+    assert report["policy_candidate_count"] == 5
+    assert len(report["top_10_names"]) == 10
+    for format_name, relative_path in report["output_paths"].items():
+        path = REPOSITORY_ROOT / relative_path
+        actual_hash = hashlib.sha256(path.read_bytes()).hexdigest().upper()
+        assert actual_hash == report["output_sha256"][format_name]
+    pdf = (REPOSITORY_ROOT / report["output_paths"]["pdf"]).read_bytes()
+    assert len(re.findall(rb"/Type\s*/Page\b", pdf)) == 1
+    svg = (REPOSITORY_ROOT / report["output_paths"]["svg"]).read_text(encoding="utf-8")
+    assert "부산의 생활취약성" in svg
 
 
 def test_dataset_audit_is_valid() -> None:
