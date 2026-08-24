@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.6.0] - 2026-08-24
+
+### Added
+
+- 부산 206개 행정동의 취약 특성이 연속적이라는 점을 검증하는 군집분석 검토
+- 다중결핍과 대기오염 노출을 함께 살피는 환경 이중부담 분석
+- 행정동별 취약 원인을 실행 가능한 정책 예시로 연결하는 정책 우선순위 매트릭스
+- 3개 큰 카테고리, 8개 하위 카테고리와 13개 평가지표를 탐색하는 트리형 생활여건 지도
+- 추정·대리·보간값의 사용 여부와 사유를 결과 행마다 공개하는 근거·신뢰도 자료
+- Clustering review, environmental double-burden overlay, and policy-priority matrix
+- Interactive living-condition map spanning three major categories, eight child categories,
+  and 13 indicators
+
+### Changed
+
+- 단일 종합점수 중심의 표현을 카테고리별 점수·근거·정책 방향을 함께 읽는 구조로 확장
+- 지도 제목과 설명을 생활여건 진단 목적에 맞게 다듬고 `생활 인프라·주거` 용어를 적용
+- 분석 재생성 파이프라인과 국문·영문 방법론을 정책 시각화 단계까지 확장
+- Expanded the reproducible pipeline and bilingual methodology through policy visualization
+
+### Fixed
+
+- 명지권 등 신규 개발지역의 교육시설 접근성이 과도하게 취약해 보이지 않도록 보정 근거를 명시
+- 카테고리 점수 산출 전에 하위 지표를 평가하도록 계층 구조와 화면 설명을 일치시킴
+- Added explicit estimation reasons and aligned the interface with the hierarchical scoring model
+
 ## [0.5.0] - 2026-08-23
 
 ### Added
