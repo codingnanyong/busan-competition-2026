@@ -21,8 +21,8 @@ def inputs() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     assignments = []
     for index in range(21):
         first = index < 5
-        dominant = "education" if first else "employment"
-        secondary = "living_environment" if first else "income"
+        dominant = "education" if first else "income"
+        secondary = "living_environment" if first else "employment"
         row = {
             "admin_dong_code": f"{index:03d}",
             "sigungu_name": "District",
@@ -30,7 +30,7 @@ def inputs() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
             "b_imd_rank": index + 1,
             "cluster_id": "type_1" if first else "type_2",
             "cluster_label": (
-                "education_living_environment" if first else "employment_income"
+                "education_living_environment" if first else "income_employment"
             ),
             "dominant_domain": dominant,
             "secondary_domain": secondary,
@@ -96,6 +96,15 @@ def test_build_creates_type_and_overlay_policy_candidates() -> None:
     assert report["unique_policy_count"] == 4
     assert set(matrix["decision_status"]) == {"candidate_for_field_validation"}
     assert matrix.groupby("cluster_id").size().to_dict() == {"type_1": 2, "type_2": 3}
+    type_2_domains = matrix[
+        (matrix["cluster_id"] == "type_2")
+        & matrix["policy_trigger"].str.startswith("domain:")
+    ]
+    assert type_2_domains["policy_priority"].tolist() == [1, 2]
+    assert type_2_domains["policy_trigger"].tolist() == [
+        "domain:income",
+        "domain:employment",
+    ]
     air = matrix[matrix["policy_trigger"] == "overlay:double_burden"]
     assert air.set_index("cluster_id")["target_area_count"].to_dict() == {
         "type_1": 1,

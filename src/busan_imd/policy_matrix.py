@@ -265,9 +265,14 @@ def build(
             }
         )
 
-    matrix = pd.DataFrame.from_records(records, columns=MATRIX_COLUMNS).sort_values(
-        ["cluster_id", "policy_trigger", "policy_priority"], kind="stable"
+    matrix = pd.DataFrame.from_records(records, columns=MATRIX_COLUMNS)
+    matrix["_trigger_group"] = np.where(
+        matrix["policy_trigger"].str.startswith("domain:"), 0, 1
     )
+    matrix = matrix.sort_values(
+        ["cluster_id", "_trigger_group", "policy_priority", "policy_trigger"],
+        kind="stable",
+    ).drop(columns="_trigger_group")
     report = {
         "schema_version": 1,
         "generated_at": datetime.now(UTC).replace(microsecond=0).isoformat(),
