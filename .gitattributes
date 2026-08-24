@@ -8,3 +8,4 @@
 *.csv text eol=lf
 *.json text eol=lf
 *.svg text eol=lf
+*.html text eol=lf
