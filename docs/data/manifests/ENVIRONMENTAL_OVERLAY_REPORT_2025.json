@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-24T02:18:16+00:00",
+  "reference_year": 2025,
+  "record_count": 206,
+  "analysis_scope": "ambient particulate exposure and particulate-independent social vulnerability overlap",
+  "exposure_definition": "mean of Busan-wide percentile ranks for annual 2025 PM2.5 and PM10 IDW estimates",
+  "high_exposure_rule": "top 25 percent by particulate exposure score",
+  "high_exposure_count": 52,
+  "social_vulnerability_definition": "published B-IMD weights renormalized across income, employment, education, health, and housing/access; the living-environment domain is excluded to avoid reusing PM2.5",
+  "social_domain_published_weights": {
+    "income": 0.225,
+    "employment": 0.225,
+    "education": 0.135,
+    "health": 0.135,
+    "housing_access": 0.093
+  },
+  "priority_area_rule": "particulate-free B-IMD decile 1",
+  "priority_area_count": 21,
+  "double_burden_rule": "high particulate exposure and particulate-free B-IMD decile 1",
+  "double_burden_count": 4,
+  "category_counts": {
+    "double_burden": 4,
+    "high_air_only": 48,
+    "neither": 137,
+    "social_priority_only": 17
+  },
+  "spearman_correlations_with_particulate_free_b_imd": {
+    "annual_pm25_ug_m3_idw_2025": -0.148637,
+    "annual_pm10_ug_m3_idw_2025": -0.271132,
+    "particulate_exposure_score_0_100": -0.225098
+  },
+  "particulate_exposure_score_by_priority_status": {
+    "priority_area": {
+      "mean": 42.059639,
+      "median": 38.592233
+    },
+    "other_area": {
+      "mean": 51.171609,
+      "median": 48.543689
+    }
+  },
+  "double_burden_areas": [
+    {
+      "admin_dong_code": "21150540",
+      "sigungu_name": "사상구",
+      "admin_dong_name": "모라3동",
+      "b_imd_rank": 1,
+      "particulate_free_b_imd_rank": 2,
+      "particulate_exposure_rank": 19
+    },
+    {
+      "admin_dong_code": "21030590",
+      "sigungu_name": "동구",
+      "admin_dong_name": "수정4동",
+      "b_imd_rank": 4,
+      "particulate_free_b_imd_rank": 6,
+      "particulate_exposure_rank": 43
+    },
+    {
+      "admin_dong_code": "21030560",
+      "sigungu_name": "동구",
+      "admin_dong_name": "수정1동",
+      "b_imd_rank": 8,
+      "particulate_free_b_imd_rank": 11,
+      "particulate_exposure_rank": 39
+    },
+    {
+      "admin_dong_code": "21120550",
+      "sigungu_name": "강서구",
+      "admin_dong_name": "가락동",
+      "b_imd_rank": 11,
+      "particulate_free_b_imd_rank": 12,
+      "particulate_exposure_rank": 29
+    }
+  ],
+  "port_industrial_overlay": {
+    "status": "not_evaluated_no_versioned_site_geometry",
+    "reason": "No reproducible 2025 port or industrial-complex boundary dataset is present in the project data inventory",
+    "interpretation_limit": "Ambient particulate overlap must not be attributed to ports or industrial complexes without source-location and dispersion evidence"
+  },
+  "decision": "use_for_particulate_independent_double_burden_screening_only",
+  "input_paths": {
+    "composite_index": "data/processed/scores/2025/busan_admin_dong_imd_2025.csv",
+    "standardized_profile": "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv"
+  },
+  "input_sha256": {
+    "composite_index": "380EB11360B40A6C8E480B3A1D2EBE40DD0EC11FFED20580E0D72563CBB1EC07",
+    "standardized_profile": "DA9FD3DF576A6C373312D61957AD362EC26BDD4469F713A34BE1442FB759C88F"
+  },
+  "output_path": "data/processed/scores/2025/busan_admin_dong_environmental_overlay_2025.csv",
+  "output_sha256": "01BEBFDEE28F4CDC8C3F2120392B6D31210856844667CA2556B67FA244685FA0"
+}

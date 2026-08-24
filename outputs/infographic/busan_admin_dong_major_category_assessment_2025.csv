@@ -1,0 +1,619 @@
+﻿admin_dong_code,sigungu_name,admin_dong_name,major_category,major_category_label,major_category_score_0_100,child_category_count,triggered_child_categories,major_category_confidence,policy_review_status
+21150570,사상구,괘법동,environment_climate_response,환경·기후 대응,91.2926825,2,대기오염 노출|폭염 대응,low,candidate_after_validation
+21150640,사상구,엄궁동,environment_climate_response,환경·기후 대응,89.926829,2,대기오염 노출|폭염 대응,low,candidate_after_validation
+21150610,사상구,주례2동,environment_climate_response,환경·기후 대응,88.9268295,2,대기오염 노출|폭염 대응,low,candidate_after_validation
+21150620,사상구,주례3동,environment_climate_response,환경·기후 대응,86.7317075,2,대기오염 노출|폭염 대응,low,candidate_after_validation
+21150520,사상구,모라1동,environment_climate_response,환경·기후 대응,85.4146345,2,대기오염 노출|폭염 대응,low,candidate_after_validation
+21150630,사상구,학장동,environment_climate_response,환경·기후 대응,85.0487805,2,대기오염 노출|폭염 대응,low,candidate_after_validation
+21120562,강서구,신호동,environment_climate_response,환경·기후 대응,81.341463,2,대기오염 노출,low,candidate_after_validation
+21060570,동래구,온천3동,environment_climate_response,환경·기후 대응,79.29268300000001,2,대기오염 노출|폭염 대응,low,candidate_after_validation
+21150560,사상구,덕포2동,environment_climate_response,환경·기후 대응,78.7560975,2,대기오염 노출,low,candidate_after_validation
+21150550,사상구,덕포1동,environment_climate_response,환경·기후 대응,78.29268300000001,2,대기오염 노출,low,candidate_after_validation
+21120530,강서구,강동동,environment_climate_response,환경·기후 대응,77.4634145,2,대기오염 노출,low,candidate_after_validation
+21150650,사상구,감전동,environment_climate_response,환경·기후 대응,77.1463415,2,대기오염 노출,low,candidate_after_validation
+21050660,부산진구,부암3동,environment_climate_response,환경·기후 대응,77.0,2,대기오염 노출,low,candidate_after_validation
+21120600,강서구,명지2동,environment_climate_response,환경·기후 대응,76.97561,2,대기오염 노출,low,candidate_after_validation
+21060550,동래구,온천1동,environment_climate_response,환경·기후 대응,76.8048785,2,대기오염 노출|폭염 대응,low,candidate_after_validation
+21060560,동래구,온천2동,environment_climate_response,환경·기후 대응,76.4390245,2,대기오염 노출,low,candidate_after_validation
+21130580,연제구,연산4동,environment_climate_response,환경·기후 대응,76.2682925,2,대기오염 노출|폭염 대응,low,candidate_after_validation
+21020530,서구,동대신3동,environment_climate_response,환경·기후 대응,73.24390249999999,2,대기오염 노출,low,candidate_after_validation
+21150600,사상구,주례1동,environment_climate_response,환경·기후 대응,72.9268295,2,대기오염 노출,low,candidate_after_validation
+21030530,동구,초량3동,environment_climate_response,환경·기후 대응,72.02439,2,대기오염 노출,low,candidate_after_validation
+21100550,사하구,당리동,environment_climate_response,환경·기후 대응,71.6585365,2,대기오염 노출|폭염 대응,low,candidate_after_validation
+21150540,사상구,모라3동,environment_climate_response,환경·기후 대응,71.5365855,2,대기오염 노출,low,candidate_after_validation
+21130530,연제구,거제3동,environment_climate_response,환경·기후 대응,71.0731705,2,대기오염 노출,low,candidate_after_validation
+21100570,사하구,하단2동,environment_climate_response,환경·기후 대응,70.95121900000001,2,대기오염 노출,low,candidate_after_validation
+21130600,연제구,연산6동,environment_climate_response,환경·기후 대응,70.585366,2,폭염 대응,low,candidate_after_validation
+21110600,금정구,부곡4동,environment_climate_response,환경·기후 대응,69.7317075,2,폭염 대응,low,monitor
+21130560,연제구,연산2동,environment_climate_response,환경·기후 대응,69.585366,2,대기오염 노출,low,monitor
+21130590,연제구,연산5동,environment_climate_response,환경·기후 대응,69.4390245,2,대기오염 노출,low,monitor
+21150510,사상구,삼락동,environment_climate_response,환경·기후 대응,69.365854,2,대기오염 노출,low,monitor
+21130520,연제구,거제2동,environment_climate_response,환경·기후 대응,68.82926800000001,2,대기오염 노출,low,monitor
+21110740,금정구,장전2동,environment_climate_response,환경·기후 대응,67.95121900000001,2,폭염 대응,low,monitor
+21050740,부산진구,개금1동,environment_climate_response,환경·기후 대응,67.9268295,2,대기오염 노출,low,monitor
+21060650,동래구,명륜동,environment_climate_response,환경·기후 대응,67.853659,2,대기오염 노출,low,monitor
+21120580,강서구,가덕도동,environment_climate_response,환경·기후 대응,67.682927,2,대기오염 노출,low,monitor
+21020540,서구,서대신1동,environment_climate_response,환경·기후 대응,67.6585365,2,폭염 대응,low,monitor
+21060590,동래구,사직2동,environment_climate_response,환경·기후 대응,66.5853655,2,대기오염 노출,low,monitor
+21050810,부산진구,가야1동,environment_climate_response,환경·기후 대응,65.146341,2,대기오염 노출,low,monitor
+21140540,수영구,망미1동,environment_climate_response,환경·기후 대응,64.8536585,2,폭염 대응,low,monitor
+21050570,부산진구,양정2동,environment_climate_response,환경·기후 대응,64.43902449999999,2,대기오염 노출,low,monitor
+21050720,부산진구,가야2동,environment_climate_response,환경·기후 대응,64.2195125,2,대기오염 노출,low,monitor
+21050550,부산진구,초읍동,environment_climate_response,환경·기후 대응,64.1951215,2,대기오염 노출,low,monitor
+21090670,해운대구,좌2동,environment_climate_response,환경·기후 대응,63.95121949999999,2,폭염 대응,low,monitor
+21130540,연제구,거제4동,environment_climate_response,환경·기후 대응,63.878049000000004,2,대기오염 노출,low,monitor
+21060510,동래구,수민동,environment_climate_response,환경·기후 대응,63.8536585,2,대기오염 노출,low,monitor
+21120520,강서구,대저2동,environment_climate_response,환경·기후 대응,63.7317075,2,대기오염 노출,low,monitor
+21060600,동래구,사직3동,environment_climate_response,환경·기후 대응,63.097561,2,대기오염 노출,low,monitor
+21100580,사하구,신평1동,environment_climate_response,환경·기후 대응,62.9999995,2,,low,monitor
+21100590,사하구,신평2동,environment_climate_response,환경·기후 대응,62.731707500000006,2,,low,monitor
+21090540,해운대구,중2동,environment_climate_response,환경·기후 대응,62.707317,2,폭염 대응,low,monitor
+21090660,해운대구,좌1동,environment_climate_response,환경·기후 대응,62.560976,2,,low,monitor
+21120550,강서구,가락동,environment_climate_response,환경·기후 대응,62.4878045,2,대기오염 노출,low,monitor
+21020560,서구,서대신3동,environment_climate_response,환경·기후 대응,62.317073,2,,low,monitor
+21090680,해운대구,좌3동,environment_climate_response,환경·기후 대응,62.31707299999999,2,,low,monitor
+21050760,부산진구,개금3동,environment_climate_response,환경·기후 대응,62.2682925,2,대기오염 노출,low,monitor
+21020570,서구,서대신4동,environment_climate_response,환경·기후 대응,62.121950999999996,2,대기오염 노출,low,monitor
+21100620,사하구,다대1동,environment_climate_response,환경·기후 대응,61.9268295,2,폭염 대응,low,monitor
+21050820,부산진구,부전1동,environment_climate_response,환경·기후 대응,61.5121955,2,,low,monitor
+21100600,사하구,장림1동,environment_climate_response,환경·기후 대응,61.170731499999995,2,,low,monitor
+21130510,연제구,거제1동,environment_climate_response,환경·기후 대응,60.8780485,2,대기오염 노출,low,monitor
+21030560,동구,수정1동,environment_climate_response,환경·기후 대응,60.58536599999999,2,대기오염 노출,low,monitor
+21130630,연제구,연산9동,environment_climate_response,환경·기후 대응,60.390244,2,,low,monitor
+21130620,연제구,연산8동,environment_climate_response,환경·기후 대응,60.292683,2,,low,monitor
+21050800,부산진구,당감1동,environment_climate_response,환경·기후 대응,60.195122,2,대기오염 노출,low,monitor
+21130550,연제구,연산1동,environment_climate_response,환경·기후 대응,60.097561,2,대기오염 노출,low,monitor
+21050540,부산진구,연지동,environment_climate_response,환경·기후 대응,59.7317075,2,,low,monitor
+21090640,해운대구,재송1동,environment_climate_response,환경·기후 대응,59.6341465,2,,low,monitor
+21140560,수영구,광안1동,environment_climate_response,환경·기후 대응,59.6341465,2,폭염 대응,low,monitor
+21020520,서구,동대신2동,environment_climate_response,환경·기후 대응,59.5609755,2,,low,monitor
+21090530,해운대구,중1동,environment_climate_response,환경·기후 대응,59.0731705,2,,low,monitor
+21060580,동래구,사직1동,environment_climate_response,환경·기후 대응,58.975609500000004,2,대기오염 노출,low,monitor
+21130570,연제구,연산3동,environment_climate_response,환경·기후 대응,58.5609755,2,,low,monitor
+21090690,해운대구,좌4동,environment_climate_response,환경·기후 대응,58.5365855,2,폭염 대응,low,monitor
+21030570,동구,수정2동,environment_climate_response,환경·기후 대응,58.243902500000004,2,대기오염 노출,low,monitor
+21090650,해운대구,재송2동,environment_climate_response,환경·기후 대응,58.0,2,폭염 대응,low,monitor
+21020510,서구,동대신1동,environment_climate_response,환경·기후 대응,57.5609755,2,,low,monitor
+21030590,동구,수정4동,environment_climate_response,환경·기후 대응,57.365853,2,대기오염 노출,low,monitor
+21110570,금정구,부곡1동,environment_climate_response,환경·기후 대응,57.3170735,2,,low,monitor
+21120561,강서구,녹산동,environment_climate_response,환경·기후 대응,56.7804875,2,대기오염 노출,low,monitor
+21060620,동래구,안락2동,environment_climate_response,환경·기후 대응,55.7317075,2,,low,monitor
+21060520,동래구,복산동,environment_climate_response,환경·기후 대응,55.609756,2,대기오염 노출,low,monitor
+21050750,부산진구,개금2동,environment_climate_response,환경·기후 대응,55.585365499999995,2,대기오염 노출,low,monitor
+21090560,해운대구,송정동,environment_climate_response,환경·기후 대응,55.2195125,2,,low,monitor
+21050680,부산진구,당감2동,environment_climate_response,환경·기후 대응,54.804877999999995,2,대기오염 노출,low,monitor
+21050700,부산진구,당감4동,environment_climate_response,환경·기후 대응,54.6341465,2,대기오염 노출,low,monitor
+21100610,사하구,장림2동,environment_climate_response,환경·기후 대응,54.609756,2,,low,monitor
+21030550,동구,초량6동,environment_climate_response,환경·기후 대응,54.512195500000004,2,대기오염 노출,low,monitor
+21090730,해운대구,우1동,environment_climate_response,환경·기후 대응,54.0487805,2,폭염 대응,low,monitor
+21030520,동구,초량2동,environment_climate_response,환경·기후 대응,53.829268500000005,2,대기오염 노출,low,monitor
+21110520,금정구,서2동,environment_climate_response,환경·기후 대응,53.78048750000001,2,,low,monitor
+21120590,강서구,명지1동,environment_climate_response,환경·기후 대응,53.68292649999999,2,,low,monitor
+21100520,사하구,괴정2동,environment_climate_response,환경·기후 대응,53.609756000000004,2,,low,monitor
+21100540,사하구,괴정4동,environment_climate_response,환경·기후 대응,53.487804999999994,2,,low,monitor
+21030510,동구,초량1동,environment_climate_response,환경·기후 대응,53.463415,2,대기오염 노출,low,monitor
+21090740,해운대구,우2동,environment_climate_response,환경·기후 대응,53.0487805,2,,low,monitor
+21050560,부산진구,양정1동,environment_climate_response,환경·기후 대응,52.7317075,2,,low,monitor
+21140550,수영구,망미2동,environment_climate_response,환경·기후 대응,52.5121955,2,,low,monitor
+21020590,서구,부민동,environment_climate_response,환경·기후 대응,52.317073,2,,low,monitor
+21100630,사하구,다대2동,environment_climate_response,환경·기후 대응,51.926829,2,,low,monitor
+21140570,수영구,광안2동,environment_climate_response,환경·기후 대응,51.195122,2,,low,monitor
+21110580,금정구,부곡2동,environment_climate_response,환경·기후 대응,50.9024395,2,폭염 대응,low,monitor
+21010590,중구,영주1동,environment_climate_response,환경·기후 대응,50.68292699999999,2,대기오염 노출,low,monitor
+21110720,금정구,서3동,environment_climate_response,환경·기후 대응,50.2195125,2,폭염 대응,low,monitor
+21030600,동구,수정5동,environment_climate_response,환경·기후 대응,50.0487805,2,대기오염 노출,low,monitor
+21010560,중구,부평동,environment_climate_response,환경·기후 대응,49.585366,2,,low,monitor
+21110610,금정구,장전1동,environment_climate_response,환경·기후 대응,49.463415,2,,low,monitor
+21140530,수영구,수영동,environment_climate_response,환경·기후 대응,49.2682925,2,,low,monitor
+21140510,수영구,남천1동,environment_climate_response,환경·기후 대응,48.6829265,2,,low,monitor
+21070590,남구,용호3동,environment_climate_response,환경·기후 대응,48.658536500000004,2,폭염 대응,low,monitor
+21040590,영도구,봉래1동,environment_climate_response,환경·기후 대응,48.512195,2,,low,monitor
+21060640,동래구,명장2동,environment_climate_response,환경·기후 대응,48.487805,2,,low,monitor
+21110680,금정구,남산동,environment_climate_response,환경·기후 대응,48.121951,2,폭염 대응,low,monitor
+21070570,남구,용호1동,environment_climate_response,환경·기후 대응,47.8536585,2,폭염 대응,low,monitor
+21080520,북구,구포2동,environment_climate_response,환경·기후 대응,47.707317,2,,low,monitor
+21010600,중구,영주2동,environment_climate_response,환경·기후 대응,47.560975500000005,2,대기오염 노출,low,monitor
+21030680,동구,범일5동,environment_climate_response,환경·기후 대응,47.390244,2,대기오염 노출,low,monitor
+21050640,부산진구,부암1동,environment_climate_response,환경·기후 대응,46.804877999999995,2,,low,monitor
+21050610,부산진구,전포2동,environment_climate_response,환경·기후 대응,46.756097499999996,2,,low,monitor
+21040530,영도구,남항동,environment_climate_response,환경·기후 대응,46.512195000000006,2,,low,monitor
+21090710,해운대구,반여4동,environment_climate_response,환경·기후 대응,46.341463499999996,2,,low,monitor
+21060630,동래구,명장1동,environment_climate_response,환경·기후 대응,46.243902500000004,2,,low,monitor
+21010520,중구,동광동,environment_climate_response,환경·기후 대응,46.04878,2,,low,monitor
+21100560,사하구,하단1동,environment_climate_response,환경·기후 대응,45.97561,2,,low,monitor
+21140580,수영구,광안3동,environment_climate_response,환경·기후 대응,45.926829,2,,low,monitor
+21020610,서구,아미동,environment_climate_response,환경·기후 대응,45.6097565,2,,low,monitor
+21090580,해운대구,반여2동,environment_climate_response,환경·기후 대응,45.121951,2,,low,monitor
+21050520,부산진구,부전2동,environment_climate_response,환경·기후 대응,44.853658,2,,low,monitor
+21080530,북구,구포3동,environment_climate_response,환경·기후 대응,44.8048785,2,,low,monitor
+21110700,금정구,구서2동,environment_climate_response,환경·기후 대응,44.804878,2,폭염 대응,low,monitor
+21110690,금정구,구서1동,environment_climate_response,환경·기후 대응,44.585365499999995,2,폭염 대응,low,monitor
+21010540,중구,보수동,environment_climate_response,환경·기후 대응,43.9512195,2,,low,monitor
+21070580,남구,용호2동,environment_climate_response,환경·기후 대응,43.902439,2,,low,monitor
+21060610,동래구,안락1동,environment_climate_response,환경·기후 대응,43.804878,2,,low,monitor
+21100510,사하구,괴정1동,environment_climate_response,환경·기후 대응,43.780488,2,,low,monitor
+21140600,수영구,민락동,environment_climate_response,환경·기후 대응,43.756098,2,,low,monitor
+21140520,수영구,남천2동,environment_climate_response,환경·기후 대응,43.7073175,2,,low,monitor
+21090700,해운대구,반여1동,environment_climate_response,환경·기후 대응,43.3902435,2,,low,monitor
+21010510,중구,중앙동,environment_climate_response,환경·기후 대응,43.195122,2,,low,monitor
+21120510,강서구,대저1동,environment_climate_response,환경·기후 대응,43.121950999999996,2,,low,monitor
+21070530,남구,대연3동,environment_climate_response,환경·기후 대응,42.975609500000004,2,,low,monitor
+21020680,서구,암남동,environment_climate_response,환경·기후 대응,42.85365850000001,2,폭염 대응,low,monitor
+21020640,서구,충무동,environment_climate_response,환경·기후 대응,41.9268295,2,,low,monitor
+21090750,해운대구,우3동,environment_climate_response,환경·기후 대응,41.682927,2,폭염 대응,low,monitor
+21080550,북구,화명1동,environment_climate_response,환경·기후 대응,41.68292649999999,2,,low,monitor
+21080600,북구,만덕2동,environment_climate_response,환경·기후 대응,41.2439025,2,,low,monitor
+21110510,금정구,서1동,environment_climate_response,환경·기후 대응,41.0,2,,low,monitor
+21080590,북구,만덕1동,environment_climate_response,환경·기후 대응,40.7804875,2,,low,monitor
+21010580,중구,남포동,environment_climate_response,환경·기후 대응,40.146342000000004,2,,low,monitor
+21020690,서구,남부민2동,environment_climate_response,환경·기후 대응,40.024390499999996,2,,low,monitor
+21010530,중구,대청동,environment_climate_response,환경·기후 대응,39.9512195,2,,low,monitor
+21020630,서구,초장동,environment_climate_response,환경·기후 대응,39.2682925,2,,low,monitor
+21090620,해운대구,반송2동,environment_climate_response,환경·기후 대응,39.2439025,2,,low,monitor
+21090590,해운대구,반여3동,environment_climate_response,환경·기후 대응,37.780488000000005,2,,low,monitor
+21020650,서구,남부민1동,environment_climate_response,환경·기후 대응,37.6585365,2,,low,monitor
+21080610,북구,만덕3동,environment_climate_response,환경·기후 대응,37.2682925,2,,low,monitor
+21010570,중구,광복동,environment_climate_response,환경·기후 대응,36.951219,2,,low,monitor
+21140590,수영구,광안4동,environment_climate_response,환경·기후 대응,36.707317,2,,low,monitor
+21070620,남구,감만1동,environment_climate_response,환경·기후 대응,36.3414635,2,,low,monitor
+21070700,남구,대연1동,environment_climate_response,환경·기후 대응,36.121950999999996,2,,low,monitor
+21100530,사하구,괴정3동,environment_climate_response,환경·기후 대응,36.048781,2,,low,monitor
+21040690,영도구,봉래2동,environment_climate_response,환경·기후 대응,35.7560975,2,,low,monitor
+21050830,부산진구,전포1동,environment_climate_response,환경·기후 대응,35.146342000000004,2,,low,monitor
+21070660,남구,문현1동,environment_climate_response,환경·기후 대응,35.1463415,2,,low,monitor
+21040650,영도구,동삼1동,environment_climate_response,환경·기후 대응,34.7073175,2,,low,monitor
+21080580,북구,덕천3동,environment_climate_response,환경·기후 대응,34.4390245,2,,low,monitor
+21080510,북구,구포1동,environment_climate_response,환경·기후 대응,34.3658535,2,,low,monitor
+21080630,북구,화명3동,environment_climate_response,환경·기후 대응,34.097561,2,,low,monitor
+21050840,부산진구,범천2동,environment_climate_response,환경·기후 대응,34.073171,2,,low,monitor
+21070550,남구,대연5동,environment_climate_response,환경·기후 대응,33.95122,2,,low,monitor
+21040670,영도구,동삼3동,environment_climate_response,환경·기후 대응,33.2682925,2,,low,monitor
+21040540,영도구,영선1동,environment_climate_response,환경·기후 대응,32.8780485,2,,low,monitor
+21510110,기장군,기장읍,environment_climate_response,환경·기후 대응,32.219512,2,,low,monitor
+21040550,영도구,영선2동,environment_climate_response,환경·기후 대응,32.121951499999994,2,,low,monitor
+21040640,영도구,청학2동,environment_climate_response,환경·기후 대응,31.195121999999998,2,,low,monitor
+21110710,금정구,금성동,environment_climate_response,환경·기후 대응,30.9756095,2,,low,monitor
+21070680,남구,문현3동,environment_climate_response,환경·기후 대응,30.609756500000003,2,,low,monitor
+21100650,사하구,감천1동,environment_climate_response,환경·기후 대응,30.024390000000004,2,,low,monitor
+21080620,북구,화명2동,environment_climate_response,환경·기후 대응,29.585366,2,,low,monitor
+21080540,북구,금곡동,environment_climate_response,환경·기후 대응,29.390243500000004,2,,low,monitor
+21070600,남구,용호4동,environment_climate_response,환경·기후 대응,28.2682925,2,,low,monitor
+21080570,북구,덕천2동,environment_climate_response,환경·기후 대응,27.97561,2,,low,monitor
+21110670,금정구,청룡노포동,environment_climate_response,환경·기후 대응,27.8536585,2,,low,monitor
+21080560,북구,덕천1동,environment_climate_response,환경·기후 대응,27.414634,2,,low,monitor
+21090720,해운대구,반송1동,environment_climate_response,환경·기후 대응,27.3414635,2,,low,monitor
+21100640,사하구,구평동,environment_climate_response,환경·기후 대응,26.7317075,2,,low,monitor
+21110590,금정구,부곡3동,environment_climate_response,환경·기후 대응,26.3902435,2,,low,monitor
+21110730,금정구,금사회동동,environment_climate_response,환경·기후 대응,26.3658535,2,,low,monitor
+21040660,영도구,동삼2동,environment_climate_response,환경·기후 대응,25.97561,2,,low,monitor
+21070710,남구,우암동,environment_climate_response,환경·기후 대응,25.2439025,2,,low,monitor
+21040680,영도구,신선동,environment_climate_response,환경·기후 대응,25.195121999999998,2,,low,monitor
+21070560,남구,대연6동,environment_climate_response,환경·기후 대응,25.073171000000002,2,,low,monitor
+21070670,남구,문현2동,environment_climate_response,환경·기후 대응,24.853658499999998,2,,low,monitor
+21040630,영도구,청학1동,environment_climate_response,환경·기후 대응,24.585366000000004,2,,low,monitor
+21070630,남구,감만2동,environment_climate_response,환경·기후 대응,23.585366,2,,low,monitor
+21030700,동구,좌천동,environment_climate_response,환경·기후 대응,23.292682999999997,2,,low,monitor
+21100660,사하구,감천2동,environment_climate_response,환경·기후 대응,21.8292685,2,,low,monitor
+21070610,남구,용당동,environment_climate_response,환경·기후 대응,21.4634145,2,,low,monitor
+21070690,남구,문현4동,environment_climate_response,환경·기후 대응,21.0487805,2,,low,monitor
+21050770,부산진구,범천1동,environment_climate_response,환경·기후 대응,20.804878000000002,2,,low,monitor
+21070540,남구,대연4동,environment_climate_response,환경·기후 대응,19.414634,2,,low,monitor
+21510111,기장군,일광읍,environment_climate_response,환경·기후 대응,18.902438500000002,2,,low,monitor
+21510120,기장군,장안읍,environment_climate_response,환경·기후 대응,17.317073,2,,low,monitor
+21110640,금정구,선두구동,environment_climate_response,환경·기후 대응,16.658536,2,,low,monitor
+21510330,기장군,철마면,environment_climate_response,환경·기후 대응,16.195122,2,,low,monitor
+21030710,동구,범일1동,environment_climate_response,환경·기후 대응,15.1219515,2,,low,monitor
+21030660,동구,범일2동,environment_climate_response,환경·기후 대응,9.585366,2,,low,monitor
+21510130,기장군,정관읍,environment_climate_response,환경·기후 대응,7.780488,2,,low,monitor
+21140520,수영구,남천2동,living_services_settlement,생활 인프라·주거,84.14634175,4,의료공급 접근|주거환경|대중교통 접근,medium_low,candidate_after_validation
+21080610,북구,만덕3동,living_services_settlement,생활 인프라·주거,76.902439,4,의료공급 접근|주거환경|대중교통 접근,medium_low,candidate_after_validation
+21050720,부산진구,가야2동,living_services_settlement,생활 인프라·주거,76.20731725,4,의료공급 접근|주거환경|대중교통 접근,medium_low,candidate_after_validation
+21090590,해운대구,반여3동,living_services_settlement,생활 인프라·주거,75.98780500000001,4,주거환경|대중교통 접근,medium_low,candidate_after_validation
+21080580,북구,덕천3동,living_services_settlement,생활 인프라·주거,72.890244,4,의료공급 접근|주거환경,medium_low,candidate_after_validation
+21150540,사상구,모라3동,living_services_settlement,생활 인프라·주거,71.84146375,4,주거환경,medium_low,candidate_after_validation
+21090650,해운대구,재송2동,living_services_settlement,생활 인프라·주거,67.5,4,주거환경|대중교통 접근,medium_low,monitor
+21030510,동구,초량1동,living_services_settlement,생활 인프라·주거,66.1463415,4,대중교통 접근,low,monitor
+21100630,사하구,다대2동,living_services_settlement,생활 인프라·주거,65.5731705,4,대중교통 접근,medium_low,monitor
+21100520,사하구,괴정2동,living_services_settlement,생활 인프라·주거,65.47561,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21070580,남구,용호2동,living_services_settlement,생활 인프라·주거,65.3658535,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21020630,서구,초장동,living_services_settlement,생활 인프라·주거,65.15853675,4,의료공급 접근|주거환경,medium_low,monitor
+21100560,사하구,하단1동,living_services_settlement,생활 인프라·주거,65.03658525,4,교육시설 접근·공급|주거환경|대중교통 접근,medium_low,monitor
+21100540,사하구,괴정4동,living_services_settlement,생활 인프라·주거,64.90243875,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21070600,남구,용호4동,living_services_settlement,생활 인프라·주거,64.13414625,4,교육시설 접근·공급|주거환경,medium_low,monitor
+21040670,영도구,동삼3동,living_services_settlement,생활 인프라·주거,63.804878,4,의료공급 접근|주거환경,medium_low,monitor
+21030560,동구,수정1동,living_services_settlement,생활 인프라·주거,63.79268275,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21080530,북구,구포3동,living_services_settlement,생활 인프라·주거,63.2804875,4,의료공급 접근,medium_low,monitor
+21050660,부산진구,부암3동,living_services_settlement,생활 인프라·주거,63.097561,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21050680,부산진구,당감2동,living_services_settlement,생활 인프라·주거,62.69512175,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21100660,사하구,감천2동,living_services_settlement,생활 인프라·주거,62.585365499999995,4,주거환경,medium_low,monitor
+21070590,남구,용호3동,living_services_settlement,생활 인프라·주거,62.54878025,4,주거환경|대중교통 접근,medium_low,monitor
+21100590,사하구,신평2동,living_services_settlement,생활 인프라·주거,62.12195125,4,교육시설 접근·공급,medium_low,monitor
+21030590,동구,수정4동,living_services_settlement,생활 인프라·주거,62.121951249999995,4,교육시설 접근·공급|주거환경,medium_low,monitor
+21110610,금정구,장전1동,living_services_settlement,생활 인프라·주거,62.012195,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21140600,수영구,민락동,living_services_settlement,생활 인프라·주거,61.9390245,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21080550,북구,화명1동,living_services_settlement,생활 인프라·주거,61.80487775,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21090580,해운대구,반여2동,living_services_settlement,생활 인프라·주거,61.79268275,4,교육시설 접근·공급|대중교통 접근,medium_low,monitor
+21140540,수영구,망미1동,living_services_settlement,생활 인프라·주거,61.58536575,4,의료공급 접근|주거환경,medium_low,monitor
+21030700,동구,좌천동,living_services_settlement,생활 인프라·주거,61.5609755,4,의료공급 접근,medium_low,monitor
+21090620,해운대구,반송2동,living_services_settlement,생활 인프라·주거,61.5,4,대중교통 접근,medium_low,monitor
+21130530,연제구,거제3동,living_services_settlement,생활 인프라·주거,61.475609750000004,4,주거환경|대중교통 접근,medium_low,monitor
+21050750,부산진구,개금2동,living_services_settlement,생활 인프라·주거,61.4512195,4,교육시설 접근·공급|주거환경,medium_low,monitor
+21150520,사상구,모라1동,living_services_settlement,생활 인프라·주거,61.26829275,4,주거환경,medium_low,monitor
+21150600,사상구,주례1동,living_services_settlement,생활 인프라·주거,60.95121975,4,의료공급 접근,medium_low,monitor
+21100570,사하구,하단2동,living_services_settlement,생활 인프라·주거,60.92682875,4,대중교통 접근,medium_low,monitor
+21140560,수영구,광안1동,living_services_settlement,생활 인프라·주거,60.585366,4,대중교통 접근,medium_low,monitor
+21050760,부산진구,개금3동,living_services_settlement,생활 인프라·주거,60.512195000000006,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21070680,남구,문현3동,living_services_settlement,생활 인프라·주거,60.158536749999996,4,대중교통 접근,medium_low,monitor
+21020690,서구,남부민2동,living_services_settlement,생활 인프라·주거,60.097561,4,주거환경,medium_low,monitor
+21020680,서구,암남동,living_services_settlement,생활 인프라·주거,59.9390245,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
+21040690,영도구,봉래2동,living_services_settlement,생활 인프라·주거,59.58536575,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
+21110700,금정구,구서2동,living_services_settlement,생활 인프라·주거,59.512195500000004,4,대중교통 접근,medium_low,monitor
+21050800,부산진구,당감1동,living_services_settlement,생활 인프라·주거,59.414634250000006,4,주거환경|대중교통 접근,medium_low,monitor
+21090690,해운대구,좌4동,living_services_settlement,생활 인프라·주거,58.6707315,4,교육시설 접근·공급|의료공급 접근|대중교통 접근,medium_low,monitor
+21030550,동구,초량6동,living_services_settlement,생활 인프라·주거,58.487804749999995,4,의료공급 접근|주거환경,medium_low,monitor
+21140530,수영구,수영동,living_services_settlement,생활 인프라·주거,58.3414635,4,주거환경|대중교통 접근,medium_low,monitor
+21100530,사하구,괴정3동,living_services_settlement,생활 인프라·주거,58.26829275,4,주거환경|대중교통 접근,medium_low,monitor
+21010600,중구,영주2동,living_services_settlement,생활 인프라·주거,57.93902425,4,의료공급 접근|주거환경,medium_low,monitor
+21050840,부산진구,범천2동,living_services_settlement,생활 인프라·주거,57.865854,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21100580,사하구,신평1동,living_services_settlement,생활 인프라·주거,57.69512175,4,주거환경,medium_low,monitor
+21110720,금정구,서3동,living_services_settlement,생활 인프라·주거,57.56097575,4,주거환경|대중교통 접근,medium_low,monitor
+21020650,서구,남부민1동,living_services_settlement,생활 인프라·주거,57.47560975,4,주거환경,medium_low,monitor
+21040550,영도구,영선2동,living_services_settlement,생활 인프라·주거,57.36585375,4,주거환경,medium_low,monitor
+21110510,금정구,서1동,living_services_settlement,생활 인프라·주거,57.256097249999996,4,주거환경,medium_low,monitor
+21120530,강서구,강동동,living_services_settlement,생활 인프라·주거,56.9512195,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
+21010560,중구,부평동,living_services_settlement,생활 인프라·주거,56.853658499999995,4,교육시설 접근·공급,medium_low,monitor
+21110730,금정구,금사회동동,living_services_settlement,생활 인프라·주거,56.76829275,4,교육시설 접근·공급|주거환경,medium_low,monitor
+21030680,동구,범일5동,living_services_settlement,생활 인프라·주거,56.634146,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
+21130630,연제구,연산9동,living_services_settlement,생활 인프라·주거,56.56097525,4,대중교통 접근,medium_low,monitor
+21050640,부산진구,부암1동,living_services_settlement,생활 인프라·주거,56.34146325,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21110600,금정구,부곡4동,living_services_settlement,생활 인프라·주거,56.012195250000005,4,주거환경,medium_low,monitor
+21030600,동구,수정5동,living_services_settlement,생활 인프라·주거,55.853658499999995,4,의료공급 접근|주거환경,medium_low,monitor
+21130620,연제구,연산8동,living_services_settlement,생활 인프라·주거,55.59756075,4,대중교통 접근,medium_low,monitor
+21010570,중구,광복동,living_services_settlement,생활 인프라·주거,55.57317075,4,주거환경,low,monitor
+21130550,연제구,연산1동,living_services_settlement,생활 인프라·주거,55.08536575,4,대중교통 접근,medium_low,monitor
+21060600,동래구,사직3동,living_services_settlement,생활 인프라·주거,55.0609755,4,대중교통 접근,medium_low,monitor
+21140570,수영구,광안2동,living_services_settlement,생활 인프라·주거,54.707317,4,대중교통 접근,medium_low,monitor
+21110570,금정구,부곡1동,living_services_settlement,생활 인프라·주거,54.707316750000004,4,주거환경,medium_low,monitor
+21120550,강서구,가락동,living_services_settlement,생활 인프라·주거,54.54878025,4,교육시설 접근·공급|주거환경,medium_low,monitor
+21090750,해운대구,우3동,living_services_settlement,생활 인프라·주거,54.52439,4,대중교통 접근,medium_low,monitor
+21040590,영도구,봉래1동,living_services_settlement,생활 인프라·주거,54.48780475,4,교육시설 접근·공급|주거환경,medium_low,monitor
+21040640,영도구,청학2동,living_services_settlement,생활 인프라·주거,54.4512195,4,,medium_low,monitor
+21050540,부산진구,연지동,living_services_settlement,생활 인프라·주거,54.268293,4,대중교통 접근,medium_low,monitor
+21070660,남구,문현1동,living_services_settlement,생활 인프라·주거,54.085365749999994,4,의료공급 접근,medium_low,monitor
+21150510,사상구,삼락동,living_services_settlement,생활 인프라·주거,53.95121950000001,4,교육시설 접근·공급|주거환경,medium_low,monitor
+21040630,영도구,청학1동,living_services_settlement,생활 인프라·주거,53.68292675,4,주거환경,medium_low,monitor
+21150560,사상구,덕포2동,living_services_settlement,생활 인프라·주거,53.4512195,4,주거환경,medium_low,monitor
+21100510,사하구,괴정1동,living_services_settlement,생활 인프라·주거,53.37804875,4,주거환경|대중교통 접근,medium_low,monitor
+21150640,사상구,엄궁동,living_services_settlement,생활 인프라·주거,53.13414625,4,대중교통 접근,medium_low,monitor
+21150630,사상구,학장동,living_services_settlement,생활 인프라·주거,53.085365749999994,4,주거환경,medium_low,monitor
+21040680,영도구,신선동,living_services_settlement,생활 인프라·주거,53.073170749999996,4,의료공급 접근|주거환경,medium_low,monitor
+21090720,해운대구,반송1동,living_services_settlement,생활 인프라·주거,52.841463499999996,4,주거환경,medium_low,monitor
+21020510,서구,동대신1동,living_services_settlement,생활 인프라·주거,52.82926825,4,,medium_low,monitor
+21050550,부산진구,초읍동,living_services_settlement,생활 인프라·주거,52.743902500000004,4,,medium_low,monitor
+21110670,금정구,청룡노포동,living_services_settlement,생활 인프라·주거,52.219512,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
+21080540,북구,금곡동,living_services_settlement,생활 인프라·주거,51.69512175,4,의료공급 접근,medium_low,monitor
+21090540,해운대구,중2동,living_services_settlement,생활 인프라·주거,51.597561000000006,4,교육시설 접근·공급,medium_low,monitor
+21080520,북구,구포2동,living_services_settlement,생활 인프라·주거,51.4390245,4,,medium_low,monitor
+21040660,영도구,동삼2동,living_services_settlement,생활 인프라·주거,51.2682925,4,,medium_low,monitor
+21090560,해운대구,송정동,living_services_settlement,생활 인프라·주거,51.207316999999996,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
+21110640,금정구,선두구동,living_services_settlement,생활 인프라·주거,51.0487805,4,교육시설 접근·공급,medium_low,monitor
+21150620,사상구,주례3동,living_services_settlement,생활 인프라·주거,51.012195,4,주거환경,medium_low,monitor
+21010520,중구,동광동,living_services_settlement,생활 인프라·주거,50.99999975,4,주거환경,medium_low,monitor
+21090680,해운대구,좌3동,living_services_settlement,생활 인프라·주거,50.75609725,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21140550,수영구,망미2동,living_services_settlement,생활 인프라·주거,50.6341465,4,의료공급 접근,medium_low,monitor
+21010590,중구,영주1동,living_services_settlement,생활 인프라·주거,50.36585375,4,,medium_low,monitor
+21070570,남구,용호1동,living_services_settlement,생활 인프라·주거,50.30487825,4,대중교통 접근,medium_low,monitor
+21120510,강서구,대저1동,living_services_settlement,생활 인프라·주거,50.18292675,4,주거환경,medium_low,monitor
+21090730,해운대구,우1동,living_services_settlement,생활 인프라·주거,49.9512195,4,대중교통 접근,medium_low,monitor
+21100550,사하구,당리동,living_services_settlement,생활 인프라·주거,49.64634125,4,주거환경,medium_low,monitor
+21110710,금정구,금성동,living_services_settlement,생활 인프라·주거,49.609756000000004,4,교육시설 접근·공급,medium_low,monitor
+21070670,남구,문현2동,living_services_settlement,생활 인프라·주거,49.4634145,4,주거환경,medium_low,monitor
+21150550,사상구,덕포1동,living_services_settlement,생활 인프라·주거,49.170732,4,,medium_low,monitor
+21110680,금정구,남산동,living_services_settlement,생활 인프라·주거,49.1585365,4,,medium_low,monitor
+21070690,남구,문현4동,living_services_settlement,생활 인프라·주거,49.0487805,4,주거환경,medium_low,monitor
+21030520,동구,초량2동,living_services_settlement,생활 인프라·주거,48.914634,4,주거환경,medium_low,monitor
+21080590,북구,만덕1동,living_services_settlement,생활 인프라·주거,48.5487805,4,,medium_low,monitor
+21130570,연제구,연산3동,living_services_settlement,생활 인프라·주거,48.073171,4,,medium_low,monitor
+21100640,사하구,구평동,living_services_settlement,생활 인프라·주거,48.024390499999996,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
+21080510,북구,구포1동,living_services_settlement,생활 인프라·주거,47.9756095,4,,medium_low,monitor
+21080600,북구,만덕2동,living_services_settlement,생활 인프라·주거,47.719512,4,,medium_low,monitor
+21020590,서구,부민동,living_services_settlement,생활 인프라·주거,47.4268295,4,,medium_low,monitor
+21150570,사상구,괘법동,living_services_settlement,생활 인프라·주거,47.426829250000004,4,대중교통 접근,medium_low,monitor
+21130510,연제구,거제1동,living_services_settlement,생활 인프라·주거,47.15853625,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21130540,연제구,거제4동,living_services_settlement,생활 인프라·주거,47.085366,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21020570,서구,서대신4동,living_services_settlement,생활 인프라·주거,47.0121955,4,의료공급 접근,medium_low,monitor
+21070620,남구,감만1동,living_services_settlement,생활 인프라·주거,46.853658499999995,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
+21080560,북구,덕천1동,living_services_settlement,생활 인프라·주거,46.80487825,4,,medium_low,monitor
+21110520,금정구,서2동,living_services_settlement,생활 인프라·주거,46.80487825,4,주거환경,medium_low,monitor
+21020540,서구,서대신1동,living_services_settlement,생활 인프라·주거,46.609756250000004,4,,medium_low,monitor
+21030530,동구,초량3동,living_services_settlement,생활 인프라·주거,46.42682925,4,교육시설 접근·공급,medium_low,monitor
+21010580,중구,남포동,living_services_settlement,생활 인프라·주거,46.13414625,4,주거환경,medium_low,monitor
+21100650,사하구,감천1동,living_services_settlement,생활 인프라·주거,46.109756000000004,4,,medium_low,monitor
+21050740,부산진구,개금1동,living_services_settlement,생활 인프라·주거,45.829268,4,대중교통 접근,medium_low,monitor
+21060640,동래구,명장2동,living_services_settlement,생활 인프라·주거,45.792683000000004,4,주거환경,medium_low,monitor
+21070610,남구,용당동,living_services_settlement,생활 인프라·주거,45.7317075,4,의료공급 접근,medium_low,monitor
+21140510,수영구,남천1동,living_services_settlement,생활 인프라·주거,45.71951225,4,,medium_low,monitor
+21060510,동래구,수민동,living_services_settlement,생활 인프라·주거,45.70731725,4,대중교통 접근,medium_low,monitor
+21020520,서구,동대신2동,living_services_settlement,생활 인프라·주거,45.68292674999999,4,주거환경,medium_low,monitor
+21130580,연제구,연산4동,living_services_settlement,생활 인프라·주거,45.560975750000004,4,대중교통 접근,medium_low,monitor
+21030570,동구,수정2동,living_services_settlement,생활 인프라·주거,45.487805,4,,medium_low,monitor
+21060590,동래구,사직2동,living_services_settlement,생활 인프라·주거,45.4634145,4,의료공급 접근,medium_low,monitor
+21080570,북구,덕천2동,living_services_settlement,생활 인프라·주거,45.378049000000004,4,주거환경,medium_low,monitor
+21050570,부산진구,양정2동,living_services_settlement,생활 인프라·주거,45.378048750000005,4,대중교통 접근,medium_low,monitor
+21010510,중구,중앙동,living_services_settlement,생활 인프라·주거,45.341463250000004,4,주거환경,medium_low,monitor
+21150610,사상구,주례2동,living_services_settlement,생활 인프라·주거,45.28048775,4,의료공급 접근,medium_low,monitor
+21130560,연제구,연산2동,living_services_settlement,생활 인프라·주거,45.19512225,4,,medium_low,monitor
+21060520,동래구,복산동,living_services_settlement,생활 인프라·주거,45.1463415,4,주거환경,medium_low,monitor
+21080620,북구,화명2동,living_services_settlement,생활 인프라·주거,44.57317075,4,의료공급 접근,medium_low,monitor
+21110580,금정구,부곡2동,living_services_settlement,생활 인프라·주거,44.170732,4,대중교통 접근,medium_low,monitor
+21060610,동래구,안락1동,living_services_settlement,생활 인프라·주거,44.09756125,4,주거환경,medium_low,monitor
+21120600,강서구,명지2동,living_services_settlement,생활 인프라·주거,44.0853655,4,,medium_low,monitor
+21510330,기장군,철마면,living_services_settlement,생활 인프라·주거,44.0243905,4,교육시설 접근·공급,medium_low,monitor
+21070630,남구,감만2동,living_services_settlement,생활 인프라·주거,43.93902425,4,,medium_low,monitor
+21130520,연제구,거제2동,living_services_settlement,생활 인프라·주거,43.707317,4,,medium_low,monitor
+21060620,동래구,안락2동,living_services_settlement,생활 인프라·주거,43.6585365,4,,medium_low,monitor
+21130600,연제구,연산6동,living_services_settlement,생활 인프라·주거,43.585366,4,,medium_low,monitor
+21070540,남구,대연4동,living_services_settlement,생활 인프라·주거,43.5243905,4,의료공급 접근,medium_low,monitor
+21150650,사상구,감전동,living_services_settlement,생활 인프라·주거,43.46341475,4,교육시설 접근·공급,medium_low,monitor
+21100600,사하구,장림1동,living_services_settlement,생활 인프라·주거,43.4512195,4,,medium_low,monitor
+21120520,강서구,대저2동,living_services_settlement,생활 인프라·주거,43.426829,4,,medium_low,monitor
+21090640,해운대구,재송1동,living_services_settlement,생활 인프라·주거,43.304878,4,,medium_low,monitor
+21020530,서구,동대신3동,living_services_settlement,생활 인프라·주거,43.109756,4,,medium_low,monitor
+21140590,수영구,광안4동,living_services_settlement,생활 인프라·주거,42.89024375,4,대중교통 접근,medium_low,monitor
+21510130,기장군,정관읍,living_services_settlement,생활 인프라·주거,42.42682925,4,의료공급 접근,medium_low,monitor
+21010540,중구,보수동,living_services_settlement,생활 인프라·주거,42.30487825,4,,medium_low,monitor
+21030710,동구,범일1동,living_services_settlement,생활 인프라·주거,42.29268325,4,주거환경,medium_low,monitor
+21090530,해운대구,중1동,living_services_settlement,생활 인프라·주거,42.097561,4,대중교통 접근,medium_low,monitor
+21060630,동래구,명장1동,living_services_settlement,생활 인프라·주거,42.01219525,4,,medium_low,monitor
+21090710,해운대구,반여4동,living_services_settlement,생활 인프라·주거,41.975609750000004,4,의료공급 접근,medium_low,monitor
+21050810,부산진구,가야1동,living_services_settlement,생활 인프라·주거,41.9390245,4,,medium_low,monitor
+21070550,남구,대연5동,living_services_settlement,생활 인프라·주거,41.86585375,4,,medium_low,monitor
+21050770,부산진구,범천1동,living_services_settlement,생활 인프라·주거,41.5609755,4,대중교통 접근,medium_low,monitor
+21080630,북구,화명3동,living_services_settlement,생활 인프라·주거,41.49999975,4,대중교통 접근,medium_low,monitor
+21070710,남구,우암동,living_services_settlement,생활 인프라·주거,41.28048775,4,주거환경,medium_low,monitor
+21120580,강서구,가덕도동,living_services_settlement,생활 인프라·주거,41.10975625,4,교육시설 접근·공급,medium_low,monitor
+21090740,해운대구,우2동,living_services_settlement,생활 인프라·주거,41.036585,4,대중교통 접근,medium_low,monitor
+21510120,기장군,장안읍,living_services_settlement,생활 인프라·주거,40.9390245,4,,medium_low,monitor
+21060560,동래구,온천2동,living_services_settlement,생활 인프라·주거,40.93902425,4,,medium_low,monitor
+21100610,사하구,장림2동,living_services_settlement,생활 인프라·주거,40.81707325,4,,medium_low,monitor
+21090700,해운대구,반여1동,living_services_settlement,생활 인프라·주거,40.7804875,4,,medium_low,monitor
+21100620,사하구,다대1동,living_services_settlement,생활 인프라·주거,40.52439,4,,medium_low,monitor
+21120562,강서구,신호동,living_services_settlement,생활 인프라·주거,40.4268295,4,의료공급 접근,medium_low,monitor
+21020640,서구,충무동,living_services_settlement,생활 인프라·주거,40.256097749999995,4,,medium_low,monitor
+21020610,서구,아미동,living_services_settlement,생활 인프라·주거,40.2439025,4,주거환경,medium_low,monitor
+21120590,강서구,명지1동,living_services_settlement,생활 인프라·주거,40.195122,4,,medium_low,monitor
+21060550,동래구,온천1동,living_services_settlement,생활 인프라·주거,40.146341250000006,4,대중교통 접근,medium_low,monitor
+21050610,부산진구,전포2동,living_services_settlement,생활 인프라·주거,39.853658249999995,4,,medium_low,monitor
+21060570,동래구,온천3동,living_services_settlement,생활 인프라·주거,39.8414635,4,대중교통 접근,medium_low,monitor
+21120561,강서구,녹산동,living_services_settlement,생활 인프라·주거,39.8414635,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
+21090670,해운대구,좌2동,living_services_settlement,생활 인프라·주거,39.78048775,4,대중교통 접근,medium_low,monitor
+21040530,영도구,남항동,living_services_settlement,생활 인프라·주거,39.71951225,4,주거환경,medium_low,monitor
+21040540,영도구,영선1동,living_services_settlement,생활 인프라·주거,39.512195,4,교육시설 접근·공급,medium_low,monitor
+21510111,기장군,일광읍,living_services_settlement,생활 인프라·주거,38.95121925,4,교육시설 접근·공급,medium_low,monitor
+21070560,남구,대연6동,living_services_settlement,생활 인프라·주거,38.353658749999994,4,,medium_low,monitor
+21040650,영도구,동삼1동,living_services_settlement,생활 인프라·주거,38.219512,4,,medium_low,monitor
+21070530,남구,대연3동,living_services_settlement,생활 인프라·주거,37.20731725,4,,medium_low,monitor
+21140580,수영구,광안3동,living_services_settlement,생활 인프라·주거,36.02439025,4,,medium_low,monitor
+21060580,동래구,사직1동,living_services_settlement,생활 인프라·주거,35.4024385,4,,medium_low,monitor
+21130590,연제구,연산5동,living_services_settlement,생활 인프라·주거,35.073171,4,대중교통 접근,medium_low,monitor
+21050700,부산진구,당감4동,living_services_settlement,생활 인프라·주거,34.53658525,4,,medium_low,monitor
+21020560,서구,서대신3동,living_services_settlement,생활 인프라·주거,34.49999975,4,,medium_low,monitor
+21110740,금정구,장전2동,living_services_settlement,생활 인프라·주거,34.01219525,4,,medium_low,monitor
+21110590,금정구,부곡3동,living_services_settlement,생활 인프라·주거,33.69512175,4,교육시설 접근·공급,medium_low,monitor
+21510110,기장군,기장읍,living_services_settlement,생활 인프라·주거,33.085366,4,,medium_low,monitor
+21070700,남구,대연1동,living_services_settlement,생활 인프라·주거,32.8414635,4,,medium_low,monitor
+21030660,동구,범일2동,living_services_settlement,생활 인프라·주거,30.81707275,4,,medium_low,monitor
+21110690,금정구,구서1동,living_services_settlement,생활 인프라·주거,30.256097500000003,4,,medium_low,monitor
+21050830,부산진구,전포1동,living_services_settlement,생활 인프라·주거,29.402439,4,,medium_low,monitor
+21010530,중구,대청동,living_services_settlement,생활 인프라·주거,29.2317075,4,,medium_low,monitor
+21060650,동래구,명륜동,living_services_settlement,생활 인프라·주거,28.18292675,4,,medium_low,monitor
+21090660,해운대구,좌1동,living_services_settlement,생활 인프라·주거,27.402439,4,,medium_low,monitor
+21050520,부산진구,부전2동,living_services_settlement,생활 인프라·주거,27.182927,4,,medium_low,monitor
+21050560,부산진구,양정1동,living_services_settlement,생활 인프라·주거,25.0,4,,medium_low,monitor
+21050820,부산진구,부전1동,living_services_settlement,생활 인프라·주거,20.24390225,4,,medium_low,monitor
+21150540,사상구,모라3동,socioeconomic_base,사회·경제 기반,95.585366,2,소득·복지수요|지역 고용기회,low,candidate_after_validation
+21080580,북구,덕천3동,socioeconomic_base,사회·경제 기반,93.8536585,2,소득·복지수요|지역 고용기회,low,candidate_after_validation
+21080540,북구,금곡동,socioeconomic_base,사회·경제 기반,93.804878,2,소득·복지수요|지역 고용기회,low,candidate_after_validation
+21090620,해운대구,반송2동,socioeconomic_base,사회·경제 기반,92.3414635,2,소득·복지수요|지역 고용기회,low,candidate_after_validation
+21090580,해운대구,반여2동,socioeconomic_base,사회·경제 기반,88.414634,2,소득·복지수요|지역 고용기회,low,candidate_after_validation
+21090590,해운대구,반여3동,socioeconomic_base,사회·경제 기반,88.0731705,2,소득·복지수요|지역 고용기회,low,candidate_after_validation
+21020630,서구,초장동,socioeconomic_base,사회·경제 기반,86.195122,2,소득·복지수요|지역 고용기회,low,candidate_after_validation
+21040670,영도구,동삼3동,socioeconomic_base,사회·경제 기반,85.926829,2,소득·복지수요|지역 고용기회,low,candidate_after_validation
+21040680,영도구,신선동,socioeconomic_base,사회·경제 기반,85.04878049999999,2,소득·복지수요|지역 고용기회,low,candidate_after_validation
+21080530,북구,구포3동,socioeconomic_base,사회·경제 기반,83.8292685,2,소득·복지수요|지역 고용기회,low,candidate_after_validation
+21100660,사하구,감천2동,socioeconomic_base,사회·경제 기반,80.195122,2,소득·복지수요,low,candidate_after_validation
+21100630,사하구,다대2동,socioeconomic_base,사회·경제 기반,79.829268,2,지역 고용기회,low,candidate_after_validation
+21020690,서구,남부민2동,socioeconomic_base,사회·경제 기반,76.414634,2,소득·복지수요,low,candidate_after_validation
+21030600,동구,수정5동,socioeconomic_base,사회·경제 기반,76.1707315,2,소득·복지수요,low,candidate_after_validation
+21030590,동구,수정4동,socioeconomic_base,사회·경제 기반,76.02439000000001,2,소득·복지수요,low,candidate_after_validation
+21090650,해운대구,재송2동,socioeconomic_base,사회·경제 기반,75.95121950000001,2,소득·복지수요|지역 고용기회,low,candidate_after_validation
+21080600,북구,만덕2동,socioeconomic_base,사회·경제 기반,75.8292685,2,지역 고용기회,low,candidate_after_validation
+21030710,동구,범일1동,socioeconomic_base,사회·경제 기반,74.4634145,2,소득·복지수요,low,candidate_after_validation
+21100520,사하구,괴정2동,socioeconomic_base,사회·경제 기반,74.24390249999999,2,지역 고용기회,low,candidate_after_validation
+21110570,금정구,부곡1동,socioeconomic_base,사회·경제 기반,73.682927,2,소득·복지수요,low,candidate_after_validation
+21030700,동구,좌천동,socioeconomic_base,사회·경제 기반,73.317073,2,소득·복지수요,low,candidate_after_validation
+21030550,동구,초량6동,socioeconomic_base,사회·경제 기반,72.804878,2,소득·복지수요,low,candidate_after_validation
+21070630,남구,감만2동,socioeconomic_base,사회·경제 기반,71.68292699999999,2,소득·복지수요,low,candidate_after_validation
+21020520,서구,동대신2동,socioeconomic_base,사회·경제 기반,70.707317,2,소득·복지수요,low,candidate_after_validation
+21110510,금정구,서1동,socioeconomic_base,사회·경제 기반,70.3414635,2,소득·복지수요,low,candidate_after_validation
+21050800,부산진구,당감1동,socioeconomic_base,사회·경제 기반,69.707317,2,지역 고용기회,low,monitor
+21040650,영도구,동삼1동,socioeconomic_base,사회·경제 기반,68.95121950000001,2,지역 고용기회,low,monitor
+21100510,사하구,괴정1동,socioeconomic_base,사회·경제 기반,68.95121950000001,2,지역 고용기회,low,monitor
+21070710,남구,우암동,socioeconomic_base,사회·경제 기반,68.951219,2,지역 고용기회,low,monitor
+21040550,영도구,영선2동,socioeconomic_base,사회·경제 기반,68.780488,2,소득·복지수요,low,monitor
+21100530,사하구,괴정3동,socioeconomic_base,사회·경제 기반,68.3414635,2,소득·복지수요,low,monitor
+21130570,연제구,연산3동,socioeconomic_base,사회·경제 기반,68.1219515,2,지역 고용기회,low,monitor
+21050760,부산진구,개금3동,socioeconomic_base,사회·경제 기반,67.97560999999999,2,지역 고용기회,low,monitor
+21080560,북구,덕천1동,socioeconomic_base,사회·경제 기반,67.8536585,2,소득·복지수요,low,monitor
+21110520,금정구,서2동,socioeconomic_base,사회·경제 기반,67.6585365,2,소득·복지수요,low,monitor
+21110600,금정구,부곡4동,socioeconomic_base,사회·경제 기반,67.60975549999999,2,지역 고용기회,low,monitor
+21060640,동래구,명장2동,socioeconomic_base,사회·경제 기반,66.536585,2,지역 고용기회,low,monitor
+21050840,부산진구,범천2동,socioeconomic_base,사회·경제 기반,66.3658535,2,지역 고용기회,low,monitor
+21140540,수영구,망미1동,socioeconomic_base,사회·경제 기반,65.5853665,2,지역 고용기회,low,monitor
+21070660,남구,문현1동,socioeconomic_base,사회·경제 기반,65.3414635,2,지역 고용기회,low,monitor
+21100540,사하구,괴정4동,socioeconomic_base,사회·경제 기반,64.97560949999999,2,지역 고용기회,low,monitor
+21010600,중구,영주2동,socioeconomic_base,사회·경제 기반,64.878049,2,,low,monitor
+21070540,남구,대연4동,socioeconomic_base,사회·경제 기반,62.560976,2,지역 고용기회,low,monitor
+21080620,북구,화명2동,socioeconomic_base,사회·경제 기반,62.2926825,2,지역 고용기회,low,monitor
+21130600,연제구,연산6동,socioeconomic_base,사회·경제 기반,62.146341500000005,2,지역 고용기회,low,monitor
+21020610,서구,아미동,socioeconomic_base,사회·경제 기반,62.121950999999996,2,소득·복지수요,low,monitor
+21100560,사하구,하단1동,socioeconomic_base,사회·경제 기반,61.878048500000006,2,소득·복지수요,low,monitor
+21080610,북구,만덕3동,socioeconomic_base,사회·경제 기반,61.829268,2,지역 고용기회,low,monitor
+21030560,동구,수정1동,socioeconomic_base,사회·경제 기반,61.536585,2,소득·복지수요,low,monitor
+21070590,남구,용호3동,socioeconomic_base,사회·경제 기반,61.3902435,2,,low,monitor
+21050720,부산진구,가야2동,socioeconomic_base,사회·경제 기반,61.3658535,2,지역 고용기회,low,monitor
+21110720,금정구,서3동,socioeconomic_base,사회·경제 기반,61.292683000000004,2,소득·복지수요,low,monitor
+21090720,해운대구,반송1동,socioeconomic_base,사회·경제 기반,60.195122,2,소득·복지수요,low,monitor
+21010540,중구,보수동,socioeconomic_base,사회·경제 기반,59.951219,2,,low,monitor
+21090560,해운대구,송정동,socioeconomic_base,사회·경제 기반,59.7317075,2,소득·복지수요,low,monitor
+21150620,사상구,주례3동,socioeconomic_base,사회·경제 기반,59.5365855,2,,low,monitor
+21070600,남구,용호4동,socioeconomic_base,사회·경제 기반,59.512195,2,,low,monitor
+21030520,동구,초량2동,socioeconomic_base,사회·경제 기반,59.463415,2,소득·복지수요,low,monitor
+21040630,영도구,청학1동,socioeconomic_base,사회·경제 기반,59.292683,2,소득·복지수요,low,monitor
+21020650,서구,남부민1동,socioeconomic_base,사회·경제 기반,59.219512,2,소득·복지수요,low,monitor
+21140560,수영구,광안1동,socioeconomic_base,사회·경제 기반,59.121951499999994,2,지역 고용기회,low,monitor
+21060520,동래구,복산동,socioeconomic_base,사회·경제 기반,58.487804499999996,2,소득·복지수요,low,monitor
+21080520,북구,구포2동,socioeconomic_base,사회·경제 기반,58.3414635,2,,low,monitor
+21020510,서구,동대신1동,socioeconomic_base,사회·경제 기반,58.04878,2,,low,monitor
+21080510,북구,구포1동,socioeconomic_base,사회·경제 기반,57.975609500000004,2,소득·복지수요,low,monitor
+21050550,부산진구,초읍동,socioeconomic_base,사회·경제 기반,57.9512195,2,지역 고용기회,low,monitor
+21100650,사하구,감천1동,socioeconomic_base,사회·경제 기반,57.6341465,2,,low,monitor
+21080590,북구,만덕1동,socioeconomic_base,사회·경제 기반,57.487804999999994,2,지역 고용기회,low,monitor
+21020540,서구,서대신1동,socioeconomic_base,사회·경제 기반,57.146341500000005,2,지역 고용기회,low,monitor
+21050660,부산진구,부암3동,socioeconomic_base,사회·경제 기반,56.8292685,2,지역 고용기회,low,monitor
+21050540,부산진구,연지동,socioeconomic_base,사회·경제 기반,56.439023999999996,2,지역 고용기회,low,monitor
+21510330,기장군,철마면,socioeconomic_base,사회·경제 기반,56.2682925,2,소득·복지수요,low,monitor
+21100550,사하구,당리동,socioeconomic_base,사회·경제 기반,56.219511999999995,2,,low,monitor
+21150550,사상구,덕포1동,socioeconomic_base,사회·경제 기반,55.6341465,2,지역 고용기회,low,monitor
+21100570,사하구,하단2동,socioeconomic_base,사회·경제 기반,55.2682925,2,소득·복지수요,low,monitor
+21090540,해운대구,중2동,socioeconomic_base,사회·경제 기반,55.04878049999999,2,지역 고용기회,low,monitor
+21050750,부산진구,개금2동,socioeconomic_base,사회·경제 기반,54.85365899999999,2,,low,monitor
+21070570,남구,용호1동,socioeconomic_base,사회·경제 기반,54.341464,2,지역 고용기회,low,monitor
+21050640,부산진구,부암1동,socioeconomic_base,사회·경제 기반,54.195122000000005,2,지역 고용기회,low,monitor
+21070580,남구,용호2동,socioeconomic_base,사회·경제 기반,53.243902,2,지역 고용기회,low,monitor
+21040640,영도구,청학2동,socioeconomic_base,사회·경제 기반,52.5609755,2,,low,monitor
+21110680,금정구,남산동,socioeconomic_base,사회·경제 기반,52.5609755,2,소득·복지수요,low,monitor
+21010520,중구,동광동,socioeconomic_base,사회·경제 기반,52.4634145,2,소득·복지수요,low,monitor
+21010590,중구,영주1동,socioeconomic_base,사회·경제 기반,52.21951249999999,2,소득·복지수요,low,monitor
+21070680,남구,문현3동,socioeconomic_base,사회·경제 기반,52.121951,2,지역 고용기회,low,monitor
+21010580,중구,남포동,socioeconomic_base,사회·경제 기반,51.6829265,2,소득·복지수요,low,monitor
+21130540,연제구,거제4동,socioeconomic_base,사회·경제 기반,51.463414,2,지역 고용기회,low,monitor
+21110700,금정구,구서2동,socioeconomic_base,사회·경제 기반,51.1707315,2,지역 고용기회,low,monitor
+21060570,동래구,온천3동,socioeconomic_base,사회·경제 기반,51.024390499999996,2,지역 고용기회,low,monitor
+21090710,해운대구,반여4동,socioeconomic_base,사회·경제 기반,50.97561,2,지역 고용기회,low,monitor
+21050810,부산진구,가야1동,socioeconomic_base,사회·경제 기반,50.8292685,2,,low,monitor
+21080550,북구,화명1동,socioeconomic_base,사회·경제 기반,50.7317075,2,지역 고용기회,low,monitor
+21100620,사하구,다대1동,socioeconomic_base,사회·경제 기반,50.6097565,2,,low,monitor
+21100610,사하구,장림2동,socioeconomic_base,사회·경제 기반,50.4634145,2,,low,monitor
+21510110,기장군,기장읍,socioeconomic_base,사회·경제 기반,50.243902500000004,2,,low,monitor
+21040690,영도구,봉래2동,socioeconomic_base,사회·경제 기반,49.95122,2,,low,monitor
+21510111,기장군,일광읍,socioeconomic_base,사회·경제 기반,49.853658,2,,low,monitor
+21040540,영도구,영선1동,socioeconomic_base,사회·경제 기반,49.7073175,2,,low,monitor
+21100580,사하구,신평1동,socioeconomic_base,사회·경제 기반,49.439024499999995,2,소득·복지수요,low,monitor
+21090680,해운대구,좌3동,socioeconomic_base,사회·경제 기반,49.3658535,2,지역 고용기회,low,monitor
+21040590,영도구,봉래1동,socioeconomic_base,사회·경제 기반,49.0,2,소득·복지수요,low,monitor
+21060550,동래구,온천1동,socioeconomic_base,사회·경제 기반,48.9268295,2,지역 고용기회,low,monitor
+21140590,수영구,광안4동,socioeconomic_base,사회·경제 기반,48.5365855,2,,low,monitor
+21150600,사상구,주례1동,socioeconomic_base,사회·경제 기반,48.4634145,2,지역 고용기회,low,monitor
+21030570,동구,수정2동,socioeconomic_base,사회·경제 기반,48.4390245,2,소득·복지수요,low,monitor
+21020570,서구,서대신4동,socioeconomic_base,사회·경제 기반,48.341463,2,지역 고용기회,low,monitor
+21010510,중구,중앙동,socioeconomic_base,사회·경제 기반,48.292683,2,소득·복지수요,low,monitor
+21010570,중구,광복동,socioeconomic_base,사회·경제 기반,48.2926825,2,소득·복지수요,low,monitor
+21140530,수영구,수영동,socioeconomic_base,사회·경제 기반,48.097561,2,,low,monitor
+21040530,영도구,남항동,socioeconomic_base,사회·경제 기반,47.95121949999999,2,소득·복지수요,low,monitor
+21080570,북구,덕천2동,socioeconomic_base,사회·경제 기반,47.6341465,2,소득·복지수요,low,monitor
+21050700,부산진구,당감4동,socioeconomic_base,사회·경제 기반,47.5365855,2,,low,monitor
+21010560,중구,부평동,socioeconomic_base,사회·경제 기반,47.4146345,2,소득·복지수요,low,monitor
+21020590,서구,부민동,socioeconomic_base,사회·경제 기반,47.365854,2,,low,monitor
+21060590,동래구,사직2동,socioeconomic_base,사회·경제 기반,47.317073,2,지역 고용기회,low,monitor
+21060600,동래구,사직3동,socioeconomic_base,사회·경제 기반,47.04878050000001,2,,low,monitor
+21020530,서구,동대신3동,socioeconomic_base,사회·경제 기반,46.97561,2,,low,monitor
+21060630,동래구,명장1동,socioeconomic_base,사회·경제 기반,46.926829500000004,2,,low,monitor
+21120550,강서구,가락동,socioeconomic_base,사회·경제 기반,46.6341465,2,소득·복지수요,low,monitor
+21120600,강서구,명지2동,socioeconomic_base,사회·경제 기반,46.414634,2,지역 고용기회,low,monitor
+21030510,동구,초량1동,socioeconomic_base,사회·경제 기반,46.390243999999996,2,소득·복지수요,low,monitor
+21020640,서구,충무동,socioeconomic_base,사회·경제 기반,45.9268295,2,소득·복지수요,low,monitor
+21510120,기장군,장안읍,socioeconomic_base,사회·경제 기반,45.8536585,2,소득·복지수요,low,monitor
+21130620,연제구,연산8동,socioeconomic_base,사회·경제 기반,45.365854,2,,low,monitor
+21110610,금정구,장전1동,socioeconomic_base,사회·경제 기반,45.268292499999994,2,지역 고용기회,low,monitor
+21050740,부산진구,개금1동,socioeconomic_base,사회·경제 기반,45.121950999999996,2,,low,monitor
+21140550,수영구,망미2동,socioeconomic_base,사회·경제 기반,44.487805,2,,low,monitor
+21130520,연제구,거제2동,socioeconomic_base,사회·경제 기반,44.14634149999999,2,지역 고용기회,low,monitor
+21010530,중구,대청동,socioeconomic_base,사회·경제 기반,44.0731705,2,,low,monitor
+21050820,부산진구,부전1동,socioeconomic_base,사회·경제 기반,44.0,2,소득·복지수요,low,monitor
+21130630,연제구,연산9동,socioeconomic_base,사회·경제 기반,43.97561,2,,low,monitor
+21030680,동구,범일5동,socioeconomic_base,사회·경제 기반,43.8292685,2,지역 고용기회,low,monitor
+21150510,사상구,삼락동,socioeconomic_base,사회·경제 기반,43.585366,2,소득·복지수요,low,monitor
+21070670,남구,문현2동,socioeconomic_base,사회·경제 기반,43.243902500000004,2,소득·복지수요,low,monitor
+21020560,서구,서대신3동,socioeconomic_base,사회·경제 기반,43.21951250000001,2,,low,monitor
+21130560,연제구,연산2동,socioeconomic_base,사회·경제 기반,43.02439,2,,low,monitor
+21510130,기장군,정관읍,socioeconomic_base,사회·경제 기반,42.658536999999995,2,,low,monitor
+21110580,금정구,부곡2동,socioeconomic_base,사회·경제 기반,42.170732,2,,low,monitor
+21110730,금정구,금사회동동,socioeconomic_base,사회·경제 기반,42.073170499999996,2,소득·복지수요,low,monitor
+21130580,연제구,연산4동,socioeconomic_base,사회·경제 기반,41.97561,2,,low,monitor
+21150610,사상구,주례2동,socioeconomic_base,사회·경제 기반,41.9268295,2,,low,monitor
+21090690,해운대구,좌4동,socioeconomic_base,사회·경제 기반,41.9024395,2,지역 고용기회,low,monitor
+21040660,영도구,동삼2동,socioeconomic_base,사회·경제 기반,41.780488000000005,2,,low,monitor
+21060620,동래구,안락2동,socioeconomic_base,사회·경제 기반,41.1707315,2,,low,monitor
+21140580,수영구,광안3동,socioeconomic_base,사회·경제 기반,40.926829,2,소득·복지수요,low,monitor
+21130530,연제구,거제3동,socioeconomic_base,사회·경제 기반,40.634146,2,,low,monitor
+21050570,부산진구,양정2동,socioeconomic_base,사회·경제 기반,40.4634145,2,,low,monitor
+21070560,남구,대연6동,socioeconomic_base,사회·경제 기반,40.31707350000001,2,지역 고용기회,low,monitor
+21090670,해운대구,좌2동,socioeconomic_base,사회·경제 기반,40.268293,2,지역 고용기회,low,monitor
+21120580,강서구,가덕도동,socioeconomic_base,사회·경제 기반,39.97561,2,,low,monitor
+21150520,사상구,모라1동,socioeconomic_base,사회·경제 기반,39.829268,2,,low,monitor
+21110670,금정구,청룡노포동,socioeconomic_base,사회·경제 기반,39.585365499999995,2,,low,monitor
+21130590,연제구,연산5동,socioeconomic_base,사회·경제 기반,39.292683499999995,2,,low,monitor
+21120510,강서구,대저1동,socioeconomic_base,사회·경제 기반,39.170732,2,소득·복지수요,low,monitor
+21130550,연제구,연산1동,socioeconomic_base,사회·경제 기반,39.170732,2,,low,monitor
+21100590,사하구,신평2동,socioeconomic_base,사회·경제 기반,38.8292685,2,,low,monitor
+21060610,동래구,안락1동,socioeconomic_base,사회·경제 기반,38.6341465,2,,low,monitor
+21070550,남구,대연5동,socioeconomic_base,사회·경제 기반,38.536585,2,,low,monitor
+21050680,부산진구,당감2동,socioeconomic_base,사회·경제 기반,38.4146345,2,,low,monitor
+21070700,남구,대연1동,socioeconomic_base,사회·경제 기반,38.3414635,2,,low,monitor
+21090700,해운대구,반여1동,socioeconomic_base,사회·경제 기반,38.146341500000005,2,,low,monitor
+21150650,사상구,감전동,socioeconomic_base,사회·경제 기반,37.2439025,2,소득·복지수요,low,monitor
+21050770,부산진구,범천1동,socioeconomic_base,사회·경제 기반,36.829268,2,,low,monitor
+21020680,서구,암남동,socioeconomic_base,사회·경제 기반,36.7804875,2,,low,monitor
+21050830,부산진구,전포1동,socioeconomic_base,사회·경제 기반,36.585366,2,,low,monitor
+21060560,동래구,온천2동,socioeconomic_base,사회·경제 기반,35.97561,2,,low,monitor
+21090750,해운대구,우3동,socioeconomic_base,사회·경제 기반,35.902439,2,지역 고용기회,low,monitor
+21070690,남구,문현4동,socioeconomic_base,사회·경제 기반,35.8536585,2,,low,monitor
+21140570,수영구,광안2동,socioeconomic_base,사회·경제 기반,34.951219,2,,low,monitor
+21120590,강서구,명지1동,socioeconomic_base,사회·경제 기반,34.7804875,2,,low,monitor
+21110640,금정구,선두구동,socioeconomic_base,사회·경제 기반,34.682927,2,,low,monitor
+21140600,수영구,민락동,socioeconomic_base,사회·경제 기반,34.1219515,2,,low,monitor
+21060510,동래구,수민동,socioeconomic_base,사회·경제 기반,34.097561,2,,low,monitor
+21080630,북구,화명3동,socioeconomic_base,사회·경제 기반,34.0,2,,low,monitor
+21090730,해운대구,우1동,socioeconomic_base,사회·경제 기반,33.3414635,2,,low,monitor
+21070620,남구,감만1동,socioeconomic_base,사회·경제 기반,33.317073,2,,low,monitor
+21050610,부산진구,전포2동,socioeconomic_base,사회·경제 기반,32.243902500000004,2,,low,monitor
+21120530,강서구,강동동,socioeconomic_base,사회·경제 기반,32.195122,2,,low,monitor
+21150570,사상구,괘법동,socioeconomic_base,사회·경제 기반,30.707317000000003,2,,low,monitor
+21060580,동래구,사직1동,socioeconomic_base,사회·경제 기반,29.926828999999998,2,,low,monitor
+21150560,사상구,덕포2동,socioeconomic_base,사회·경제 기반,29.878048999999997,2,,low,monitor
+21150630,사상구,학장동,socioeconomic_base,사회·경제 기반,29.3414635,2,,low,monitor
+21140520,수영구,남천2동,socioeconomic_base,사회·경제 기반,29.243902499999997,2,,low,monitor
+21050560,부산진구,양정1동,socioeconomic_base,사회·경제 기반,29.121951,2,,low,monitor
+21100600,사하구,장림1동,socioeconomic_base,사회·경제 기반,28.634146,2,,low,monitor
+21150640,사상구,엄궁동,socioeconomic_base,사회·경제 기반,28.024390000000004,2,,low,monitor
+21060650,동래구,명륜동,socioeconomic_base,사회·경제 기반,27.3658535,2,,low,monitor
+21030660,동구,범일2동,socioeconomic_base,사회·경제 기반,26.2682925,2,,low,monitor
+21050520,부산진구,부전2동,socioeconomic_base,사회·경제 기반,26.2439025,2,,low,monitor
+21110710,금정구,금성동,socioeconomic_base,사회·경제 기반,25.097561,2,,low,monitor
+21110590,금정구,부곡3동,socioeconomic_base,사회·경제 기반,23.8536585,2,,low,monitor
+21100640,사하구,구평동,socioeconomic_base,사회·경제 기반,23.365854,2,,low,monitor
+21070610,남구,용당동,socioeconomic_base,사회·경제 기반,23.317073,2,,low,monitor
+21110740,금정구,장전2동,socioeconomic_base,사회·경제 기반,22.9268295,2,,low,monitor
+21110690,금정구,구서1동,socioeconomic_base,사회·경제 기반,22.219512,2,,low,monitor
+21120562,강서구,신호동,socioeconomic_base,사회·경제 기반,22.0975615,2,,low,monitor
+21090660,해운대구,좌1동,socioeconomic_base,사회·경제 기반,19.6585365,2,,low,monitor
+21120520,강서구,대저2동,socioeconomic_base,사회·경제 기반,18.707317,2,,low,monitor
+21090530,해운대구,중1동,socioeconomic_base,사회·경제 기반,17.9756095,2,,low,monitor
+21090640,해운대구,재송1동,socioeconomic_base,사회·경제 기반,17.6585365,2,,low,monitor
+21070530,남구,대연3동,socioeconomic_base,사회·경제 기반,16.414634500000002,2,,low,monitor
+21130510,연제구,거제1동,socioeconomic_base,사회·경제 기반,15.878049,2,,low,monitor
+21030530,동구,초량3동,socioeconomic_base,사회·경제 기반,13.0,2,,low,monitor
+21140510,수영구,남천1동,socioeconomic_base,사회·경제 기반,12.804877999999999,2,,low,monitor
+21120561,강서구,녹산동,socioeconomic_base,사회·경제 기반,11.1707315,2,,low,monitor
+21090740,해운대구,우2동,socioeconomic_base,사회·경제 기반,6.2682925,2,,low,monitor

@@ -1,6 +1,9 @@
+import hashlib
 import json
 import re
 from pathlib import Path
+
+import pandas as pd
 
 from busan_imd.collectors.approved_apis import validate_manifest as validate_raw_manifest
 from busan_imd.collectors.fire_incidents import validate_manifest as validate_fire_manifest
@@ -69,6 +72,14 @@ def test_project_structure_and_required_documents() -> None:
         "docs/data/SENSITIVITY_SCENARIOS_2025.csv",
         "docs/data/manifests/SENSITIVITY_ANALYSIS_REPORT_2025.json",
         "docs/data/manifests/PRIORITY_AREA_REPORT_2025.json",
+        "docs/data/manifests/CLUSTER_ANALYSIS_REPORT_2025.json",
+        "docs/data/manifests/ENVIRONMENTAL_OVERLAY_REPORT_2025.json",
+        "docs/data/manifests/POLICY_MATRIX_REPORT_2025.json",
+        "docs/data/manifests/INFOGRAPHIC_REPORT_2025.json",
+        "docs/data/manifests/CATEGORY_ASSESSMENT_REPORT_2025.json",
+        "docs/data/POLICY_ACTION_CATALOG_2025.csv",
+        "docs/data/CATEGORY_ASSESSMENT_SPEC_2025.csv",
+        "docs/data/CATEGORY_POLICY_CATALOG_2025.csv",
         "docs/data/DATA_PORTABILITY.md",
         "docs/data/manifests/CONSUMER_SALES_MANIFEST_2025.json",
         "docs/data/manifests/CITY_PARKS_MANIFEST.json",
@@ -82,7 +93,26 @@ def test_project_structure_and_required_documents() -> None:
         "docs/en/methodology/SENSITIVITY_ANALYSIS_2025.md",
         "docs/methodology/PRIORITY_AREAS_2025.md",
         "docs/en/methodology/PRIORITY_AREAS_2025.md",
+        "docs/methodology/CLUSTER_ANALYSIS_2025.md",
+        "docs/en/methodology/CLUSTER_ANALYSIS_2025.md",
+        "docs/methodology/ENVIRONMENTAL_OVERLAY_2025.md",
+        "docs/en/methodology/ENVIRONMENTAL_OVERLAY_2025.md",
+        "docs/methodology/POLICY_MATRIX_2025.md",
+        "docs/en/methodology/POLICY_MATRIX_2025.md",
+        "docs/methodology/INFOGRAPHIC_2025.md",
+        "docs/en/methodology/INFOGRAPHIC_2025.md",
+        "docs/methodology/CATEGORY_ASSESSMENT_2025.md",
+        "docs/en/methodology/CATEGORY_ASSESSMENT_2025.md",
+        "outputs/infographic/busan_imd_one_page_2025.svg",
+        "outputs/infographic/busan_imd_one_page_2025.pdf",
+        "outputs/infographic/busan_imd_one_page_2025.png",
+        "outputs/infographic/busan_admin_dong_category_assessment_2025.csv",
+        "outputs/infographic/busan_admin_dong_major_category_assessment_2025.csv",
+        "outputs/infographic/busan_admin_dong_category_indicator_scores_2025.csv",
         "notebooks/01_candidate_profile_eda.ipynb",
+        "notebooks/02_deprivation_cluster_review.ipynb",
+        "notebooks/03_environmental_overlay_review.ipynb",
+        "notebooks/04_policy_matrix_review.ipynb",
     )
 
     assert all((REPOSITORY_ROOT / path).is_dir() for path in required_directories)
@@ -96,6 +126,52 @@ def test_eda_notebook_is_clean_and_reuses_the_pipeline() -> None:
     assert notebook["nbformat"] == 4
     code_cells = [cell for cell in notebook["cells"] if cell["cell_type"] == "code"]
     assert any("from busan_imd.eda import run" in "".join(cell["source"]) for cell in code_cells)
+    assert any("os.chdir(project_root)" in "".join(cell["source"]) for cell in code_cells)
+    assert all(cell["execution_count"] is None for cell in code_cells)
+    assert all(cell["outputs"] == [] for cell in code_cells)
+
+
+def test_cluster_notebook_is_clean_and_portable() -> None:
+    notebook_path = REPOSITORY_ROOT / "notebooks/02_deprivation_cluster_review.ipynb"
+    notebook = json.loads(notebook_path.read_text(encoding="utf-8"))
+
+    assert notebook["nbformat"] == 4
+    code_cells = [cell for cell in notebook["cells"] if cell["cell_type"] == "code"]
+    sources = ["".join(cell["source"]) for cell in code_cells]
+    assert any("os.chdir(project_root)" in source for source in sources)
+    assert any("from busan_imd.cluster_analysis import" in source for source in sources)
+    assert any("px.scatter" in source for source in sources)
+    assert any("px.imshow" in source for source in sources)
+    assert all(cell["execution_count"] is None for cell in code_cells)
+    assert all(cell["outputs"] == [] for cell in code_cells)
+
+
+def test_environmental_overlay_notebook_is_clean_and_portable() -> None:
+    notebook_path = REPOSITORY_ROOT / "notebooks/03_environmental_overlay_review.ipynb"
+    notebook = json.loads(notebook_path.read_text(encoding="utf-8"))
+
+    assert notebook["nbformat"] == 4
+    code_cells = [cell for cell in notebook["cells"] if cell["cell_type"] == "code"]
+    sources = ["".join(cell["source"]) for cell in code_cells]
+    assert any("os.chdir(project_root)" in source for source in sources)
+    assert any("from busan_imd.environmental_overlay import" in source for source in sources)
+    assert any("px.scatter" in source for source in sources)
+    assert any("px.choropleth_mapbox" in source for source in sources)
+    assert all(cell["execution_count"] is None for cell in code_cells)
+    assert all(cell["outputs"] == [] for cell in code_cells)
+
+
+def test_policy_matrix_notebook_is_clean_and_portable() -> None:
+    notebook_path = REPOSITORY_ROOT / "notebooks/04_policy_matrix_review.ipynb"
+    notebook = json.loads(notebook_path.read_text(encoding="utf-8"))
+
+    assert notebook["nbformat"] == 4
+    code_cells = [cell for cell in notebook["cells"] if cell["cell_type"] == "code"]
+    sources = ["".join(cell["source"]) for cell in code_cells]
+    assert any("os.chdir(project_root)" in source for source in sources)
+    assert any("from busan_imd.policy_matrix import" in source for source in sources)
+    assert any("px.bar" in source for source in sources)
+    assert any("px.scatter" in source for source in sources)
     assert all(cell["execution_count"] is None for cell in code_cells)
     assert all(cell["outputs"] == [] for cell in code_cells)
 
@@ -179,6 +255,156 @@ def test_priority_area_report_covers_cod19_scope() -> None:
         re.fullmatch(r"[0-9A-F]{64}", value)
         for value in report["output_sha256"].values()
     )
+
+
+def test_cluster_analysis_report_records_cod20_typology_decision() -> None:
+    report = read_json("docs/data/manifests/CLUSTER_ANALYSIS_REPORT_2025.json")
+    priority_report = read_json("docs/data/manifests/PRIORITY_AREA_REPORT_2025.json")
+
+    assert report["record_count"] == 21
+    assert report["candidate_cluster_counts"] == [2, 3, 4, 5, 6]
+    assert report["selected_cluster_count"] == 2
+    assert report["recommended_for_policy_typology"] is True
+    assert report["decision"] == "use_as_exploratory_policy_typology"
+    assert report["input_sha256"] == priority_report["output_sha256"]["priority_areas"]
+    assert report["selected_metrics"]["mean_seed_stability_ari"] >= report[
+        "quality_gate"
+    ]["minimum_mean_seed_stability_ari"]
+    assert {item["cluster_label"] for item in report["cluster_summaries"]} == {
+        "education_living_environment",
+        "employment_income",
+    }
+    assert all(
+        re.fullmatch(r"[0-9A-F]{64}", value)
+        for value in report["output_sha256"].values()
+    )
+
+
+def test_environmental_overlay_report_records_cod21_scope() -> None:
+    report = read_json("docs/data/manifests/ENVIRONMENTAL_OVERLAY_REPORT_2025.json")
+    composite_report = read_json("docs/data/manifests/COMPOSITE_INDEX_REPORT_2025.json")
+    standardization_report = read_json("docs/data/manifests/STANDARDIZATION_REPORT_2025.json")
+
+    assert report["record_count"] == 206
+    assert report["high_exposure_count"] == 52
+    assert report["priority_area_count"] == 21
+    assert report["double_burden_count"] == 4
+    assert sum(report["category_counts"].values()) == 206
+    assert report["decision"] == (
+        "use_for_particulate_independent_double_burden_screening_only"
+    )
+    assert report["port_industrial_overlay"]["status"] == (
+        "not_evaluated_no_versioned_site_geometry"
+    )
+    assert report["input_sha256"]["composite_index"] == composite_report["output_sha256"]
+    assert report["input_sha256"]["standardized_profile"] == standardization_report[
+        "profile_sha256"
+    ]
+    assert re.fullmatch(r"[0-9A-F]{64}", report["output_sha256"])
+
+
+def test_policy_matrix_report_records_cod22_scope() -> None:
+    report = read_json("docs/data/manifests/POLICY_MATRIX_REPORT_2025.json")
+    cluster_report = read_json("docs/data/manifests/CLUSTER_ANALYSIS_REPORT_2025.json")
+    overlay_report = read_json("docs/data/manifests/ENVIRONMENTAL_OVERLAY_REPORT_2025.json")
+
+    assert report["priority_area_count"] == 21
+    assert report["cluster_count"] == 2
+    assert report["matrix_row_count"] == 5
+    assert report["unique_policy_count"] == 4
+    assert report["decision_status"] == "candidate_for_field_validation"
+    assert report["input_sha256"]["cluster_assignments"] == cluster_report[
+        "output_sha256"
+    ]["assignments"]
+    assert report["input_sha256"]["environmental_overlay"] == overlay_report[
+        "output_sha256"
+    ]
+    assert report["cluster_summaries"][0]["excluded_nonpositive_domains"] == [
+        {"domain": "living_environment", "mean_excess_points": -0.252867}
+    ]
+    assert all(
+        re.fullmatch(r"[0-9A-F]{64}", value)
+        for value in (*report["input_sha256"].values(), report["output_sha256"])
+    )
+
+
+def test_infographic_report_and_outputs_cover_cod23_scope() -> None:
+    report = read_json("docs/data/manifests/INFOGRAPHIC_REPORT_2025.json")
+
+    assert report["artifact_status"] == "submission_draft"
+    assert report["page_count"] == 1
+    assert report["dong_action_profile_count"] == 206
+    assert report["priority_area_count"] == 21
+    assert report["double_burden_area_count"] == 4
+    assert report["policy_candidate_count"] == 5
+    assert len(report["top_10_names"]) == 10
+    for format_name, relative_path in report["output_paths"].items():
+        path = REPOSITORY_ROOT / relative_path
+        actual_hash = hashlib.sha256(path.read_bytes()).hexdigest().upper()
+        assert actual_hash == report["output_sha256"][format_name]
+    pdf = (REPOSITORY_ROOT / report["output_paths"]["pdf"]).read_bytes()
+    assert len(re.findall(rb"/Type\s*/Page\b", pdf)) == 1
+    svg = (REPOSITORY_ROOT / report["output_paths"]["svg"]).read_text(encoding="utf-8")
+    assert "행정동별 취약 원인" in svg
+    profiles = pd.read_csv(
+        REPOSITORY_ROOT / report["output_paths"]["action_profile_csv"],
+        dtype={"admin_dong_code": str},
+    )
+    assert len(profiles) == 206
+    assert profiles["admin_dong_code"].nunique() == 206
+    assert profiles["improvement_direction"].notna().all()
+    assert profiles["specialization_evidence_status"].str.contains("특화 확정 불가").all()
+    action_map = (
+        REPOSITORY_ROOT / report["output_paths"]["interactive_action_map"]
+    ).read_text(encoding="utf-8")
+    assert action_map.count("data-code=") == 206
+    assert action_map.count('class="tree-major"') == 3
+    assert action_map.count('class="tree-child"') == 8
+    assert 'role="tree"' in action_map
+    assert "큰 카테고리 종합점수 산정" in action_map
+    assert "생활 인프라·주거" in action_map
+
+
+def test_category_assessment_is_complete_and_flags_estimation() -> None:
+    report = read_json("docs/data/manifests/CATEGORY_ASSESSMENT_REPORT_2025.json")
+
+    assert report["admin_dong_count"] == 206
+    assert report["major_category_count"] == 3
+    assert report["category_count"] == 8
+    assert report["indicator_count"] == 13
+    assert report["category_score_row_count"] == 206 * 8
+    assert report["major_category_score_row_count"] == 206 * 3
+    assert report["indicator_score_row_count"] == 206 * 13
+    assert report["policy_trigger_threshold"] == 70
+    for name, relative_path in report["output_paths"].items():
+        actual = hashlib.sha256((REPOSITORY_ROOT / relative_path).read_bytes()).hexdigest().upper()
+        assert actual == report["output_sha256"][name]
+    categories = pd.read_csv(
+        REPOSITORY_ROOT / report["output_paths"]["category_assessment"],
+        dtype={"admin_dong_code": str},
+    )
+    assert categories.groupby("admin_dong_code")["category"].nunique().eq(8).all()
+    major_categories = pd.read_csv(
+        REPOSITORY_ROOT / report["output_paths"]["major_category_assessment"],
+        dtype={"admin_dong_code": str},
+    )
+    assert major_categories.groupby("admin_dong_code")["major_category"].nunique().eq(3).all()
+    assert major_categories["major_category_score_0_100"].between(0, 100).all()
+    myeongji = categories[
+        categories["admin_dong_name"].isin(["명지1동", "명지2동"])
+        & (categories["category"] == "education_access_supply")
+    ]
+    assert len(myeongji) == 2
+    assert myeongji["category_score_0_100"].lt(70).all()
+    indicators = pd.read_csv(
+        REPOSITORY_ROOT / report["output_paths"]["indicator_scores"]
+    )
+    assert {"estimate_used", "estimation_method_ko", "estimation_reason"} <= set(
+        indicators.columns
+    )
+    estimated = indicators[indicators["estimate_used"]]
+    assert len(estimated) == 206 * 9
+    assert estimated["estimation_reason"].str.len().gt(0).all()
 
 
 def test_dataset_audit_is_valid() -> None:

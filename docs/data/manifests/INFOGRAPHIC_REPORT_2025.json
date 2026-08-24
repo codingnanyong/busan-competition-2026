@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-24T07:22:42+00:00",
+  "reference_year": 2025,
+  "artifact_status": "submission_draft",
+  "format": "A4 portrait one-page infographic",
+  "dong_action_profile_count": 206,
+  "page_count": 1,
+  "priority_area_count": 21,
+  "double_burden_area_count": 4,
+  "top_10_names": [
+    "사상구 모라3동",
+    "동구 초량6동",
+    "해운대구 반여3동",
+    "동구 수정4동",
+    "북구 덕천3동",
+    "사하구 감천2동",
+    "동구 수정5동",
+    "동구 수정1동",
+    "서구 초장동",
+    "해운대구 반여2동"
+  ],
+  "policy_candidate_count": 5,
+  "font_family": "Noto Sans CJK JP",
+  "input_paths": {
+    "composite_index": "data/processed/scores/2025/busan_admin_dong_imd_2025.csv",
+    "boundaries": "data/raw/sgis/admin_boundaries/2025/busan_admin_dong_boundaries_2025_valid.geojson",
+    "priority_areas": "data/processed/scores/2025/busan_admin_dong_priority_areas_2025.csv",
+    "environmental_overlay": "data/processed/scores/2025/busan_admin_dong_environmental_overlay_2025.csv",
+    "policy_matrix": "data/processed/scores/2025/busan_admin_dong_policy_matrix_2025.csv",
+    "category_assessment": "outputs/infographic/busan_admin_dong_category_assessment_2025.csv",
+    "major_category_assessment": "outputs/infographic/busan_admin_dong_major_category_assessment_2025.csv",
+    "indicator_scores": "outputs/infographic/busan_admin_dong_category_indicator_scores_2025.csv",
+    "policy_catalog": "docs/data/CATEGORY_POLICY_CATALOG_2025.csv"
+  },
+  "input_sha256": {
+    "composite_index": "380EB11360B40A6C8E480B3A1D2EBE40DD0EC11FFED20580E0D72563CBB1EC07",
+    "boundaries": "7CC99595FC753F81C7B9A9D480B8EBBF3114808A1496D46FC6662C21BF362487",
+    "priority_areas": "848546B9B7BE40932CBF9B4D5B3B79D6151B8FF680F987A4E1EB9A85705566C9",
+    "environmental_overlay": "01BEBFDEE28F4CDC8C3F2120392B6D31210856844667CA2556B67FA244685FA0",
+    "policy_matrix": "0B85E066632D6A7C6C004ED593982A1B744592EFF2E674A9B4A79C92A2FA354F",
+    "category_assessment": "6E5C6E98FB1BCA7701CA28239CACDFD3C300E4EF3015B838284F01186B3AEDB9",
+    "major_category_assessment": "DD021EA3A6809F975C74A5DED0D6515E3367C3EC86C2E36CD7AA19945DBFE26B",
+    "indicator_scores": "A0EE7FCDDEEBA7BA01FEC2D897ADCC457C2BF73310E37E9F4D84FACF5460EDFB",
+    "policy_catalog": "EBB3DEA2F77036EEDFB1F305262CE14414D71EA46A6E88BC923FAC0A6E668A2F"
+  },
+  "output_paths": {
+    "svg": "outputs/infographic/busan_imd_one_page_2025.svg",
+    "pdf": "outputs/infographic/busan_imd_one_page_2025.pdf",
+    "png": "outputs/infographic/busan_imd_one_page_2025.png",
+    "action_profile_csv": "outputs/infographic/busan_admin_dong_action_profile_2025.csv",
+    "interactive_action_map": "outputs/infographic/busan_admin_dong_action_map_2025.html"
+  },
+  "output_sha256": {
+    "svg": "1A131B2048CBBD715302F663043F74F7C82BB3CC8335E7C4D258EB88E789264C",
+    "pdf": "CF32580579A1C41789937E05F1ED80D14FE7582A08170D2FFE145C204AA6FAEB",
+    "png": "C25234C5DC340DDFB014225131873BCE0D1A09AFFA8FD4A797B2460DAA351E48",
+    "action_profile_csv": "8B7976BDFF3D7A75D23EBA5671F3530E82196225A1DB2BBD1543CAF6A573D3C7",
+    "interactive_action_map": "EADBBECF528342BE8C76C512975D9A3E3614892B50DE8A953B8C1F2961FDE08E"
+  },
+  "interpretation": "Public-data experimental screening; not an official index, causal estimate, individual eligibility rule, or final funding decision"
+}
