@@ -24,10 +24,11 @@ examples are in [CATEGORY_POLICY_CATALOG_2025.csv](../../data/CATEGORY_POLICY_CA
 The calculation follows `major category → child category → indicator`:
 
 - Socioeconomic base: income/support need and local employment opportunity, each weighted 0.50.
-- Living services and settlement: education, healthcare, housing, and transit, each weighted 0.25.
+- Living infrastructure and housing: education, healthcare, housing, and transit, each weighted 0.25.
 - Environment and climate response: air exposure and heat response, each weighted 0.50.
 
-`major score = Σ(child-category score × within-major weight)`
+The major-category score applies the stated contribution share to each child-category
+vulnerability score and then adds the results. It is not an unweighted average.
 
 The major-category map therefore visualizes the combined child-category result, rather than any
 single indicator. The dashboard expands a selected dong from the major score into child scores

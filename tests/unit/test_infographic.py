@@ -217,12 +217,13 @@ def test_action_profiles_and_map_cover_every_dong(tmp_path) -> None:
     assert profiles["specialization_evidence_status"].str.contains("특화 확정 불가").all()
     html = html_path.read_text(encoding="utf-8")
     assert html.count("data-code=") == 206
-    assert "근거가 보이는 평가와 정책 예시" in html
+    assert "부산 행정동 생활여건 진단: 취약 요인과 정책 방향" in html
     assert html.count('class="tree-major"') == 2
     assert html.count('class="tree-child"') == len(categories)
     assert 'role="tree"' in html
     assert "function selectNode(nextMajor,nextCategory=null)" in html
-    assert "큰 카테고리 점수 =" in html
+    assert "큰 카테고리 종합점수 산정" in html
+    assert "단순 평균이 아니며" in html
     assert "하위 카테고리" in html
     assert "취약 백분위" in html
     assert "추정값 사용" in html

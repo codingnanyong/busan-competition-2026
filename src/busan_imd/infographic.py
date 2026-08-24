@@ -650,7 +650,7 @@ def write_action_map(
     category_tree = "".join(tree_branches)
     document = f"""<!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
-<title>2025 부산 행정동 카테고리 평가·정책 대시보드</title><style>
+<title>2025 부산 행정동 생활여건 진단</title><style>
 body{{margin:0;background:#f7f4ed;color:#18323d;font-family:Arial,'Noto Sans KR',sans-serif}}
 main{{max-width:1540px;margin:auto;padding:24px}} h1{{margin:0 0 8px;font-size:28px}}
 .note,.scores{{color:#5d7078;line-height:1.5}}
@@ -681,9 +681,10 @@ path:hover,path:focus{{stroke:#18323d;stroke-width:2}}
 .steps{{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0;padding:0;list-style:none}}
 .step{{background:white;border-radius:8px;padding:10px;font-size:13px;line-height:1.45}}
 .step-number{{display:block;color:#087e8b;font-size:12px;font-weight:700;margin-bottom:4px}}
-.formula{{background:#18323d;color:white;border-radius:7px;margin-top:10px;padding:10px 12px;
- font-family:Consolas,monospace;font-size:13px}}
-.formula-note{{font-size:12px;color:#5d7078;margin:7px 2px 0;line-height:1.45}}
+.aggregation-note{{background:#18323d;color:white;border-radius:7px;margin-top:10px;
+ padding:10px 12px;font-size:13px;line-height:1.5}}
+.aggregation-note strong{{display:block;color:#9ed8d3;margin-bottom:2px}}
+.aggregation-caption{{font-size:12px;color:#5d7078;margin:7px 2px 0;line-height:1.45}}
 .score-flow{{margin:0;padding:0;list-style:none}}
 .score-level{{background:white;border-radius:7px;padding:8px 10px;font-size:13px;line-height:1.4}}
 .score-level strong{{color:#087e8b}}
@@ -712,7 +713,7 @@ path:hover,path:focus{{stroke:#18323d;stroke-width:2}}
  .category-tree{{position:static}}.guide{{grid-template-columns:1fr}}}}
 @media(max-width:720px){{.layout{{grid-template-columns:1fr}}.card#detail{{grid-column:auto}}
  .steps{{grid-template-columns:1fr 1fr}}svg{{height:55vh;min-height:400px}}}}
-</style></head><body><main><h1>부산 206개 행정동: 근거가 보이는 평가와 정책 예시</h1>
+</style></head><body><main><h1>부산 행정동 생활여건 진단: 취약 요인과 정책 방향</h1>
 <section class="guide" aria-label="대시보드 이용 방법과 점수 계산 구조">
 <div class="guide-card"><h2>이 화면을 보는 방법</h2><ol class="steps">
 <li class="step"><span class="step-number">1 · 항목 선택</span>
@@ -723,8 +724,10 @@ path:hover,path:focus{{stroke:#18323d;stroke-width:2}}
 관심 행정동을 누르거나 마우스를 올려 해당 지역 결과를 엽니다.</li>
 <li class="step"><span class="step-number">4 · 정책 해석</span>
 오른쪽에서 평가지표, 추정 사유, 신뢰도와 조건부 정책 예시를 확인합니다.</li>
-</ol><div class="formula">큰 카테고리 점수 = Σ(하위 카테고리 점수 × 표시된 가중치)</div>
-<p class="formula-note">점수가 높을수록 부산 안에서 상대적으로 더 취약하다는 뜻입니다.
+</ol><div class="aggregation-note"><strong>큰 카테고리 종합점수 산정</strong>
+하위 카테고리별 취약도에 화면에 표시된 반영 비율을 적용한 뒤 합산합니다.
+단순 평균이 아니며, 각 하위 항목이 종합점수에 미치는 비중을 함께 보여줍니다.</div>
+<p class="aggregation-caption">점수가 높을수록 부산 안에서 상대적으로 더 취약하다는 뜻입니다.
 절대적 결핍 판정이나 정책 확정 점수가 아닙니다.</p></div>
 <div class="guide-card"><h2>점수는 이렇게 만들어집니다</h2><ol class="score-flow">
 <li class="score-level level-1"><strong>1단계 · 평가지표 13개</strong><br>
