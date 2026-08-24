@@ -7,6 +7,7 @@ import json
 from datetime import UTC, datetime
 from html import escape
 from pathlib import Path
+from textwrap import fill
 from typing import Any
 
 import geopandas as gpd
@@ -229,8 +230,73 @@ def _validate(
         set(composite["admin_dong_code"].astype(str))
     ):
         raise ValueError("Priority areas must be a subset of the composite")
-    if "double_burden" not in overlay or "policy_title_ko" not in policy_matrix:
+    comparison_columns = [
+        "admin_dong_code",
+        "sigungu_name",
+        "admin_dong_name",
+        "b_imd_score_0_100",
+        "b_imd_rank",
+        "b_imd_decile",
+    ]
+    provided_priority = priority[comparison_columns].sort_values("admin_dong_code").reset_index(
+        drop=True
+    )
+    canonical_priority = (
+        composite[composite["admin_dong_code"].isin(priority["admin_dong_code"])]
+        [comparison_columns]
+        .sort_values("admin_dong_code")
+        .reset_index(drop=True)
+    )
+    try:
+        pd.testing.assert_frame_equal(provided_priority, canonical_priority, check_dtype=False)
+    except AssertionError as error:
+        raise ValueError("Priority rows must match the current composite values") from error
+    required_policy = {
+        "cluster_id",
+        "policy_trigger",
+        "policy_title_ko",
+        "target_area_count",
+        "target_admin_dongs",
+    }
+    if "double_burden" not in overlay or not required_policy <= set(policy_matrix.columns):
         raise ValueError("Overlay and policy-matrix inputs are missing presentation columns")
+    if policy_matrix["cluster_id"].nunique() != 2:
+        raise ValueError("One-page policy panel requires exactly two policy clusters")
+
+
+def _policy_cards(policy_matrix: pd.DataFrame) -> list[tuple[float, str, str, str, str]]:
+    """Derive the two one-page policy cards from the regenerated policy matrix."""
+    cards: list[tuple[float, str, str, str, str]] = []
+    positions = (0.025, 0.515)
+    colors = (PALETTE["gold"], PALETTE["blue"])
+    for index, (_, rows) in enumerate(policy_matrix.groupby("cluster_id", sort=True)):
+        domain_rows = rows[rows["policy_trigger"].str.startswith("domain:")].sort_values(
+            "policy_trigger"
+        )
+        overlay_rows = rows[rows["policy_trigger"].eq("overlay:double_burden")]
+        domain_keys = domain_rows["policy_trigger"].str.removeprefix("domain:")
+        if domain_rows.empty or not set(domain_keys) <= set(DOMAIN_COLUMNS):
+            raise ValueError("Every policy cluster requires known domain-trigger rows")
+        labels = [DOMAIN_COLUMNS[key][1] for key in domain_keys]
+        target_count = int(domain_rows["target_area_count"].max())
+        title = f"{'·'.join(labels)}형 · {target_count}개 동"
+        action = fill(
+            " + ".join(domain_rows["policy_title_ko"].astype(str)),
+            width=30,
+            break_long_words=True,
+        )
+        if overlay_rows.empty:
+            detail = "환경 이중부담 병행 대상 없음"
+        else:
+            overlay = overlay_rows.iloc[0]
+            targets = str(overlay["target_admin_dongs"]).replace("|", "·")
+            detail = fill(
+                f"{targets}: {overlay['policy_title_ko']} 병행",
+                width=30,
+                break_long_words=True,
+            )
+        cards.append((positions[index], title, action, detail, colors[index]))
+    return cards
 
 
 def _panel(ax: plt.Axes) -> None:
@@ -781,22 +847,7 @@ def render(
         color=PALETTE["ink"],
         va="top",
     )
-    cards = (
-        (
-            0.025,
-            "교육 중심 상대형 · 5개 동",
-            "방과후 학습·학교 접근 취약 점검",
-            "가락동은 미세먼지 추가 측정·건강보호 병행",
-            PALETTE["gold"],
-        ),
-        (
-            0.515,
-            "고용·소득형 · 16개 동",
-            "일자리·직업훈련 연계 + 복지급여 누락 점검",
-            "모라3·수정4·수정1동은 환경·보건 대응 병행",
-            PALETTE["blue"],
-        ),
-    )
+    cards = _policy_cards(policy_matrix)
     for x, title, action, detail, color in cards:
         ax_policy.add_patch(
             mpl.patches.FancyBboxPatch(
@@ -831,8 +882,8 @@ def render(
         0.025,
         0.49,
         "9개 공개 대리지표를 6개 영역으로 묶어 부산 안의 상대순위를 비교했습니다. "
-        "동일가중에서도 상위 21개 중 18개가 유지되지만, 소득·고용 영역 제외 시 결과가 "
-        "크게 달라져 직접 행정자료 검증이 우선입니다. 낮은 취약점수는 특화산업의 증거가 아니며 "
+        "가중치와 소득·고용 대리지표 포함 범위에 따라 순위가 달라질 수 있어 직접 행정자료 "
+        "검증이 우선입니다. 낮은 취약점수는 특화산업의 증거가 아니며 "
         "지역자산 데이터를 결합해야 특화 방향을 판단할 수 있습니다.",
         fontsize=7.8,
         color=PALETTE["ink"],

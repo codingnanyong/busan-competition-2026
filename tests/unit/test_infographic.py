@@ -53,7 +53,31 @@ def inputs() -> tuple[
             "double_burden": [index < 4 for index in range(206)],
         }
     )
-    policy = pd.DataFrame({"policy_title_ko": ["정책 후보"] * 5})
+    policy = pd.DataFrame(
+        [
+            {
+                "cluster_id": "type_1",
+                "policy_trigger": "domain:education",
+                "policy_title_ko": "교육 접근 점검",
+                "target_area_count": 5,
+                "target_admin_dongs": "District Dong 0",
+            },
+            {
+                "cluster_id": "type_1",
+                "policy_trigger": "overlay:double_burden",
+                "policy_title_ko": "대기질 점검",
+                "target_area_count": 1,
+                "target_admin_dongs": "District Dong 0",
+            },
+            {
+                "cluster_id": "type_2",
+                "policy_trigger": "domain:employment",
+                "policy_title_ko": "고용 연계",
+                "target_area_count": 16,
+                "target_admin_dongs": "District Dong 1",
+            },
+        ]
+    )
     return composite, boundaries, priority, overlay, policy
 
 
@@ -172,6 +196,23 @@ def test_render_rejects_incomplete_canonical_population(tmp_path) -> None:
             boundaries.iloc[:-1],
             priority,
             overlay.iloc[:-1],
+            policy,
+            tmp_path / "visual.svg",
+            tmp_path / "visual.pdf",
+            tmp_path / "visual.png",
+        )
+
+
+def test_render_rejects_priority_values_from_another_rebuild(tmp_path) -> None:
+    composite, boundaries, priority, overlay, policy = inputs()
+    priority.loc[0, "b_imd_score_0_100"] = -1
+
+    with pytest.raises(ValueError, match="match the current composite"):
+        render(
+            composite,
+            boundaries,
+            priority,
+            overlay,
             policy,
             tmp_path / "visual.svg",
             tmp_path / "visual.pdf",
