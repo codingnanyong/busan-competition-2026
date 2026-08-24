@@ -30,6 +30,8 @@ make administrative-data and field-validation expansion part of the proposal's v
 - [INFOGRAPHIC_REPORT_2025.json](../../data/manifests/INFOGRAPHIC_REPORT_2025.json):
   input/output checksums, page count, displayed statistics, and artifact status
 
+The PNG is a screen preview; page-count and submission-format checks use the PDF.
+
 ## Rebuild
 
 Use the Docker image with pinned Matplotlib and Noto CJK fonts:

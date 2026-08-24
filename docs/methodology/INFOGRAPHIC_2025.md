@@ -28,6 +28,8 @@
 - [INFOGRAPHIC_REPORT_2025.json](../data/manifests/INFOGRAPHIC_REPORT_2025.json):
   입력·출력 체크섬, 페이지 수, 표시 통계와 상태
 
+PNG는 화면 미리보기용이며, 페이지 수와 제출 형식을 판정할 때는 PDF를 기준으로 한다.
+
 ## 재생성
 
 Matplotlib과 Noto CJK 폰트가 고정된 Docker 이미지에서 실행한다.
