@@ -675,8 +675,23 @@ path:hover,path:focus{{stroke:#18323d;stroke-width:2}}
  cursor:pointer;color:#29434c}}
 .tree-child:hover{{background:#eef5f4}} .tree-child.active{{background:#087e8b;color:white}}
 .tree-child.active small{{color:#dce8e8}} .tree-line{{color:#87a5a7}}
-.hierarchy{{background:#eaf2f2;border-left:5px solid #087e8b;border-radius:8px;padding:14px}}
-.hierarchy code{{background:white;padding:2px 5px;border-radius:4px}}
+.guide{{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin:16px 0 20px}}
+.guide-card{{background:#eaf2f2;border-left:5px solid #087e8b;border-radius:10px;padding:16px}}
+.guide-card h2{{font-size:17px;margin:0 0 12px}}
+.steps{{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0;padding:0;list-style:none}}
+.step{{background:white;border-radius:8px;padding:10px;font-size:13px;line-height:1.45}}
+.step-number{{display:block;color:#087e8b;font-size:12px;font-weight:700;margin-bottom:4px}}
+.formula{{background:#18323d;color:white;border-radius:7px;margin-top:10px;padding:10px 12px;
+ font-family:Consolas,monospace;font-size:13px}}
+.formula-note{{font-size:12px;color:#5d7078;margin:7px 2px 0;line-height:1.45}}
+.score-flow{{margin:0;padding:0;list-style:none}}
+.score-level{{background:white;border-radius:7px;padding:8px 10px;font-size:13px;line-height:1.4}}
+.score-level strong{{color:#087e8b}}
+.score-level.level-2{{margin-left:22px}} .score-level.level-3{{margin-left:44px}}
+.flow-arrow{{color:#087e8b;font-weight:700;line-height:18px;margin-left:12px}}
+.flow-arrow.level-2{{margin-left:34px}}
+.estimate-guide{{border-left:4px solid #d84a3a;background:#fff4ed;border-radius:0 7px 7px 0;
+ margin:11px 0 0 44px;padding:9px 10px;font-size:12px;line-height:1.45}}
 .scale{{height:10px;background:linear-gradient(90deg,#fff7bc,#fdae61,#d7301f)}}
 .scale{{border-radius:6px}}
 .scale-label,.metric-head{{display:flex;justify-content:space-between;font-size:12px}}
@@ -694,17 +709,36 @@ path:hover,path:focus{{stroke:#18323d;stroke-width:2}}
 .trigger{{color:#d84a3a;font-weight:700}}
 .warning{{border-top:1px solid #d7ded9;padding-top:12px;font-size:12px}}
 @media(max-width:1100px){{.layout{{grid-template-columns:240px 1fr}}.card#detail{{grid-column:1/-1}}
- .category-tree{{position:static}}}}
+ .category-tree{{position:static}}.guide{{grid-template-columns:1fr}}}}
 @media(max-width:720px){{.layout{{grid-template-columns:1fr}}.card#detail{{grid-column:auto}}
- svg{{height:55vh;min-height:400px}}}}
+ .steps{{grid-template-columns:1fr 1fr}}svg{{height:55vh;min-height:400px}}}}
 </style></head><body><main><h1>부산 206개 행정동: 근거가 보이는 평가와 정책 예시</h1>
-<div class="hierarchy"><b>읽는 순서</b><br>
-① 왼쪽 트리에서 큰 카테고리 또는 하위 항목 선택 → ② 지도에서 선택 점수 분포 확인 →
-③ 행정동 선택 → ④ 평가지표·추정 사유·정책 예시 확인<br>
-<code>큰 카테고리 점수 = Σ(하위 카테고리 점수 × 표시된 가중치)</code></div>
-<p class="note">지도 색상은 13개 평가지표를 바로 섞은 값이 아닙니다. 먼저 지표를 이용해
-8개 하위 카테고리를 평가하고, 그 결과를 다시 가중합해 3개 큰 카테고리 분포를 만듭니다.
-추정·보정값은 <b>⚠ 추정값 사용</b>과 사용 사유로 표시합니다.</p>
+<section class="guide" aria-label="대시보드 이용 방법과 점수 계산 구조">
+<div class="guide-card"><h2>이 화면을 보는 방법</h2><ol class="steps">
+<li class="step"><span class="step-number">1 · 항목 선택</span>
+왼쪽 트리에서 큰 카테고리 또는 하위 카테고리를 선택합니다.</li>
+<li class="step"><span class="step-number">2 · 분포 비교</span>
+지도 색으로 부산 행정동의 상대적 취약도 분포를 비교합니다.</li>
+<li class="step"><span class="step-number">3 · 지역 선택</span>
+관심 행정동을 누르거나 마우스를 올려 해당 지역 결과를 엽니다.</li>
+<li class="step"><span class="step-number">4 · 정책 해석</span>
+오른쪽에서 평가지표, 추정 사유, 신뢰도와 조건부 정책 예시를 확인합니다.</li>
+</ol><div class="formula">큰 카테고리 점수 = Σ(하위 카테고리 점수 × 표시된 가중치)</div>
+<p class="formula-note">점수가 높을수록 부산 안에서 상대적으로 더 취약하다는 뜻입니다.
+절대적 결핍 판정이나 정책 확정 점수가 아닙니다.</p></div>
+<div class="guide-card"><h2>점수는 이렇게 만들어집니다</h2><ol class="score-flow">
+<li class="score-level level-1"><strong>1단계 · 평가지표 13개</strong><br>
+교육시설 수, 의료 접근성, 대기오염 노출처럼 측정 가능한 근거를 정리합니다.</li>
+<li class="flow-arrow" aria-hidden="true">↓ 지표별 방향과 가중치 반영</li>
+<li class="score-level level-2"><strong>2단계 · 하위 카테고리 8개</strong><br>
+관련 지표를 묶어 각 세부 영역의 취약도 점수를 계산합니다.</li>
+<li class="flow-arrow level-2" aria-hidden="true">↓ 하위 점수의 가중합</li>
+<li class="score-level level-3"><strong>3단계 · 큰 카테고리 3개</strong><br>
+하위 카테고리 결과를 합산해 최종 종합분포를 만듭니다.</li>
+</ol><div class="estimate-guide"><b>⚠ 추정값 사용 표시</b><br>
+원자료가 행정동 단위로 없거나 기준연도·공간단위를 맞춰야 할 때만 추정·보정합니다.
+사용한 방법과 이유는 선택한 행정동의 세부 평가지표 아래에 함께 표시합니다.</div></div>
+</section>
 <div class="layout"><nav class="card category-tree" aria-label="카테고리 선택 트리" role="tree">
 <h2>분석 카테고리</h2><p class="scores">▸를 눌러 하위 항목을 접거나 펼치고, 항목명을 선택하세요.</p>
 {category_tree}</nav><div class="map"><h2 id="map-title"></h2>
