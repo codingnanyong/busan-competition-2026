@@ -41,6 +41,8 @@ def test_build_selects_stable_interpretable_clusters() -> None:
     assert set(assignments["cluster_id"]) == {"type_1", "type_2", "type_3"}
     assert assignments.groupby("cluster_id").size().tolist() == [7, 7, 7]
     assert len(report["cluster_summaries"]) == 3
+    assert report["stability_evaluation"]["repeated_fit_n_init"] == 20
+    assert assignments["cluster_label"].nunique() == 3
     assert metrics["cluster_count"].tolist() == [2, 3, 4, 5, 6]
 
 

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-23T23:52:21+00:00",
+  "generated_at": "2026-08-24T00:26:42+00:00",
   "reference_year": 2025,
   "analysis_population": "21 B-IMD decile-1 priority areas",
   "record_count": 21,
@@ -24,8 +24,8 @@
   "selected_cluster_count": 2,
   "selected_metrics": {
     "silhouette_score": 0.280819,
-    "mean_seed_stability_ari": 0.371521,
-    "minimum_seed_stability_ari": -0.061798,
+    "mean_seed_stability_ari": 0.980282,
+    "minimum_seed_stability_ari": 0.802817,
     "minimum_cluster_size": 5,
     "maximum_cluster_size": 16
   },
@@ -34,12 +34,42 @@
     "minimum_mean_seed_stability_ari": 0.8,
     "minimum_cluster_size": 3
   },
-  "recommended_for_policy_typology": false,
-  "decision": "do_not_use_as_policy_typology",
+  "stability_evaluation": {
+    "random_seed_count": 20,
+    "reference_n_init": 50,
+    "repeated_fit_n_init": 20,
+    "metric": "adjusted Rand index against the reference fit"
+  },
+  "recommended_for_policy_typology": true,
+  "decision": "use_as_exploratory_policy_typology",
   "cluster_summaries": [
+    {
+      "dominant_domain": "education",
+      "secondary_domain": "living_environment",
+      "cluster_label": "education_living_environment",
+      "member_count": 5,
+      "mean_excess_points": {
+        "income": 6.384268,
+        "employment": 5.730092,
+        "education": 3.975933,
+        "health": 4.408416,
+        "housing_access": -0.170247,
+        "living_environment": -0.252867
+      },
+      "mean_standardized_excess": {
+        "income": -1.210638,
+        "employment": -1.249062,
+        "education": 0.880227,
+        "health": 0.354424,
+        "housing_access": -0.904982,
+        "living_environment": 0.854119
+      },
+      "cluster_id": "type_1"
+    },
     {
       "dominant_domain": "employment",
       "secondary_domain": "income",
+      "cluster_label": "employment_income",
       "member_count": 16,
       "mean_excess_points": {
         "income": 10.592493,
@@ -49,19 +79,13 @@
         "housing_access": 1.617974,
         "living_environment": -1.796358
       },
-      "cluster_id": "type_1"
-    },
-    {
-      "dominant_domain": "income",
-      "secondary_domain": "employment",
-      "member_count": 5,
-      "mean_excess_points": {
-        "income": 6.384268,
-        "employment": 5.730092,
-        "education": 3.975933,
-        "health": 4.408416,
-        "housing_access": -0.170247,
-        "living_environment": -0.252867
+      "mean_standardized_excess": {
+        "income": 0.378324,
+        "employment": 0.390332,
+        "education": -0.275071,
+        "health": -0.110757,
+        "housing_access": 0.282807,
+        "living_environment": -0.266912
       },
       "cluster_id": "type_2"
     }
@@ -73,7 +97,7 @@
     "candidate_metrics": "data/processed/scores/2025/busan_admin_dong_cluster_metrics_2025.csv"
   },
   "output_sha256": {
-    "assignments": "648654A7E389D4FD3B06CA54A6FFEEE77A669EA123DE4174754DE7B1B0E15371",
-    "candidate_metrics": "1A37EB4D196559B72B84E3601293F3678CC4F10871E4474B722E2C0E4616E19B"
+    "assignments": "0A9AC21F0CB3D87C460030AED7A28BEB1848F25CD960D4E530BAD3E09A875B72",
+    "candidate_metrics": "C8E1D5006FC203CAED91136818C8D9F48504C0A733C316CB4A1D2DB142B8F78A"
   }
 }

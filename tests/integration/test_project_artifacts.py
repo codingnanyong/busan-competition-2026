@@ -184,19 +184,23 @@ def test_priority_area_report_covers_cod19_scope() -> None:
     )
 
 
-def test_cluster_analysis_report_records_cod20_no_use_decision() -> None:
+def test_cluster_analysis_report_records_cod20_typology_decision() -> None:
     report = read_json("docs/data/manifests/CLUSTER_ANALYSIS_REPORT_2025.json")
     priority_report = read_json("docs/data/manifests/PRIORITY_AREA_REPORT_2025.json")
 
     assert report["record_count"] == 21
     assert report["candidate_cluster_counts"] == [2, 3, 4, 5, 6]
     assert report["selected_cluster_count"] == 2
-    assert report["recommended_for_policy_typology"] is False
-    assert report["decision"] == "do_not_use_as_policy_typology"
+    assert report["recommended_for_policy_typology"] is True
+    assert report["decision"] == "use_as_exploratory_policy_typology"
     assert report["input_sha256"] == priority_report["output_sha256"]["priority_areas"]
-    assert report["selected_metrics"]["mean_seed_stability_ari"] < report[
+    assert report["selected_metrics"]["mean_seed_stability_ari"] >= report[
         "quality_gate"
     ]["minimum_mean_seed_stability_ari"]
+    assert {item["cluster_label"] for item in report["cluster_summaries"]} == {
+        "education_living_environment",
+        "employment_income",
+    }
     assert all(
         re.fullmatch(r"[0-9A-F]{64}", value)
         for value in report["output_sha256"].values()

@@ -31,6 +31,8 @@ DOMAINS = (
 )
 FEATURE_COLUMNS = tuple(f"{domain}_excess_points" for domain in DOMAINS)
 RANDOM_STATES = tuple(range(2026, 2046))
+REFERENCE_N_INIT = 50
+STABILITY_N_INIT = 20
 MIN_SILHOUETTE = 0.25
 MIN_STABILITY_ARI = 0.80
 MIN_CLUSTER_SIZE = 3
@@ -71,7 +73,11 @@ def _candidate_metrics(
     records: list[dict[str, Any]] = []
     labels_by_count: dict[int, np.ndarray] = {}
     for cluster_count in cluster_counts:
-        reference = KMeans(n_clusters=cluster_count, random_state=2026, n_init=50).fit(values)
+        reference = KMeans(
+            n_clusters=cluster_count,
+            random_state=2026,
+            n_init=REFERENCE_N_INIT,
+        ).fit(values)
         labels = reference.labels_
         labels_by_count[cluster_count] = labels
         stability = []
@@ -79,7 +85,7 @@ def _candidate_metrics(
             repeated = KMeans(
                 n_clusters=cluster_count,
                 random_state=random_state,
-                n_init=1,
+                n_init=STABILITY_N_INIT,
             ).fit_predict(values)
             stability.append(adjusted_rand_score(labels, repeated))
         sizes = np.bincount(labels, minlength=cluster_count)
@@ -105,28 +111,39 @@ def _candidate_metrics(
 def _canonical_labels(
     labels: np.ndarray,
     original_values: pd.DataFrame,
+    standardized_values: pd.DataFrame,
 ) -> tuple[pd.Series, list[dict[str, Any]]]:
     summaries = []
     for raw_label in sorted(set(labels)):
         member_values = original_values.loc[labels == raw_label]
         means = member_values.mean()
-        ordered = sorted(DOMAINS, key=lambda domain: (-means[f"{domain}_excess_points"], domain))
+        standardized_means = standardized_values.loc[labels == raw_label].mean()
+        ordered = sorted(
+            DOMAINS,
+            key=lambda domain: (-standardized_means[f"{domain}_excess_points"], domain),
+        )
         summaries.append(
             {
                 "raw_label": int(raw_label),
                 "dominant_domain": ordered[0],
                 "secondary_domain": ordered[1],
+                "cluster_label": f"{ordered[0]}_{ordered[1]}",
                 "member_count": len(member_values),
                 "mean_excess_points": {
                     domain: round(float(means[f"{domain}_excess_points"]), 6)
+                    for domain in DOMAINS
+                },
+                "mean_standardized_excess": {
+                    domain: round(
+                        float(standardized_means[f"{domain}_excess_points"]), 6
+                    )
                     for domain in DOMAINS
                 },
             }
         )
     summaries.sort(
         key=lambda item: (
-            item["dominant_domain"],
-            item["secondary_domain"],
+            item["cluster_label"],
             tuple(-item["mean_excess_points"][domain] for domain in DOMAINS),
         )
     )
@@ -141,6 +158,11 @@ def build(priority_areas: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, dic
     priority = _validate(priority_areas)
     original_values = priority[list(FEATURE_COLUMNS)]
     standardized = StandardScaler().fit_transform(original_values)
+    standardized_values = pd.DataFrame(
+        standardized,
+        columns=FEATURE_COLUMNS,
+        index=original_values.index,
+    )
     metrics, labels_by_count = _candidate_metrics(standardized, range(2, 7))
     eligible = metrics[metrics["minimum_cluster_size"] >= MIN_CLUSTER_SIZE]
     selection_pool = eligible if not eligible.empty else metrics
@@ -151,7 +173,7 @@ def build(priority_areas: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, dic
     ).iloc[0]
     selected_count = int(selected["cluster_count"])
     canonical, cluster_summaries = _canonical_labels(
-        labels_by_count[selected_count], original_values
+        labels_by_count[selected_count], original_values, standardized_values
     )
 
     assignments = priority[
@@ -171,6 +193,9 @@ def build(priority_areas: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, dic
     )
     assignments["secondary_domain"] = assignments["cluster_id"].map(
         lambda value: summary_by_id[value]["secondary_domain"]
+    )
+    assignments["cluster_label"] = assignments["cluster_id"].map(
+        lambda value: summary_by_id[value]["cluster_label"]
     )
     assignments = assignments.sort_values(["cluster_id", "b_imd_rank"], kind="stable")
 
@@ -200,6 +225,12 @@ def build(priority_areas: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, dic
             "minimum_silhouette": MIN_SILHOUETTE,
             "minimum_mean_seed_stability_ari": MIN_STABILITY_ARI,
             "minimum_cluster_size": MIN_CLUSTER_SIZE,
+        },
+        "stability_evaluation": {
+            "random_seed_count": len(RANDOM_STATES),
+            "reference_n_init": REFERENCE_N_INIT,
+            "repeated_fit_n_init": STABILITY_N_INIT,
+            "metric": "adjusted Rand index against the reference fit",
         },
         "recommended_for_policy_typology": recommended,
         "decision": (
