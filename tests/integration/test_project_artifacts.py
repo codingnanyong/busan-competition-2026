@@ -1,6 +1,9 @@
+import hashlib
 import json
 import re
 from pathlib import Path
+
+import pandas as pd
 
 from busan_imd.collectors.approved_apis import validate_manifest as validate_raw_manifest
 from busan_imd.collectors.fire_incidents import validate_manifest as validate_fire_manifest
@@ -72,7 +75,11 @@ def test_project_structure_and_required_documents() -> None:
         "docs/data/manifests/CLUSTER_ANALYSIS_REPORT_2025.json",
         "docs/data/manifests/ENVIRONMENTAL_OVERLAY_REPORT_2025.json",
         "docs/data/manifests/POLICY_MATRIX_REPORT_2025.json",
+        "docs/data/manifests/INFOGRAPHIC_REPORT_2025.json",
+        "docs/data/manifests/CATEGORY_ASSESSMENT_REPORT_2025.json",
         "docs/data/POLICY_ACTION_CATALOG_2025.csv",
+        "docs/data/CATEGORY_ASSESSMENT_SPEC_2025.csv",
+        "docs/data/CATEGORY_POLICY_CATALOG_2025.csv",
         "docs/data/DATA_PORTABILITY.md",
         "docs/data/manifests/CONSUMER_SALES_MANIFEST_2025.json",
         "docs/data/manifests/CITY_PARKS_MANIFEST.json",
@@ -92,6 +99,16 @@ def test_project_structure_and_required_documents() -> None:
         "docs/en/methodology/ENVIRONMENTAL_OVERLAY_2025.md",
         "docs/methodology/POLICY_MATRIX_2025.md",
         "docs/en/methodology/POLICY_MATRIX_2025.md",
+        "docs/methodology/INFOGRAPHIC_2025.md",
+        "docs/en/methodology/INFOGRAPHIC_2025.md",
+        "docs/methodology/CATEGORY_ASSESSMENT_2025.md",
+        "docs/en/methodology/CATEGORY_ASSESSMENT_2025.md",
+        "outputs/infographic/busan_imd_one_page_2025.svg",
+        "outputs/infographic/busan_imd_one_page_2025.pdf",
+        "outputs/infographic/busan_imd_one_page_2025.png",
+        "outputs/infographic/busan_admin_dong_category_assessment_2025.csv",
+        "outputs/infographic/busan_admin_dong_major_category_assessment_2025.csv",
+        "outputs/infographic/busan_admin_dong_category_indicator_scores_2025.csv",
         "notebooks/01_candidate_profile_eda.ipynb",
         "notebooks/02_deprivation_cluster_review.ipynb",
         "notebooks/03_environmental_overlay_review.ipynb",
@@ -309,6 +326,85 @@ def test_policy_matrix_report_records_cod22_scope() -> None:
         re.fullmatch(r"[0-9A-F]{64}", value)
         for value in (*report["input_sha256"].values(), report["output_sha256"])
     )
+
+
+def test_infographic_report_and_outputs_cover_cod23_scope() -> None:
+    report = read_json("docs/data/manifests/INFOGRAPHIC_REPORT_2025.json")
+
+    assert report["artifact_status"] == "submission_draft"
+    assert report["page_count"] == 1
+    assert report["dong_action_profile_count"] == 206
+    assert report["priority_area_count"] == 21
+    assert report["double_burden_area_count"] == 4
+    assert report["policy_candidate_count"] == 5
+    assert len(report["top_10_names"]) == 10
+    for format_name, relative_path in report["output_paths"].items():
+        path = REPOSITORY_ROOT / relative_path
+        actual_hash = hashlib.sha256(path.read_bytes()).hexdigest().upper()
+        assert actual_hash == report["output_sha256"][format_name]
+    pdf = (REPOSITORY_ROOT / report["output_paths"]["pdf"]).read_bytes()
+    assert len(re.findall(rb"/Type\s*/Page\b", pdf)) == 1
+    svg = (REPOSITORY_ROOT / report["output_paths"]["svg"]).read_text(encoding="utf-8")
+    assert "행정동별 취약 원인" in svg
+    profiles = pd.read_csv(
+        REPOSITORY_ROOT / report["output_paths"]["action_profile_csv"],
+        dtype={"admin_dong_code": str},
+    )
+    assert len(profiles) == 206
+    assert profiles["admin_dong_code"].nunique() == 206
+    assert profiles["improvement_direction"].notna().all()
+    assert profiles["specialization_evidence_status"].str.contains("특화 확정 불가").all()
+    action_map = (
+        REPOSITORY_ROOT / report["output_paths"]["interactive_action_map"]
+    ).read_text(encoding="utf-8")
+    assert action_map.count("data-code=") == 206
+    assert action_map.count('class="tree-major"') == 3
+    assert action_map.count('class="tree-child"') == 8
+    assert 'role="tree"' in action_map
+    assert "큰 카테고리 종합점수 산정" in action_map
+    assert "생활 인프라·주거" in action_map
+
+
+def test_category_assessment_is_complete_and_flags_estimation() -> None:
+    report = read_json("docs/data/manifests/CATEGORY_ASSESSMENT_REPORT_2025.json")
+
+    assert report["admin_dong_count"] == 206
+    assert report["major_category_count"] == 3
+    assert report["category_count"] == 8
+    assert report["indicator_count"] == 13
+    assert report["category_score_row_count"] == 206 * 8
+    assert report["major_category_score_row_count"] == 206 * 3
+    assert report["indicator_score_row_count"] == 206 * 13
+    assert report["policy_trigger_threshold"] == 70
+    for name, relative_path in report["output_paths"].items():
+        actual = hashlib.sha256((REPOSITORY_ROOT / relative_path).read_bytes()).hexdigest().upper()
+        assert actual == report["output_sha256"][name]
+    categories = pd.read_csv(
+        REPOSITORY_ROOT / report["output_paths"]["category_assessment"],
+        dtype={"admin_dong_code": str},
+    )
+    assert categories.groupby("admin_dong_code")["category"].nunique().eq(8).all()
+    major_categories = pd.read_csv(
+        REPOSITORY_ROOT / report["output_paths"]["major_category_assessment"],
+        dtype={"admin_dong_code": str},
+    )
+    assert major_categories.groupby("admin_dong_code")["major_category"].nunique().eq(3).all()
+    assert major_categories["major_category_score_0_100"].between(0, 100).all()
+    myeongji = categories[
+        categories["admin_dong_name"].isin(["명지1동", "명지2동"])
+        & (categories["category"] == "education_access_supply")
+    ]
+    assert len(myeongji) == 2
+    assert myeongji["category_score_0_100"].lt(70).all()
+    indicators = pd.read_csv(
+        REPOSITORY_ROOT / report["output_paths"]["indicator_scores"]
+    )
+    assert {"estimate_used", "estimation_method_ko", "estimation_reason"} <= set(
+        indicators.columns
+    )
+    estimated = indicators[indicators["estimate_used"]]
+    assert len(estimated) == 206 * 9
+    assert estimated["estimation_reason"].str.len().gt(0).all()
 
 
 def test_dataset_audit_is_valid() -> None:

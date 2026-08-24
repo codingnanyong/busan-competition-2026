@@ -6,6 +6,7 @@ import argparse
 from pathlib import Path
 
 from busan_imd.candidate_processing import CandidatePaths, process_all
+from busan_imd.category_assessment import run as write_category_assessment
 from busan_imd.cluster_analysis import run as write_cluster_analysis
 from busan_imd.collectors.consumer_sales import run as process_consumer_sales
 from busan_imd.composite_index import run as write_composite_index
@@ -15,6 +16,7 @@ from busan_imd.eda import run as write_eda_report
 from busan_imd.environmental_overlay import run as write_environmental_overlay
 from busan_imd.income_inference import infer
 from busan_imd.income_inference import write_outputs as write_income_outputs
+from busan_imd.infographic import run as write_infographic
 from busan_imd.policy_matrix import run as write_policy_matrix
 from busan_imd.priority_areas import run as write_priority_areas
 from busan_imd.sensitivity_analysis import run as write_sensitivity_analysis
@@ -47,6 +49,8 @@ def rebuild() -> None:
     write_cluster_analysis()
     write_environmental_overlay()
     write_policy_matrix()
+    write_category_assessment()
+    write_infographic()
 
 
 def main() -> int:
@@ -55,7 +59,7 @@ def main() -> int:
     print(
         "rebuilt candidate, inference, standardized, consumer-sales, quality, EDA, "
         "domain-score, composite-index, sensitivity-analysis, priority-area, cluster-analysis, "
-        "environmental-overlay, and policy-matrix artifacts"
+        "environmental-overlay, policy-matrix, category-assessment, and infographic artifacts"
     )
     return 0
 

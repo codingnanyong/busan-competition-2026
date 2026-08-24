@@ -8,6 +8,10 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /workspace
 
+RUN apt-get update \
+    && apt-get install --yes --no-install-recommends fonts-noto-cjk \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN groupadd --gid 1000 jovyan \
     && useradd --uid 1000 --gid 1000 --create-home jovyan
 

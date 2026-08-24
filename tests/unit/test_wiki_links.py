@@ -1,6 +1,8 @@
 import os
 import re
+import shutil
 import subprocess
+import sys
 from pathlib import Path, PurePosixPath
 
 from scripts.rewrite_wiki_links import rewrite_page
@@ -50,9 +52,19 @@ def test_build_wiki_leaves_no_broken_repository_relative_links(tmp_path: Path) -
     output_dir = tmp_path / "wiki"
     environment = os.environ.copy()
     environment["WIKI_SOURCE_REF"] = "develop"
+    environment["PYTHON_EXECUTABLE"] = sys.executable
+    bash = shutil.which("bash")
+    if os.name == "nt":
+        git = shutil.which("git")
+        if git:
+            git_bash = Path(git).parents[1] / "bin" / "bash.exe"
+            if git_bash.is_file():
+                bash = str(git_bash)
+
+    assert bash is not None
 
     subprocess.run(
-        ["bash", "scripts/build_wiki.sh", str(output_dir)],
+        [bash, "scripts/build_wiki.sh", str(output_dir)],
         cwd=REPOSITORY_ROOT,
         env=environment,
         check=True,

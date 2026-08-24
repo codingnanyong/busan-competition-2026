@@ -18,8 +18,15 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
       - name: Install dependencies
         run: python -m pip install --requirement requirements.txt
+      - name: Spell check
+        run: >-
+          npx --yes cspell@9.8.0 --config cspell.json --no-progress --no-summary
+          "src/**/*" "scripts/**/*" "tests/**/*" "docs/**/*.md" "README*.md"
       - name: Lint
         run: python -m ruff check .
       - name: Test
