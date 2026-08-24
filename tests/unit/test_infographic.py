@@ -132,6 +132,14 @@ def test_action_profiles_and_map_cover_every_dong(tmp_path) -> None:
                 "admin_dong_code": code,
                 "category": category,
                 "category_label": label,
+                "major_category": (
+                    "social" if category in {"income_support_need", "local_employment_opportunity"}
+                    else "services"
+                ),
+                "major_category_weight": (
+                    0.5 if category in {"income_support_need", "local_employment_opportunity"}
+                    else 1 / 6
+                ),
                 "category_score_0_100": 75,
                 "category_confidence": "medium_low",
                 "policy_review_status": "candidate_after_validation",
@@ -139,6 +147,22 @@ def test_action_profiles_and_map_cover_every_dong(tmp_path) -> None:
             }
             for code in composite["admin_dong_code"]
             for category, label in categories.items()
+        ]
+    )
+    major_labels = {"social": "사회·경제 기반", "services": "생활·환경 기반"}
+    major_category_assessments = pd.DataFrame(
+        [
+            {
+                "admin_dong_code": code,
+                "major_category": major,
+                "major_category_label": label,
+                "major_category_score_0_100": 75,
+                "major_category_confidence": "low",
+                "policy_review_status": "candidate_after_validation",
+                "triggered_child_categories": "하위 카테고리",
+            }
+            for code in composite["admin_dong_code"]
+            for major, label in major_labels.items()
         ]
     )
     indicator_scores = pd.DataFrame(
@@ -181,6 +205,7 @@ def test_action_profiles_and_map_cover_every_dong(tmp_path) -> None:
         profiles,
         boundaries,
         category_assessments,
+        major_category_assessments,
         indicator_scores,
         policy_catalog,
         html_path,
@@ -193,7 +218,9 @@ def test_action_profiles_and_map_cover_every_dong(tmp_path) -> None:
     html = html_path.read_text(encoding="utf-8")
     assert html.count("data-code=") == 206
     assert "근거가 보이는 평가와 정책 예시" in html
-    assert html.count("data-category=") == 8
+    assert html.count("data-major-category=") == 2
+    assert "큰 카테고리 점수 =" in html
+    assert "하위 카테고리" in html
     assert "취약 백분위" in html
     assert "추정값 사용" in html
     assert "사용 사유" in html

@@ -8,7 +8,7 @@ usable, but their evidence type, row-level confidence, and policy limitation are
 
 ## Improvements
 
-- Split housing from transit and air exposure from heat response, producing eight categories.
+- Place eight child categories under three major categories.
 - Stabilize small-area facility rates toward the Busan-wide rate using a 5,000-person prior.
 - Record `estimate_used`, estimation method and reason, `confidence_level`, and
   `quality_note` for every indicator.
@@ -18,6 +18,20 @@ usable, but their evidence type, row-level confidence, and policy limitation are
 The versioned indicator contract is
 [CATEGORY_ASSESSMENT_SPEC_2025.csv](../../data/CATEGORY_ASSESSMENT_SPEC_2025.csv), and conditional
 examples are in [CATEGORY_POLICY_CATALOG_2025.csv](../../data/CATEGORY_POLICY_CATALOG_2025.csv).
+
+## Three-level structure
+
+The calculation follows `major category → child category → indicator`:
+
+- Socioeconomic base: income/support need and local employment opportunity, each weighted 0.50.
+- Living services and settlement: education, healthcare, housing, and transit, each weighted 0.25.
+- Environment and climate response: air exposure and heat response, each weighted 0.50.
+
+`major score = Σ(child-category score × within-major weight)`
+
+The major-category map therefore visualizes the combined child-category result, rather than any
+single indicator. The dashboard expands a selected dong from the major score into child scores
+and then the underlying indicators.
 
 ## Estimation disclosure
 
@@ -42,6 +56,7 @@ docker compose run --rm jupyter python -m busan_imd.category_assessment
 docker compose run --rm jupyter python -m busan_imd.infographic
 ```
 
-The outputs contain 206×8 category assessments, 206×13 indicator evidence rows, and a manifest
-with reproducibility checksums. They support screening only; observed administrative data,
-travel time, capacity, and field demand must validate final policy choices.
+The outputs contain 206×3 major-category assessments, 206×8 child-category assessments,
+206×13 indicator evidence rows, and a manifest with reproducibility checksums. They support
+screening only; observed administrative data, travel time, capacity, and field demand must
+validate final policy choices.

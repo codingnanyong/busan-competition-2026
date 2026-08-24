@@ -107,6 +107,7 @@ def test_project_structure_and_required_documents() -> None:
         "outputs/infographic/busan_imd_one_page_2025.pdf",
         "outputs/infographic/busan_imd_one_page_2025.png",
         "outputs/infographic/busan_admin_dong_category_assessment_2025.csv",
+        "outputs/infographic/busan_admin_dong_major_category_assessment_2025.csv",
         "outputs/infographic/busan_admin_dong_category_indicator_scores_2025.csv",
         "notebooks/01_candidate_profile_eda.ipynb",
         "notebooks/02_deprivation_cluster_review.ipynb",
@@ -357,15 +358,19 @@ def test_infographic_report_and_outputs_cover_cod23_scope() -> None:
         REPOSITORY_ROOT / report["output_paths"]["interactive_action_map"]
     ).read_text(encoding="utf-8")
     assert action_map.count("data-code=") == 206
+    assert action_map.count("data-major-category=") == 3
+    assert "큰 카테고리 점수 =" in action_map
 
 
 def test_category_assessment_is_complete_and_flags_estimation() -> None:
     report = read_json("docs/data/manifests/CATEGORY_ASSESSMENT_REPORT_2025.json")
 
     assert report["admin_dong_count"] == 206
+    assert report["major_category_count"] == 3
     assert report["category_count"] == 8
     assert report["indicator_count"] == 13
     assert report["category_score_row_count"] == 206 * 8
+    assert report["major_category_score_row_count"] == 206 * 3
     assert report["indicator_score_row_count"] == 206 * 13
     assert report["policy_trigger_threshold"] == 70
     for name, relative_path in report["output_paths"].items():
@@ -376,6 +381,12 @@ def test_category_assessment_is_complete_and_flags_estimation() -> None:
         dtype={"admin_dong_code": str},
     )
     assert categories.groupby("admin_dong_code")["category"].nunique().eq(8).all()
+    major_categories = pd.read_csv(
+        REPOSITORY_ROOT / report["output_paths"]["major_category_assessment"],
+        dtype={"admin_dong_code": str},
+    )
+    assert major_categories.groupby("admin_dong_code")["major_category"].nunique().eq(3).all()
+    assert major_categories["major_category_score_0_100"].between(0, 100).all()
     myeongji = categories[
         categories["admin_dong_name"].isin(["명지1동", "명지2동"])
         & (categories["category"] == "education_access_supply")

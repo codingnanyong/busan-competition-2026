@@ -1,12 +1,14 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-24T05:51:27+00:00",
+  "generated_at": "2026-08-24T06:16:43+00:00",
   "reference_year": 2025,
   "admin_dong_count": 206,
   "category_count": 8,
+  "major_category_count": 3,
   "indicator_count": 13,
   "indicator_score_row_count": 2678,
   "category_score_row_count": 1648,
+  "major_category_score_row_count": 618,
   "policy_trigger_threshold": 70,
   "small_area_rate_shrinkage_population": 5000,
   "decision": "use_for_transparent_category_policy_screening_after_validation",
@@ -22,15 +24,17 @@
   },
   "input_sha256": {
     "profile": "DA9FD3DF576A6C373312D61957AD362EC26BDD4469F713A34BE1442FB759C88F",
-    "spec": "6F54ABAD0C2C4312663CD40B0DE7A256D18BEDF23E788CF570E21ABC0A18BBF4",
+    "spec": "FC3AC6CECF0CAAE873A92140F58AABC7CE5B04993FEF9CED73AA0D1BA9CFDB73",
     "policy_catalog": "EBB3DEA2F77036EEDFB1F305262CE14414D71EA46A6E88BC923FAC0A6E668A2F"
   },
   "output_paths": {
     "category_assessment": "outputs/infographic/busan_admin_dong_category_assessment_2025.csv",
+    "major_category_assessment": "outputs/infographic/busan_admin_dong_major_category_assessment_2025.csv",
     "indicator_scores": "outputs/infographic/busan_admin_dong_category_indicator_scores_2025.csv"
   },
   "output_sha256": {
-    "category_assessment": "83CB1DCBCA5A546A403006BF757AF77CFCCE2B284E1AE842155AFF643C8444F0",
-    "indicator_scores": "5F81D2D2F53A0A099EB42D7CE7702656E68E3EDE248762B3678AD350F1CCDE43"
+    "category_assessment": "A80DC58EA36C93507CE327B5D7CA202FA65A7D5AD5261AACFE66DB2C65C87716",
+    "major_category_assessment": "389706689D369744DBA5813F0FDC8CD8782C0378CE4FBEF60CD17AE875407743",
+    "indicator_scores": "C9B8A42CA85308DA1EB18011C3DBBF15FEE10D1B9E0714A8C6DC9B05A8CEE777"
   }
 }

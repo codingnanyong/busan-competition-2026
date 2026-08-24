@@ -30,7 +30,8 @@
 - [`busan_imd_one_page_2025.png`](../../outputs/infographic/busan_imd_one_page_2025.png):
   빠른 검토용 이미지
 - [`busan_admin_dong_action_map_2025.html`](../../outputs/infographic/busan_admin_dong_action_map_2025.html):
-  카테고리별 분포·구성 평가지표·정책 예시를 206개 동에서 확인하는 독립형 대시보드
+  3개 큰 카테고리 종합분포에서 8개 하위 카테고리와 13개 평가지표·정책 예시까지
+  내려가 확인하는 206개 동 독립형 대시보드
 - [`busan_admin_dong_action_profile_2025.csv`](../../outputs/infographic/busan_admin_dong_action_profile_2025.csv):
   동별 6개 영역 점수·취약순위·개선방향·상대 저취약 영역
 - [INFOGRAPHIC_REPORT_2025.json](../data/manifests/INFOGRAPHIC_REPORT_2025.json):
@@ -38,9 +39,9 @@
 
 PNG는 화면 미리보기용이며, 페이지 수와 제출 형식을 판정할 때는 PDF를 기준으로 한다.
 HTML은 브라우저에서 바로 열 수 있고 외부 지도나 JavaScript 서버에 의존하지 않는다.
-개선형 8개 카테고리를 선택하면 지도 색이 해당 점수로 바뀐다. 동을 선택하면 원지표,
-취약 백분위, 가중치, 추정·대리·보간 근거, 신뢰도, 조건부 정책 예시와 성과지표가 함께
-표시된다. 점수 계약과 명지 회귀검증은
+3개 큰 카테고리를 선택하면 지도 색이 하위 카테고리 가중합 점수로 바뀐다. 동을 선택하면
+큰 점수, 8개 하위 카테고리 중 해당 구성요소, 원지표, 취약 백분위, 가중치, 추정 사유,
+신뢰도, 정책 게이트와 조건부 예시가 계층적으로 나타난다. 점수 계약과 명지 회귀검증은
 [2025 카테고리 평가](CATEGORY_ASSESSMENT_2025.md)를 따른다.
 
 ## 재생성

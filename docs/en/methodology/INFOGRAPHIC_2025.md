@@ -32,7 +32,8 @@ requires additional local asset data on industry, commerce, tourism, and living 
 - [`busan_imd_one_page_2025.png`](../../../outputs/infographic/busan_imd_one_page_2025.png):
   quick-review preview
 - [`busan_admin_dong_action_map_2025.html`](../../../outputs/infographic/busan_admin_dong_action_map_2025.html):
-  standalone dashboard for category maps, component indicators, and policy examples in 206 dongs
+  standalone dashboard from three major-category maps to eight child categories, thirteen
+  indicators, and policy examples in 206 dongs
 - [`busan_admin_dong_action_profile_2025.csv`](../../../outputs/infographic/busan_admin_dong_action_profile_2025.csv):
   six scores, vulnerability order, improvement direction, and relative low-deprivation domain
 - [INFOGRAPHIC_REPORT_2025.json](../../data/manifests/INFOGRAPHIC_REPORT_2025.json):

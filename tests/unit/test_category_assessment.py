@@ -40,13 +40,31 @@ def profile() -> pd.DataFrame:
 
 
 def test_build_creates_complete_transparent_category_contract() -> None:
-    indicators, categories, report = build(profile(), load_spec())
+    indicators, categories, major_categories, report = build(profile(), load_spec())
 
+    assert report["major_category_count"] == 3
     assert report["category_count"] == 8
     assert report["indicator_count"] == 13
     assert len(indicators) == 206 * 13
     assert len(categories) == 206 * 8
+    assert len(major_categories) == 206 * 3
     assert categories.groupby("admin_dong_code")["category"].nunique().eq(8).all()
+    assert major_categories.groupby("admin_dong_code")["major_category"].nunique().eq(3).all()
+    expected_major = (
+        categories.assign(
+            expected=(
+                categories["category_score_0_100"]
+                * categories["major_category_weight"]
+            )
+        )
+        .groupby(["admin_dong_code", "major_category"], observed=True)["expected"]
+        .sum()
+        .sort_index()
+    )
+    actual_major = major_categories.set_index(
+        ["admin_dong_code", "major_category"]
+    )["major_category_score_0_100"].sort_index()
+    pd.testing.assert_series_equal(actual_major, expected_major, check_names=False)
     assert set(indicators["confidence_level"]) == {"low", "medium_low", "medium"}
     assert indicators["estimate_used"].sum() == 206 * 9
     assert indicators.loc[indicators["estimate_used"], "estimation_reason"].str.len().gt(0).all()
@@ -55,6 +73,7 @@ def test_build_creates_complete_transparent_category_contract() -> None:
         "candidate_after_validation",
         "monitor",
     }
+    assert major_categories["major_category_score_0_100"].between(0, 100).all()
 
 
 def test_small_area_rate_shrinkage_reduces_denominator_extremes() -> None:
