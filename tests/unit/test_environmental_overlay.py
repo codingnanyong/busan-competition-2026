@@ -18,6 +18,16 @@ def inputs() -> tuple[pd.DataFrame, pd.DataFrame]:
             "b_imd_score_0_100": 100 - index / 3,
             "b_imd_rank": index + 1,
             "b_imd_decile": np.where(index < 21, 1, 2),
+            **{
+                f"{domain}_score_0_100": 100 - index / 3
+                for domain in (
+                    "income",
+                    "employment",
+                    "education",
+                    "health",
+                    "housing_access",
+                )
+            },
         }
     )
     profile = pd.DataFrame(
@@ -44,13 +54,14 @@ def test_build_identifies_exact_top_quartile_and_double_burden() -> None:
         "high_air_only": 31,
         "neither": 154,
     }
-    assert report["spearman_correlations_with_b_imd"][
+    assert report["spearman_correlations_with_particulate_free_b_imd"][
         "particulate_exposure_score_0_100"
     ] == 1.0
     assert report["port_industrial_overlay"]["status"] == (
         "not_evaluated_no_versioned_site_geometry"
     )
     assert overlay["particulate_exposure_rank"].nunique() == 206
+    assert overlay["particulate_free_b_imd_rank"].nunique() == 206
 
 
 def test_build_rejects_mismatched_or_incomplete_inputs() -> None:

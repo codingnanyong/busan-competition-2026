@@ -253,7 +253,9 @@ def test_environmental_overlay_report_records_cod21_scope() -> None:
     assert report["priority_area_count"] == 21
     assert report["double_burden_count"] == 4
     assert sum(report["category_counts"].values()) == 206
-    assert report["decision"] == "use_for_ambient_air_double_burden_screening_only"
+    assert report["decision"] == (
+        "use_for_particulate_independent_double_burden_screening_only"
+    )
     assert report["port_industrial_overlay"]["status"] == (
         "not_evaluated_no_versioned_site_geometry"
     )

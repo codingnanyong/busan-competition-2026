@@ -24,6 +24,13 @@ EXPECTED_RECORD_COUNT = 206
 HIGH_EXPOSURE_SHARE = 0.25
 PM25_COLUMN = "annual_pm25_ug_m3_idw_2025"
 PM10_COLUMN = "annual_pm10_ug_m3_idw_2025"
+SOCIAL_DOMAIN_WEIGHTS = {
+    "income": 0.225,
+    "employment": 0.225,
+    "education": 0.135,
+    "health": 0.135,
+    "housing_access": 0.093,
+}
 
 
 def _validate(composite: pd.DataFrame, profile: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -34,6 +41,7 @@ def _validate(composite: pd.DataFrame, profile: pd.DataFrame) -> tuple[pd.DataFr
         "b_imd_score_0_100",
         "b_imd_rank",
         "b_imd_decile",
+        *(f"{domain}_score_0_100" for domain in SOCIAL_DOMAIN_WEIGHTS),
     }
     profile_required = {"admin_dong_code", PM25_COLUMN, PM10_COLUMN}
     missing_composite = sorted(composite_required - set(composite.columns))
@@ -54,7 +62,12 @@ def _validate(composite: pd.DataFrame, profile: pd.DataFrame) -> tuple[pd.DataFr
     if set(composite["admin_dong_code"]) != set(profile["admin_dong_code"]):
         raise ValueError("Composite and profile administrative-dong codes must match exactly")
 
-    composite_numeric = ["b_imd_score_0_100", "b_imd_rank", "b_imd_decile"]
+    composite_numeric = [
+        "b_imd_score_0_100",
+        "b_imd_rank",
+        "b_imd_decile",
+        *(f"{domain}_score_0_100" for domain in SOCIAL_DOMAIN_WEIGHTS),
+    ]
     composite[composite_numeric] = composite[composite_numeric].apply(
         pd.to_numeric, errors="raise"
     )
@@ -85,8 +98,29 @@ def build(composite: pd.DataFrame, profile: pd.DataFrame) -> tuple[pd.DataFrame,
             "b_imd_score_0_100",
             "b_imd_rank",
             "b_imd_decile",
+            *(f"{domain}_score_0_100" for domain in SOCIAL_DOMAIN_WEIGHTS),
         ]
     ].merge(exposure, on="admin_dong_code", validate="one_to_one")
+
+    social_weight_total = sum(SOCIAL_DOMAIN_WEIGHTS.values())
+    social_score = pd.Series(0.0, index=overlay.index)
+    for domain, published_weight in SOCIAL_DOMAIN_WEIGHTS.items():
+        social_score += (
+            overlay[f"{domain}_score_0_100"] * published_weight / social_weight_total
+        )
+    social_ordered = overlay.assign(_score_exact=social_score).sort_values(
+        ["_score_exact", "admin_dong_code"],
+        ascending=[False, True],
+        kind="stable",
+    ).index
+    overlay["particulate_free_b_imd_score_0_100"] = social_score.round(6)
+    overlay["particulate_free_b_imd_rank"] = 0
+    overlay.loc[social_ordered, "particulate_free_b_imd_rank"] = np.arange(
+        1, len(overlay) + 1
+    )
+    overlay["particulate_free_b_imd_decile"] = (
+        (overlay["particulate_free_b_imd_rank"] - 1) * 10 // len(overlay) + 1
+    ).astype(int)
 
     overlay["pm25_exposure_percentile"] = overlay[PM25_COLUMN].rank(
         method="average", pct=True
@@ -106,57 +140,80 @@ def build(composite: pd.DataFrame, profile: pd.DataFrame) -> tuple[pd.DataFrame,
     overlay.loc[ordered, "particulate_exposure_rank"] = np.arange(1, len(overlay) + 1)
     high_count = math.ceil(len(overlay) * HIGH_EXPOSURE_SHARE)
     overlay["high_particulate_exposure"] = overlay["particulate_exposure_rank"] <= high_count
-    overlay["b_imd_priority_area"] = overlay["b_imd_decile"] == 1
+    overlay["social_vulnerability_priority_area"] = (
+        overlay["particulate_free_b_imd_decile"] == 1
+    )
     overlay["double_burden"] = (
-        overlay["high_particulate_exposure"] & overlay["b_imd_priority_area"]
+        overlay["high_particulate_exposure"]
+        & overlay["social_vulnerability_priority_area"]
     )
     overlay["overlay_category"] = np.select(
         [
             overlay["double_burden"],
-            overlay["b_imd_priority_area"],
+            overlay["social_vulnerability_priority_area"],
             overlay["high_particulate_exposure"],
         ],
         ["double_burden", "social_priority_only", "high_air_only"],
         default="neither",
     )
     overlay = overlay.sort_values(
-        ["double_burden", "b_imd_rank", "particulate_exposure_rank"],
+        ["double_burden", "particulate_free_b_imd_rank", "particulate_exposure_rank"],
         ascending=[False, True, True],
         kind="stable",
     ).reset_index(drop=True)
 
-    priority = overlay[overlay["b_imd_priority_area"]]
-    other = overlay[~overlay["b_imd_priority_area"]]
-    double_burden = overlay[overlay["double_burden"]].sort_values("b_imd_rank")
+    priority = overlay[overlay["social_vulnerability_priority_area"]]
+    other = overlay[~overlay["social_vulnerability_priority_area"]]
+    double_burden = overlay[overlay["double_burden"]].sort_values(
+        "particulate_free_b_imd_rank"
+    )
     report: dict[str, Any] = {
         "schema_version": 1,
         "generated_at": datetime.now(UTC).replace(microsecond=0).isoformat(),
         "reference_year": 2025,
         "record_count": len(overlay),
-        "analysis_scope": "ambient particulate exposure and B-IMD social vulnerability overlap",
+        "analysis_scope": (
+            "ambient particulate exposure and particulate-independent social vulnerability overlap"
+        ),
         "exposure_definition": (
             "mean of Busan-wide percentile ranks for annual 2025 PM2.5 and PM10 IDW estimates"
         ),
         "high_exposure_rule": "top 25 percent by particulate exposure score",
         "high_exposure_count": int(overlay["high_particulate_exposure"].sum()),
-        "priority_area_rule": "B-IMD decile 1",
-        "priority_area_count": int(overlay["b_imd_priority_area"].sum()),
-        "double_burden_rule": "high particulate exposure and B-IMD decile 1",
+        "social_vulnerability_definition": (
+            "published B-IMD weights renormalized across income, employment, education, "
+            "health, and housing/access; the living-environment domain is excluded to avoid "
+            "reusing PM2.5"
+        ),
+        "social_domain_published_weights": SOCIAL_DOMAIN_WEIGHTS,
+        "priority_area_rule": "particulate-free B-IMD decile 1",
+        "priority_area_count": int(
+            overlay["social_vulnerability_priority_area"].sum()
+        ),
+        "double_burden_rule": (
+            "high particulate exposure and particulate-free B-IMD decile 1"
+        ),
         "double_burden_count": int(overlay["double_burden"].sum()),
         "category_counts": {
             str(key): int(value)
             for key, value in overlay["overlay_category"].value_counts().sort_index().items()
         },
-        "spearman_correlations_with_b_imd": {
+        "spearman_correlations_with_particulate_free_b_imd": {
             "annual_pm25_ug_m3_idw_2025": round(
-                _spearman(overlay["b_imd_score_0_100"], overlay[PM25_COLUMN]), 6
+                _spearman(
+                    overlay["particulate_free_b_imd_score_0_100"], overlay[PM25_COLUMN]
+                ),
+                6,
             ),
             "annual_pm10_ug_m3_idw_2025": round(
-                _spearman(overlay["b_imd_score_0_100"], overlay[PM10_COLUMN]), 6
+                _spearman(
+                    overlay["particulate_free_b_imd_score_0_100"], overlay[PM10_COLUMN]
+                ),
+                6,
             ),
             "particulate_exposure_score_0_100": round(
                 _spearman(
-                    overlay["b_imd_score_0_100"],
+                    overlay["particulate_free_b_imd_score_0_100"],
                     overlay["particulate_exposure_score_0_100"],
                 ),
                 6,
@@ -180,6 +237,7 @@ def build(composite: pd.DataFrame, profile: pd.DataFrame) -> tuple[pd.DataFrame,
                 "sigungu_name",
                 "admin_dong_name",
                 "b_imd_rank",
+                "particulate_free_b_imd_rank",
                 "particulate_exposure_rank",
             ]
         ].to_dict(orient="records"),
@@ -194,7 +252,7 @@ def build(composite: pd.DataFrame, profile: pd.DataFrame) -> tuple[pd.DataFrame,
                 "complexes without source-location and dispersion evidence"
             ),
         },
-        "decision": "use_for_ambient_air_double_burden_screening_only",
+        "decision": "use_for_particulate_independent_double_burden_screening_only",
     }
     return overlay, report
 
