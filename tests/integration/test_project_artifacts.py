@@ -70,6 +70,7 @@ def test_project_structure_and_required_documents() -> None:
         "docs/data/manifests/SENSITIVITY_ANALYSIS_REPORT_2025.json",
         "docs/data/manifests/PRIORITY_AREA_REPORT_2025.json",
         "docs/data/manifests/CLUSTER_ANALYSIS_REPORT_2025.json",
+        "docs/data/manifests/ENVIRONMENTAL_OVERLAY_REPORT_2025.json",
         "docs/data/DATA_PORTABILITY.md",
         "docs/data/manifests/CONSUMER_SALES_MANIFEST_2025.json",
         "docs/data/manifests/CITY_PARKS_MANIFEST.json",
@@ -85,8 +86,11 @@ def test_project_structure_and_required_documents() -> None:
         "docs/en/methodology/PRIORITY_AREAS_2025.md",
         "docs/methodology/CLUSTER_ANALYSIS_2025.md",
         "docs/en/methodology/CLUSTER_ANALYSIS_2025.md",
+        "docs/methodology/ENVIRONMENTAL_OVERLAY_2025.md",
+        "docs/en/methodology/ENVIRONMENTAL_OVERLAY_2025.md",
         "notebooks/01_candidate_profile_eda.ipynb",
         "notebooks/02_deprivation_cluster_review.ipynb",
+        "notebooks/03_environmental_overlay_review.ipynb",
     )
 
     assert all((REPOSITORY_ROOT / path).is_dir() for path in required_directories)
@@ -116,6 +120,21 @@ def test_cluster_notebook_is_clean_and_portable() -> None:
     assert any("from busan_imd.cluster_analysis import" in source for source in sources)
     assert any("px.scatter" in source for source in sources)
     assert any("px.imshow" in source for source in sources)
+    assert all(cell["execution_count"] is None for cell in code_cells)
+    assert all(cell["outputs"] == [] for cell in code_cells)
+
+
+def test_environmental_overlay_notebook_is_clean_and_portable() -> None:
+    notebook_path = REPOSITORY_ROOT / "notebooks/03_environmental_overlay_review.ipynb"
+    notebook = json.loads(notebook_path.read_text(encoding="utf-8"))
+
+    assert notebook["nbformat"] == 4
+    code_cells = [cell for cell in notebook["cells"] if cell["cell_type"] == "code"]
+    sources = ["".join(cell["source"]) for cell in code_cells]
+    assert any("os.chdir(project_root)" in source for source in sources)
+    assert any("from busan_imd.environmental_overlay import" in source for source in sources)
+    assert any("px.scatter" in source for source in sources)
+    assert any("px.choropleth_mapbox" in source for source in sources)
     assert all(cell["execution_count"] is None for cell in code_cells)
     assert all(cell["outputs"] == [] for cell in code_cells)
 
@@ -222,6 +241,27 @@ def test_cluster_analysis_report_records_cod20_typology_decision() -> None:
         re.fullmatch(r"[0-9A-F]{64}", value)
         for value in report["output_sha256"].values()
     )
+
+
+def test_environmental_overlay_report_records_cod21_scope() -> None:
+    report = read_json("docs/data/manifests/ENVIRONMENTAL_OVERLAY_REPORT_2025.json")
+    composite_report = read_json("docs/data/manifests/COMPOSITE_INDEX_REPORT_2025.json")
+    standardization_report = read_json("docs/data/manifests/STANDARDIZATION_REPORT_2025.json")
+
+    assert report["record_count"] == 206
+    assert report["high_exposure_count"] == 52
+    assert report["priority_area_count"] == 21
+    assert report["double_burden_count"] == 4
+    assert sum(report["category_counts"].values()) == 206
+    assert report["decision"] == "use_for_ambient_air_double_burden_screening_only"
+    assert report["port_industrial_overlay"]["status"] == (
+        "not_evaluated_no_versioned_site_geometry"
+    )
+    assert report["input_sha256"]["composite_index"] == composite_report["output_sha256"]
+    assert report["input_sha256"]["standardized_profile"] == standardization_report[
+        "profile_sha256"
+    ]
+    assert re.fullmatch(r"[0-9A-F]{64}", report["output_sha256"])
 
 
 def test_dataset_audit_is_valid() -> None:
