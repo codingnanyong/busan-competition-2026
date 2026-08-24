@@ -31,10 +31,13 @@ DEFAULT_PDF_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_imd_one_page_2025.pdf"
 DEFAULT_PNG_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_imd_one_page_2025.png"
 DEFAULT_PROFILE_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_admin_dong_action_profile_2025.csv"
 DEFAULT_HTML_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_admin_dong_action_map_2025.html"
-DEFAULT_INDICATOR_SCORES = Path(
-    "data/processed/scores/2025/busan_admin_dong_indicator_scores_2025.csv"
+DEFAULT_CATEGORY_ASSESSMENT = (
+    DEFAULT_OUTPUT_DIR / "busan_admin_dong_category_assessment_2025.csv"
 )
-DEFAULT_POLICY_CATALOG = Path("docs/data/POLICY_ACTION_CATALOG_2025.csv")
+DEFAULT_INDICATOR_SCORES = Path(
+    "outputs/infographic/busan_admin_dong_category_indicator_scores_2025.csv"
+)
+DEFAULT_POLICY_CATALOG = Path("docs/data/CATEGORY_POLICY_CATALOG_2025.csv")
 DEFAULT_REPORT = Path("docs/data/manifests/INFOGRAPHIC_REPORT_2025.json")
 EXPECTED_DONG_COUNT = 206
 EXPECTED_PRIORITY_COUNT = 21
@@ -254,7 +257,7 @@ def _geometry_svg_path(geometry: Any, bounds: tuple[float, float, float, float])
     return " ".join(parts)
 
 
-def write_action_map(
+def _write_action_map_legacy(
     profiles: pd.DataFrame,
     boundaries: gpd.GeoDataFrame,
     indicator_scores: pd.DataFrame,
@@ -396,6 +399,159 @@ document.querySelectorAll('path').forEach(p=>{{
 document.querySelectorAll('button').forEach(b=>
  b.addEventListener('click',()=>selectDomain(b.dataset.domain)));
 selectDomain(domain);
+</script></body></html>"""
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(document, encoding="utf-8", newline="\n")
+
+
+def write_action_map(
+    profiles: pd.DataFrame,
+    boundaries: gpd.GeoDataFrame,
+    category_assessments: pd.DataFrame,
+    indicator_scores: pd.DataFrame,
+    policy_catalog: pd.DataFrame,
+    output_path: Path,
+) -> None:
+    """Write a category dashboard with explicit evidence labels and policy gates."""
+    map_data = boundaries.copy()
+    map_data["adm_cd"] = map_data["adm_cd"].astype(str)
+    map_data = map_data.merge(
+        profiles,
+        left_on="adm_cd",
+        right_on="admin_dong_code",
+        validate="one_to_one",
+    )
+    bounds = tuple(float(value) for value in map_data.total_bounds)
+    categories = policy_catalog["category"].tolist()
+    if set(category_assessments["category"]) != set(categories):
+        raise ValueError("Assessment and policy categories must match")
+
+    indicator_payload: dict[str, dict[str, list[dict[str, Any]]]] = {}
+    for row in indicator_scores.itertuples(index=False):
+        item = {
+            "label": row.indicator_label,
+            "raw": round(float(row.raw_or_derived_value), 2),
+            "percentile": round(float(row.deprivation_percentile_0_100), 1),
+            "weight": float(row.within_category_weight),
+            "evidence": row.evidence_type,
+            "confidence": row.confidence_level,
+            "quality": row.quality_note,
+            "triggered": bool(row.indicator_policy_triggered),
+        }
+        indicator_payload.setdefault(str(row.admin_dong_code), {}).setdefault(
+            str(row.category), []
+        ).append(item)
+    assessment_payload: dict[str, dict[str, dict[str, Any]]] = {}
+    for row in category_assessments.itertuples(index=False):
+        assessment_payload.setdefault(str(row.admin_dong_code), {})[str(row.category)] = {
+            "score": round(float(row.category_score_0_100), 1),
+            "confidence": row.category_confidence,
+            "status": row.policy_review_status,
+            "triggers": (
+                str(row.triggered_indicators)
+                if pd.notna(row.triggered_indicators) and str(row.triggered_indicators)
+                else "없음"
+            ),
+        }
+    policy_payload = {
+        str(row.category): {
+            "title": row.policy_title_ko,
+            "lead": row.lead_implementer,
+            "example": row.policy_example,
+            "monitor": row.monitoring_indicator,
+            "limit": row.evidence_limit,
+        }
+        for row in policy_catalog.itertuples(index=False)
+    }
+    paths: list[str] = []
+    for row in map_data.itertuples(index=False):
+        attributes = {
+            "code": row.admin_dong_code,
+            "name": f"{row.sigungu_name} {row.admin_dong_name}",
+            "rank": f"기존 B-IMD {int(row.b_imd_rank)}위 · {row.b_imd_score_0_100:.1f}",
+        }
+        encoded = " ".join(
+            f'data-{key}="{escape(str(value), quote=True)}"' for key, value in attributes.items()
+        )
+        paths.append(
+            f'<path d="{_geometry_svg_path(row.geometry, bounds)}" '
+            f'fill="#f4a261" {encoded}/>'
+        )
+    category_rows = category_assessments[["category", "category_label"]].drop_duplicates()
+    buttons = "".join(
+        f'<button data-category="{row.category}">{row.category_label}</button>'
+        for row in category_rows.itertuples(index=False)
+    )
+    labels = dict(category_rows.itertuples(index=False, name=None))
+    document = f"""<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>2025 부산 행정동 카테고리 평가·정책 대시보드</title><style>
+body{{margin:0;background:#f7f4ed;color:#18323d;font-family:Arial,'Noto Sans KR',sans-serif}}
+main{{max-width:1220px;margin:auto;padding:24px}} h1{{margin:0 0 8px;font-size:28px}}
+.note,.scores{{color:#5d7078;line-height:1.5}}
+.layout{{display:grid;grid-template-columns:2fr 1fr;gap:20px}}
+.map,.card{{background:white;border:1px solid #d7ded9;border-radius:12px;padding:16px}}
+svg{{width:100%;height:70vh;min-height:540px}} path{{stroke:white;stroke-width:.55;cursor:pointer}}
+path:hover,path:focus{{stroke:#18323d;stroke-width:2}}
+.tabs{{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}}
+button{{border:1px solid #d7ded9;background:white;border-radius:20px;padding:9px 15px}}
+button{{cursor:pointer}} button.active{{background:#18323d;color:white}}
+.scale{{height:10px;background:linear-gradient(90deg,#fff7bc,#fdae61,#d7301f)}}
+.scale{{border-radius:6px}}
+.scale-label,.metric-head{{display:flex;justify-content:space-between;font-size:12px}}
+.metric{{margin:14px 0}} .bar{{height:8px;background:#edf0ed;border-radius:5px;overflow:hidden}}
+.bar i{{display:block;height:100%;background:#d84a3a}}
+.policy{{background:#f7f4ed;border-radius:9px;padding:12px;margin-top:18px}}
+.badge{{display:inline-block;border-radius:12px;padding:3px 8px;background:#edf0ed;font-size:12px}}
+.trigger{{color:#d84a3a;font-weight:700}}
+.warning{{border-top:1px solid #d7ded9;padding-top:12px;font-size:12px}}
+@media(max-width:800px){{.layout{{grid-template-columns:1fr}}svg{{height:55vh;min-height:400px}}}}
+</style></head><body><main><h1>부산 206개 행정동: 근거가 보이는 평가와 정책 예시</h1>
+<p class="note">추정값은 제외하지 않고 추정·대리·보간 여부와 신뢰도를 표시합니다.
+카테고리를 선택한 뒤 행정동을 선택하면 세부지표와 조건부 정책 예시가 나타납니다.</p>
+<div class="tabs">{buttons}</div><div class="layout"><div class="map"><h2 id="map-title"></h2>
+<div class="scale"></div><div class="scale-label">
+<span>0 상대 저취약</span><span>100 상대 고취약</span></div>
+<svg viewBox="0 0 900 900" aria-label="부산 행정동별 개선형 카테고리 지도">{''.join(paths)}</svg>
+</div><aside class="card" id="detail"><h2>행정동을 선택하세요</h2>
+<p>지표 근거와 정책 게이트가 표시됩니다.</p></aside></div>
+<p class="note warning">70점 이상은 정책 확정이 아니라 추가 행정자료·현장 검증 후보입니다.
+기존 B-IMD 순위는 비교용이며 개선형 카테고리 점수와 혼합하지 않습니다.</p></main><script>
+const indicators={json.dumps(indicator_payload, ensure_ascii=False, separators=(',', ':'))};
+const assessments={json.dumps(assessment_payload, ensure_ascii=False, separators=(',', ':'))};
+const policies={json.dumps(policy_payload, ensure_ascii=False, separators=(',', ':'))};
+const labels={json.dumps(labels, ensure_ascii=False, separators=(',', ':'))};
+const detail=document.getElementById('detail');let category='{categories[0]}';let selected=null;
+function color(score){{const hue=48-score*.45;return `hsl(${{hue}} 88% ${{62-score*.18}}%)`;}}
+function scoreOf(path){{return assessments[path.dataset.code][category].score;}}
+function selectCategory(next){{category=next;document.querySelectorAll('button').forEach(b=>
+ b.classList.toggle('active',b.dataset.category===category));
+ document.getElementById('map-title').textContent=labels[category]+' 취약도 분포';
+ document.querySelectorAll('path').forEach(p=>p.style.fill=color(scoreOf(p)));
+ if(selected)show({{target:selected}});
+}}
+function show(e){{const d=e.target.dataset;if(!d.name)return;selected=e.target;
+ const a=assessments[d.code][category];const policy=policies[category];
+ const metrics=indicators[d.code][category].map(m=>`<div class="metric">
+ <div class="metric-head"><b>${{m.label}}</b><span>${{m.raw}}</span></div>
+ <div class="scores">취약 백분위 ${{m.percentile}} · 가중치 ${{m.weight}} ·
+ 근거 ${{m.evidence}} · 신뢰 ${{m.confidence}}</div>
+ <div class="bar"><i style="width:${{m.percentile}}%"></i></div>
+ <div class="scores">${{m.quality}}</div></div>`).join('');
+ const gate=a.status==='candidate_after_validation'
+  ?'<span class="trigger">검증 후 정책검토 후보</span>':'<span class="badge">모니터링</span>';
+ detail.innerHTML=`<h2>${{d.name}}</h2><p class="scores">${{d.rank}}</p>
+ <h3>${{labels[category]}} ${{a.score.toFixed(1)}}</h3>
+ <p>카테고리 신뢰 <span class="badge">${{a.confidence}}</span> · ${{gate}}</p>
+ <p class="scores">임계지표: ${{a.triggers}}</p>${{metrics}}
+ <div class="policy"><b>조건부 정책 예시</b><h3>${{policy.title}}</h3>
+ <p>주관: ${{policy.lead}}</p><p>${{policy.example}}</p><p>성과지표: ${{policy.monitor}}</p>
+ <p class="warning">${{policy.limit}}</p></div>`;
+}}
+document.querySelectorAll('path').forEach(p=>{{p.tabIndex=0;p.addEventListener('mouseenter',show);
+p.addEventListener('click',show);p.addEventListener('focus',show);}});
+document.querySelectorAll('button').forEach(b=>
+b.addEventListener('click',()=>selectCategory(b.dataset.category)));selectCategory(category);
 </script></body></html>"""
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(document, encoding="utf-8", newline="\n")
@@ -735,6 +891,7 @@ def run(
     priority_path: Path = DEFAULT_PRIORITY_OUTPUT,
     overlay_path: Path = DEFAULT_OVERLAY,
     policy_matrix_path: Path = DEFAULT_POLICY_MATRIX,
+    category_assessment_path: Path = DEFAULT_CATEGORY_ASSESSMENT,
     indicator_scores_path: Path = DEFAULT_INDICATOR_SCORES,
     policy_catalog_path: Path = DEFAULT_POLICY_CATALOG,
     svg_output: Path = DEFAULT_SVG_OUTPUT,
@@ -750,6 +907,10 @@ def run(
     priority = pd.read_csv(priority_path, dtype={"admin_dong_code": str})
     overlay = pd.read_csv(overlay_path, dtype={"admin_dong_code": str})
     policy_matrix = pd.read_csv(policy_matrix_path)
+    category_assessments = pd.read_csv(
+        category_assessment_path,
+        dtype={"admin_dong_code": str},
+    )
     indicator_scores = pd.read_csv(indicator_scores_path, dtype={"admin_dong_code": str})
     policy_catalog = pd.read_csv(policy_catalog_path)
     summary = render(
@@ -765,7 +926,14 @@ def run(
     profiles = build_action_profiles(composite)
     profile_output.parent.mkdir(parents=True, exist_ok=True)
     profiles.to_csv(profile_output, index=False, encoding="utf-8-sig", lineterminator="\n")
-    write_action_map(profiles, boundaries, indicator_scores, policy_catalog, html_output)
+    write_action_map(
+        profiles,
+        boundaries,
+        category_assessments,
+        indicator_scores,
+        policy_catalog,
+        html_output,
+    )
     report = {
         "schema_version": 1,
         "generated_at": datetime.now(UTC).replace(microsecond=0).isoformat(),
@@ -780,6 +948,7 @@ def run(
             "priority_areas": priority_path.as_posix(),
             "environmental_overlay": overlay_path.as_posix(),
             "policy_matrix": policy_matrix_path.as_posix(),
+            "category_assessment": category_assessment_path.as_posix(),
             "indicator_scores": indicator_scores_path.as_posix(),
             "policy_catalog": policy_catalog_path.as_posix(),
         },
@@ -789,6 +958,7 @@ def run(
             "priority_areas": sha256_file(priority_path),
             "environmental_overlay": sha256_file(overlay_path),
             "policy_matrix": sha256_file(policy_matrix_path),
+            "category_assessment": sha256_file(category_assessment_path),
             "indicator_scores": sha256_file(indicator_scores_path),
             "policy_catalog": sha256_file(policy_catalog_path),
         },
@@ -822,6 +992,11 @@ def main() -> int:
     parser.add_argument("--priority-areas", type=Path, default=DEFAULT_PRIORITY_OUTPUT)
     parser.add_argument("--environmental-overlay", type=Path, default=DEFAULT_OVERLAY)
     parser.add_argument("--policy-matrix", type=Path, default=DEFAULT_POLICY_MATRIX)
+    parser.add_argument(
+        "--category-assessment",
+        type=Path,
+        default=DEFAULT_CATEGORY_ASSESSMENT,
+    )
     parser.add_argument("--indicator-scores", type=Path, default=DEFAULT_INDICATOR_SCORES)
     parser.add_argument("--policy-catalog", type=Path, default=DEFAULT_POLICY_CATALOG)
     parser.add_argument("--svg-output", type=Path, default=DEFAULT_SVG_OUTPUT)
@@ -837,6 +1012,7 @@ def main() -> int:
         args.priority_areas,
         args.environmental_overlay,
         args.policy_matrix,
+        args.category_assessment,
         args.indicator_scores,
         args.policy_catalog,
         args.svg_output,

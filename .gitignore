@@ -18,3 +18,5 @@ outputs/*
 !outputs/infographic/busan_imd_one_page_2025.png
 !outputs/infographic/busan_admin_dong_action_profile_2025.csv
 !outputs/infographic/busan_admin_dong_action_map_2025.html
+!outputs/infographic/busan_admin_dong_category_assessment_2025.csv
+!outputs/infographic/busan_admin_dong_category_indicator_scores_2025.csv

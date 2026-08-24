@@ -76,7 +76,10 @@ def test_project_structure_and_required_documents() -> None:
         "docs/data/manifests/ENVIRONMENTAL_OVERLAY_REPORT_2025.json",
         "docs/data/manifests/POLICY_MATRIX_REPORT_2025.json",
         "docs/data/manifests/INFOGRAPHIC_REPORT_2025.json",
+        "docs/data/manifests/CATEGORY_ASSESSMENT_REPORT_2025.json",
         "docs/data/POLICY_ACTION_CATALOG_2025.csv",
+        "docs/data/CATEGORY_ASSESSMENT_SPEC_2025.csv",
+        "docs/data/CATEGORY_POLICY_CATALOG_2025.csv",
         "docs/data/DATA_PORTABILITY.md",
         "docs/data/manifests/CONSUMER_SALES_MANIFEST_2025.json",
         "docs/data/manifests/CITY_PARKS_MANIFEST.json",
@@ -98,9 +101,13 @@ def test_project_structure_and_required_documents() -> None:
         "docs/en/methodology/POLICY_MATRIX_2025.md",
         "docs/methodology/INFOGRAPHIC_2025.md",
         "docs/en/methodology/INFOGRAPHIC_2025.md",
+        "docs/methodology/CATEGORY_ASSESSMENT_2025.md",
+        "docs/en/methodology/CATEGORY_ASSESSMENT_2025.md",
         "outputs/infographic/busan_imd_one_page_2025.svg",
         "outputs/infographic/busan_imd_one_page_2025.pdf",
         "outputs/infographic/busan_imd_one_page_2025.png",
+        "outputs/infographic/busan_admin_dong_category_assessment_2025.csv",
+        "outputs/infographic/busan_admin_dong_category_indicator_scores_2025.csv",
         "notebooks/01_candidate_profile_eda.ipynb",
         "notebooks/02_deprivation_cluster_review.ipynb",
         "notebooks/03_environmental_overlay_review.ipynb",
@@ -350,6 +357,31 @@ def test_infographic_report_and_outputs_cover_cod23_scope() -> None:
         REPOSITORY_ROOT / report["output_paths"]["interactive_action_map"]
     ).read_text(encoding="utf-8")
     assert action_map.count("data-code=") == 206
+
+
+def test_category_assessment_is_complete_and_flags_estimation() -> None:
+    report = read_json("docs/data/manifests/CATEGORY_ASSESSMENT_REPORT_2025.json")
+
+    assert report["admin_dong_count"] == 206
+    assert report["category_count"] == 8
+    assert report["indicator_count"] == 13
+    assert report["category_score_row_count"] == 206 * 8
+    assert report["indicator_score_row_count"] == 206 * 13
+    assert report["policy_trigger_threshold"] == 70
+    for name, relative_path in report["output_paths"].items():
+        actual = hashlib.sha256((REPOSITORY_ROOT / relative_path).read_bytes()).hexdigest().upper()
+        assert actual == report["output_sha256"][name]
+    categories = pd.read_csv(
+        REPOSITORY_ROOT / report["output_paths"]["category_assessment"],
+        dtype={"admin_dong_code": str},
+    )
+    assert categories.groupby("admin_dong_code")["category"].nunique().eq(8).all()
+    myeongji = categories[
+        categories["admin_dong_name"].isin(["명지1동", "명지2동"])
+        & (categories["category"] == "education_access_supply")
+    ]
+    assert len(myeongji) == 2
+    assert myeongji["category_score_0_100"].lt(70).all()
 
 
 def test_dataset_audit_is_valid() -> None:

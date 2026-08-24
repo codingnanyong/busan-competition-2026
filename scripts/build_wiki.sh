@@ -44,6 +44,7 @@ publish_page docs/methodology/CLUSTER_ANALYSIS_2025.md KO-Cluster-Analysis-2025
 publish_page docs/methodology/ENVIRONMENTAL_OVERLAY_2025.md KO-Environmental-Overlay-2025
 publish_page docs/methodology/POLICY_MATRIX_2025.md KO-Policy-Matrix-2025
 publish_page docs/methodology/INFOGRAPHIC_2025.md KO-Infographic-2025
+publish_page docs/methodology/CATEGORY_ASSESSMENT_2025.md KO-Category-Assessment-2025
 publish_page docs/methodology/INDICATOR_SPEC.md KO-Indicator-Spec
 publish_page docs/methodology/LIMITATIONS.md KO-Limitations
 publish_page docs/methodology/EXPANSION_MODEL.md KO-Expansion-Model
@@ -64,6 +65,7 @@ publish_page docs/en/methodology/CLUSTER_ANALYSIS_2025.md EN-Cluster-Analysis-20
 publish_page docs/en/methodology/ENVIRONMENTAL_OVERLAY_2025.md EN-Environmental-Overlay-2025
 publish_page docs/en/methodology/POLICY_MATRIX_2025.md EN-Policy-Matrix-2025
 publish_page docs/en/methodology/INFOGRAPHIC_2025.md EN-Infographic-2025
+publish_page docs/en/methodology/CATEGORY_ASSESSMENT_2025.md EN-Category-Assessment-2025
 publish_page docs/en/methodology/INDICATOR_SPEC.md EN-Indicator-Spec
 publish_page docs/en/methodology/LIMITATIONS.md EN-Limitations
 publish_page docs/en/methodology/EXPANSION_MODEL.md EN-Expansion-Model

@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-24T05:28:28+00:00",
+  "reference_year": 2025,
+  "admin_dong_count": 206,
+  "category_count": 8,
+  "indicator_count": 13,
+  "indicator_score_row_count": 2678,
+  "category_score_row_count": 1648,
+  "policy_trigger_threshold": 70,
+  "small_area_rate_shrinkage_population": 5000,
+  "decision": "use_for_transparent_category_policy_screening_after_validation",
+  "limitations": [
+    "Estimated and proxy inputs are retained with row-level evidence labels",
+    "Category scores are relative Busan percentiles, not absolute service standards",
+    "Policy examples require observed administrative data and field validation"
+  ],
+  "input_paths": {
+    "profile": "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv",
+    "spec": "docs/data/CATEGORY_ASSESSMENT_SPEC_2025.csv",
+    "policy_catalog": "docs/data/CATEGORY_POLICY_CATALOG_2025.csv"
+  },
+  "input_sha256": {
+    "profile": "DA9FD3DF576A6C373312D61957AD362EC26BDD4469F713A34BE1442FB759C88F",
+    "spec": "C5B7AD8C804BF616DF5ED674EB1CF189F326FD658B03E73349F901AD37CED8B7",
+    "policy_catalog": "EBB3DEA2F77036EEDFB1F305262CE14414D71EA46A6E88BC923FAC0A6E668A2F"
+  },
+  "output_paths": {
+    "category_assessment": "outputs/infographic/busan_admin_dong_category_assessment_2025.csv",
+    "indicator_scores": "outputs/infographic/busan_admin_dong_category_indicator_scores_2025.csv"
+  },
+  "output_sha256": {
+    "category_assessment": "83CB1DCBCA5A546A403006BF757AF77CFCCE2B284E1AE842155AFF643C8444F0",
+    "indicator_scores": "C461CF31E982572A1EF2ACEF246E98B6FD80B6292531B79590AFAEF15F418B83"
+  }
+}

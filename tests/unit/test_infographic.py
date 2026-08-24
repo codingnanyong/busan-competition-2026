@@ -8,8 +8,6 @@ import pytest
 from shapely.geometry import box
 
 from busan_imd.infographic import (
-    DOMAIN_COLUMNS,
-    INDICATOR_PRESENTATION,
     build_action_profiles,
     render,
     write_action_map,
@@ -88,47 +86,71 @@ def test_action_profiles_and_map_cover_every_dong(tmp_path) -> None:
     composite, boundaries, *_ = inputs()
     profiles = build_action_profiles(composite)
     html_path = tmp_path / "action-map.html"
-    indicator_to_domain = {
-        "basic_livelihood_recipients_per_1000_population_2025_inferred": "income",
-        "workplace_workers_2024": "employment",
-        "nearest_core_school_distance_m_2025": "education",
-        "hospital_count_2025_candidate_per_10000_population": "health",
-        "clinic_count_2025_candidate_per_10000_population": "health",
-        "old_house_share_30plus_2024_lower_bound_pct": "housing_access",
-        "bus_stop_count_2025_per_10000_population": "housing_access",
-        "heat_shelter_count_2025_per_10000_population": "living_environment",
-        "annual_pm25_ug_m3_idw_2025": "living_environment",
+    categories = {
+        "income_support_need": "소득·복지수요",
+        "local_employment_opportunity": "지역 고용기회",
+        "education_access_supply": "교육시설 접근·공급",
+        "healthcare_supply": "의료공급 접근",
+        "housing_condition": "주거환경",
+        "transit_access": "대중교통 접근",
+        "air_exposure": "대기오염 노출",
+        "heat_response": "폭염 대응",
     }
+    category_assessments = pd.DataFrame(
+        [
+            {
+                "admin_dong_code": code,
+                "category": category,
+                "category_label": label,
+                "category_score_0_100": 75,
+                "category_confidence": "medium_low",
+                "policy_review_status": "candidate_after_validation",
+                "triggered_indicators": "평가지표",
+            }
+            for code in composite["admin_dong_code"]
+            for category, label in categories.items()
+        ]
+    )
     indicator_scores = pd.DataFrame(
         [
             {
                 "admin_dong_code": code,
-                "domain": indicator_to_domain[indicator],
-                "indicator": indicator,
-                "raw_value": 10,
+                "category": category,
+                "indicator_label": "평가지표",
+                "raw_or_derived_value": 10,
                 "deprivation_percentile_0_100": 75,
-                "within_domain_weight": 1,
+                "within_category_weight": 1,
+                "evidence_type": "proxy",
+                "confidence_level": "medium_low",
+                "quality_note": "현장 검증 필요",
+                "indicator_policy_triggered": True,
             }
             for code in composite["admin_dong_code"]
-            for indicator in INDICATOR_PRESENTATION
+            for category in categories
         ]
     )
     policy_catalog = pd.DataFrame(
         [
             {
-                "trigger_kind": "domain",
-                "trigger_value": domain,
+                "category": category,
                 "policy_title_ko": f"{label} 정책",
                 "lead_implementer": "담당부서",
-                "expected_effect": "접근성 개선",
+                "policy_example": "검증 후 개선",
                 "monitoring_indicator": "연계율",
                 "evidence_limit": "현장 검증 필요",
             }
-            for domain, (_, label) in DOMAIN_COLUMNS.items()
+            for category, label in categories.items()
         ]
     )
 
-    write_action_map(profiles, boundaries, indicator_scores, policy_catalog, html_path)
+    write_action_map(
+        profiles,
+        boundaries,
+        category_assessments,
+        indicator_scores,
+        policy_catalog,
+        html_path,
+    )
 
     assert len(profiles) == 206
     assert profiles.loc[0, "primary_vulnerability_ko"] == "교육"
@@ -136,8 +158,8 @@ def test_action_profiles_and_map_cover_every_dong(tmp_path) -> None:
     assert profiles["specialization_evidence_status"].str.contains("특화 확정 불가").all()
     html = html_path.read_text(encoding="utf-8")
     assert html.count("data-code=") == 206
-    assert "카테고리별 평가와 정책 예시" in html
-    assert html.count("data-domain=") == 6
+    assert "근거가 보이는 평가와 정책 예시" in html
+    assert html.count("data-category=") == 8
     assert "취약 백분위" in html
 
 
