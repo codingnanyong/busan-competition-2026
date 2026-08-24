@@ -1,10 +1,20 @@
 from __future__ import annotations
 
+import hashlib
+import json
+
 import pandas as pd
 import pytest
 
 from busan_imd.cluster_analysis import DOMAINS
 from busan_imd.policy_matrix import CATALOG_COLUMNS, build, run
+
+
+def cluster_report() -> dict:
+    return {
+        "recommended_for_policy_typology": True,
+        "decision": "use_as_exploratory_policy_typology",
+    }
 
 
 def inputs() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
@@ -79,7 +89,7 @@ def inputs() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
 def test_build_creates_type_and_overlay_policy_candidates() -> None:
     assignments, overlay, catalog = inputs()
 
-    matrix, report = build(assignments, overlay, catalog)
+    matrix, report = build(assignments, overlay, catalog, cluster_report())
 
     assert len(matrix) == report["matrix_row_count"] == 5
     assert report["cluster_count"] == 2
@@ -100,11 +110,37 @@ def test_build_rejects_missing_policy_and_invalid_overlay() -> None:
     assignments, overlay, catalog = inputs()
 
     with pytest.raises(ValueError, match="exactly one domain:income"):
-        build(assignments, overlay, catalog[catalog["trigger_value"] != "income"])
+        build(
+            assignments,
+            overlay,
+            catalog[catalog["trigger_value"] != "income"],
+            cluster_report(),
+        )
     with pytest.raises(ValueError, match="206 unique"):
-        build(assignments, overlay.iloc[:-1], catalog)
+        build(assignments, overlay.iloc[:-1], catalog, cluster_report())
     with pytest.raises(ValueError, match="21 unique"):
-        build(assignments.iloc[:-1], overlay, catalog)
+        build(assignments.iloc[:-1], overlay, catalog, cluster_report())
+
+
+def test_build_stops_on_failed_typology_and_handles_no_candidates() -> None:
+    assignments, overlay, catalog = inputs()
+    failed_report = {
+        "recommended_for_policy_typology": False,
+        "decision": "do_not_use_as_policy_typology",
+    }
+
+    with pytest.raises(ValueError, match="passes the typology gate"):
+        build(assignments, overlay, catalog, failed_report)
+
+    for column in [name for name in assignments if name.endswith("_excess_points")]:
+        assignments[column] = -1.0
+    overlay["double_burden"] = False
+    matrix, report = build(assignments, overlay, catalog, cluster_report())
+
+    assert matrix.empty
+    assert list(matrix.columns)
+    assert report["matrix_row_count"] == 0
+    assert report["unique_policy_count"] == 0
 
 
 def test_run_creates_independent_output_directories(tmp_path) -> None:
@@ -114,12 +150,30 @@ def test_run_creates_independent_output_directories(tmp_path) -> None:
     catalog_path = tmp_path / "input" / "catalog.csv"
     output_path = tmp_path / "output" / "matrix.csv"
     report_path = tmp_path / "report" / "matrix.json"
+    cluster_report_path = tmp_path / "input" / "cluster.json"
     assignments_path.parent.mkdir(parents=True)
     assignments.to_csv(assignments_path, index=False)
     overlay.to_csv(overlay_path, index=False)
     catalog.to_csv(catalog_path, index=False)
+    assignment_hash = hashlib.sha256(assignments_path.read_bytes()).hexdigest().upper()
+    cluster_report_path.write_text(
+        json.dumps(
+            {
+                **cluster_report(),
+                "output_sha256": {"assignments": assignment_hash},
+            }
+        ),
+        encoding="utf-8",
+    )
 
-    report = run(assignments_path, overlay_path, catalog_path, output_path, report_path)
+    report = run(
+        assignments_path,
+        overlay_path,
+        catalog_path,
+        cluster_report_path,
+        output_path,
+        report_path,
+    )
 
     assert output_path.is_file()
     assert report_path.is_file()

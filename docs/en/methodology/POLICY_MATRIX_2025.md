@@ -43,13 +43,16 @@ and select `Run All Cells`.
 
 ## Selection rule
 
-1. Take each COD-20 type's dominant and secondary domains as candidates.
-2. Create an action only when that domain's mean weighted excess over the Busan median is
+1. Require the COD-20 report to recommend exploratory policy typology and require the
+   assignment checksum to match that quality-gated report; otherwise stop.
+2. Take each COD-20 type's dominant and secondary domains as candidates.
+3. Create an action only when that domain's mean weighted excess over the Busan median is
    positive among the relevant priority areas.
-3. Add an environmental-health action when a type contains COD-21 double-burden areas.
-4. Join implementation roles, partners, difficulty, expected effect, and monitoring fields
+4. Add an environmental-health action when a type contains COD-21 double-burden areas.
+5. Join implementation roles, partners, difficulty, expected effect, and monitoring fields
    from the versioned policy catalog.
-5. Keep every row at `candidate_for_field_validation` status.
+6. Keep every row at `candidate_for_field_validation` status. If no candidate qualifies,
+   write a schema-correct zero-row matrix and report instead of inventing an action.
 
 Medium difficulty requires new targeting, follow-up, or cross-service coordination. High
 difficulty requires new measurement, capital work, or sustained multi-organization delivery.

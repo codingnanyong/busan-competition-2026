@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -10,7 +11,13 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from busan_imd.cluster_analysis import DEFAULT_ASSIGNMENT_OUTPUT, FEATURE_COLUMNS
+from busan_imd.cluster_analysis import (
+    DEFAULT_ASSIGNMENT_OUTPUT,
+    FEATURE_COLUMNS,
+)
+from busan_imd.cluster_analysis import (
+    DEFAULT_REPORT as DEFAULT_CLUSTER_REPORT,
+)
 from busan_imd.core.artifacts import sha256_file, write_json
 from busan_imd.environmental_overlay import DEFAULT_OUTPUT as DEFAULT_OVERLAY
 
@@ -32,6 +39,37 @@ CATALOG_COLUMNS = (
     "monitoring_indicator",
     "evidence_limit",
 )
+MATRIX_COLUMNS = (
+    "matrix_id",
+    "cluster_id",
+    "cluster_label",
+    "policy_priority",
+    "policy_trigger",
+    "policy_id",
+    "policy_title_ko",
+    "policy_title_en",
+    "target_area_count",
+    "target_admin_dong_codes",
+    "target_admin_dongs",
+    "analysis_basis",
+    "analysis_basis_value",
+    "lead_implementer",
+    "implementation_partners",
+    "implementation_difficulty",
+    "difficulty_basis",
+    "expected_effect",
+    "monitoring_indicator",
+    "evidence_limit",
+    "decision_status",
+)
+
+
+def _validate_typology_report(cluster_report: dict[str, Any]) -> None:
+    if (
+        cluster_report.get("recommended_for_policy_typology") is not True
+        or cluster_report.get("decision") != "use_as_exploratory_policy_typology"
+    ):
+        raise ValueError("Policy matrix requires a cluster report that passes the typology gate")
 
 
 def _validate(
@@ -119,8 +157,10 @@ def build(
     assignments: pd.DataFrame,
     overlay: pd.DataFrame,
     catalog: pd.DataFrame,
+    cluster_report: dict[str, Any],
 ) -> tuple[pd.DataFrame, dict[str, Any]]:
     """Return deterministic type-level policy candidates and an audit report."""
+    _validate_typology_report(cluster_report)
     assignments, overlay, catalog = _validate(assignments, overlay, catalog)
     joined = assignments.merge(
         overlay[
@@ -225,7 +265,7 @@ def build(
             }
         )
 
-    matrix = pd.DataFrame(records).sort_values(
+    matrix = pd.DataFrame.from_records(records, columns=MATRIX_COLUMNS).sort_values(
         ["cluster_id", "policy_trigger", "policy_priority"], kind="stable"
     )
     report = {
@@ -263,14 +303,20 @@ def run(
     assignments_path: Path = DEFAULT_ASSIGNMENT_OUTPUT,
     overlay_path: Path = DEFAULT_OVERLAY,
     catalog_path: Path = DEFAULT_CATALOG,
+    cluster_report_path: Path = DEFAULT_CLUSTER_REPORT,
     output_path: Path = DEFAULT_OUTPUT,
     report_path: Path = DEFAULT_REPORT,
 ) -> dict[str, Any]:
     """Read canonical inputs and write COD-22 policy-matrix artifacts."""
+    cluster_report = json.loads(cluster_report_path.read_text(encoding="utf-8"))
+    _validate_typology_report(cluster_report)
+    expected_assignment_hash = cluster_report.get("output_sha256", {}).get("assignments")
+    if sha256_file(assignments_path) != expected_assignment_hash:
+        raise ValueError("Cluster assignments do not match the quality-gated cluster report")
     assignments = pd.read_csv(assignments_path, dtype={"admin_dong_code": str})
     overlay = pd.read_csv(overlay_path, dtype={"admin_dong_code": str})
     catalog = pd.read_csv(catalog_path)
-    matrix, report = build(assignments, overlay, catalog)
+    matrix, report = build(assignments, overlay, catalog, cluster_report)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.parent.mkdir(parents=True, exist_ok=True)
     matrix.to_csv(output_path, index=False, encoding="utf-8-sig", lineterminator="\n")
@@ -280,11 +326,13 @@ def run(
                 "cluster_assignments": assignments_path.as_posix(),
                 "environmental_overlay": overlay_path.as_posix(),
                 "policy_catalog": catalog_path.as_posix(),
+                "cluster_report": cluster_report_path.as_posix(),
             },
             "input_sha256": {
                 "cluster_assignments": sha256_file(assignments_path),
                 "environmental_overlay": sha256_file(overlay_path),
                 "policy_catalog": sha256_file(catalog_path),
+                "cluster_report": sha256_file(cluster_report_path),
             },
             "output_path": output_path.as_posix(),
             "output_sha256": sha256_file(output_path),
@@ -299,6 +347,7 @@ def main() -> int:
     parser.add_argument("--cluster-assignments", type=Path, default=DEFAULT_ASSIGNMENT_OUTPUT)
     parser.add_argument("--environmental-overlay", type=Path, default=DEFAULT_OVERLAY)
     parser.add_argument("--policy-catalog", type=Path, default=DEFAULT_CATALOG)
+    parser.add_argument("--cluster-report", type=Path, default=DEFAULT_CLUSTER_REPORT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
     args = parser.parse_args()
@@ -306,6 +355,7 @@ def main() -> int:
         args.cluster_assignments,
         args.environmental_overlay,
         args.policy_catalog,
+        args.cluster_report,
         args.output,
         args.report,
     )
