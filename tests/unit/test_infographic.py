@@ -82,8 +82,13 @@ def inputs() -> tuple[
     return composite, boundaries, priority, overlay, policy
 
 
-def test_render_writes_one_page_vector_pdf_and_preview(tmp_path) -> None:
+@pytest.mark.filterwarnings("ignore:Glyph .* missing from font")
+def test_render_writes_one_page_vector_pdf_and_preview(
+    tmp_path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     composite, boundaries, priority, overlay, policy = inputs()
+    monkeypatch.setattr(infographic, "_font_family", lambda: "DejaVu Sans")
     svg_path = tmp_path / "visual.svg"
     pdf_path = tmp_path / "visual.pdf"
     png_path = tmp_path / "visual.png"
