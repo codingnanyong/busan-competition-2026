@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-24T23:10:36+00:00",
+  "generated_at": "2026-08-25T05:42:14+00:00",
   "reference_year": 2025,
   "reference_crs": "EPSG:5179",
   "canonical_admin_dong_count": 206,
@@ -79,6 +79,7 @@
     "nearest_core_school_distance_m_2025": 0,
     "core_schools_within_2000m_2025": 0,
     "core_school_teachers_within_2000m_2025": 0,
+    "core_school_students_within_2000m_2025": 0,
     "air_idw_station_count": 0,
     "nearest_air_station_distance_m": 0,
     "annual_pm25_ug_m3_idw_2025": 0,
@@ -291,7 +292,7 @@
       "missing_admin_dongs": 0,
       "match_rate": 1.0,
       "source_path": "data/processed/candidates/2025/school_counts_2025.csv",
-      "source_sha256": "AD6A3C652B29A2A8FC516399A09B2B1BA5219216415D206456D5347206BFAF99"
+      "source_sha256": "02717DF8EF7E38D51C2AA3BB6F03FA21D75C24B1A7767BAC97DAF6C4ED82CEE7"
     },
     {
       "dataset_id": "ENV-AIR-HEIS-DAILY-2025-001",
@@ -334,5 +335,5 @@
     ]
   },
   "profile_path": "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv",
-  "profile_sha256": "45901948F9A998B864DB4BAD6019CD257D2983E4FA0A2D37A7F6EC203F7A4479"
+  "profile_sha256": "49A663FCD1A2868D03213778CEE77F4D3DE17AD27F1AFCBE5AB8B2C4219DBC2F"
 }

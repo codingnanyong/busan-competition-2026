@@ -22,7 +22,7 @@ from busan_imd.infographic.config import (
     EXPECTED_PRIORITY_COUNT,
     PALETTE,
 )
-from busan_imd.infographic.profiles import build_action_profiles
+from busan_imd.infographic.domain.profiles import build_action_profiles
 
 INDICATOR_PRESENTATION = {
     "basic_livelihood_recipients_per_1000_population_2025_inferred": (
@@ -354,8 +354,26 @@ def write_action_map(
     indicator_scores: pd.DataFrame,
     policy_catalog: pd.DataFrame,
     output_path: Path,
-) -> None:
+    traffic_hotspots: pd.DataFrame | gpd.GeoDataFrame | None = None,
+    reference_context: pd.DataFrame | None = None,
+    safety_risk_areas: pd.DataFrame | gpd.GeoDataFrame | None = None,
+    consumer_sales_by_category: pd.DataFrame | None = None,
+    aed_points: gpd.GeoDataFrame | None = None,
+    park_points: pd.DataFrame | gpd.GeoDataFrame | None = None,
+    traffic_citywide_trend: pd.DataFrame | None = None,
+) -> dict[str, int]:
     """Write a category dashboard with explicit evidence labels and policy gates."""
+    confidence_labels = {
+        "high": "높음",
+        "medium": "보통",
+        "medium_low": "다소 낮음",
+        "low": "낮음",
+    }
+
+    def confidence_label(value: Any) -> str:
+        normalized = str(value).strip().lower()
+        return confidence_labels.get(normalized, str(value))
+
     map_data = boundaries.copy()
     map_data["adm_cd"] = map_data["adm_cd"].astype(str)
     map_data = map_data.merge(
@@ -365,6 +383,158 @@ def write_action_map(
         validate="one_to_one",
     )
     bounds = tuple(float(value) for value in map_data.total_bounds)
+    if boundaries.crs is None:
+        raise ValueError("Boundary geometry requires a declared CRS for reference layers")
+    boundary_lookup = boundaries[["adm_cd", "geometry"]].copy()
+    boundary_lookup["adm_cd"] = boundary_lookup["adm_cd"].astype(str)
+    accident_summary: dict[str, dict[str, int]] = {}
+    hotspot_circles: list[str] = []
+    mapped_hotspot_count = 0
+    if traffic_hotspots is not None and not traffic_hotspots.empty:
+        required_hotspot_columns = {"spot_nm", "occrrnc_cnt", "caslt_cnt"}
+        missing_hotspot_columns = required_hotspot_columns - set(traffic_hotspots.columns)
+        if missing_hotspot_columns:
+            raise ValueError(
+                f"Traffic hotspots are missing columns: {sorted(missing_hotspot_columns)}"
+            )
+        if isinstance(traffic_hotspots, gpd.GeoDataFrame):
+            hotspot_points = traffic_hotspots.copy()
+            if hotspot_points.crs is None:
+                raise ValueError("Traffic hotspot geometry requires a declared CRS")
+        else:
+            coordinate_columns = {"lo_crd", "la_crd"}
+            missing_coordinates = coordinate_columns - set(traffic_hotspots.columns)
+            if missing_coordinates:
+                raise ValueError(
+                    f"Traffic hotspots are missing coordinates: {sorted(missing_coordinates)}"
+                )
+            hotspot_points = gpd.GeoDataFrame(
+                traffic_hotspots.copy(),
+                geometry=gpd.points_from_xy(
+                    pd.to_numeric(traffic_hotspots["lo_crd"]),
+                    pd.to_numeric(traffic_hotspots["la_crd"]),
+                ),
+                crs="EPSG:4326",
+            )
+        hotspot_points = hotspot_points.to_crs(boundaries.crs)
+        hotspot_points = gpd.sjoin(
+            hotspot_points,
+            boundary_lookup,
+            how="left",
+            predicate="within",
+        )
+        mapped_hotspots = hotspot_points[hotspot_points["adm_cd"].notna()].copy()
+        mapped_hotspot_count = len(mapped_hotspots)
+        for code, rows in mapped_hotspots.groupby("adm_cd", sort=False):
+            accident_summary[str(code)] = {
+                "location_count": int(len(rows)),
+                "occurrence_count": int(pd.to_numeric(rows["occrrnc_cnt"]).sum()),
+                "casualty_count": int(pd.to_numeric(rows["caslt_cnt"]).sum()),
+            }
+        min_x, min_y, max_x, max_y = bounds
+        width = max_x - min_x
+        height = max_y - min_y
+        for row in mapped_hotspots.itertuples(index=False):
+            occurrence_count = int(row.occrrnc_cnt)
+            cx = (row.geometry.x - min_x) / width * 900
+            cy = (max_y - row.geometry.y) / height * 900
+            radius = min(10.0, 3.0 + occurrence_count**0.5 * 0.55)
+            title = escape(
+                f"{row.spot_nm}: 사고 {occurrence_count}건, 사상자 {int(row.caslt_cnt)}명"
+            )
+            hotspot_circles.append(
+                f'<circle class="accident-hotspot" cx="{cx:.2f}" cy="{cy:.2f}" '
+                f'r="{radius:.2f}" data-hotspot-code="{row.adm_cd}">'
+                f"<title>{title}</title></circle>"
+            )
+    safety_risk_markers: list[str] = []
+    mapped_safety_risk_count = 0
+    if safety_risk_areas is not None and not safety_risk_areas.empty:
+        required_risk_columns = {"경도", "위도", "사고유형", "출동횟수", "상세위치"}
+        missing_risk_columns = required_risk_columns - set(safety_risk_areas.columns)
+        if missing_risk_columns:
+            raise ValueError(
+                f"Safety risk areas are missing columns: {sorted(missing_risk_columns)}"
+            )
+        if isinstance(safety_risk_areas, gpd.GeoDataFrame):
+            risk_points = safety_risk_areas.copy()
+            if risk_points.crs is None:
+                raise ValueError("Safety risk geometry requires a declared CRS")
+        else:
+            risk_points = gpd.GeoDataFrame(
+                safety_risk_areas.copy(),
+                geometry=gpd.points_from_xy(
+                    pd.to_numeric(safety_risk_areas["경도"], errors="coerce"),
+                    pd.to_numeric(safety_risk_areas["위도"], errors="coerce"),
+                ),
+                crs="EPSG:4326",
+            )
+        risk_points = risk_points.to_crs(boundaries.crs)
+        risk_points = gpd.sjoin(
+            risk_points,
+            boundary_lookup,
+            how="left",
+            predicate="within",
+        )
+        mapped_risks = risk_points[risk_points["adm_cd"].notna()].copy()
+        mapped_safety_risk_count = len(mapped_risks)
+        min_x, min_y, max_x, max_y = bounds
+        width = max_x - min_x
+        height = max_y - min_y
+        for row in mapped_risks.itertuples(index=False):
+            cx = (row.geometry.x - min_x) / width * 900
+            cy = (max_y - row.geometry.y) / height * 900
+            title = escape(f"{row.사고유형}: {row.상세위치} · 출동 {int(row.출동횟수)}회")
+            safety_risk_markers.append(
+                f'<rect class="safety-risk-area" x="{cx - 3.8:.2f}" y="{cy - 3.8:.2f}" '
+                f'width="7.6" height="7.6" transform="rotate(45 {cx:.2f} {cy:.2f})" '
+                f'data-safety-risk-code="{row.adm_cd}"><title>{title}</title></rect>'
+            )
+
+    def point_markers(
+        source: pd.DataFrame | gpd.GeoDataFrame | None,
+        css_class: str,
+        title_columns: tuple[str, ...],
+    ) -> tuple[list[str], int]:
+        if source is None or source.empty:
+            return [], 0
+        if isinstance(source, gpd.GeoDataFrame):
+            points = source.copy()
+            if points.crs is None:
+                raise ValueError(f"{css_class} geometry requires a declared CRS")
+        else:
+            points = gpd.GeoDataFrame(
+                source.copy(),
+                geometry=gpd.points_from_xy(
+                    pd.to_numeric(source["longitude"], errors="coerce"),
+                    pd.to_numeric(source["latitude"], errors="coerce"),
+                ),
+                crs="EPSG:4326",
+            )
+        points = points[points.geometry.notna() & ~points.geometry.is_empty].to_crs(boundaries.crs)
+        points = gpd.sjoin(points, boundary_lookup, how="left", predicate="within")
+        points = points[points["adm_cd"].notna()].copy()
+        min_x, min_y, max_x, max_y = bounds
+        width, height = max_x - min_x, max_y - min_y
+        markers = []
+        for row in points.itertuples(index=False):
+            cx = (row.geometry.x - min_x) / width * 900
+            cy = (max_y - row.geometry.y) / height * 900
+            details = " · ".join(
+                str(getattr(row, column))
+                for column in title_columns
+                if hasattr(row, column) and pd.notna(getattr(row, column))
+            )
+            markers.append(
+                f'<circle class="{css_class}" cx="{cx:.2f}" cy="{cy:.2f}" r="2.8" '
+                f'data-reference-code="{row.adm_cd}"><title>{escape(details)}</title></circle>'
+            )
+        return markers, len(points)
+
+    aed_markers, mapped_aed_count = point_markers(aed_points, "aed-point", ("org", "addrs"))
+    park_markers, mapped_park_count = point_markers(
+        park_points, "park-point", ("parkNm", "parkSe", "parkAr")
+    )
     categories = policy_catalog["category"].tolist()
     if set(category_assessments["category"]) != set(categories):
         raise ValueError("Assessment and policy categories must match")
@@ -393,7 +563,7 @@ def write_action_map(
             "estimate_used": estimate_used,
             "estimation_method": row.estimation_method_ko,
             "estimation_reason": row.estimation_reason,
-            "confidence": row.confidence_level,
+            "confidence": confidence_label(row.confidence_level),
             "quality": row.quality_note,
             "triggered": bool(row.indicator_policy_triggered),
         }
@@ -407,7 +577,7 @@ def write_action_map(
             "major_category": row.major_category,
             "major_weight": float(row.major_category_weight),
             "score": round(float(row.category_score_0_100), 1),
-            "confidence": row.category_confidence,
+            "confidence": confidence_label(row.category_confidence),
             "status": row.policy_review_status,
             "triggers": (
                 str(row.triggered_indicators)
@@ -419,7 +589,7 @@ def write_action_map(
     for row in major_category_assessments.itertuples(index=False):
         major_payload.setdefault(str(row.admin_dong_code), {})[str(row.major_category)] = {
             "score": round(float(row.major_category_score_0_100), 1),
-            "confidence": row.major_category_confidence,
+            "confidence": confidence_label(row.major_category_confidence),
             "status": row.policy_review_status,
             "triggered_children": (
                 str(row.triggered_child_categories)
@@ -443,6 +613,238 @@ def write_action_map(
         }
         for row in policy_catalog.itertuples(index=False)
     }
+    reference_payload: dict[str, dict[str, list[dict[str, Any]]]] = {}
+    reference_specs = (
+        (
+            "healthcare_supply",
+            "aed_count_current_unverified_per_10000_population",
+            "인구 1만 명당 AED",
+            1.0,
+            "대/1만 명",
+            "2026-08-12 조회 현재 목록이며 2025 점수에는 반영하지 않음",
+        ),
+        (
+            "air_exposure",
+            "annual_pm10_ug_m3_idw_2025",
+            "2025 연평균 PM10 추정",
+            1.0,
+            "㎍/㎥",
+            "32개 측정소 IDW 보간 참고값",
+        ),
+        (
+            "air_exposure",
+            "annual_no2_ppm_idw_2025",
+            "2025 연평균 NO₂ 추정",
+            1.0,
+            "ppm",
+            "32개 측정소 IDW 보간 참고값",
+        ),
+        (
+            "air_exposure",
+            "annual_o3_ppm_idw_2025",
+            "2025 연평균 O₃ 추정",
+            1.0,
+            "ppm",
+            "32개 측정소 IDW 보간 참고값",
+        ),
+        (
+            "air_exposure",
+            "air_idw_station_count",
+            "보간에 사용한 대기측정소 수",
+            1.0,
+            "곳",
+            "측정망 밀도를 보여 주는 불확실성 정보이며 취약점수가 아님",
+        ),
+        (
+            "air_exposure",
+            "nearest_air_station_distance_m",
+            "최근접 대기측정소 거리",
+            1.0,
+            "m",
+            "거리가 멀수록 공간보간 불확실성이 커질 수 있으며 취약점수가 아님",
+        ),
+        (
+            "education_access_supply",
+            "core_school_students_within_2000m_2025",
+            "중심점 2km 내 학교 재학생",
+            1.0,
+            "명",
+            "학교알리미 2025 재학생 합계이며 해당 동 거주 학령인구를 뜻하지 않음",
+        ),
+        (
+            "education_access_supply",
+            "core_school_teachers_within_2000m_2025",
+            "중심점 2km 내 현원 교원",
+            1.0,
+            "명",
+            "학교알리미 2025 현원 교원 합계이며 반경 중첩으로 인접 동과 중복될 수 있음",
+        ),
+        (
+            "education_access_supply",
+            "students_per_teacher_within_2000m_2025",
+            "주변 학교 학생·교원 비율",
+            1.0,
+            "명/교원 1명",
+            "2km 내 학교 재학생÷현원 교원 참고값이며 학급당 학생 수와 다름",
+        ),
+        (
+            "local_employment_opportunity",
+            "avg_daily_residential_living_population_2025",
+            "일평균 거주 생활인구",
+            1.0,
+            "명/일",
+            "생활활동 규모 참고값이며 고용기회 점수에는 반영하지 않음",
+        ),
+        (
+            "local_employment_opportunity",
+            "avg_daily_workplace_living_population_2025",
+            "일평균 직장 생활인구",
+            1.0,
+            "명/일",
+            "생활활동 규모 참고값이며 고용기회 점수에는 반영하지 않음",
+        ),
+        (
+            "local_employment_opportunity",
+            "avg_daily_visitor_living_population_2025",
+            "일평균 방문 생활인구",
+            1.0,
+            "명/일",
+            "생활활동 규모 참고값이며 고용기회 점수에는 반영하지 않음",
+        ),
+        (
+            "local_employment_opportunity",
+            "consumer_sales_avg_daily_amount_2025",
+            "일평균 소비매출",
+            1_000_000.0,
+            "백만원/일",
+            "점포 소재지 소비활동이며 주민소득이나 고용기회 점수에는 반영하지 않음",
+        ),
+        (
+            "local_employment_opportunity",
+            "consumer_sales_avg_daily_transactions_2025",
+            "일평균 소비건수",
+            1.0,
+            "건/일",
+            "점포 소재지 소비활동이며 주민소득이나 고용기회 점수에는 반영하지 않음",
+        ),
+        (
+            "major_environment",
+            "park_count_current",
+            "행정동 내 도시공원 수",
+            1.0,
+            "곳",
+            "2026-08-14 조회 공원목록 참고값이며 2025 환경점수에는 반영하지 않음",
+        ),
+        (
+            "major_environment",
+            "nearest_park_distance_m_current",
+            "행정동 중심점 최근접 도시공원 거리",
+            1.0,
+            "m",
+            "직선거리 참고값이며 실제 보행경로·공원 입구·이용 가능성을 뜻하지 않음",
+        ),
+        (
+            "major_safety",
+            "district_accident_count_2025",
+            "소속 구·군 교통사고 발생",
+            1.0,
+            "건",
+            "도로교통공단 2025 구·군 전체사고 통계이며 행정동 점수에는 반영하지 않음",
+        ),
+        (
+            "major_safety",
+            "district_accidents_per_100k_2025",
+            "소속 구·군 인구 10만 명당 교통사고",
+            1.0,
+            "건/10만 명",
+            "구·군 비교용 통계이며 행정동 단위 위험도로 해석할 수 없음",
+        ),
+    )
+    if reference_context is not None:
+        if (
+            len(reference_context) != EXPECTED_DONG_COUNT
+            or reference_context["admin_dong_code"].astype(str).duplicated().any()
+        ):
+            raise ValueError("Reference context requires 206 unique administrative-dong rows")
+        missing_reference = sorted(
+            {column for _, column, *_ in reference_specs} - set(reference_context.columns)
+        )
+        if missing_reference:
+            raise ValueError(f"Reference context is missing columns: {missing_reference}")
+        for category_key, column, label, divisor, unit, note in reference_specs:
+            values = pd.to_numeric(reference_context[column], errors="raise").astype(float)
+            percentiles = values.rank(method="average", pct=True) * 100.0
+            for code, value, percentile in zip(
+                reference_context["admin_dong_code"].astype(str),
+                values,
+                percentiles,
+                strict=True,
+            ):
+                reference_payload.setdefault(code, {}).setdefault(category_key, []).append(
+                    {
+                        "label": label,
+                        "value": round(float(value) / divisor, 2),
+                        "unit": unit,
+                        "percentile": round(float(percentile), 1),
+                        "note": note,
+                    }
+                )
+    composition_payload: dict[str, dict[str, list[dict[str, Any]]]] = {}
+    if reference_context is not None:
+        living_columns = {
+            "거주": "avg_daily_residential_living_population_2025",
+            "직장": "avg_daily_workplace_living_population_2025",
+            "방문": "avg_daily_visitor_living_population_2025",
+        }
+        for row in reference_context.itertuples(index=False):
+            values = {
+                label: float(getattr(row, column)) for label, column in living_columns.items()
+            }
+            total = sum(values.values())
+            composition_payload.setdefault(str(row.admin_dong_code), {})["living_population"] = [
+                {"label": label, "share": round(value / total * 100, 1) if total else 0}
+                for label, value in values.items()
+            ]
+    if consumer_sales_by_category is not None:
+        required_sales_columns = {
+            "admin_dong_code",
+            "industry_category",
+            "consumer_sales_avg_daily_amount_2025",
+        }
+        missing_sales = required_sales_columns - set(consumer_sales_by_category.columns)
+        if missing_sales:
+            raise ValueError(f"Sales composition is missing columns: {sorted(missing_sales)}")
+        sales = consumer_sales_by_category.copy()
+        sales["admin_dong_code"] = sales["admin_dong_code"].astype(str)
+        sales["amount"] = pd.to_numeric(
+            sales["consumer_sales_avg_daily_amount_2025"], errors="raise"
+        )
+        for code, rows in sales.groupby("admin_dong_code", sort=False):
+            rows = rows.sort_values("amount", ascending=False)
+            total = float(rows["amount"].sum())
+            composition_payload.setdefault(str(code), {})["sales"] = [
+                {
+                    "label": str(row.industry_category),
+                    "share": round(float(row.amount) / total * 100, 1) if total else 0,
+                }
+                for row in rows.head(5).itertuples(index=False)
+            ]
+    trend_payload: list[dict[str, int]] = []
+    if traffic_citywide_trend is not None:
+        trend = traffic_citywide_trend.tail(5).copy()
+        for column in trend.columns:
+            trend[column] = pd.to_numeric(
+                trend[column].astype(str).str.replace(",", "", regex=False), errors="raise"
+            )
+        trend_payload = [
+            {
+                "year": int(row[0]),
+                "accidents": int(row[1]),
+                "deaths": int(row[2]),
+                "injuries": int(row[3]),
+            }
+            for row in trend.itertuples(index=False, name=None)
+        ]
     paths: list[str] = []
     for row in map_data.itertuples(index=False):
         attributes = {
@@ -578,6 +980,21 @@ path:hover,path:focus{{stroke:#18323d;stroke-width:2}}
 .scale{{height:10px;background:linear-gradient(90deg,#fff7bc,#fdae61,#d7301f)}}
 .scale{{border-radius:6px}}
 .scale-label,.metric-head{{display:flex;justify-content:space-between;font-size:12px}}
+.overlay-control{{display:flex;align-items:center;gap:9px;margin:12px 0 4px;flex-wrap:wrap}}
+.overlay-control[hidden]{{display:none}}
+.overlay-control button{{border:1px solid #d84a3a;background:white;color:#9f3025;border-radius:18px;
+ padding:7px 12px;cursor:pointer;font-weight:700}}
+.overlay-control button[aria-pressed="true"]{{background:#d84a3a;color:white}}
+.accident-hotspot{{fill:#7b1e1e;fill-opacity:.72;stroke:white;stroke-width:1.4;
+ pointer-events:auto}}
+#accident-layer[hidden]{{display:none}}
+.safety-risk-area{{fill:#334e9b;fill-opacity:.8;stroke:white;stroke-width:1.1}}
+#safety-risk-layer[hidden]{{display:none}}
+.aed-point{{fill:#0b7285;fill-opacity:.78;stroke:white;stroke-width:.8}}
+.park-point{{fill:#2f8f46;fill-opacity:.72;stroke:white;stroke-width:.8}}
+#aed-layer[hidden],#park-layer[hidden]{{display:none}}
+.accident-reference{{border-left:4px solid #d84a3a;background:#fff4ed;border-radius:0 7px 7px 0;
+ padding:9px 10px;margin:9px 0;font-size:12px;line-height:1.5}}
 .metric{{margin:14px 0}} .bar{{height:8px;background:#edf0ed;border-radius:5px;overflow:hidden}}
 .bar i{{display:block;height:100%;background:#d84a3a}}
 .policy{{background:#f7f4ed;border-radius:9px;padding:12px;margin-top:18px}}
@@ -596,6 +1013,10 @@ path:hover,path:focus{{stroke:#18323d;stroke-width:2}}
 .badge{{display:inline-block;border-radius:12px;padding:3px 8px;background:#edf0ed;font-size:12px}}
 .estimate{{border-left:4px solid #d84a3a;background:#fff4ed;padding:9px;margin:8px 0}}
 .observed{{border-left:4px solid #4f8a5b;background:#f2f8f2;padding:9px;margin:8px 0}}
+.reference-context{{border-left:4px solid #6677a8;background:#f3f5fb;padding:10px;margin:14px 0}}
+.reference-context h4{{margin:0 0 8px;color:#394d82}}
+.composition-row{{display:grid;grid-template-columns:72px 1fr 48px;gap:7px;align-items:center;
+ font-size:12px;margin:6px 0}}
 .trigger{{color:#d84a3a;font-weight:700}}
 .warning{{border-top:1px solid #d7ded9;padding-top:12px;font-size:12px}}
 @media(max-width:1100px){{.layout{{grid-template-columns:240px 1fr}}.card#detail{{grid-column:1/-1}}
@@ -607,43 +1028,64 @@ path:hover,path:focus{{stroke:#18323d;stroke-width:2}}
 <section class="guide" aria-label="대시보드 이용 방법과 점수 계산 구조">
 <div class="guide-card"><h2>이 화면을 보는 방법</h2><ol class="steps">
 <li class="step"><span class="step-number">1 · 항목 선택</span>
-왼쪽 트리에서 큰 카테고리 또는 하위 카테고리를 선택합니다.</li>
+왼쪽 트리에서 생활여건 영역 또는 세부 평가항목을 선택합니다.</li>
 <li class="step"><span class="step-number">2 · 분포 비교</span>
 지도 색으로 부산 행정동의 상대적 취약도 분포를 비교합니다.</li>
 <li class="step"><span class="step-number">3 · 지역 선택</span>
 관심 행정동을 누르거나 마우스를 올려 해당 지역 결과를 엽니다.</li>
 <li class="step"><span class="step-number">4 · 정책 해석</span>
 오른쪽에서 평가지표, 추정 사유, 신뢰도와 조건부 정책 예시를 확인합니다.</li>
-</ol><div class="aggregation-note"><strong>큰 카테고리 종합점수 산정</strong>
-하위 카테고리별 취약도에 화면에 표시된 반영 비율을 적용한 뒤 합산합니다.
-단순 평균이 아니며, 각 하위 항목이 종합점수에 미치는 비중을 함께 보여줍니다.</div>
+</ol><div class="aggregation-note"><strong>생활여건 영역 점수 산정</strong>
+세부 평가항목별 취약도에 화면에 표시된 반영 비율을 적용한 뒤 합산합니다.
+단순 평균이 아니며, 각 평가항목이 영역 점수에 미치는 비중을 함께 보여줍니다.</div>
 <p class="aggregation-caption">점수가 높을수록 부산 안에서 상대적으로 더 취약하다는 뜻입니다.
 절대적 결핍 판정이나 정책 확정 점수가 아닙니다.</p></div>
 <div class="guide-card"><h2>점수는 이렇게 만들어집니다</h2><ol class="score-flow">
 <li class="score-level level-1"><strong>1단계 · 평가지표 {indicator_count}개</strong><br>
 교육시설 수, 의료 접근성, 대기오염 노출처럼 측정 가능한 근거를 정리합니다.</li>
-<li class="flow-arrow" aria-hidden="true">↓ 지표별 방향과 가중치 반영</li>
-<li class="score-level level-2"><strong>2단계 · 하위 카테고리 8개</strong><br>
+<li class="flow-arrow" aria-hidden="true">↓ 지표별 취약 방향과 반영 비율 적용</li>
+<li class="score-level level-2"><strong>2단계 · 세부 평가항목 {len(categories)}개</strong><br>
 관련 지표를 묶어 각 세부 영역의 취약도 점수를 계산합니다.</li>
-<li class="flow-arrow level-2" aria-hidden="true">↓ 하위 점수의 가중합</li>
-<li class="score-level level-3"><strong>3단계 · 큰 카테고리 3개</strong><br>
-하위 카테고리 결과를 합산해 최종 종합분포를 만듭니다.</li>
+<li class="flow-arrow level-2" aria-hidden="true">↓ 세부 점수와 반영 비율을 합산</li>
+<li class="score-level level-3"><strong>3단계 · 생활여건 영역 {len(major_categories)}개</strong><br>
+세부 평가항목 결과를 합산해 영역별 종합분포를 만듭니다.</li>
 </ol><div class="estimate-guide"><b>⚠ 추정값 사용 표시</b><br>
 원자료가 행정동 단위로 없거나 기준연도·공간단위를 맞춰야 할 때만 추정·보정합니다.
 사용한 방법과 이유는 선택한 행정동의 세부 평가지표 아래에 함께 표시합니다.</div></div>
 </section>
-<div class="layout"><nav class="card category-tree" aria-label="카테고리 선택 트리" role="tree">
-<h2>분석 카테고리</h2><p class="scores">▸를 눌러 하위 항목을 접거나 펼치고, 항목명을 선택하세요.</p>
+<div class="layout"><nav class="card category-tree"
+aria-label="생활여건 평가항목 선택 트리" role="tree">
+<h2>생활여건 평가항목</h2><p class="scores">
+▸를 눌러 세부 항목을 접거나 펼치고, 항목명을 선택하세요.</p>
 {category_tree}</nav><div class="map"><h2 id="map-title"></h2>
 <div class="scale"></div><div class="scale-label">
 <span>0 상대 저취약</span><span>100 상대 고취약</span></div>
-<svg viewBox="0 0 900 900" aria-label="부산 행정동별 선택 카테고리 취약도 분포">
-{"".join(paths)}</svg>
+<div class="overlay-control" id="accident-control" hidden><button id="accident-toggle"
+type="button" aria-pressed="false">
+교통사고 다발지역 표시</button><span class="scores">2024년 선정 다발지역
+{len(hotspot_circles)}곳 · 안전 영역의 교통사고 위험 평가에 반영</span></div>
+<div class="overlay-control" id="safety-risk-control" hidden>
+<button id="safety-risk-toggle" type="button" aria-pressed="false">생활안전 위험지역 표시</button>
+<span class="scores">2023년 공개 위험지역 {len(safety_risk_markers)}곳 · 안전점수에는 반영하지 않음
+· 수난·산악 등 포함</span></div>
+<div class="overlay-control" id="aed-control" hidden>
+<button id="aed-toggle" type="button" aria-pressed="false">AED 위치 표시</button>
+<span class="scores">현재 공개 위치 {len(aed_markers)}곳 · 의료공급 접근 점수에는
+반영하지 않음</span></div>
+<div class="overlay-control" id="park-control" hidden>
+<button id="park-toggle" type="button" aria-pressed="false">도시공원 위치 표시</button>
+<span class="scores">현재 공개 위치 {len(park_markers)}곳 · 2025 환경점수에는
+반영하지 않음</span></div>
+<svg viewBox="0 0 900 900" aria-label="부산 행정동별 선택 항목 취약도 분포">
+{"".join(paths)}<g id="accident-layer" hidden>{"".join(hotspot_circles)}</g>
+<g id="safety-risk-layer" hidden>{"".join(safety_risk_markers)}</g>
+<g id="aed-layer" hidden>{"".join(aed_markers)}</g>
+<g id="park-layer" hidden>{"".join(park_markers)}</g></svg>
 </div><aside class="card" id="detail"><h2>행정동을 선택하세요</h2>
-<p>트리에서 큰 카테고리를 선택하면 종합 결과를, 하위 항목을 선택하면
+<p>트리에서 생활여건 영역을 선택하면 종합 결과를, 세부 항목을 선택하면
 세부 평가지표와 정책 예시를 표시합니다.</p></aside></div>
 <p class="note warning">70점 이상은 정책 확정이 아니라 추가 행정자료·현장 검증 후보입니다.
-기존 B-IMD 순위는 비교용이며 개선형 카테고리 점수와 혼합하지 않습니다.</p></main><script>
+기존 B-IMD 순위는 비교용이며 생활여건 영역 점수와 혼합하지 않습니다.</p></main><script>
 const indicators={json.dumps(indicator_payload, ensure_ascii=False, separators=(",", ":"))};
 const assessments={json.dumps(assessment_payload, ensure_ascii=False, separators=(",", ":"))};
 const majorAssessments={json.dumps(major_payload, ensure_ascii=False, separators=(",", ":"))};
@@ -651,9 +1093,24 @@ const children={json.dumps(children, ensure_ascii=False, separators=(",", ":"))}
 const policies={json.dumps(policy_payload, ensure_ascii=False, separators=(",", ":"))};
 const labels={json.dumps(labels, ensure_ascii=False, separators=(",", ":"))};
 const categoryLabels={json.dumps(category_labels, ensure_ascii=False, separators=(",", ":"))};
+const accidentSummary={json.dumps(accident_summary, ensure_ascii=False, separators=(",", ":"))};
+const referenceContext={json.dumps(reference_payload, ensure_ascii=False, separators=(",", ":"))};
+const referenceCompositions={
+        json.dumps(composition_payload, ensure_ascii=False, separators=(",", ":"))
+    };
+const trafficTrend={json.dumps(trend_payload, ensure_ascii=False, separators=(",", ":"))};
 const detail=document.getElementById('detail');
 let majorCategory='{major_categories[0]}';let category=null;let selected=null;
 function color(score){{const hue=48-score*.45;return `hsl(${{hue}} 88% ${{62-score*.18}}%)`;}}
+function percentage(value){{return `${{Math.round(Number(value)*100)}}%`;}}
+function accidentHtml(code){{const summary=accidentSummary[code];return summary
+ ?`<div class="accident-reference"><b>교통사고 다발지역 근거</b><br>
+ 2024년 선정 다발지역 ${{summary.location_count}}곳 · 사고 ${{summary.occurrence_count}}건 ·
+ 사상자 ${{summary.casualty_count}}명<br>선정 지점의 사고 발생 건수는 안전 영역에
+ 반영됩니다. 전체 사고 전수자료는 아닙니다.</div>`
+ :`<div class="accident-reference"><b>교통사고 다발지역 근거</b><br>
+ 이 행정동에서는 2024년 선정 다발지점이 확인되지 않았습니다. 이는 사고가 없거나
+ 안전하다는 뜻이 아니며, 전체 사고자료 확인이 필요합니다.</div>`;}}
 function scoreOf(path){{return category
  ?assessments[path.dataset.code][category].score
  :majorAssessments[path.dataset.code][majorCategory].score;}}
@@ -663,31 +1120,74 @@ function selectNode(nextMajor,nextCategory=null){{majorCategory=nextMajor;catego
  document.querySelectorAll('.tree-child').forEach(node=>node.classList.toggle('active',
   node.dataset.category===category));
  const selectedLabel=category?categoryLabels[category]:labels[majorCategory];
- const levelLabel=category?'하위 카테고리':'큰 카테고리 종합';
- document.getElementById('map-title').textContent=selectedLabel+' · '+levelLabel+' 취약도 분포';
+ document.getElementById('map-title').textContent=selectedLabel+' 취약도 분포';
+ const accidentSelected=category==='traffic_accident_risk';
+ accidentControl.hidden=!accidentSelected;
+ if(!accidentSelected){{accidentLayer.hidden=true;accidentLayer.style.display='none';
+  accidentToggle.setAttribute('aria-pressed','false');
+  accidentToggle.textContent='교통사고 다발지역 표시';}}
+ const safetyOverview=majorCategory==='safety'&&category===null;
+ safetyRiskControl.hidden=!safetyOverview;
+ if(!safetyOverview){{safetyRiskLayer.hidden=true;safetyRiskLayer.style.display='none';
+  safetyRiskToggle.setAttribute('aria-pressed','false');
+  safetyRiskToggle.textContent='생활안전 위험지역 표시';}}
+ const aedSelected=category==='healthcare_supply';aedControl.hidden=!aedSelected;
+ if(!aedSelected){{aedLayer.hidden=true;aedLayer.style.display='none';
+  aedToggle.setAttribute('aria-pressed','false');aedToggle.textContent='AED 위치 표시';}}
+ const parkOverview=majorCategory==='environment'&&category===null;parkControl.hidden=!parkOverview;
+ if(!parkOverview){{parkLayer.hidden=true;parkLayer.style.display='none';
+  parkToggle.setAttribute('aria-pressed','false');parkToggle.textContent='도시공원 위치 표시';}}
  document.querySelectorAll('path').forEach(p=>p.style.fill=color(scoreOf(p)));
  if(selected)show({{target:selected}});
 }}
 function metricHtml(m){{const disclosure=m.estimate_used
   ?`<div class="estimate"><b>⚠ 추정값 사용</b><br>방법: ${{m.estimation_method}}<br>
   사용 사유: ${{m.estimation_reason}}</div>`
-  :`<div class="observed"><b>추정값 미사용</b> · ${{m.value_status}}<br>
-  산출 설명: ${{m.estimation_reason}}</div>`;return `<div class="metric">
+  :'';return `<div class="metric">
  <div class="metric-head"><b>${{m.label}}</b><span>${{m.raw}}</span></div>
- <div class="scores">취약 백분위 ${{m.percentile}} · 가중치 ${{m.weight}} ·
- 값 구분 ${{m.value_status}} · 신뢰 ${{m.confidence}}</div>${{disclosure}}
+ <div class="scores">취약도 백분위 ${{m.percentile}} · 평가 반영 비율 ${{percentage(m.weight)}} ·
+ 자료 유형 ${{m.value_status}} · 자료 신뢰도 ${{m.confidence}}</div>${{disclosure}}
  <div class="bar"><i style="width:${{m.percentile}}%"></i></div>
  <div class="scores">원자료 한계: ${{m.quality}} ·
  기술 근거: ${{m.evidence}}</div></div>`;}}
+function referenceHtml(code,categoryKey){{const items=referenceContext[code]?.[categoryKey]||[];
+ if(!items.length)return '';return `<div class="reference-context"><h4>점수 제외 참고지표</h4>
+ ${{items.map(item=>`<div class="metric"><div class="metric-head"><b>${{item.label}}</b>
+ <span>${{item.value.toLocaleString()}} ${{item.unit}}</span></div>
+ <div class="scores">부산 내 값의 상대 위치 ${{item.percentile}} · ${{item.note}}</div>
+ <div class="bar"><i style="width:${{item.percentile}}%"></i></div></div>`).join('')}}</div>`;}}
+function compositionBlock(title,items,note){{if(!items?.length)return '';
+ return `<div class="reference-context">
+ <h4>${{title}}</h4>${{items.map(item=>`<div class="composition-row"><b>${{item.label}}</b>
+ <div class="bar"><i style="width:${{item.share}}%"></i></div>
+ <span>${{item.share}}%</span></div>`).join('')}}
+ <div class="scores">${{note}}</div></div>`;}}
+function compositionHtml(code,categoryKey){{
+ if(categoryKey!=='local_employment_opportunity')return '';
+ const data=referenceCompositions[code]||{{}};
+ return compositionBlock('생활인구 구성',data.living_population,
+ '거주·직장·방문 생활인구의 구성비이며 점수에는 반영하지 않음')+
+ compositionBlock('소비매출 상위 업종 구성',data.sales,
+ '일평균 업종별 매출액 구성비 상위 5개이며 주민소득·고용 점수에는 반영하지 않음');}}
+function trafficTrendHtml(){{if(!trafficTrend.length)return '';
+ const max=Math.max(...trafficTrend.map(d=>d.accidents));
+ return `<div class="reference-context"><h4>부산 교통사고 최근 5년 추이</h4>${{trafficTrend.map(d=>
+ `<div class="composition-row"><b>${{d.year}}</b><div class="bar">
+ <i style="width:${{d.accidents/max*100}}%"></i></div>
+ <span>${{d.accidents.toLocaleString()}}건</span></div>`).join('')}}
+ <div class="scores">도로교통공단 부산 전체 통계 · 행정동 점수에는 반영하지 않음</div></div>`;}}
 function childHtml(code,child){{const a=assessments[code][child.category];
  const policy=policies[child.category];const metrics=indicators[code][child.category]
   .map(metricHtml).join('');const gate=a.status==='candidate_after_validation'
   ?'<span class="trigger">검증 후 정책검토 후보</span>'
   :'<span class="badge">모니터링</span>';return `<section class="subcategory">
- <h3>하위 카테고리 · ${{child.label}} ${{a.score.toFixed(1)}}</h3>
- <p class="scores">큰 카테고리 반영 가중치 ${{child.weight}} ·
- 신뢰 ${{a.confidence}} · ${{gate}}</p><p class="scores">임계지표: ${{a.triggers}}</p>
- ${{metrics}}<div class="policy"><b>조건부 정책 방향</b><h3>${{policy.title}}</h3>
+ <h3>${{child.label}} ${{a.score.toFixed(1)}}</h3>
+ <p class="scores">영역 점수 반영 비율 ${{percentage(child.weight)}} ·
+ 자료 신뢰도 ${{a.confidence}} · ${{gate}}</p>
+ <p class="scores">우선 점검 지표: ${{a.triggers}}</p>
+ ${{metrics}}${{referenceHtml(code,child.category)}}
+ ${{compositionHtml(code,child.category)}}<div class="policy">
+ <b>조건부 정책 방향</b><h3>${{policy.title}}</h3>
  <p>주관: ${{policy.lead}}</p><div class="policy-grid">
  <div class="policy-item"><b>분석이 포착한 신호</b>${{policy.signal}}</div>
  <div class="policy-item"><b>우선 확인 대상</b>${{policy.target}}</div></div>
@@ -700,24 +1200,29 @@ function childHtml(code,child){{const a=assessments[code][child.category];
  <p class="warning"><b>해석 제한</b><br>${{policy.limit}}</p></div>
  </section>`;}}
 function childOverviewHtml(code,child){{const a=assessments[code][child.category];return `
- <div class="child-overview"><span>${{child.label}} · 가중치 ${{child.weight}}</span>
- <strong>${{a.score.toFixed(1)}}</strong><span class="scores">신뢰 ${{a.confidence}} ·
- 임계지표 ${{a.triggers}}</span></div>`;}}
+ <div class="child-overview"><span>${{child.label}} · 영역 점수 반영 비율
+ ${{percentage(child.weight)}}</span><strong>${{a.score.toFixed(1)}}</strong>
+ <span class="scores">자료 신뢰도 ${{a.confidence}} ·
+ 우선 점검 지표 ${{a.triggers}}</span></div>`;}}
 function show(e){{const d=e.target.dataset;if(!d.name)return;selected=e.target;
  const major=majorAssessments[d.code][majorCategory];
  const gate=major.status==='candidate_after_validation'
-  ?'<span class="trigger">검증 후 큰 카테고리 정책검토 후보</span>'
+  ?'<span class="trigger">현장 검증 후 정책 검토</span>'
   :'<span class="badge">모니터링</span>';
- const heading=`<h2>${{d.name}}</h2><p class="scores">${{d.rank}}</p>`;
+ const accidentEvidence=category==='traffic_accident_risk'?accidentHtml(d.code):'';
+ const heading=`<h2>${{d.name}}</h2><p class="scores">${{d.rank}}</p>${{accidentEvidence}}`;
  if(category){{const child=children[majorCategory].find(c=>c.category===category);
-  detail.innerHTML=heading+`<p class="scores">상위 · ${{labels[majorCategory]}}
-  종합점수 ${{major.score.toFixed(1)}}</p>`+childHtml(d.code,child);return;}}
+  detail.innerHTML=heading+`<p class="scores">소속 생활여건 영역 · ${{labels[majorCategory]}}
+  ${{major.score.toFixed(1)}}</p>`+childHtml(d.code,child);return;}}
  const childOverview=children[majorCategory].map(c=>childOverviewHtml(d.code,c)).join('');
- detail.innerHTML=heading+`<h3>큰 카테고리 · ${{labels[majorCategory]}}
- ${{major.score.toFixed(1)}}</h3><p>종합 신뢰 <span class="badge">${{major.confidence}}</span>
- · ${{gate}}</p><p class="scores">70점 이상 하위 카테고리:
- ${{major.triggered_children}}</p><p class="scores">하위 점수 × 가중치의 합산 결과입니다.
- 트리에서 하위 항목을 선택하면 평가지표와 정책 예시가 열립니다.</p>${{childOverview}}`;
+ detail.innerHTML=heading+`<h3>${{labels[majorCategory]}} ${{major.score.toFixed(1)}}</h3>
+ <p>종합 자료 신뢰도 <span class="badge">${{major.confidence}}</span>
+ · ${{gate}}</p><p class="scores">70점 이상 우선 점검 항목:
+ ${{major.triggered_children}}</p><p class="scores">세부 평가항목 점수에 표시된 반영 비율을
+ 적용해 합산한 결과입니다. 트리에서 세부 항목을 선택하면 평가에 사용한 지표와 정책
+ 예시가 열립니다.</p>${{childOverview}}
+ ${{referenceHtml(d.code,'major_'+majorCategory)}}
+ ${{majorCategory==='safety'?trafficTrendHtml():''}}`;
 }}
 document.querySelectorAll('path').forEach(p=>{{p.tabIndex=0;p.addEventListener('mouseenter',show);
 p.addEventListener('click',show);p.addEventListener('focus',show);}});
@@ -726,10 +1231,48 @@ document.querySelectorAll('.tree-major').forEach(node=>node.addEventListener('cl
 document.querySelectorAll('.tree-child').forEach(node=>node.addEventListener('click',()=>{{
  node.closest('details').open=true;selectNode(node.dataset.majorCategory,node.dataset.category);
 }}));
+const accidentToggle=document.getElementById('accident-toggle');
+const accidentLayer=document.getElementById('accident-layer');
+const accidentControl=document.getElementById('accident-control');
+const safetyRiskToggle=document.getElementById('safety-risk-toggle');
+const safetyRiskLayer=document.getElementById('safety-risk-layer');
+const safetyRiskControl=document.getElementById('safety-risk-control');
+const aedToggle=document.getElementById('aed-toggle');
+const aedLayer=document.getElementById('aed-layer');
+const aedControl=document.getElementById('aed-control');
+const parkToggle=document.getElementById('park-toggle');
+const parkLayer=document.getElementById('park-layer');
+const parkControl=document.getElementById('park-control');
+accidentToggle.addEventListener('click',()=>{{const visible=accidentLayer.hidden;
+ accidentLayer.hidden=!visible;accidentLayer.style.display=visible?'inline':'none';
+ accidentToggle.setAttribute('aria-pressed',String(visible));
+ accidentToggle.textContent=visible?'교통사고 다발지역 숨기기':'교통사고 다발지역 표시';}});
+safetyRiskToggle.addEventListener('click',()=>{{const visible=safetyRiskLayer.hidden;
+ safetyRiskLayer.hidden=!visible;safetyRiskLayer.style.display=visible?'inline':'none';
+ safetyRiskToggle.setAttribute('aria-pressed',String(visible));
+ safetyRiskToggle.textContent=visible?'생활안전 위험지역 숨기기':'생활안전 위험지역 표시';}});
+aedToggle.addEventListener('click',()=>{{const visible=aedLayer.hidden;
+ aedLayer.hidden=!visible;aedLayer.style.display=visible?'inline':'none';
+ aedToggle.setAttribute('aria-pressed',String(visible));
+ aedToggle.textContent=visible?'AED 위치 숨기기':'AED 위치 표시';}});
+parkToggle.addEventListener('click',()=>{{const visible=parkLayer.hidden;
+ parkLayer.hidden=!visible;parkLayer.style.display=visible?'inline':'none';
+ parkToggle.setAttribute('aria-pressed',String(visible));
+ parkToggle.textContent=visible?'도시공원 위치 숨기기':'도시공원 위치 표시';}});
 selectNode(majorCategory);
 </script></body></html>"""
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(document, encoding="utf-8", newline="\n")
+    return {
+        "traffic_hotspot_count": len(traffic_hotspots) if traffic_hotspots is not None else 0,
+        "mapped_traffic_hotspot_count": mapped_hotspot_count,
+        "safety_risk_area_count": len(safety_risk_areas) if safety_risk_areas is not None else 0,
+        "mapped_safety_risk_area_count": mapped_safety_risk_count,
+        "aed_point_count": len(aed_points) if aed_points is not None else 0,
+        "mapped_aed_point_count": mapped_aed_count,
+        "park_point_count": len(park_points) if park_points is not None else 0,
+        "mapped_park_point_count": mapped_park_count,
+    }
 
 
 def render(

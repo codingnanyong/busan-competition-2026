@@ -66,7 +66,7 @@ docker compose run --rm jupyter python -m busan_imd.analysis.category_assessment
 docker compose run --rm jupyter python -m busan_imd.infographic
 ```
 
-The outputs contain 206×3 major-category assessments, 206×8 child-category assessments,
-206×14 indicator evidence rows, and a manifest with reproducibility checksums. They support
+The outputs contain 206×4 area assessments, 206×10 detailed assessments,
+206×17 indicator evidence rows, and a manifest with reproducibility checksums. They support
 screening only; observed administrative data, travel time, capacity, and field demand must
 validate final policy choices.

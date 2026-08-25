@@ -25,16 +25,16 @@ requires additional local asset data on industry, commerce, tourism, and living 
 
 ## Outputs
 
-- [`busan_imd_one_page_2025.pdf`](../../../outputs/infographic/busan_imd_one_page_2025.pdf):
+- [`busan_imd_one_page_2025.pdf`](../../../outputs/infographic/2025/static/busan_imd_one_page_2025.pdf):
   one-page competition PDF draft
-- [`busan_imd_one_page_2025.svg`](../../../outputs/infographic/busan_imd_one_page_2025.svg):
+- [`busan_imd_one_page_2025.svg`](../../../outputs/infographic/2025/static/busan_imd_one_page_2025.svg):
   editable vector source
-- [`busan_imd_one_page_2025.png`](../../../outputs/infographic/busan_imd_one_page_2025.png):
+- [`busan_imd_one_page_2025.png`](../../../outputs/infographic/2025/static/busan_imd_one_page_2025.png):
   quick-review preview
-- [`busan_admin_dong_action_map_2025.html`](../../../outputs/infographic/busan_admin_dong_action_map_2025.html):
+- [`busan_admin_dong_action_map_2025.html`](../../../outputs/infographic/2025/interactive/busan_admin_dong_action_map_2025.html):
   standalone 206-dong dashboard with a collapsible tree for three major categories, eight child
   categories, fourteen indicators, and policy examples
-- [`busan_admin_dong_action_profile_2025.csv`](../../../outputs/infographic/busan_admin_dong_action_profile_2025.csv):
+- [`busan_admin_dong_action_profile_2025.csv`](../../../outputs/infographic/2025/tables/busan_admin_dong_action_profile_2025.csv):
   six scores, vulnerability order, improvement direction, and relative low-deprivation domain
 - [INFOGRAPHIC_REPORT_2025.json](../../data/manifests/INFOGRAPHIC_REPORT_2025.json):
   input/output checksums, page count, displayed statistics, and artifact status

@@ -37,6 +37,9 @@ def test_project_structure_and_required_documents() -> None:
         "data/processed",
         "notebooks",
         "outputs",
+        "outputs/infographic/2025/static",
+        "outputs/infographic/2025/interactive",
+        "outputs/infographic/2025/tables",
         "src/busan_imd/core",
         "src/busan_imd/collectors",
         "src/busan_imd/sources",
@@ -103,12 +106,12 @@ def test_project_structure_and_required_documents() -> None:
         "docs/en/methodology/INFOGRAPHIC_2025.md",
         "docs/methodology/CATEGORY_ASSESSMENT_2025.md",
         "docs/en/methodology/CATEGORY_ASSESSMENT_2025.md",
-        "outputs/infographic/busan_imd_one_page_2025.svg",
-        "outputs/infographic/busan_imd_one_page_2025.pdf",
-        "outputs/infographic/busan_imd_one_page_2025.png",
-        "outputs/infographic/busan_admin_dong_category_assessment_2025.csv",
-        "outputs/infographic/busan_admin_dong_major_category_assessment_2025.csv",
-        "outputs/infographic/busan_admin_dong_category_indicator_scores_2025.csv",
+        "outputs/infographic/2025/static/busan_imd_one_page_2025.svg",
+        "outputs/infographic/2025/static/busan_imd_one_page_2025.pdf",
+        "outputs/infographic/2025/static/busan_imd_one_page_2025.png",
+        "outputs/infographic/2025/tables/busan_admin_dong_category_assessment_2025.csv",
+        "outputs/infographic/2025/tables/busan_admin_dong_major_category_assessment_2025.csv",
+        "outputs/infographic/2025/tables/busan_admin_dong_category_indicator_scores_2025.csv",
         "notebooks/01_candidate_profile_eda.ipynb",
         "notebooks/02_deprivation_cluster_review.ipynb",
         "notebooks/03_environmental_overlay_review.ipynb",
@@ -184,7 +187,7 @@ def test_eda_report_covers_the_canonical_profile() -> None:
     report = read_json("docs/data/manifests/EDA_REPORT_2025.json")
 
     assert report["profile_record_count"] == 206
-    assert report["numeric_indicator_count"] == 49
+    assert report["numeric_indicator_count"] == 50
     assert report["scoring_candidate_numeric_count"] == 37
     assert report["constant_numeric_columns"] == ["air_idw_station_count"]
     assert report["columns_with_missing_values"] == {}
@@ -333,6 +336,14 @@ def test_infographic_report_and_outputs_cover_cod23_scope() -> None:
     assert report["priority_area_count"] == 21
     assert report["double_burden_area_count"] == 4
     assert report["policy_candidate_count"] == 5
+    assert report["traffic_hotspot_count"] == 48
+    assert report["mapped_traffic_hotspot_count"] == 48
+    assert report["safety_risk_area_count"] == 70
+    assert report["mapped_safety_risk_area_count"] == 67
+    assert report["aed_point_count"] == 1079
+    assert report["mapped_aed_point_count"] == 1078
+    assert report["park_point_count"] == 652
+    assert report["mapped_park_point_count"] == 651
     assert len(report["top_10_names"]) == 10
     for format_name, relative_path in report["output_paths"].items():
         path = REPOSITORY_ROOT / relative_path
@@ -354,25 +365,59 @@ def test_infographic_report_and_outputs_cover_cod23_scope() -> None:
         encoding="utf-8"
     )
     assert action_map.count("data-code=") == 206
-    assert action_map.count('class="tree-major"') == 3
-    assert action_map.count('class="tree-child"') == 8
+    assert action_map.count('class="tree-major"') == 4
+    assert action_map.count('class="tree-child"') == 10
     assert 'role="tree"' in action_map
-    assert "큰 카테고리 종합점수 산정" in action_map
+    assert "생활여건 영역 점수 산정" in action_map
+    assert "세부 평가항목" in action_map
+    assert "영역 점수 반영 비율" in action_map
+    assert "percentage(child.weight)" in action_map
+    assert '"confidence":"낮음"' in action_map
+    assert "자료 신뢰도 ${a.confidence}" in action_map
+    assert "큰 카테고리" not in action_map
+    assert "하위 카테고리" not in action_map
+    assert "추정값 미사용" not in action_map
+    assert "산출 설명" not in action_map
     assert "생활 인프라·주거" in action_map
+    assert 'data-major-category="safety"' in action_map
+    assert "교통사고 위험" in action_map
     assert "정책 설계 참고사례" in action_map
     assert "부산형 DRT '타바라'" in action_map
+    assert action_map.count('class="accident-hotspot"') == 48
+    assert "교통사고 다발지역 표시" in action_map
+    assert "안전 영역의 교통사고 위험 평가에 반영" in action_map
+    assert "category==='traffic_accident_risk'?accidentHtml(d.code):''" in action_map
+    assert "accidentControl.hidden=!accidentSelected" in action_map
+    assert "#accident-layer[hidden]{display:none}" in action_map
+    assert "accidentLayer.style.display='none'" in action_map
+    assert action_map.count('class="safety-risk-area"') == 67
+    assert "생활안전 위험지역 표시" in action_map
+    assert "majorCategory==='safety'&&category===null" in action_map
+    assert "점수 제외 참고지표" in action_map
+    assert "인구 1만 명당 AED" in action_map
+    assert "2025 연평균 PM10 추정" in action_map
+    assert "일평균 소비매출" in action_map
+    assert "행정동 내 도시공원 수" in action_map
+    assert action_map.count('class="aed-point"') == 1078
+    assert action_map.count('class="park-point"') == 651
+    assert "category==='healthcare_supply'" in action_map
+    assert "majorCategory==='environment'&&category===null" in action_map
+    assert "생활인구 구성" in action_map
+    assert "소비매출 상위 업종 구성" in action_map
+    assert "주변 학교 학생·교원 비율" in action_map
+    assert "부산 교통사고 최근 5년 추이" in action_map
 
 
 def test_category_assessment_is_complete_and_flags_estimation() -> None:
     report = read_json("docs/data/manifests/CATEGORY_ASSESSMENT_REPORT_2025.json")
 
     assert report["admin_dong_count"] == 206
-    assert report["major_category_count"] == 3
-    assert report["category_count"] == 8
-    assert report["indicator_count"] == 14
-    assert report["category_score_row_count"] == 206 * 8
-    assert report["major_category_score_row_count"] == 206 * 3
-    assert report["indicator_score_row_count"] == 206 * 14
+    assert report["major_category_count"] == 4
+    assert report["category_count"] == 10
+    assert report["indicator_count"] == 17
+    assert report["category_score_row_count"] == 206 * 10
+    assert report["major_category_score_row_count"] == 206 * 4
+    assert report["indicator_score_row_count"] == 206 * 17
     assert report["policy_trigger_threshold"] == 70
     for name, relative_path in report["output_paths"].items():
         actual = hashlib.sha256((REPOSITORY_ROOT / relative_path).read_bytes()).hexdigest().upper()
@@ -381,12 +426,12 @@ def test_category_assessment_is_complete_and_flags_estimation() -> None:
         REPOSITORY_ROOT / report["output_paths"]["category_assessment"],
         dtype={"admin_dong_code": str},
     )
-    assert categories.groupby("admin_dong_code")["category"].nunique().eq(8).all()
+    assert categories.groupby("admin_dong_code")["category"].nunique().eq(10).all()
     major_categories = pd.read_csv(
         REPOSITORY_ROOT / report["output_paths"]["major_category_assessment"],
         dtype={"admin_dong_code": str},
     )
-    assert major_categories.groupby("admin_dong_code")["major_category"].nunique().eq(3).all()
+    assert major_categories.groupby("admin_dong_code")["major_category"].nunique().eq(4).all()
     assert major_categories["major_category_score_0_100"].between(0, 100).all()
     myeongji = categories[
         categories["admin_dong_name"].isin(["명지1동", "명지2동"])
@@ -397,7 +442,7 @@ def test_category_assessment_is_complete_and_flags_estimation() -> None:
     indicators = pd.read_csv(REPOSITORY_ROOT / report["output_paths"]["indicator_scores"])
     assert {"estimate_used", "estimation_method_ko", "estimation_reason"} <= set(indicators.columns)
     estimated = indicators[indicators["estimate_used"]]
-    assert len(estimated) == 206 * 9
+    assert len(estimated) == 206 * 11
     assert estimated["estimation_reason"].str.len().gt(0).all()
 
 

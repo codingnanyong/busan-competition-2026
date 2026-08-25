@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-24T23:10:40+00:00",
+  "generated_at": "2026-08-25T05:42:19+00:00",
   "reference_year": 2025,
   "record_count": 206,
   "analysis_scope": "ambient particulate exposure and particulate-independent social vulnerability overlap",
@@ -86,7 +86,7 @@
   },
   "input_sha256": {
     "composite_index": "380EB11360B40A6C8E480B3A1D2EBE40DD0EC11FFED20580E0D72563CBB1EC07",
-    "standardized_profile": "45901948F9A998B864DB4BAD6019CD257D2983E4FA0A2D37A7F6EC203F7A4479"
+    "standardized_profile": "49A663FCD1A2868D03213778CEE77F4D3DE17AD27F1AFCBE5AB8B2C4219DBC2F"
   },
   "output_path": "data/processed/scores/2025/busan_admin_dong_environmental_overlay_2025.csv",
   "output_sha256": "01BEBFDEE28F4CDC8C3F2120392B6D31210856844667CA2556B67FA244685FA0"

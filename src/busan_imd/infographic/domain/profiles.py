@@ -1,4 +1,4 @@
-"""Build dong-level action profiles from the composite index."""
+"""Build domain-level dong action profiles from the composite index."""
 
 import pandas as pd
 

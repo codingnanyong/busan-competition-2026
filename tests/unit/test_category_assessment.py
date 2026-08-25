@@ -19,6 +19,8 @@ def profile() -> pd.DataFrame:
             "establishments_2024": 100 + index * 3,
             "hospital_count_2025_candidate": 1 + index % 5,
             "clinic_count_2025_candidate": 2 + index % 11,
+            "pharmacy_count_2025_candidate": 3 + index % 13,
+            "crime_prevention_cctv_count_2025": 10 + index % 31,
             "bus_stop_count_2025": 3 + index % 17,
             "heat_shelter_count_2025": 1 + index % 9,
             "elderly_alone_latest_count": 50 + index * 2,
@@ -34,6 +36,9 @@ def profile() -> pd.DataFrame:
                 "C1_observed_pattern_rescaled" if value < 86 else "C2_model_pattern_rescaled"
                 for value in range(size)
             ],
+            "selected_traffic_hotspot_occurrences_2024": [
+                value if value < 48 else 0 for value in range(size)
+            ],
         }
     )
 
@@ -41,14 +46,14 @@ def profile() -> pd.DataFrame:
 def test_build_creates_complete_transparent_category_contract() -> None:
     indicators, categories, major_categories, report = build(profile(), load_spec())
 
-    assert report["major_category_count"] == 3
-    assert report["category_count"] == 8
-    assert report["indicator_count"] == 14
-    assert len(indicators) == 206 * 14
-    assert len(categories) == 206 * 8
-    assert len(major_categories) == 206 * 3
-    assert categories.groupby("admin_dong_code")["category"].nunique().eq(8).all()
-    assert major_categories.groupby("admin_dong_code")["major_category"].nunique().eq(3).all()
+    assert report["major_category_count"] == 4
+    assert report["category_count"] == 10
+    assert report["indicator_count"] == 17
+    assert len(indicators) == 206 * 17
+    assert len(categories) == 206 * 10
+    assert len(major_categories) == 206 * 4
+    assert categories.groupby("admin_dong_code")["category"].nunique().eq(10).all()
+    assert major_categories.groupby("admin_dong_code")["major_category"].nunique().eq(4).all()
     expected_major = (
         categories.assign(
             expected=(categories["category_score_0_100"] * categories["major_category_weight"])
@@ -62,7 +67,7 @@ def test_build_creates_complete_transparent_category_contract() -> None:
     ].sort_index()
     pd.testing.assert_series_equal(actual_major, expected_major, check_names=False)
     assert set(indicators["confidence_level"]) == {"low", "medium_low", "medium"}
-    assert indicators["estimate_used"].sum() == 206 * 9
+    assert indicators["estimate_used"].sum() == 206 * 11
     assert indicators.loc[indicators["estimate_used"], "estimation_reason"].str.len().gt(0).all()
     assert indicators.loc[indicators["estimate_used"], "estimation_method_ko"].ne("해당 없음").all()
     assert set(categories["policy_review_status"]) <= {
@@ -70,6 +75,10 @@ def test_build_creates_complete_transparent_category_contract() -> None:
         "monitor",
     }
     assert major_categories["major_category_score_0_100"].between(0, 100).all()
+    traffic = indicators[indicators["category"] == "traffic_accident_risk"]
+    assert traffic.loc[traffic["raw_or_derived_value"] == 0, "deprivation_percentile_0_100"].eq(
+        0
+    ).all()
 
 
 def test_small_area_rate_shrinkage_reduces_denominator_extremes() -> None:
