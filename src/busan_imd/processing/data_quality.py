@@ -171,6 +171,17 @@ def column_spec(column: str) -> ColumnSpec:
             column,
             "Service-demand context, not deprivation",
         )
+    if column == "core_school_students_within_2000m_2025":
+        return ColumnSpec(
+            "EDU-SCHOOL-001|EDU-SCHOOLINFO-2025-001",
+            "validation_only",
+            "2025",
+            "students",
+            "2025 SchoolInfo enrollment joined to official coordinates within 2 km of centroid",
+            "none",
+            column,
+            "Enrollment is observed by school; centroid-based access allocation is a spatial proxy",
+        )
     if column == "core_school_teachers_within_2000m_2025":
         return ColumnSpec(
             "EDU-SCHOOL-001|EDU-SCHOOLINFO-2025-001",

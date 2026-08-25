@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-24T23:10:38+00:00",
+  "generated_at": "2026-08-25T05:42:16+00:00",
   "reference_year": 2025,
   "profile_record_count": 206,
-  "profile_column_count": 64,
-  "numeric_indicator_count": 49,
+  "profile_column_count": 65,
+  "numeric_indicator_count": 50,
   "scoring_candidate_numeric_count": 37,
   "constant_numeric_columns": [
     "air_idw_station_count"
@@ -49,9 +49,9 @@
   ],
   "spatial_indicator_count": 36,
   "profile_path": "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv",
-  "profile_sha256": "45901948F9A998B864DB4BAD6019CD257D2983E4FA0A2D37A7F6EC203F7A4479",
+  "profile_sha256": "49A663FCD1A2868D03213778CEE77F4D3DE17AD27F1AFCBE5AB8B2C4219DBC2F",
   "dictionary_path": "docs/data/DATA_DICTIONARY_2025.csv",
-  "dictionary_sha256": "5C5F90D9D853B5E5D97E6F39ADCCC2C0C4E94A1C9C1DDE4D80C25C4CDA740393",
+  "dictionary_sha256": "B86FB6BCB5A520A6DFE16967FD2F0A9D745FBEADFE160128E11E6418D578E49D",
   "boundaries_path": "data/raw/sgis/admin_boundaries/2025/busan_admin_dong_boundaries_2025_valid.geojson",
   "boundaries_sha256": "7CC99595FC753F81C7B9A9D480B8EBBF3114808A1496D46FC6662C21BF362487",
   "output_paths": {
@@ -62,7 +62,7 @@
     "district_summary": "outputs/eda/2025/district_summary.csv"
   },
   "output_sha256": {
-    "indicator_summary": "931DCD7076D54B548B6F666D699E474E1BD1FB9899BDCAE068E4572CBEDFA397",
+    "indicator_summary": "A0BA865B8EAF40F07AA7308C47523D704DAB9F3622BCCF658B5DFF74801C43EF",
     "correlation_matrix": "9DD3470FF3C53675B73393A316BFD30BE98B5C06C405FBA8952B189BFCABC11A",
     "high_correlations": "20F67B781966D04A20F80D9A37B57B6901E419B85B3CFD87699C80EBFF86490E",
     "spatial_autocorrelation": "CF54A21A94DE9693B2A6C982CF3C1869E5E3735404DC3B6965F3B431E2F8ED33",

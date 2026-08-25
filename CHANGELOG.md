@@ -1,5 +1,23 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+
+- 안전 영역의 교통사고·범죄예방 평가와 카테고리별 참고 레이어
+- 생활인구·소비업종·학교 학생·교원·AED·공원·대기 측정망·교통사고 추이 시각화
+
+### Changed
+
+- 생활여건 평가를 사회·경제, 생활 인프라·주거, 안전, 환경의 4개 영역으로 확장
+- `infographic` 코드를 application·domain·presentation 책임으로 구조화
+- 최종 산출물을 `outputs/infographic/2025/{interactive,static,tables}`로 분리
+
+### Fixed
+
+- 교통사고 다발지역이 안전의 `교통사고 위험` 외 항목에서도 표시되던 레이어 범위 문제
+- 실제값에는 불필요한 추정 안내를 숨기고 추정값에만 방법과 사용 사유를 표시
+
 ## [0.7.0] - 2026-08-25
 
 ### Added

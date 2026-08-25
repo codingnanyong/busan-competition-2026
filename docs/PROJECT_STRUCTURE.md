@@ -9,7 +9,10 @@ src/busan_imd/
 ├─ core/         # HTTP, 설정, 체크섬, 출처 검증 공통 코드
 ├─ processing/   # 후보자료 처리·표준화·추정·품질·데이터 카탈로그
 ├─ analysis/     # 영역점수·종합지수·민감도·공간·정책 분석
-└─ infographic/  # 프로필 계산·지도 및 인포그래픽 렌더링·실행 파이프라인
+└─ infographic/  # 최종 시각화 공개 API와 공통 설정
+   ├─ application/   # 입력 결합, 산출물 생성과 CLI 실행 조정
+   ├─ domain/        # 행정동별 정책·행동 프로필 계산 규칙
+   └─ presentation/  # 대화형 HTML 지도와 정적 PDF·SVG·PNG 렌더링
 tests/
 ├─ unit/         # 네트워크와 실제 파일에 의존하지 않는 로직 검사
 ├─ integration/  # 로컬 원본과 커밋된 manifest의 일관성 검사
@@ -21,13 +24,20 @@ docs/data/
 ├─ manifests/    # 출처·기간·건수·체크섬을 담은 추적 가능한 JSON
 └─ *.md, *.csv   # 정책, 감사표, 요청 양식과 기준지리 표
 notebooks/       # 탐색 및 설명용 분석
-outputs/         # 지도·표·보고서와 전송용 데이터 bundle; Git 제외
+outputs/
+└─ infographic/2025/
+   ├─ static/       # 제출·인쇄용 PDF, SVG, PNG
+   ├─ interactive/  # 브라우저에서 여는 독립형 HTML 지도
+   └─ tables/       # 행정동 프로필·영역·세부항목·지표 결과 CSV
 scripts/         # 운영체제에 독립적인 보조 명령과 문서 빌드 도구
 ```
 
 수집기는 외부 서비스별 차이를 직접 구현하지 않고 가능한 한 `sources/` 계약을 사용한다.
 인증키는 `.env`에서만 읽는다. `data/raw`는 API 응답과 직접 다운로드 파일을 그대로 보존하고,
 수정·통합 결과는 후속 분석 단계에서 `data/processed`에 만든다.
+`infographic`의 외부 호출은 최상위 공개 API를 사용하며, 하위 패키지는 실행 조정·도메인
+변환·표현 책임을 서로 넘지 않는다. 따라서 기존 `from busan_imd.infographic import run`
+호출과 `python -m busan_imd.infographic` 실행 방식은 내부 구조 변경과 무관하게 유지한다.
 
 ## 실행 규칙
 

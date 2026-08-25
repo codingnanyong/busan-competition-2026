@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-24T23:10:34+00:00",
+  "generated_at": "2026-08-25T05:42:11+00:00",
   "reference_year": 2025,
   "canonical_admin_dong_count": 206,
   "assessments": [
@@ -68,7 +68,7 @@
     "school_access": {
       "path": "data/processed/candidates/2025/school_counts_2025.csv",
       "records": 206,
-      "sha256": "AD6A3C652B29A2A8FC516399A09B2B1BA5219216415D206456D5347206BFAF99"
+      "sha256": "02717DF8EF7E38D51C2AA3BB6F03FA21D75C24B1A7767BAC97DAF6C4ED82CEE7"
     },
     "air_exposure": {
       "path": "data/processed/candidates/2025/air_exposure_idw_2025.csv",

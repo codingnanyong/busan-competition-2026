@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-24T23:10:37+00:00",
+  "generated_at": "2026-08-25T05:42:16+00:00",
   "reference_year": 2025,
   "profile_record_count": 206,
-  "profile_column_count": 64,
+  "profile_column_count": 65,
   "canonical_admin_dong_count": 206,
   "unique_admin_dong_codes": true,
   "columns_with_missing_values": {
@@ -13,9 +13,9 @@
     "identifier": 4,
     "primary_denominator": 4,
     "provisional_scoring_proxy": 47,
-    "validation_only": 9
+    "validation_only": 10
   },
-  "quality_warning_column_count": 54,
+  "quality_warning_column_count": 55,
   "quality_warning_columns": [
     "establishments_2024",
     "workplace_workers_2024",
@@ -63,6 +63,7 @@
     "nearest_core_school_distance_m_2025",
     "core_schools_within_2000m_2025",
     "core_school_teachers_within_2000m_2025",
+    "core_school_students_within_2000m_2025",
     "air_idw_station_count",
     "nearest_air_station_distance_m",
     "annual_pm25_ug_m3_idw_2025",
@@ -75,9 +76,9 @@
   "standardized_dataset_count": 15,
   "minimum_source_match_rate": 0.931706,
   "profile_path": "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv",
-  "profile_sha256": "45901948F9A998B864DB4BAD6019CD257D2983E4FA0A2D37A7F6EC203F7A4479",
+  "profile_sha256": "49A663FCD1A2868D03213778CEE77F4D3DE17AD27F1AFCBE5AB8B2C4219DBC2F",
   "dictionary_path": "docs/data/DATA_DICTIONARY_2025.csv",
-  "dictionary_sha256": "5C5F90D9D853B5E5D97E6F39ADCCC2C0C4E94A1C9C1DDE4D80C25C4CDA740393",
+  "dictionary_sha256": "B86FB6BCB5A520A6DFE16967FD2F0A9D745FBEADFE160128E11E6418D578E49D",
   "standardization_report_path": "docs/data/manifests/STANDARDIZATION_REPORT_2025.json",
-  "standardization_report_sha256": "057BF02A4557936B288869F61C4D44D5060C37044FBA001CB1B65F80137CE743"
+  "standardization_report_sha256": "4FCA4A754DCE392C78E49178D67057DDE9973314BF83BEE71D9720E310C473A4"
 }

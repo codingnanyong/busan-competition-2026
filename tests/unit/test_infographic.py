@@ -7,7 +7,7 @@ import pandas as pd
 import pytest
 from shapely.geometry import box
 
-import busan_imd.infographic.rendering as infographic_rendering
+import busan_imd.infographic.presentation.rendering as infographic_rendering
 from busan_imd.infographic import (
     build_action_profiles,
     render,
@@ -161,7 +161,7 @@ def test_action_profiles_and_map_cover_every_dong(tmp_path) -> None:
                 "major_category_score_0_100": 75,
                 "major_category_confidence": "low",
                 "policy_review_status": "candidate_after_validation",
-                "triggered_child_categories": "하위 카테고리",
+                "triggered_child_categories": "소득·복지수요",
             }
             for code in composite["admin_dong_code"]
             for major, label in major_labels.items()
@@ -208,6 +208,49 @@ def test_action_profiles_and_map_cover_every_dong(tmp_path) -> None:
             for category, label in categories.items()
         ]
     )
+    traffic_hotspots = gpd.GeoDataFrame(
+        {
+            "spot_nm": ["시험 교차로"],
+            "occrrnc_cnt": [7],
+            "caslt_cnt": [9],
+        },
+        geometry=gpd.points_from_xy([0.45], [0.45]),
+        crs=boundaries.crs,
+    )
+    reference_context = pd.DataFrame(
+        {
+            "admin_dong_code": composite["admin_dong_code"],
+            "aed_count_current_unverified_per_10000_population": range(206),
+            "annual_pm10_ug_m3_idw_2025": range(206),
+            "annual_no2_ppm_idw_2025": range(206),
+            "annual_o3_ppm_idw_2025": range(206),
+            "air_idw_station_count": range(206),
+            "nearest_air_station_distance_m": range(206),
+            "core_school_students_within_2000m_2025": range(206),
+            "core_school_teachers_within_2000m_2025": range(1, 207),
+            "students_per_teacher_within_2000m_2025": range(206),
+            "avg_daily_residential_living_population_2025": range(206),
+            "avg_daily_workplace_living_population_2025": range(206),
+            "avg_daily_visitor_living_population_2025": range(206),
+            "consumer_sales_avg_daily_amount_2025": range(206),
+            "consumer_sales_avg_daily_transactions_2025": range(206),
+            "park_count_current": range(206),
+            "nearest_park_distance_m_current": range(206),
+            "district_accident_count_2025": range(206),
+            "district_accidents_per_100k_2025": range(206),
+        }
+    )
+    safety_risk_areas = gpd.GeoDataFrame(
+        {
+            "경도": [0.55],
+            "위도": [0.55],
+            "사고유형": ["수난"],
+            "출동횟수": [3],
+            "상세위치": ["시험 저수지"],
+        },
+        geometry=gpd.points_from_xy([0.55], [0.55]),
+        crs=boundaries.crs,
+    )
 
     write_action_map(
         profiles,
@@ -217,6 +260,9 @@ def test_action_profiles_and_map_cover_every_dong(tmp_path) -> None:
         indicator_scores,
         policy_catalog,
         html_path,
+        traffic_hotspots,
+        reference_context,
+        safety_risk_areas,
     )
 
     assert len(profiles) == 206
@@ -230,14 +276,39 @@ def test_action_profiles_and_map_cover_every_dong(tmp_path) -> None:
     assert html.count('class="tree-child"') == len(categories)
     assert 'role="tree"' in html
     assert "function selectNode(nextMajor,nextCategory=null)" in html
-    assert "큰 카테고리 종합점수 산정" in html
+    assert "생활여건 영역 점수 산정" in html
     assert "단순 평균이 아니며" in html
-    assert "하위 카테고리" in html
-    assert "취약 백분위" in html
+    assert "세부 평가항목" in html
+    assert "취약도 백분위" in html
+    assert "영역 점수 반영 비율" in html
+    assert "percentage(child.weight)" in html
+    assert '"confidence":"낮음"' in html
+    assert "자료 신뢰도 ${a.confidence}" in html
+    assert "큰 카테고리" not in html
+    assert "하위 카테고리" not in html
     assert "추정값 사용" in html
     assert "사용 사유" in html
+    assert "추정값 미사용" not in html
+    assert "산출 설명" not in html
     assert "정책 설계 참고사례" in html
     assert "실행 순서" in html
+    assert html.count('class="accident-hotspot"') == 1
+    assert "교통사고 다발지역 표시" in html
+    assert "category==='traffic_accident_risk'?accidentHtml(d.code):''" in html
+    assert "accidentControl.hidden=!accidentSelected" in html
+    assert "#accident-layer[hidden]{display:none}" in html
+    assert "accidentLayer.style.display='none'" in html
+    assert "점수 제외 참고지표" in html
+    assert "인구 1만 명당 AED" in html
+    assert "2025 연평균 PM10 추정" in html
+    assert "일평균 소비매출" in html
+    assert "행정동 내 도시공원 수" in html
+    assert "행정동 중심점 최근접 도시공원 거리" in html
+    assert html.count('class="safety-risk-area"') == 1
+    assert "생활안전 위험지역 표시" in html
+    assert "majorCategory==='safety'&&category===null" in html
+    assert '"occurrence_count":7' in html
+    assert "안전 영역의 교통사고 위험 평가에 반영" in html
 
 
 def test_render_rejects_incomplete_canonical_population(tmp_path) -> None:

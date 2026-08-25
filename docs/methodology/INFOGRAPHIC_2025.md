@@ -23,16 +23,16 @@
 
 ## 결과물
 
-- [`busan_imd_one_page_2025.pdf`](../../outputs/infographic/busan_imd_one_page_2025.pdf):
+- [`busan_imd_one_page_2025.pdf`](../../outputs/infographic/2025/static/busan_imd_one_page_2025.pdf):
   공모전 1페이지 PDF 초안
-- [`busan_imd_one_page_2025.svg`](../../outputs/infographic/busan_imd_one_page_2025.svg):
+- [`busan_imd_one_page_2025.svg`](../../outputs/infographic/2025/static/busan_imd_one_page_2025.svg):
   후속 편집용 벡터 원본
-- [`busan_imd_one_page_2025.png`](../../outputs/infographic/busan_imd_one_page_2025.png):
+- [`busan_imd_one_page_2025.png`](../../outputs/infographic/2025/static/busan_imd_one_page_2025.png):
   빠른 검토용 이미지
-- [`busan_admin_dong_action_map_2025.html`](../../outputs/infographic/busan_admin_dong_action_map_2025.html):
-  펼침·접힘 트리에서 3개 큰 카테고리와 8개 하위 카테고리를 선택하고 14개
+- [`busan_admin_dong_action_map_2025.html`](../../outputs/infographic/2025/interactive/busan_admin_dong_action_map_2025.html):
+  펼침·접힘 트리에서 4개 생활여건 영역과 10개 세부 평가항목을 선택하고 17개
   평가지표·정책 예시까지 내려가 확인하는 206개 동 독립형 대시보드
-- [`busan_admin_dong_action_profile_2025.csv`](../../outputs/infographic/busan_admin_dong_action_profile_2025.csv):
+- [`busan_admin_dong_action_profile_2025.csv`](../../outputs/infographic/2025/tables/busan_admin_dong_action_profile_2025.csv):
   동별 6개 영역 점수·취약순위·개선방향·상대 저취약 영역
 - [INFOGRAPHIC_REPORT_2025.json](../data/manifests/INFOGRAPHIC_REPORT_2025.json):
   입력·출력 체크섬, 페이지 수, 표시 통계와 상태
@@ -44,6 +44,12 @@ HTML은 브라우저에서 바로 열 수 있고 외부 지도나 JavaScript 서
 취약 백분위, 가중치, 추정 사유, 신뢰도, 정책 게이트와 조건부 예시가 나타난다. 정책 카드는
 분석 신호·우선 대상·실행 순서·성과지표·공식 참고사례·적용 주의점을 함께 표시한다. 점수
 계약과 명지 회귀검증은 [2025 카테고리 평가](CATEGORY_ASSESSMENT_2025.md)를 따른다.
+
+점수와 기준시점·공간단위가 다른 보조자료는 `점수 제외 참고지표`로 분리한다. 고용기회의
+생활인구·업종 구성, 교육의 주변 학교 학생·교원, 의료의 AED 위치, 환경의 공원 위치와
+대기 보간 불확실성, 안전의 구·군 사고통계와 부산 최근 5년 추이가 이에 해당한다. AED는
+의료공급 세부 항목에서만, 공원은 환경 종합화면에서만 표시되어 다른 지도 레이어를 가리지
+않는다.
 
 ## 재생성
 

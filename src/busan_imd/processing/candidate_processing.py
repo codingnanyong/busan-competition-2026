@@ -349,6 +349,9 @@ def process_schools(paths: CandidatePaths) -> tuple[pd.DataFrame, dict[str, Any]
                 "core_school_teachers_within_2000m_2025": int(
                     points.loc[distances <= 2_000, "active_teacher_count_2025"].sum()
                 ),
+                "core_school_students_within_2000m_2025": int(
+                    points.loc[distances <= 2_000, "student_count_2025"].sum()
+                ),
             }
         )
     result = counts.merge(

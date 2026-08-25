@@ -477,6 +477,7 @@ def build_standardized_profile(
                     "nearest_core_school_distance_m_2025",
                     "core_schools_within_2000m_2025",
                     "core_school_teachers_within_2000m_2025",
+                    "core_school_students_within_2000m_2025",
                 ],
             ),
             (
