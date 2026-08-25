@@ -363,6 +363,8 @@ def test_infographic_report_and_outputs_cover_cod23_scope() -> None:
     assert 'role="tree"' in action_map
     assert "큰 카테고리 종합점수 산정" in action_map
     assert "생활 인프라·주거" in action_map
+    assert "정책 설계 참고사례" in action_map
+    assert "부산형 DRT '타바라'" in action_map
 
 
 def test_category_assessment_is_complete_and_flags_estimation() -> None:

@@ -502,6 +502,19 @@ def write_action_map(
     categories = policy_catalog["category"].tolist()
     if set(category_assessments["category"]) != set(categories):
         raise ValueError("Assessment and policy categories must match")
+    required_policy_columns = {
+        "problem_signal_ko",
+        "priority_target_ko",
+        "implementation_steps_ko",
+        "policy_case_ko",
+        "policy_case_source_url",
+        "case_application_note_ko",
+    }
+    missing_policy_columns = required_policy_columns - set(policy_catalog.columns)
+    if missing_policy_columns:
+        raise ValueError(
+            f"Policy catalog is missing columns: {sorted(missing_policy_columns)}"
+        )
 
     indicator_payload: dict[str, dict[str, list[dict[str, Any]]]] = {}
     for row in indicator_scores.itertuples(index=False):
@@ -555,8 +568,14 @@ def write_action_map(
         str(row.category): {
             "title": row.policy_title_ko,
             "lead": row.lead_implementer,
+            "signal": row.problem_signal_ko,
+            "target": row.priority_target_ko,
+            "steps": row.implementation_steps_ko,
             "example": row.policy_example,
             "monitor": row.monitoring_indicator,
+            "case": row.policy_case_ko,
+            "case_url": row.policy_case_source_url,
+            "case_note": row.case_application_note_ko,
             "limit": row.evidence_limit,
         }
         for row in policy_catalog.itertuples(index=False)
@@ -701,6 +720,13 @@ path:hover,path:focus{{stroke:#18323d;stroke-width:2}}
 .metric{{margin:14px 0}} .bar{{height:8px;background:#edf0ed;border-radius:5px;overflow:hidden}}
 .bar i{{display:block;height:100%;background:#d84a3a}}
 .policy{{background:#f7f4ed;border-radius:9px;padding:12px;margin-top:18px}}
+.policy-grid{{display:grid;grid-template-columns:1fr 1fr;gap:8px}}
+.policy-item{{background:white;border:1px solid #d7ded9;border-radius:7px;padding:9px;
+ font-size:13px;line-height:1.5}}
+.policy-item b{{display:block;color:#087e8b;margin-bottom:3px}}
+.policy-case{{border-left:4px solid #087e8b;background:#eaf2f2;border-radius:0 7px 7px 0;
+ padding:10px;margin-top:10px;line-height:1.5}}
+.policy-case a{{color:#075e67;font-weight:700}}
 .subcategory{{border-top:2px solid #d7ded9;margin-top:20px;padding-top:12px}}
 .subcategory h3{{margin-bottom:5px}}
 .child-overview{{display:grid;grid-template-columns:1fr auto;gap:4px 12px;
@@ -714,7 +740,8 @@ path:hover,path:focus{{stroke:#18323d;stroke-width:2}}
 @media(max-width:1100px){{.layout{{grid-template-columns:240px 1fr}}.card#detail{{grid-column:1/-1}}
  .category-tree{{position:static}}.guide{{grid-template-columns:1fr}}}}
 @media(max-width:720px){{.layout{{grid-template-columns:1fr}}.card#detail{{grid-column:auto}}
- .steps{{grid-template-columns:1fr 1fr}}svg{{height:55vh;min-height:400px}}}}
+ .steps{{grid-template-columns:1fr 1fr}}.policy-grid{{grid-template-columns:1fr}}
+ svg{{height:55vh;min-height:400px}}}}
 </style></head><body><main><h1>부산 행정동 생활여건 진단: 취약 요인과 정책 방향</h1>
 <section class="guide" aria-label="대시보드 이용 방법과 점수 계산 구조">
 <div class="guide-card"><h2>이 화면을 보는 방법</h2><ol class="steps">
@@ -799,9 +826,17 @@ function childHtml(code,child){{const a=assessments[code][child.category];
  <h3>하위 카테고리 · ${{child.label}} ${{a.score.toFixed(1)}}</h3>
  <p class="scores">큰 카테고리 반영 가중치 ${{child.weight}} ·
  신뢰 ${{a.confidence}} · ${{gate}}</p><p class="scores">임계지표: ${{a.triggers}}</p>
- ${{metrics}}<div class="policy"><b>조건부 정책 예시</b><h3>${{policy.title}}</h3>
- <p>주관: ${{policy.lead}}</p><p>${{policy.example}}</p>
- <p>성과지표: ${{policy.monitor}}</p><p class="warning">${{policy.limit}}</p></div>
+ ${{metrics}}<div class="policy"><b>조건부 정책 방향</b><h3>${{policy.title}}</h3>
+ <p>주관: ${{policy.lead}}</p><div class="policy-grid">
+ <div class="policy-item"><b>분석이 포착한 신호</b>${{policy.signal}}</div>
+ <div class="policy-item"><b>우선 확인 대상</b>${{policy.target}}</div></div>
+ <div class="policy-item"><b>실행 순서</b>${{policy.steps}}</div>
+ <p><b>적용 예시</b><br>${{policy.example}}</p>
+ <p><b>성과지표</b><br>${{policy.monitor}}</p>
+ <div class="policy-case"><b>정책 설계 참고사례</b><br>${{policy.case}}<br>
+ <a href="${{policy.case_url}}" target="_blank" rel="noopener noreferrer">공식 자료 보기 ↗</a>
+ <p class="scores">이 분석에 적용할 때: ${{policy.case_note}}</p></div>
+ <p class="warning"><b>해석 제한</b><br>${{policy.limit}}</p></div>
  </section>`;}}
 function childOverviewHtml(code,child){{const a=assessments[code][child.category];return `
  <div class="child-overview"><span>${{child.label}} · 가중치 ${{child.weight}}</span>

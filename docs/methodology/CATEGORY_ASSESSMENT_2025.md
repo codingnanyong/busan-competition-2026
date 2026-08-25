@@ -65,6 +65,21 @@
 [CATEGORY_ASSESSMENT_SPEC_2025.csv](../data/CATEGORY_ASSESSMENT_SPEC_2025.csv), 정책 예시는
 [CATEGORY_POLICY_CATALOG_2025.csv](../data/CATEGORY_POLICY_CATALOG_2025.csv)에 고정한다.
 
+## 정책 방향을 읽는 방법
+
+정책 카드는 `분석이 포착한 신호 → 우선 확인 대상 → 실행 순서 → 성과지표 →
+공식 참고사례 → 적용 주의점`을 함께 보여준다. 참고사례는 해당 행정동의 정책이
+이미 확정됐다는 뜻이 아니라, 현장 검증 후 비교할 수 있는 실행수단이다.
+
+- 소득·복지: [부산 '이웃의 재발견'](https://www.busan.go.kr/nbtnewsBU/1551025)
+- 고용: [고용노동부 국민취업지원제 우수사례](https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=18692)
+- 교육: [교육부 안전한 통학로 조성](https://www.moe.go.kr/mnstrBoardView.do?boardID=430&boardSeq=94002&lev=0)
+- 건강: [부산 건강생활지원센터](https://www.busan.go.kr/expdetail/view?curPage=339&schDbiz=6260000200930231&schYear=2025)
+- 주거: [국토교통부 그린리모델링](https://www.molit.go.kr/USR/NEWS/m_71/dtl.jsp?id=95083756&lcmspage=4)
+- 교통: [부산형 DRT '타바라'](https://www.busan.go.kr/15minute/space022)
+- 대기: [환경부 미세먼지 집중관리구역](https://me.go.kr/home/web/board/read.do?boardId=1416120&boardMasterId=939)
+- 폭염: [행정안전부 무더위쉼터 점검](https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&nttId=126779)
+
 ## 명지 회귀검증
 
 기존 교육점수는 중심점 최근접 거리만 사용해 명지1동 84.9, 명지2동 90.7로 나타났다.

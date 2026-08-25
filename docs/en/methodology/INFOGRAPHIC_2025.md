@@ -44,6 +44,8 @@ The HTML opens directly in a browser and has no external map or JavaScript-serve
 Selecting a major tree node maps its weighted child-category composite. Selecting a child node
 switches the map to that category's score distribution. Selecting a dong then displays indicators,
 deprivation percentiles, weights, estimation reasons, confidence, and a conditional policy example.
+Each policy card also gives a priority population, implementation sequence, outcome measures, an
+official reference case, and a caution against copying the case without local validation.
 The contract and Myeongji regression check are documented in the
 [2025 category assessment](CATEGORY_ASSESSMENT_2025.md).
 

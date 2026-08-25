@@ -193,8 +193,14 @@ def test_action_profiles_and_map_cover_every_dong(tmp_path) -> None:
                 "category": category,
                 "policy_title_ko": f"{label} 정책",
                 "lead_implementer": "담당부서",
+                "problem_signal_ko": "상대적으로 높은 취약도",
+                "priority_target_ko": "현장 검증 대상",
+                "implementation_steps_ko": "자료 확인 → 시범사업 → 성과평가",
                 "policy_example": "검증 후 개선",
                 "monitoring_indicator": "연계율",
+                "policy_case_ko": "공공 정책 사례",
+                "policy_case_source_url": "https://example.test/policy",
+                "case_application_note_ko": "사례를 그대로 복제하지 않음",
                 "evidence_limit": "현장 검증 필요",
             }
             for category, label in categories.items()
@@ -228,6 +234,8 @@ def test_action_profiles_and_map_cover_every_dong(tmp_path) -> None:
     assert "취약 백분위" in html
     assert "추정값 사용" in html
     assert "사용 사유" in html
+    assert "정책 설계 참고사례" in html
+    assert "실행 순서" in html
 
 
 def test_render_rejects_incomplete_canonical_population(tmp_path) -> None:

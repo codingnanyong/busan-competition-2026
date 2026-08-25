@@ -40,8 +40,15 @@ Nine of the fourteen indicators use estimation, reconstruction, interpolation, o
 shrinkage. The dashboard marks each one as `estimated value used` and displays both the method
 and why it was necessary. The reasons distinguish unavailable dong-level income observations,
 small population denominators, reconstructed operating-facility inventories, the absence of an
-air monitor in every dong, and mixed reference dates. The other four indicators are marked as
+air monitor in every dong, and mixed reference dates. The other five indicators are marked as
 not using missing-value estimation, while their proxy or lower-bound limitations remain visible.
+
+## Reading the policy direction
+
+Each policy card follows `detected signal → priority population → implementation sequence →
+outcome measures → official reference case → adaptation caution`. Reference cases illustrate
+implementable instruments; they do not mean that the same intervention has already been selected
+for the dong. Field evidence must still determine whether to adapt, pilot, or reject an instrument.
 
 ## Myeongji regression check
 

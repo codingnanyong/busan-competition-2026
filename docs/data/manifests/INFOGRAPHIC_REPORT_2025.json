@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-24T23:10:42+00:00",
+  "generated_at": "2026-08-25T00:13:22+00:00",
   "reference_year": 2025,
   "artifact_status": "submission_draft",
   "format": "A4 portrait one-page infographic",
@@ -42,7 +42,7 @@
     "category_assessment": "D26F987A7EF2FC11D90D353FCF013EE3796B929749BF9F00887FD7B65AD69027",
     "major_category_assessment": "4D33B51E3F6012703D19780E76C176BDA826265EB4E1EC434A1712947B52A9A5",
     "indicator_scores": "05782DF46D26C61348647B731E3B3151638E76CDA60F5790283DDBDA59FBD76A",
-    "policy_catalog": "EBB3DEA2F77036EEDFB1F305262CE14414D71EA46A6E88BC923FAC0A6E668A2F"
+    "policy_catalog": "5F9376E81F9D7DD2D061C360D2A5E30294B3620B619CF4CCAE0994C1340566A2"
   },
   "output_paths": {
     "svg": "outputs/infographic/busan_imd_one_page_2025.svg",
@@ -56,7 +56,7 @@
     "pdf": "CF32580579A1C41789937E05F1ED80D14FE7582A08170D2FFE145C204AA6FAEB",
     "png": "C25234C5DC340DDFB014225131873BCE0D1A09AFFA8FD4A797B2460DAA351E48",
     "action_profile_csv": "8B7976BDFF3D7A75D23EBA5671F3530E82196225A1DB2BBD1543CAF6A573D3C7",
-    "interactive_action_map": "986E47E4F39E8B9FDABCDDD2C3231D7737E3DCC83D63ECC95C6D70F22DCF75DD"
+    "interactive_action_map": "41DCEDB54B6FFDA08882F3D267E1352686B067CDC498024AB651D1D143D04977"
   },
   "interpretation": "Public-data experimental screening; not an official index, causal estimate, individual eligibility rule, or final funding decision"
 }
