@@ -24,7 +24,7 @@ COD-22는 COD-20에서 품질 게이트를 통과한 2개 탐색적 취약유형
 COD-22 단계만 재생성하려면 다음 명령을 실행한다.
 
 ```bash
-docker compose run --rm jupyter python -m busan_imd.policy_matrix
+docker compose run --rm jupyter python -m busan_imd.analysis.policy_matrix
 ```
 
 - [POLICY_ACTION_CATALOG_2025.csv](../data/POLICY_ACTION_CATALOG_2025.csv): 정책명,

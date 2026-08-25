@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-16T06:38:54+00:00",
+  "generated_at": "2026-08-24T23:10:38+00:00",
   "reference_year": 2025,
   "record_count": 206,
   "indicator_count": 9,
@@ -52,7 +52,7 @@
   },
   "composite_score_created": false,
   "profile_path": "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv",
-  "profile_sha256": "DA9FD3DF576A6C373312D61957AD362EC26BDD4469F713A34BE1442FB759C88F",
+  "profile_sha256": "45901948F9A998B864DB4BAD6019CD257D2983E4FA0A2D37A7F6EC203F7A4479",
   "spec_path": "docs/data/DOMAIN_SCORE_SPEC_2025.csv",
   "spec_sha256": "72748F96A742A6CDE9F7E69134FD7849E5B603AE5194B7828761E8528B7A6A2B",
   "output_paths": {

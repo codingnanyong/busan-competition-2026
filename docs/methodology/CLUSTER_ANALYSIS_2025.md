@@ -18,7 +18,7 @@ docker compose run --rm jupyter python scripts/rebuild_processed.py
 COD-20 단계만 실행하려면 다음 명령을 사용한다.
 
 ```bash
-docker compose run --rm jupyter python -m busan_imd.cluster_analysis
+docker compose run --rm jupyter python -m busan_imd.analysis.cluster_analysis
 ```
 
 - `data/processed/scores/2025/busan_admin_dong_deprivation_clusters_2025.csv`: 선택된

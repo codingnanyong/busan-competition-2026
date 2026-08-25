@@ -10,11 +10,11 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from busan_imd.composite_index import DEFAULT_OUTPUT as DEFAULT_COMPOSITE
-from busan_imd.composite_index import DEFAULT_SPEC as DEFAULT_COMPOSITE_SPEC
-from busan_imd.composite_index import DomainWeight, load_weights
+from busan_imd.analysis.composite_index import DEFAULT_OUTPUT as DEFAULT_COMPOSITE
+from busan_imd.analysis.composite_index import DEFAULT_SPEC as DEFAULT_COMPOSITE_SPEC
+from busan_imd.analysis.composite_index import DomainWeight, load_weights
+from busan_imd.analysis.domain_scores import DEFAULT_OUTPUT_DIR, IDENTITY_COLUMNS
 from busan_imd.core.artifacts import sha256_file, write_json
-from busan_imd.domain_scores import DEFAULT_OUTPUT_DIR, IDENTITY_COLUMNS
 
 DEFAULT_INDICATOR_SCORES = DEFAULT_OUTPUT_DIR / "busan_admin_dong_indicator_scores_2025.csv"
 DEFAULT_PRIORITY_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_admin_dong_priority_areas_2025.csv"
@@ -82,9 +82,9 @@ def _validate_inputs(
     composite["admin_dong_code"] = codes
     indicator_scores = indicator_scores.copy()
     indicator_scores["admin_dong_code"] = indicator_codes
-    numeric = indicator_scores[
-        ["deprivation_percentile_0_100", "within_domain_weight"]
-    ].apply(pd.to_numeric, errors="raise")
+    numeric = indicator_scores[["deprivation_percentile_0_100", "within_domain_weight"]].apply(
+        pd.to_numeric, errors="raise"
+    )
     if not np.isfinite(numeric).all().all():
         raise ValueError("Indicator scores and weights must be finite")
     indicator_values = numeric["deprivation_percentile_0_100"]
@@ -117,13 +117,11 @@ def build(
         frame["domain"] = domain
         frame["domain_score_0_100"] = frame.pop(score_column)
         frame["domain_weight"] = domain_weight
-        frame["composite_contribution_points"] = (
-            frame["domain_score_0_100"] * domain_weight
-        )
+        frame["composite_contribution_points"] = frame["domain_score_0_100"] * domain_weight
         frame["city_domain_median_0_100"] = domain_median
         frame["weighted_excess_over_city_median"] = (
-            (frame["domain_score_0_100"] - domain_median) * domain_weight
-        )
+            frame["domain_score_0_100"] - domain_median
+        ) * domain_weight
         domain_records.append(frame)
     domain_contributions = pd.concat(domain_records, ignore_index=True)
 
@@ -144,9 +142,7 @@ def build(
     )
     leading_domain = priority_domains.groupby("admin_dong_code", sort=False).first()
     priority = priority.merge(
-        leading_domain[
-            ["domain", "domain_score_0_100", "weighted_excess_over_city_median"]
-        ].rename(
+        leading_domain[["domain", "domain_score_0_100", "weighted_excess_over_city_median"]].rename(
             columns={
                 "domain": "leading_domain",
                 "domain_score_0_100": "leading_domain_score_0_100",
@@ -180,23 +176,15 @@ def build(
         indicators["within_domain_weight"] * indicators["domain_weight"]
     )
     indicators["composite_contribution_points"] = (
-        indicators["deprivation_percentile_0_100"]
-        * indicators["effective_composite_weight"]
+        indicators["deprivation_percentile_0_100"] * indicators["effective_composite_weight"]
     )
-    indicator_totals = indicators.groupby("admin_dong_code")[
-        "composite_contribution_points"
-    ].sum()
+    indicator_totals = indicators.groupby("admin_dong_code")["composite_contribution_points"].sum()
     if not np.allclose(indicator_totals.sort_index(), expected.sort_index(), atol=2e-5):
         raise ValueError("Indicator contributions must sum to the published composite score")
-    indicator_medians = indicators.groupby("indicator")[
-        "deprivation_percentile_0_100"
-    ].median()
-    indicators["city_indicator_median_0_100"] = indicators["indicator"].map(
-        indicator_medians
-    )
+    indicator_medians = indicators.groupby("indicator")["deprivation_percentile_0_100"].median()
+    indicators["city_indicator_median_0_100"] = indicators["indicator"].map(indicator_medians)
     indicators["weighted_excess_over_city_median"] = (
-        indicators["deprivation_percentile_0_100"]
-        - indicators["city_indicator_median_0_100"]
+        indicators["deprivation_percentile_0_100"] - indicators["city_indicator_median_0_100"]
     ) * indicators["effective_composite_weight"]
     indicators = indicators.merge(
         composite[IDENTITY_COLUMNS + ["b_imd_score_0_100", "b_imd_rank", "b_imd_decile"]],
@@ -206,8 +194,7 @@ def build(
     )
     contributions = indicators[indicators["b_imd_decile"] == 1].copy()
     contributions["contribution_share_of_composite"] = (
-        contributions["composite_contribution_points"]
-        / contributions["b_imd_score_0_100"]
+        contributions["composite_contribution_points"] / contributions["b_imd_score_0_100"]
     )
     contributions = contributions.sort_values(
         ["b_imd_rank", "weighted_excess_over_city_median", "indicator"],
@@ -221,9 +208,7 @@ def build(
     leading_indicators = contributions[contributions["driver_rank_within_area"] == 1].set_index(
         "admin_dong_code"
     )
-    priority["leading_indicator"] = priority["admin_dong_code"].map(
-        leading_indicators["indicator"]
-    )
+    priority["leading_indicator"] = priority["admin_dong_code"].map(leading_indicators["indicator"])
     priority["leading_indicator_excess_points"] = priority["admin_dong_code"].map(
         leading_indicators["weighted_excess_over_city_median"]
     )
@@ -235,9 +220,7 @@ def build(
     }
     top_areas = []
     for row in priority.head(10).itertuples(index=False):
-        top_drivers = contributions[
-            contributions["admin_dong_code"] == row.admin_dong_code
-        ].head(3)
+        top_drivers = contributions[contributions["admin_dong_code"] == row.admin_dong_code].head(3)
         top_areas.append(
             {
                 "admin_dong_code": row.admin_dong_code,
@@ -290,9 +273,7 @@ def run(
 ) -> dict[str, Any]:
     """Read upstream scores and write deterministic priority-area artifacts."""
     composite = pd.read_csv(composite_path, dtype={"admin_dong_code": str})
-    indicator_scores = pd.read_csv(
-        indicator_scores_path, dtype={"admin_dong_code": str}
-    )
+    indicator_scores = pd.read_csv(indicator_scores_path, dtype={"admin_dong_code": str})
     weights = load_weights(weight_spec_path)
     priority, contributions, report = build(composite, indicator_scores, weights)
     priority_output_path.parent.mkdir(parents=True, exist_ok=True)

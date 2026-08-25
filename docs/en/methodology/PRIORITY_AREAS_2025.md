@@ -18,7 +18,7 @@ docker compose run --rm jupyter python scripts/rebuild_processed.py
 Run only this stage with:
 
 ```bash
-docker compose run --rm jupyter python -m busan_imd.priority_areas
+docker compose run --rm jupyter python -m busan_imd.analysis.priority_areas
 ```
 
 The stage writes a 21-row priority-area profile, a 21-by-9 long-form indicator contribution

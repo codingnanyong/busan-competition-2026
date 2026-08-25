@@ -205,212 +205,212 @@
 21030710,동구,범일1동,environment_climate_response,환경·기후 대응,15.1219515,2,,low,monitor
 21030660,동구,범일2동,environment_climate_response,환경·기후 대응,9.585366,2,,low,monitor
 21510130,기장군,정관읍,environment_climate_response,환경·기후 대응,7.780488,2,,low,monitor
-21140520,수영구,남천2동,living_services_settlement,생활 인프라·주거,84.14634175,4,의료공급 접근|주거환경|대중교통 접근,medium_low,candidate_after_validation
-21080610,북구,만덕3동,living_services_settlement,생활 인프라·주거,76.902439,4,의료공급 접근|주거환경|대중교통 접근,medium_low,candidate_after_validation
-21050720,부산진구,가야2동,living_services_settlement,생활 인프라·주거,76.20731725,4,의료공급 접근|주거환경|대중교통 접근,medium_low,candidate_after_validation
-21090590,해운대구,반여3동,living_services_settlement,생활 인프라·주거,75.98780500000001,4,주거환경|대중교통 접근,medium_low,candidate_after_validation
-21080580,북구,덕천3동,living_services_settlement,생활 인프라·주거,72.890244,4,의료공급 접근|주거환경,medium_low,candidate_after_validation
-21150540,사상구,모라3동,living_services_settlement,생활 인프라·주거,71.84146375,4,주거환경,medium_low,candidate_after_validation
-21090650,해운대구,재송2동,living_services_settlement,생활 인프라·주거,67.5,4,주거환경|대중교통 접근,medium_low,monitor
-21030510,동구,초량1동,living_services_settlement,생활 인프라·주거,66.1463415,4,대중교통 접근,low,monitor
-21100630,사하구,다대2동,living_services_settlement,생활 인프라·주거,65.5731705,4,대중교통 접근,medium_low,monitor
-21100520,사하구,괴정2동,living_services_settlement,생활 인프라·주거,65.47561,4,의료공급 접근|대중교통 접근,medium_low,monitor
-21070580,남구,용호2동,living_services_settlement,생활 인프라·주거,65.3658535,4,의료공급 접근|대중교통 접근,medium_low,monitor
-21020630,서구,초장동,living_services_settlement,생활 인프라·주거,65.15853675,4,의료공급 접근|주거환경,medium_low,monitor
-21100560,사하구,하단1동,living_services_settlement,생활 인프라·주거,65.03658525,4,교육시설 접근·공급|주거환경|대중교통 접근,medium_low,monitor
-21100540,사하구,괴정4동,living_services_settlement,생활 인프라·주거,64.90243875,4,의료공급 접근|대중교통 접근,medium_low,monitor
-21070600,남구,용호4동,living_services_settlement,생활 인프라·주거,64.13414625,4,교육시설 접근·공급|주거환경,medium_low,monitor
-21040670,영도구,동삼3동,living_services_settlement,생활 인프라·주거,63.804878,4,의료공급 접근|주거환경,medium_low,monitor
-21030560,동구,수정1동,living_services_settlement,생활 인프라·주거,63.79268275,4,의료공급 접근|대중교통 접근,medium_low,monitor
-21080530,북구,구포3동,living_services_settlement,생활 인프라·주거,63.2804875,4,의료공급 접근,medium_low,monitor
-21050660,부산진구,부암3동,living_services_settlement,생활 인프라·주거,63.097561,4,의료공급 접근|대중교통 접근,medium_low,monitor
-21050680,부산진구,당감2동,living_services_settlement,생활 인프라·주거,62.69512175,4,의료공급 접근|대중교통 접근,medium_low,monitor
-21100660,사하구,감천2동,living_services_settlement,생활 인프라·주거,62.585365499999995,4,주거환경,medium_low,monitor
-21070590,남구,용호3동,living_services_settlement,생활 인프라·주거,62.54878025,4,주거환경|대중교통 접근,medium_low,monitor
-21100590,사하구,신평2동,living_services_settlement,생활 인프라·주거,62.12195125,4,교육시설 접근·공급,medium_low,monitor
-21030590,동구,수정4동,living_services_settlement,생활 인프라·주거,62.121951249999995,4,교육시설 접근·공급|주거환경,medium_low,monitor
-21110610,금정구,장전1동,living_services_settlement,생활 인프라·주거,62.012195,4,의료공급 접근|대중교통 접근,medium_low,monitor
-21140600,수영구,민락동,living_services_settlement,생활 인프라·주거,61.9390245,4,의료공급 접근|대중교통 접근,medium_low,monitor
-21080550,북구,화명1동,living_services_settlement,생활 인프라·주거,61.80487775,4,의료공급 접근|대중교통 접근,medium_low,monitor
-21090580,해운대구,반여2동,living_services_settlement,생활 인프라·주거,61.79268275,4,교육시설 접근·공급|대중교통 접근,medium_low,monitor
-21140540,수영구,망미1동,living_services_settlement,생활 인프라·주거,61.58536575,4,의료공급 접근|주거환경,medium_low,monitor
-21030700,동구,좌천동,living_services_settlement,생활 인프라·주거,61.5609755,4,의료공급 접근,medium_low,monitor
-21090620,해운대구,반송2동,living_services_settlement,생활 인프라·주거,61.5,4,대중교통 접근,medium_low,monitor
-21130530,연제구,거제3동,living_services_settlement,생활 인프라·주거,61.475609750000004,4,주거환경|대중교통 접근,medium_low,monitor
-21050750,부산진구,개금2동,living_services_settlement,생활 인프라·주거,61.4512195,4,교육시설 접근·공급|주거환경,medium_low,monitor
-21150520,사상구,모라1동,living_services_settlement,생활 인프라·주거,61.26829275,4,주거환경,medium_low,monitor
-21150600,사상구,주례1동,living_services_settlement,생활 인프라·주거,60.95121975,4,의료공급 접근,medium_low,monitor
-21100570,사하구,하단2동,living_services_settlement,생활 인프라·주거,60.92682875,4,대중교통 접근,medium_low,monitor
-21140560,수영구,광안1동,living_services_settlement,생활 인프라·주거,60.585366,4,대중교통 접근,medium_low,monitor
-21050760,부산진구,개금3동,living_services_settlement,생활 인프라·주거,60.512195000000006,4,의료공급 접근|대중교통 접근,medium_low,monitor
-21070680,남구,문현3동,living_services_settlement,생활 인프라·주거,60.158536749999996,4,대중교통 접근,medium_low,monitor
-21020690,서구,남부민2동,living_services_settlement,생활 인프라·주거,60.097561,4,주거환경,medium_low,monitor
-21020680,서구,암남동,living_services_settlement,생활 인프라·주거,59.9390245,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
-21040690,영도구,봉래2동,living_services_settlement,생활 인프라·주거,59.58536575,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
-21110700,금정구,구서2동,living_services_settlement,생활 인프라·주거,59.512195500000004,4,대중교통 접근,medium_low,monitor
-21050800,부산진구,당감1동,living_services_settlement,생활 인프라·주거,59.414634250000006,4,주거환경|대중교통 접근,medium_low,monitor
-21090690,해운대구,좌4동,living_services_settlement,생활 인프라·주거,58.6707315,4,교육시설 접근·공급|의료공급 접근|대중교통 접근,medium_low,monitor
-21030550,동구,초량6동,living_services_settlement,생활 인프라·주거,58.487804749999995,4,의료공급 접근|주거환경,medium_low,monitor
-21140530,수영구,수영동,living_services_settlement,생활 인프라·주거,58.3414635,4,주거환경|대중교통 접근,medium_low,monitor
-21100530,사하구,괴정3동,living_services_settlement,생활 인프라·주거,58.26829275,4,주거환경|대중교통 접근,medium_low,monitor
-21010600,중구,영주2동,living_services_settlement,생활 인프라·주거,57.93902425,4,의료공급 접근|주거환경,medium_low,monitor
-21050840,부산진구,범천2동,living_services_settlement,생활 인프라·주거,57.865854,4,의료공급 접근|대중교통 접근,medium_low,monitor
-21100580,사하구,신평1동,living_services_settlement,생활 인프라·주거,57.69512175,4,주거환경,medium_low,monitor
-21110720,금정구,서3동,living_services_settlement,생활 인프라·주거,57.56097575,4,주거환경|대중교통 접근,medium_low,monitor
-21020650,서구,남부민1동,living_services_settlement,생활 인프라·주거,57.47560975,4,주거환경,medium_low,monitor
-21040550,영도구,영선2동,living_services_settlement,생활 인프라·주거,57.36585375,4,주거환경,medium_low,monitor
-21110510,금정구,서1동,living_services_settlement,생활 인프라·주거,57.256097249999996,4,주거환경,medium_low,monitor
-21120530,강서구,강동동,living_services_settlement,생활 인프라·주거,56.9512195,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
-21010560,중구,부평동,living_services_settlement,생활 인프라·주거,56.853658499999995,4,교육시설 접근·공급,medium_low,monitor
-21110730,금정구,금사회동동,living_services_settlement,생활 인프라·주거,56.76829275,4,교육시설 접근·공급|주거환경,medium_low,monitor
-21030680,동구,범일5동,living_services_settlement,생활 인프라·주거,56.634146,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
-21130630,연제구,연산9동,living_services_settlement,생활 인프라·주거,56.56097525,4,대중교통 접근,medium_low,monitor
-21050640,부산진구,부암1동,living_services_settlement,생활 인프라·주거,56.34146325,4,의료공급 접근|대중교통 접근,medium_low,monitor
-21110600,금정구,부곡4동,living_services_settlement,생활 인프라·주거,56.012195250000005,4,주거환경,medium_low,monitor
-21030600,동구,수정5동,living_services_settlement,생활 인프라·주거,55.853658499999995,4,의료공급 접근|주거환경,medium_low,monitor
-21130620,연제구,연산8동,living_services_settlement,생활 인프라·주거,55.59756075,4,대중교통 접근,medium_low,monitor
-21010570,중구,광복동,living_services_settlement,생활 인프라·주거,55.57317075,4,주거환경,low,monitor
-21130550,연제구,연산1동,living_services_settlement,생활 인프라·주거,55.08536575,4,대중교통 접근,medium_low,monitor
-21060600,동래구,사직3동,living_services_settlement,생활 인프라·주거,55.0609755,4,대중교통 접근,medium_low,monitor
-21140570,수영구,광안2동,living_services_settlement,생활 인프라·주거,54.707317,4,대중교통 접근,medium_low,monitor
-21110570,금정구,부곡1동,living_services_settlement,생활 인프라·주거,54.707316750000004,4,주거환경,medium_low,monitor
-21120550,강서구,가락동,living_services_settlement,생활 인프라·주거,54.54878025,4,교육시설 접근·공급|주거환경,medium_low,monitor
-21090750,해운대구,우3동,living_services_settlement,생활 인프라·주거,54.52439,4,대중교통 접근,medium_low,monitor
-21040590,영도구,봉래1동,living_services_settlement,생활 인프라·주거,54.48780475,4,교육시설 접근·공급|주거환경,medium_low,monitor
-21040640,영도구,청학2동,living_services_settlement,생활 인프라·주거,54.4512195,4,,medium_low,monitor
-21050540,부산진구,연지동,living_services_settlement,생활 인프라·주거,54.268293,4,대중교통 접근,medium_low,monitor
-21070660,남구,문현1동,living_services_settlement,생활 인프라·주거,54.085365749999994,4,의료공급 접근,medium_low,monitor
-21150510,사상구,삼락동,living_services_settlement,생활 인프라·주거,53.95121950000001,4,교육시설 접근·공급|주거환경,medium_low,monitor
-21040630,영도구,청학1동,living_services_settlement,생활 인프라·주거,53.68292675,4,주거환경,medium_low,monitor
-21150560,사상구,덕포2동,living_services_settlement,생활 인프라·주거,53.4512195,4,주거환경,medium_low,monitor
-21100510,사하구,괴정1동,living_services_settlement,생활 인프라·주거,53.37804875,4,주거환경|대중교통 접근,medium_low,monitor
-21150640,사상구,엄궁동,living_services_settlement,생활 인프라·주거,53.13414625,4,대중교통 접근,medium_low,monitor
-21150630,사상구,학장동,living_services_settlement,생활 인프라·주거,53.085365749999994,4,주거환경,medium_low,monitor
-21040680,영도구,신선동,living_services_settlement,생활 인프라·주거,53.073170749999996,4,의료공급 접근|주거환경,medium_low,monitor
-21090720,해운대구,반송1동,living_services_settlement,생활 인프라·주거,52.841463499999996,4,주거환경,medium_low,monitor
-21020510,서구,동대신1동,living_services_settlement,생활 인프라·주거,52.82926825,4,,medium_low,monitor
-21050550,부산진구,초읍동,living_services_settlement,생활 인프라·주거,52.743902500000004,4,,medium_low,monitor
-21110670,금정구,청룡노포동,living_services_settlement,생활 인프라·주거,52.219512,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
-21080540,북구,금곡동,living_services_settlement,생활 인프라·주거,51.69512175,4,의료공급 접근,medium_low,monitor
-21090540,해운대구,중2동,living_services_settlement,생활 인프라·주거,51.597561000000006,4,교육시설 접근·공급,medium_low,monitor
-21080520,북구,구포2동,living_services_settlement,생활 인프라·주거,51.4390245,4,,medium_low,monitor
-21040660,영도구,동삼2동,living_services_settlement,생활 인프라·주거,51.2682925,4,,medium_low,monitor
-21090560,해운대구,송정동,living_services_settlement,생활 인프라·주거,51.207316999999996,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
-21110640,금정구,선두구동,living_services_settlement,생활 인프라·주거,51.0487805,4,교육시설 접근·공급,medium_low,monitor
-21150620,사상구,주례3동,living_services_settlement,생활 인프라·주거,51.012195,4,주거환경,medium_low,monitor
-21010520,중구,동광동,living_services_settlement,생활 인프라·주거,50.99999975,4,주거환경,medium_low,monitor
-21090680,해운대구,좌3동,living_services_settlement,생활 인프라·주거,50.75609725,4,의료공급 접근|대중교통 접근,medium_low,monitor
-21140550,수영구,망미2동,living_services_settlement,생활 인프라·주거,50.6341465,4,의료공급 접근,medium_low,monitor
-21010590,중구,영주1동,living_services_settlement,생활 인프라·주거,50.36585375,4,,medium_low,monitor
-21070570,남구,용호1동,living_services_settlement,생활 인프라·주거,50.30487825,4,대중교통 접근,medium_low,monitor
-21120510,강서구,대저1동,living_services_settlement,생활 인프라·주거,50.18292675,4,주거환경,medium_low,monitor
-21090730,해운대구,우1동,living_services_settlement,생활 인프라·주거,49.9512195,4,대중교통 접근,medium_low,monitor
-21100550,사하구,당리동,living_services_settlement,생활 인프라·주거,49.64634125,4,주거환경,medium_low,monitor
-21110710,금정구,금성동,living_services_settlement,생활 인프라·주거,49.609756000000004,4,교육시설 접근·공급,medium_low,monitor
-21070670,남구,문현2동,living_services_settlement,생활 인프라·주거,49.4634145,4,주거환경,medium_low,monitor
-21150550,사상구,덕포1동,living_services_settlement,생활 인프라·주거,49.170732,4,,medium_low,monitor
-21110680,금정구,남산동,living_services_settlement,생활 인프라·주거,49.1585365,4,,medium_low,monitor
-21070690,남구,문현4동,living_services_settlement,생활 인프라·주거,49.0487805,4,주거환경,medium_low,monitor
-21030520,동구,초량2동,living_services_settlement,생활 인프라·주거,48.914634,4,주거환경,medium_low,monitor
-21080590,북구,만덕1동,living_services_settlement,생활 인프라·주거,48.5487805,4,,medium_low,monitor
-21130570,연제구,연산3동,living_services_settlement,생활 인프라·주거,48.073171,4,,medium_low,monitor
-21100640,사하구,구평동,living_services_settlement,생활 인프라·주거,48.024390499999996,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
-21080510,북구,구포1동,living_services_settlement,생활 인프라·주거,47.9756095,4,,medium_low,monitor
-21080600,북구,만덕2동,living_services_settlement,생활 인프라·주거,47.719512,4,,medium_low,monitor
-21020590,서구,부민동,living_services_settlement,생활 인프라·주거,47.4268295,4,,medium_low,monitor
-21150570,사상구,괘법동,living_services_settlement,생활 인프라·주거,47.426829250000004,4,대중교통 접근,medium_low,monitor
-21130510,연제구,거제1동,living_services_settlement,생활 인프라·주거,47.15853625,4,의료공급 접근|대중교통 접근,medium_low,monitor
-21130540,연제구,거제4동,living_services_settlement,생활 인프라·주거,47.085366,4,의료공급 접근|대중교통 접근,medium_low,monitor
-21020570,서구,서대신4동,living_services_settlement,생활 인프라·주거,47.0121955,4,의료공급 접근,medium_low,monitor
-21070620,남구,감만1동,living_services_settlement,생활 인프라·주거,46.853658499999995,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
-21080560,북구,덕천1동,living_services_settlement,생활 인프라·주거,46.80487825,4,,medium_low,monitor
-21110520,금정구,서2동,living_services_settlement,생활 인프라·주거,46.80487825,4,주거환경,medium_low,monitor
-21020540,서구,서대신1동,living_services_settlement,생활 인프라·주거,46.609756250000004,4,,medium_low,monitor
-21030530,동구,초량3동,living_services_settlement,생활 인프라·주거,46.42682925,4,교육시설 접근·공급,medium_low,monitor
-21010580,중구,남포동,living_services_settlement,생활 인프라·주거,46.13414625,4,주거환경,medium_low,monitor
-21100650,사하구,감천1동,living_services_settlement,생활 인프라·주거,46.109756000000004,4,,medium_low,monitor
-21050740,부산진구,개금1동,living_services_settlement,생활 인프라·주거,45.829268,4,대중교통 접근,medium_low,monitor
-21060640,동래구,명장2동,living_services_settlement,생활 인프라·주거,45.792683000000004,4,주거환경,medium_low,monitor
-21070610,남구,용당동,living_services_settlement,생활 인프라·주거,45.7317075,4,의료공급 접근,medium_low,monitor
-21140510,수영구,남천1동,living_services_settlement,생활 인프라·주거,45.71951225,4,,medium_low,monitor
-21060510,동래구,수민동,living_services_settlement,생활 인프라·주거,45.70731725,4,대중교통 접근,medium_low,monitor
-21020520,서구,동대신2동,living_services_settlement,생활 인프라·주거,45.68292674999999,4,주거환경,medium_low,monitor
-21130580,연제구,연산4동,living_services_settlement,생활 인프라·주거,45.560975750000004,4,대중교통 접근,medium_low,monitor
-21030570,동구,수정2동,living_services_settlement,생활 인프라·주거,45.487805,4,,medium_low,monitor
-21060590,동래구,사직2동,living_services_settlement,생활 인프라·주거,45.4634145,4,의료공급 접근,medium_low,monitor
-21080570,북구,덕천2동,living_services_settlement,생활 인프라·주거,45.378049000000004,4,주거환경,medium_low,monitor
-21050570,부산진구,양정2동,living_services_settlement,생활 인프라·주거,45.378048750000005,4,대중교통 접근,medium_low,monitor
-21010510,중구,중앙동,living_services_settlement,생활 인프라·주거,45.341463250000004,4,주거환경,medium_low,monitor
-21150610,사상구,주례2동,living_services_settlement,생활 인프라·주거,45.28048775,4,의료공급 접근,medium_low,monitor
-21130560,연제구,연산2동,living_services_settlement,생활 인프라·주거,45.19512225,4,,medium_low,monitor
-21060520,동래구,복산동,living_services_settlement,생활 인프라·주거,45.1463415,4,주거환경,medium_low,monitor
-21080620,북구,화명2동,living_services_settlement,생활 인프라·주거,44.57317075,4,의료공급 접근,medium_low,monitor
-21110580,금정구,부곡2동,living_services_settlement,생활 인프라·주거,44.170732,4,대중교통 접근,medium_low,monitor
-21060610,동래구,안락1동,living_services_settlement,생활 인프라·주거,44.09756125,4,주거환경,medium_low,monitor
-21120600,강서구,명지2동,living_services_settlement,생활 인프라·주거,44.0853655,4,,medium_low,monitor
-21510330,기장군,철마면,living_services_settlement,생활 인프라·주거,44.0243905,4,교육시설 접근·공급,medium_low,monitor
-21070630,남구,감만2동,living_services_settlement,생활 인프라·주거,43.93902425,4,,medium_low,monitor
-21130520,연제구,거제2동,living_services_settlement,생활 인프라·주거,43.707317,4,,medium_low,monitor
-21060620,동래구,안락2동,living_services_settlement,생활 인프라·주거,43.6585365,4,,medium_low,monitor
-21130600,연제구,연산6동,living_services_settlement,생활 인프라·주거,43.585366,4,,medium_low,monitor
-21070540,남구,대연4동,living_services_settlement,생활 인프라·주거,43.5243905,4,의료공급 접근,medium_low,monitor
-21150650,사상구,감전동,living_services_settlement,생활 인프라·주거,43.46341475,4,교육시설 접근·공급,medium_low,monitor
-21100600,사하구,장림1동,living_services_settlement,생활 인프라·주거,43.4512195,4,,medium_low,monitor
-21120520,강서구,대저2동,living_services_settlement,생활 인프라·주거,43.426829,4,,medium_low,monitor
-21090640,해운대구,재송1동,living_services_settlement,생활 인프라·주거,43.304878,4,,medium_low,monitor
-21020530,서구,동대신3동,living_services_settlement,생활 인프라·주거,43.109756,4,,medium_low,monitor
-21140590,수영구,광안4동,living_services_settlement,생활 인프라·주거,42.89024375,4,대중교통 접근,medium_low,monitor
-21510130,기장군,정관읍,living_services_settlement,생활 인프라·주거,42.42682925,4,의료공급 접근,medium_low,monitor
-21010540,중구,보수동,living_services_settlement,생활 인프라·주거,42.30487825,4,,medium_low,monitor
-21030710,동구,범일1동,living_services_settlement,생활 인프라·주거,42.29268325,4,주거환경,medium_low,monitor
-21090530,해운대구,중1동,living_services_settlement,생활 인프라·주거,42.097561,4,대중교통 접근,medium_low,monitor
-21060630,동래구,명장1동,living_services_settlement,생활 인프라·주거,42.01219525,4,,medium_low,monitor
-21090710,해운대구,반여4동,living_services_settlement,생활 인프라·주거,41.975609750000004,4,의료공급 접근,medium_low,monitor
-21050810,부산진구,가야1동,living_services_settlement,생활 인프라·주거,41.9390245,4,,medium_low,monitor
-21070550,남구,대연5동,living_services_settlement,생활 인프라·주거,41.86585375,4,,medium_low,monitor
-21050770,부산진구,범천1동,living_services_settlement,생활 인프라·주거,41.5609755,4,대중교통 접근,medium_low,monitor
-21080630,북구,화명3동,living_services_settlement,생활 인프라·주거,41.49999975,4,대중교통 접근,medium_low,monitor
-21070710,남구,우암동,living_services_settlement,생활 인프라·주거,41.28048775,4,주거환경,medium_low,monitor
-21120580,강서구,가덕도동,living_services_settlement,생활 인프라·주거,41.10975625,4,교육시설 접근·공급,medium_low,monitor
-21090740,해운대구,우2동,living_services_settlement,생활 인프라·주거,41.036585,4,대중교통 접근,medium_low,monitor
-21510120,기장군,장안읍,living_services_settlement,생활 인프라·주거,40.9390245,4,,medium_low,monitor
-21060560,동래구,온천2동,living_services_settlement,생활 인프라·주거,40.93902425,4,,medium_low,monitor
-21100610,사하구,장림2동,living_services_settlement,생활 인프라·주거,40.81707325,4,,medium_low,monitor
-21090700,해운대구,반여1동,living_services_settlement,생활 인프라·주거,40.7804875,4,,medium_low,monitor
-21100620,사하구,다대1동,living_services_settlement,생활 인프라·주거,40.52439,4,,medium_low,monitor
-21120562,강서구,신호동,living_services_settlement,생활 인프라·주거,40.4268295,4,의료공급 접근,medium_low,monitor
-21020640,서구,충무동,living_services_settlement,생활 인프라·주거,40.256097749999995,4,,medium_low,monitor
-21020610,서구,아미동,living_services_settlement,생활 인프라·주거,40.2439025,4,주거환경,medium_low,monitor
-21120590,강서구,명지1동,living_services_settlement,생활 인프라·주거,40.195122,4,,medium_low,monitor
-21060550,동래구,온천1동,living_services_settlement,생활 인프라·주거,40.146341250000006,4,대중교통 접근,medium_low,monitor
-21050610,부산진구,전포2동,living_services_settlement,생활 인프라·주거,39.853658249999995,4,,medium_low,monitor
-21060570,동래구,온천3동,living_services_settlement,생활 인프라·주거,39.8414635,4,대중교통 접근,medium_low,monitor
-21120561,강서구,녹산동,living_services_settlement,생활 인프라·주거,39.8414635,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
-21090670,해운대구,좌2동,living_services_settlement,생활 인프라·주거,39.78048775,4,대중교통 접근,medium_low,monitor
-21040530,영도구,남항동,living_services_settlement,생활 인프라·주거,39.71951225,4,주거환경,medium_low,monitor
-21040540,영도구,영선1동,living_services_settlement,생활 인프라·주거,39.512195,4,교육시설 접근·공급,medium_low,monitor
-21510111,기장군,일광읍,living_services_settlement,생활 인프라·주거,38.95121925,4,교육시설 접근·공급,medium_low,monitor
-21070560,남구,대연6동,living_services_settlement,생활 인프라·주거,38.353658749999994,4,,medium_low,monitor
-21040650,영도구,동삼1동,living_services_settlement,생활 인프라·주거,38.219512,4,,medium_low,monitor
-21070530,남구,대연3동,living_services_settlement,생활 인프라·주거,37.20731725,4,,medium_low,monitor
-21140580,수영구,광안3동,living_services_settlement,생활 인프라·주거,36.02439025,4,,medium_low,monitor
-21060580,동래구,사직1동,living_services_settlement,생활 인프라·주거,35.4024385,4,,medium_low,monitor
-21130590,연제구,연산5동,living_services_settlement,생활 인프라·주거,35.073171,4,대중교통 접근,medium_low,monitor
-21050700,부산진구,당감4동,living_services_settlement,생활 인프라·주거,34.53658525,4,,medium_low,monitor
-21020560,서구,서대신3동,living_services_settlement,생활 인프라·주거,34.49999975,4,,medium_low,monitor
-21110740,금정구,장전2동,living_services_settlement,생활 인프라·주거,34.01219525,4,,medium_low,monitor
-21110590,금정구,부곡3동,living_services_settlement,생활 인프라·주거,33.69512175,4,교육시설 접근·공급,medium_low,monitor
-21510110,기장군,기장읍,living_services_settlement,생활 인프라·주거,33.085366,4,,medium_low,monitor
-21070700,남구,대연1동,living_services_settlement,생활 인프라·주거,32.8414635,4,,medium_low,monitor
-21030660,동구,범일2동,living_services_settlement,생활 인프라·주거,30.81707275,4,,medium_low,monitor
-21110690,금정구,구서1동,living_services_settlement,생활 인프라·주거,30.256097500000003,4,,medium_low,monitor
-21050830,부산진구,전포1동,living_services_settlement,생활 인프라·주거,29.402439,4,,medium_low,monitor
-21010530,중구,대청동,living_services_settlement,생활 인프라·주거,29.2317075,4,,medium_low,monitor
-21060650,동래구,명륜동,living_services_settlement,생활 인프라·주거,28.18292675,4,,medium_low,monitor
-21090660,해운대구,좌1동,living_services_settlement,생활 인프라·주거,27.402439,4,,medium_low,monitor
-21050520,부산진구,부전2동,living_services_settlement,생활 인프라·주거,27.182927,4,,medium_low,monitor
-21050560,부산진구,양정1동,living_services_settlement,생활 인프라·주거,25.0,4,,medium_low,monitor
-21050820,부산진구,부전1동,living_services_settlement,생활 인프라·주거,20.24390225,4,,medium_low,monitor
+21140520,수영구,남천2동,living_services_settlement,생활 인프라·주거,82.50914675,4,의료공급 접근|주거환경|대중교통 접근,medium_low,candidate_after_validation
+21050720,부산진구,가야2동,living_services_settlement,생활 인프라·주거,77.4085365,4,의료공급 접근|주거환경|대중교통 접근,medium_low,candidate_after_validation
+21080610,북구,만덕3동,living_services_settlement,생활 인프라·주거,77.3810975,4,의료공급 접근|주거환경|대중교통 접근,medium_low,candidate_after_validation
+21090590,해운대구,반여3동,living_services_settlement,생활 인프라·주거,77.003049,4,교육시설 접근·공급|주거환경|대중교통 접근,medium_low,candidate_after_validation
+21150540,사상구,모라3동,living_services_settlement,생활 인프라·주거,72.8689025,4,주거환경,medium_low,candidate_after_validation
+21080580,북구,덕천3동,living_services_settlement,생활 인프라·주거,71.72865875,4,의료공급 접근|주거환경,medium_low,candidate_after_validation
+21100630,사하구,다대2동,living_services_settlement,생활 인프라·주거,68.15853675,4,대중교통 접근,medium_low,monitor
+21090650,해운대구,재송2동,living_services_settlement,생활 인프라·주거,68.137195,4,주거환경|대중교통 접근,medium_low,monitor
+21070580,남구,용호2동,living_services_settlement,생활 인프라·주거,67.2560975,4,교육시설 접근·공급|의료공급 접근|대중교통 접근,medium_low,monitor
+21100560,사하구,하단1동,living_services_settlement,생활 인프라·주거,66.496951,4,교육시설 접근·공급|주거환경|대중교통 접근,medium_low,monitor
+21080530,북구,구포3동,living_services_settlement,생활 인프라·주거,65.509146,4,의료공급 접근,medium_low,monitor
+21040670,영도구,동삼3동,living_services_settlement,생활 인프라·주거,65.36585375,4,의료공급 접근|주거환경,medium_low,monitor
+21030510,동구,초량1동,living_services_settlement,생활 인프라·주거,65.3262195,4,대중교통 접근,low,monitor
+21090620,해운대구,반송2동,living_services_settlement,생활 인프라·주거,65.09451250000001,4,대중교통 접근,medium_low,monitor
+21020630,서구,초장동,living_services_settlement,생활 인프라·주거,64.878049,4,의료공급 접근|주거환경,medium_low,monitor
+21100520,사하구,괴정2동,living_services_settlement,생활 인프라·주거,64.823171,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21030560,동구,수정1동,living_services_settlement,생활 인프라·주거,64.789634,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21070600,남구,용호4동,living_services_settlement,생활 인프라·주거,64.484756,4,교육시설 접근·공급|주거환경,medium_low,monitor
+21050660,부산진구,부암3동,living_services_settlement,생활 인프라·주거,64.20121975,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21100570,사하구,하단2동,living_services_settlement,생활 인프라·주거,63.53963375,4,대중교통 접근,medium_low,monitor
+21100540,사하구,괴정4동,living_services_settlement,생활 인프라·주거,63.4756095,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21070590,남구,용호3동,living_services_settlement,생활 인프라·주거,62.90548775,4,주거환경|대중교통 접근,medium_low,monitor
+21080550,북구,화명1동,living_services_settlement,생활 인프라·주거,62.6554875,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21150520,사상구,모라1동,living_services_settlement,생활 인프라·주거,62.32317075,4,주거환경,medium_low,monitor
+21050760,부산진구,개금3동,living_services_settlement,생활 인프라·주거,62.07317075,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21150600,사상구,주례1동,living_services_settlement,생활 인프라·주거,62.05487825,4,의료공급 접근,medium_low,monitor
+21100590,사하구,신평2동,living_services_settlement,생활 인프라·주거,61.899390499999996,4,교육시설 접근·공급,medium_low,monitor
+21020680,서구,암남동,living_services_settlement,생활 인프라·주거,61.850609999999996,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
+21050800,부산진구,당감1동,living_services_settlement,생활 인프라·주거,61.493902500000004,4,주거환경|대중교통 접근,medium_low,monitor
+21110610,금정구,장전1동,living_services_settlement,생활 인프라·주거,61.39939025,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21020690,서구,남부민2동,living_services_settlement,생활 인프라·주거,61.38414625,4,주거환경,medium_low,monitor
+21030700,동구,좌천동,living_services_settlement,생활 인프라·주거,61.344511999999995,4,의료공급 접근,medium_low,monitor
+21050750,부산진구,개금2동,living_services_settlement,생활 인프라·주거,61.158536500000004,4,주거환경,medium_low,monitor
+21140540,수영구,망미1동,living_services_settlement,생활 인프라·주거,61.155487750000006,4,의료공급 접근|주거환경,medium_low,monitor
+21090580,해운대구,반여2동,living_services_settlement,생활 인프라·주거,60.972561,4,교육시설 접근·공급|대중교통 접근,medium_low,monitor
+21030590,동구,수정4동,living_services_settlement,생활 인프라·주거,60.87500025,4,교육시설 접근·공급|주거환경,medium_low,monitor
+21100660,사하구,감천2동,living_services_settlement,생활 인프라·주거,60.50304849999999,4,주거환경,medium_low,monitor
+21140600,수영구,민락동,living_services_settlement,생활 인프라·주거,60.2408535,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21040690,영도구,봉래2동,living_services_settlement,생활 인프라·주거,59.91768275,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
+21050680,부산진구,당감2동,living_services_settlement,생활 인프라·주거,59.79573175,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21090690,해운대구,좌4동,living_services_settlement,생활 인프라·주거,59.7408535,4,교육시설 접근·공급|의료공급 접근|대중교통 접근,medium_low,monitor
+21110700,금정구,구서2동,living_services_settlement,생활 인프라·주거,59.71646375,4,대중교통 접근,medium_low,monitor
+21140560,수영구,광안1동,living_services_settlement,생활 인프라·주거,59.429878,4,대중교통 접근,medium_low,monitor
+21040550,영도구,영선2동,living_services_settlement,생활 인프라·주거,59.35670725,4,주거환경,medium_low,monitor
+21120530,강서구,강동동,living_services_settlement,생활 인프라·주거,58.945122000000005,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
+21020650,서구,남부민1동,living_services_settlement,생활 인프라·주거,58.417683,4,주거환경,medium_low,monitor
+21030550,동구,초량6동,living_services_settlement,생활 인프라·주거,58.31097575,4,의료공급 접근|주거환경,medium_low,monitor
+21100580,사하구,신평1동,living_services_settlement,생활 인프라·주거,57.88719475,4,주거환경,medium_low,monitor
+21110720,금정구,서3동,living_services_settlement,생활 인프라·주거,57.503049000000004,4,주거환경|대중교통 접근,medium_low,monitor
+21130530,연제구,거제3동,living_services_settlement,생활 인프라·주거,57.1646345,4,주거환경|대중교통 접근,medium_low,monitor
+21100530,사하구,괴정3동,living_services_settlement,생활 인프라·주거,57.0,4,주거환경|대중교통 접근,medium_low,monitor
+21050840,부산진구,범천2동,living_services_settlement,생활 인프라·주거,56.83536625,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21040680,영도구,신선동,living_services_settlement,생활 인프라·주거,56.823170749999996,4,의료공급 접근|주거환경,medium_low,monitor
+21110730,금정구,금사회동동,living_services_settlement,생활 인프라·주거,56.66158575,4,교육시설 접근·공급|주거환경,medium_low,monitor
+21030600,동구,수정5동,living_services_settlement,생활 인프라·주거,56.496950999999996,4,의료공급 접근|주거환경,medium_low,monitor
+21010600,중구,영주2동,living_services_settlement,생활 인프라·주거,56.262195,4,의료공급 접근|주거환경,medium_low,monitor
+21070680,남구,문현3동,living_services_settlement,생활 인프라·주거,56.112805,4,대중교통 접근,medium_low,monitor
+21150560,사상구,덕포2동,living_services_settlement,생활 인프라·주거,56.10061,4,주거환경,medium_low,monitor
+21010560,중구,부평동,living_services_settlement,생활 인프라·주거,56.024390249999996,4,,medium_low,monitor
+21010570,중구,광복동,living_services_settlement,생활 인프라·주거,55.96341475,4,주거환경,low,monitor
+21150630,사상구,학장동,living_services_settlement,생활 인프라·주거,55.92378075,4,주거환경,medium_low,monitor
+21120550,강서구,가락동,living_services_settlement,생활 인프라·주거,55.8384145,4,교육시설 접근·공급|주거환경,medium_low,monitor
+21150640,사상구,엄궁동,living_services_settlement,생활 인프라·주거,55.68597575,4,대중교통 접근,medium_low,monitor
+21050640,부산진구,부암1동,living_services_settlement,생활 인프라·주거,55.6158535,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21130620,연제구,연산8동,living_services_settlement,생활 인프라·주거,55.46951225,4,대중교통 접근,medium_low,monitor
+21040630,영도구,청학1동,living_services_settlement,생활 인프라·주거,55.46036575,4,주거환경,medium_low,monitor
+21030680,동구,범일5동,living_services_settlement,생활 인프라·주거,55.42987775,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
+21110510,금정구,서1동,living_services_settlement,생활 인프라·주거,55.2957315,4,주거환경,medium_low,monitor
+21080540,북구,금곡동,living_services_settlement,생활 인프라·주거,55.17987775,4,의료공급 접근,medium_low,monitor
+21130630,연제구,연산9동,living_services_settlement,생활 인프라·주거,55.1707315,4,대중교통 접근,medium_low,monitor
+21090720,해운대구,반송1동,living_services_settlement,생활 인프라·주거,55.003049,4,교육시설 접근·공급|주거환경,medium_low,monitor
+21040640,영도구,청학2동,living_services_settlement,생활 인프라·주거,54.804878,4,교육시설 접근·공급,medium_low,monitor
+21040590,영도구,봉래1동,living_services_settlement,생활 인프라·주거,54.512195000000006,4,교육시설 접근·공급|주거환경,medium_low,monitor
+21140530,수영구,수영동,living_services_settlement,생활 인프라·주거,54.43292700000001,4,주거환경|대중교통 접근,medium_low,monitor
+21080520,북구,구포2동,living_services_settlement,생활 인프라·주거,54.262195250000005,4,,medium_low,monitor
+21140570,수영구,광안2동,living_services_settlement,생활 인프라·주거,54.222561,4,대중교통 접근,medium_low,monitor
+21110570,금정구,부곡1동,living_services_settlement,생활 인프라·주거,54.18902425,4,주거환경,medium_low,monitor
+21130550,연제구,연산1동,living_services_settlement,생활 인프라·주거,54.0182925,4,대중교통 접근,medium_low,monitor
+21110600,금정구,부곡4동,living_services_settlement,생활 인프라·주거,53.92682925,4,주거환경,medium_low,monitor
+21150510,사상구,삼락동,living_services_settlement,생활 인프라·주거,53.89939025,4,교육시설 접근·공급|주거환경,medium_low,monitor
+21090750,해운대구,우3동,living_services_settlement,생활 인프라·주거,53.5060975,4,대중교통 접근,medium_low,monitor
+21100510,사하구,괴정1동,living_services_settlement,생활 인프라·주거,53.49085375,4,주거환경|대중교통 접근,medium_low,monitor
+21110670,금정구,청룡노포동,living_services_settlement,생활 인프라·주거,53.469512,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
+21070660,남구,문현1동,living_services_settlement,생활 인프라·주거,53.46036599999999,4,의료공급 접근,medium_low,monitor
+21050550,부산진구,초읍동,living_services_settlement,생활 인프라·주거,53.265243999999996,4,,medium_low,monitor
+21040660,영도구,동삼2동,living_services_settlement,생활 인프라·주거,52.94817075,4,교육시설 접근·공급,medium_low,monitor
+21120510,강서구,대저1동,living_services_settlement,생활 인프라·주거,52.887195,4,교육시설 접근·공급|주거환경,medium_low,monitor
+21150620,사상구,주례3동,living_services_settlement,생활 인프라·주거,52.84451225,4,주거환경,medium_low,monitor
+21110680,금정구,남산동,living_services_settlement,생활 인프라·주거,52.18902425,4,,medium_low,monitor
+21060600,동래구,사직3동,living_services_settlement,생활 인프라·주거,52.05792675,4,대중교통 접근,medium_low,monitor
+21150550,사상구,덕포1동,living_services_settlement,생활 인프라·주거,52.0030495,4,,medium_low,monitor
+21050540,부산진구,연지동,living_services_settlement,생활 인프라·주거,51.996951499999994,4,대중교통 접근,medium_low,monitor
+21090560,해운대구,송정동,living_services_settlement,생활 인프라·주거,51.689024499999995,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
+21110640,금정구,선두구동,living_services_settlement,생활 인프라·주거,51.57926825,4,교육시설 접근·공급,medium_low,monitor
+21100550,사하구,당리동,living_services_settlement,생활 인프라·주거,51.53048775,4,주거환경,medium_low,monitor
+21020510,서구,동대신1동,living_services_settlement,생활 인프라·주거,51.408536749999996,4,,medium_low,monitor
+21070570,남구,용호1동,living_services_settlement,생활 인프라·주거,51.22256125,4,대중교통 접근,medium_low,monitor
+21080590,북구,만덕1동,living_services_settlement,생활 인프라·주거,50.91158525,4,교육시설 접근·공급,medium_low,monitor
+21110710,금정구,금성동,living_services_settlement,생활 인프라·주거,50.46036575,4,교육시설 접근·공급,medium_low,monitor
+21090540,해운대구,중2동,living_services_settlement,생활 인프라·주거,50.33231725,4,교육시설 접근·공급,medium_low,monitor
+21010520,중구,동광동,living_services_settlement,생활 인프라·주거,50.134146,4,주거환경,medium_low,monitor
+21090680,해운대구,좌3동,living_services_settlement,생활 인프라·주거,49.996951,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21010590,중구,영주1동,living_services_settlement,생활 인프라·주거,49.44512225,4,,medium_low,monitor
+21080510,북구,구포1동,living_services_settlement,생활 인프라·주거,49.07621925,4,,medium_low,monitor
+21090730,해운대구,우1동,living_services_settlement,생활 인프라·주거,49.06402425,4,대중교통 접근,medium_low,monitor
+21080600,북구,만덕2동,living_services_settlement,생활 인프라·주거,48.591463250000004,4,,medium_low,monitor
+21070620,남구,감만1동,living_services_settlement,생활 인프라·주거,48.496951249999995,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
+21070690,남구,문현4동,living_services_settlement,생활 인프라·주거,48.3963415,4,주거환경,medium_low,monitor
+21150570,사상구,괘법동,living_services_settlement,생활 인프라·주거,48.12195125,4,교육시설 접근·공급|대중교통 접근,medium_low,monitor
+21140550,수영구,망미2동,living_services_settlement,생활 인프라·주거,48.097561,4,의료공급 접근,medium_low,monitor
+21100650,사하구,감천1동,living_services_settlement,생활 인프라·주거,48.021341500000005,4,,medium_low,monitor
+21100640,사하구,구평동,living_services_settlement,생활 인프라·주거,47.887195500000004,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
+21020570,서구,서대신4동,living_services_settlement,생활 인프라·주거,47.85670775,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
+21150610,사상구,주례2동,living_services_settlement,생활 인프라·주거,47.609756,4,의료공급 접근,medium_low,monitor
+21070670,남구,문현2동,living_services_settlement,생활 인프라·주거,47.41463400000001,4,주거환경,medium_low,monitor
+21080620,북구,화명2동,living_services_settlement,생활 인프라·주거,47.01829275,4,의료공급 접근,medium_low,monitor
+21030520,동구,초량2동,living_services_settlement,생활 인프라·주거,46.887195,4,주거환경,medium_low,monitor
+21130510,연제구,거제1동,living_services_settlement,생활 인프라·주거,46.579268,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21120600,강서구,명지2동,living_services_settlement,생활 인프라·주거,46.411585,4,,medium_low,monitor
+21070610,남구,용당동,living_services_settlement,생활 인프라·주거,46.28048775,4,의료공급 접근,medium_low,monitor
+21120520,강서구,대저2동,living_services_settlement,생활 인프라·주거,46.1859755,4,교육시설 접근·공급,medium_low,monitor
+21020590,서구,부민동,living_services_settlement,생활 인프라·주거,45.893293,4,,medium_low,monitor
+21080570,북구,덕천2동,living_services_settlement,생활 인프라·주거,45.771341500000005,4,주거환경,medium_low,monitor
+21060640,동래구,명장2동,living_services_settlement,생활 인프라·주거,45.7439025,4,주거환경,medium_low,monitor
+21510330,기장군,철마면,living_services_settlement,생활 인프라·주거,45.557927,4,교육시설 접근·공급,medium_low,monitor
+21060590,동래구,사직2동,living_services_settlement,생활 인프라·주거,45.484756000000004,4,의료공급 접근,medium_low,monitor
+21080560,북구,덕천1동,living_services_settlement,생활 인프라·주거,45.43902475,4,,medium_low,monitor
+21030530,동구,초량3동,living_services_settlement,생활 인프라·주거,45.378048750000005,4,교육시설 접근·공급,medium_low,monitor
+21100600,사하구,장림1동,living_services_settlement,생활 인프라·주거,45.32012225,4,교육시설 접근·공급,medium_low,monitor
+21050570,부산진구,양정2동,living_services_settlement,생활 인프라·주거,45.118902500000004,4,대중교통 접근,medium_low,monitor
+21130570,연제구,연산3동,living_services_settlement,생활 인프라·주거,45.08536625,4,,medium_low,monitor
+21020520,서구,동대신2동,living_services_settlement,생활 인프라·주거,44.94207324999999,4,주거환경,medium_low,monitor
+21030570,동구,수정2동,living_services_settlement,생활 인프라·주거,44.9237805,4,,medium_low,monitor
+21130540,연제구,거제4동,living_services_settlement,생활 인프라·주거,44.908536500000004,4,의료공급 접근|대중교통 접근,medium_low,monitor
+21010580,중구,남포동,living_services_settlement,생활 인프라·주거,44.70731725,4,주거환경,medium_low,monitor
+21140510,수영구,남천1동,living_services_settlement,생활 인프라·주거,44.56707325,4,,medium_low,monitor
+21150650,사상구,감전동,living_services_settlement,생활 인프라·주거,44.405488,4,교육시설 접근·공급,medium_low,monitor
+21510120,기장군,장안읍,living_services_settlement,생활 인프라·주거,44.38719525,4,교육시설 접근·공급,medium_low,monitor
+21020540,서구,서대신1동,living_services_settlement,생활 인프라·주거,44.11585375,4,,medium_low,monitor
+21110580,금정구,부곡2동,living_services_settlement,생활 인프라·주거,44.02743925,4,대중교통 접근,medium_low,monitor
+21060510,동래구,수민동,living_services_settlement,생활 인프라·주거,43.945122,4,대중교통 접근,medium_low,monitor
+21110520,금정구,서2동,living_services_settlement,생활 인프라·주거,43.93902475,4,주거환경,medium_low,monitor
+21090640,해운대구,재송1동,living_services_settlement,생활 인프라·주거,43.871950999999996,4,,medium_low,monitor
+21010510,중구,중앙동,living_services_settlement,생활 인프라·주거,43.823171,4,주거환경,medium_low,monitor
+21100620,사하구,다대1동,living_services_settlement,생활 인프라·주거,43.701219249999994,4,,medium_low,monitor
+21050740,부산진구,개금1동,living_services_settlement,생활 인프라·주거,43.54878025,4,대중교통 접근,medium_low,monitor
+21070630,남구,감만2동,living_services_settlement,생활 인프라·주거,43.4908535,4,,medium_low,monitor
+21050810,부산진구,가야1동,living_services_settlement,생활 인프라·주거,43.4542685,4,,medium_low,monitor
+21140590,수영구,광안4동,living_services_settlement,생활 인프라·주거,43.42682925,4,대중교통 접근,medium_low,monitor
+21070710,남구,우암동,living_services_settlement,생활 인프라·주거,43.42073175,4,주거환경,medium_low,monitor
+21120562,강서구,신호동,living_services_settlement,생활 인프라·주거,43.34451225,4,의료공급 접근,medium_low,monitor
+21120580,강서구,가덕도동,living_services_settlement,생활 인프라·주거,43.2591465,4,교육시설 접근·공급,medium_low,monitor
+21090700,해운대구,반여1동,living_services_settlement,생활 인프라·주거,43.118902250000005,4,,medium_low,monitor
+21060520,동래구,복산동,living_services_settlement,생활 인프라·주거,42.743902250000005,4,주거환경,medium_low,monitor
+21130560,연제구,연산2동,living_services_settlement,생활 인프라·주거,42.67987825,4,,medium_low,monitor
+21100610,사하구,장림2동,living_services_settlement,생활 인프라·주거,42.667683249999996,4,,medium_low,monitor
+21510130,기장군,정관읍,living_services_settlement,생활 인프라·주거,42.60365875,4,의료공급 접근,medium_low,monitor
+21120561,강서구,녹산동,living_services_settlement,생활 인프라·주거,42.56707325,4,교육시설 접근·공급|의료공급 접근,medium_low,monitor
+21080630,북구,화명3동,living_services_settlement,생활 인프라·주거,42.54878024999999,4,대중교통 접근,medium_low,monitor
+21070540,남구,대연4동,living_services_settlement,생활 인프라·주거,42.3140245,4,의료공급 접근,medium_low,monitor
+21030710,동구,범일1동,living_services_settlement,생활 인프라·주거,42.21036575,4,주거환경,medium_low,monitor
+21060620,동래구,안락2동,living_services_settlement,생활 인프라·주거,42.16463425,4,,medium_low,monitor
+21130580,연제구,연산4동,living_services_settlement,생활 인프라·주거,41.920732,4,대중교통 접근,medium_low,monitor
+21020530,서구,동대신3동,living_services_settlement,생활 인프라·주거,41.84756075,4,,medium_low,monitor
+21130600,연제구,연산6동,living_services_settlement,생활 인프라·주거,41.83231725,4,,medium_low,monitor
+21040650,영도구,동삼1동,living_services_settlement,생활 인프라·주거,41.82317075,4,,medium_low,monitor
+21010540,중구,보수동,living_services_settlement,생활 인프라·주거,41.77743925,4,,medium_low,monitor
+21060630,동래구,명장1동,living_services_settlement,생활 인프라·주거,41.737805,4,,medium_low,monitor
+21120590,강서구,명지1동,living_services_settlement,생활 인프라·주거,41.734756250000004,4,,medium_low,monitor
+21510111,기장군,일광읍,living_services_settlement,생활 인프라·주거,41.6829265,4,교육시설 접근·공급,medium_low,monitor
+21090710,해운대구,반여4동,living_services_settlement,생활 인프라·주거,41.49390225,4,의료공급 접근,medium_low,monitor
+21040530,영도구,남항동,living_services_settlement,생활 인프라·주거,40.91463425,4,주거환경,medium_low,monitor
+21020640,서구,충무동,living_services_settlement,생활 인프라·주거,40.725609750000004,4,,medium_low,monitor
+21130520,연제구,거제2동,living_services_settlement,생활 인프라·주거,40.4786585,4,,medium_low,monitor
+21060610,동래구,안락1동,living_services_settlement,생활 인프라·주거,40.298781,4,주거환경,medium_low,monitor
+21090740,해운대구,우2동,living_services_settlement,생활 인프라·주거,40.28963375,4,대중교통 접근,medium_low,monitor
+21090670,해운대구,좌2동,living_services_settlement,생활 인프라·주거,39.820122,4,대중교통 접근,medium_low,monitor
+21050770,부산진구,범천1동,living_services_settlement,생활 인프라·주거,39.8170735,4,대중교통 접근,medium_low,monitor
+21040540,영도구,영선1동,living_services_settlement,생활 인프라·주거,39.783536500000004,4,교육시설 접근·공급,medium_low,monitor
+21070550,남구,대연5동,living_services_settlement,생활 인프라·주거,39.585366,4,,medium_low,monitor
+21060560,동래구,온천2동,living_services_settlement,생활 인프라·주거,39.50609725,4,,medium_low,monitor
+21090530,해운대구,중1동,living_services_settlement,생활 인프라·주거,39.0213415,4,대중교통 접근,medium_low,monitor
+21050610,부산진구,전포2동,living_services_settlement,생활 인프라·주거,38.640243749999996,4,,medium_low,monitor
+21060550,동래구,온천1동,living_services_settlement,생활 인프라·주거,38.5609755,4,대중교통 접근,medium_low,monitor
+21020610,서구,아미동,living_services_settlement,생활 인프라·주거,38.5487805,4,주거환경,medium_low,monitor
+21060570,동래구,온천3동,living_services_settlement,생활 인프라·주거,38.2317075,4,대중교통 접근,medium_low,monitor
+21070560,남구,대연6동,living_services_settlement,생활 인프라·주거,37.57012225,4,,medium_low,monitor
+21070530,남구,대연3동,living_services_settlement,생활 인프라·주거,37.417683,4,,medium_low,monitor
+21510110,기장군,기장읍,living_services_settlement,생활 인프라·주거,36.375,4,,medium_low,monitor
+21020560,서구,서대신3동,living_services_settlement,생활 인프라·주거,35.71036575,4,,medium_low,monitor
+21050700,부산진구,당감4동,living_services_settlement,생활 인프라·주거,35.31402425,4,,medium_low,monitor
+21140580,수영구,광안3동,living_services_settlement,생활 인프라·주거,34.68292675,4,,medium_low,monitor
+21110590,금정구,부곡3동,living_services_settlement,생활 인프라·주거,34.24390225,4,교육시설 접근·공급,medium_low,monitor
+21110740,금정구,장전2동,living_services_settlement,생활 인프라·주거,34.082316999999996,4,,medium_low,monitor
+21130590,연제구,연산5동,living_services_settlement,생활 인프라·주거,32.006097749999995,4,대중교통 접근,medium_low,monitor
+21110690,금정구,구서1동,living_services_settlement,생활 인프라·주거,31.5365855,4,,medium_low,monitor
+21060580,동래구,사직1동,living_services_settlement,생활 인프라·주거,30.765243499999997,4,,medium_low,monitor
+21070700,남구,대연1동,living_services_settlement,생활 인프라·주거,29.871951250000002,4,,medium_low,monitor
+21050830,부산진구,전포1동,living_services_settlement,생활 인프라·주거,29.83536575,4,,medium_low,monitor
+21010530,중구,대청동,living_services_settlement,생활 인프라·주거,29.707317,4,,medium_low,monitor
+21030660,동구,범일2동,living_services_settlement,생활 인프라·주거,28.8353655,4,,medium_low,monitor
+21090660,해운대구,좌1동,living_services_settlement,생활 인프라·주거,27.012195249999998,4,,medium_low,monitor
+21060650,동래구,명륜동,living_services_settlement,생활 인프라·주거,26.93292675,4,,medium_low,monitor
+21050520,부산진구,부전2동,living_services_settlement,생활 인프라·주거,24.72561,4,,medium_low,monitor
+21050560,부산진구,양정1동,living_services_settlement,생활 인프라·주거,24.22256075,4,,medium_low,monitor
+21050820,부산진구,부전1동,living_services_settlement,생활 인프라·주거,18.09756075,4,,medium_low,monitor
 21150540,사상구,모라3동,socioeconomic_base,사회·경제 기반,95.585366,2,소득·복지수요|지역 고용기회,low,candidate_after_validation
 21080580,북구,덕천3동,socioeconomic_base,사회·경제 기반,93.8536585,2,소득·복지수요|지역 고용기회,low,candidate_after_validation
 21080540,북구,금곡동,socioeconomic_base,사회·경제 기반,93.804878,2,소득·복지수요|지역 고용기회,low,candidate_after_validation

@@ -12,7 +12,7 @@ screening. It does not show that ports or industrial complexes caused the exposu
 Run only COD-21 from the repository root with:
 
 ```bash
-docker compose run --rm jupyter python -m busan_imd.environmental_overlay
+docker compose run --rm jupyter python -m busan_imd.analysis.environmental_overlay
 ```
 
 - `data/processed/scores/2025/busan_admin_dong_environmental_overlay_2025.csv`: original B-IMD,

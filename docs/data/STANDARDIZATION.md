@@ -13,13 +13,13 @@
 저장소 루트에서 다음 명령을 실행한다.
 
 ```bash
-docker compose run --rm jupyter python -m busan_imd.standardization
+docker compose run --rm jupyter python -m busan_imd.processing.standardization
 ```
 
 학교·생활인구·대기질·버스 후보의 선행 가공은 다음 명령으로 재현한다.
 
 ```bash
-docker compose run --rm jupyter python -m busan_imd.candidate_processing --collect-coordinates
+docker compose run --rm jupyter python -m busan_imd.processing.candidate_processing --collect-coordinates
 ```
 
 생성물은 다음과 같다.

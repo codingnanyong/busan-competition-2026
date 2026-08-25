@@ -2,7 +2,7 @@
 
 import pandas as pd
 
-from busan_imd.income_inference import (
+from busan_imd.processing.income_inference import (
     MODEL_FEATURE_DATASET_IDS,
     MODEL_PATTERN_DATASET_IDS,
     largest_remainder,

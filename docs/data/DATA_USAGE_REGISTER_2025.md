@@ -1,7 +1,7 @@
 # 2025년 데이터 사용 구분표
 
 수집했다는 사실과 IMD 점수에 사용한다는 결정은 구분한다. `DATASET_AUDIT.csv`에 등록된
-40개 데이터셋은 모두 출처와 상태를 관리하지만, 공간단위·기준기간·완전성 검증을 통과한
+42개 데이터셋은 모두 출처와 상태를 관리하지만, 공간단위·기준기간·완전성 검증을 통과한
 자료만 점수 후보가 된다.
 
 ## 표준 프로필 및 잠정 점수 후보
@@ -17,7 +17,7 @@
 | 대중교통 접근성 | `HOU-BUSSTOP-001` |
 | 안전서비스 접근성 | `SAF-BUSAN-CCTV-001` |
 | 폭염 대응시설 접근성 | `ENV-HEAT-SHELTER-001` |
-| 교육시설 접근성 | `EDU-SCHOOL-001` |
+| 교육시설 접근성·공급 | `EDU-SCHOOL-001`, `EDU-SCHOOLINFO-2025-001` |
 | 대기오염 노출 추정 | `ENV-AIR-HEIS-DAILY-2025-001` |
 
 이 목록은 모두 최종 확정 지표가 아니라 `provisional_scoring_proxy`다. 최종 가중치와
@@ -50,6 +50,7 @@
 - `SAF-BUSAN-POLICE-CRIME-001`: 경찰서 관할 5대 범죄
 - `DEM-BUSAN-LIVING-001`: 생활인구
 - `TRN-BUSAN-VILLAGE-BUS-001`: 구·군 마을버스 공급 맥락
+- `TRN-BUSAN-BIMS-CURRENT-001`: 현재 노선별 배차간격·첫·막차 검증(구간을 2025 점수에는 미반영)
 - `SOC-BUSAN-ELDERLY-ALONE-001`: 기준일 혼합 검증 및 소득 추정 설명변수
 - `SAF-BUSAN-POLICE-TREND-001`: 부산 전체 교통사고 추세
 - `SAF-BUSAN-RISK-AREA-001`: 사고위험지점 공간 검증

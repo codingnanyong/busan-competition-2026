@@ -23,7 +23,7 @@ from busan_imd.core.provenance import (
     cutoff_status,
     ensure_secret_free,
 )
-from busan_imd.data_catalog import read_catalog
+from busan_imd.processing.data_catalog import read_catalog
 from busan_imd.sources.sgis import authenticate
 
 CUTOFF = ANALYSIS_CUTOFF
@@ -75,6 +75,7 @@ API_SOURCES = {
     },
 }
 
+
 def public_portal_url(endpoint: str, service_key: str, result_type: str) -> str:
     """Build a portal URL without double-encoding its already encoded service key."""
     parameters = {"pageNo": "1", "numOfRows": "10000"}
@@ -111,6 +112,7 @@ def xml_summary(payload: bytes) -> tuple[int, dict[str, Any]]:
     if len(items) != total_count:
         raise ValueError(f"Expected {total_count} XML items, received {len(items)}")
     return total_count, {}
+
 
 def direct_download_entries(catalog_path: Path, audit_root: Path) -> list[dict[str, Any]]:
     """Verify and describe the direct downloads already present locally."""
@@ -177,9 +179,7 @@ def collect_sgis_company(
     path = output_root / "EMP-SGIS-001" / "sgis_company_2024.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes(payload)
-    return api_entry(
-        "EMP-SGIS-001", path, retrieved_at, len(rows), "eligible", parameters, source
-    )
+    return api_entry("EMP-SGIS-001", path, retrieved_at, len(rows), "eligible", parameters, source)
 
 
 def api_entry(
@@ -236,9 +236,7 @@ def collect_portal_api(
     notes = "Record-level observation date is unavailable; do not score until cutoff is verified."
     if dataset_id == "ENV-AIR-REALTIME-001":
         controls = sorted(
-            str(item["controlnumber"])
-            for item in summary["items"]
-            if item.get("controlnumber")
+            str(item["controlnumber"]) for item in summary["items"] if item.get("controlnumber")
         )
         if not controls:
             raise ValueError("Air-quality response has no controlnumber")
@@ -326,8 +324,8 @@ def main() -> int:
     require_values(config, tuple(required), args.env_file)
 
     retrieved_at = datetime.now(UTC).replace(microsecond=0).isoformat()
-    entries = [] if args.skip_direct_downloads else direct_download_entries(
-        args.catalog, args.audit_root
+    entries = (
+        [] if args.skip_direct_downloads else direct_download_entries(args.catalog, args.audit_root)
     )
     if "EMP-SGIS-001" in selected:
         entries.append(

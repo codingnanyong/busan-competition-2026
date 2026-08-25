@@ -12,7 +12,7 @@ import numpy as np
 import pandas as pd
 
 from busan_imd.core.artifacts import sha256_file, write_json
-from busan_imd.standardization import load_boundaries
+from busan_imd.processing.standardization import load_boundaries
 
 DEFAULT_PROFILE = Path(
     "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv"
@@ -39,9 +39,7 @@ def numeric_indicator_columns(profile: pd.DataFrame) -> list[str]:
     ]
 
 
-def summarize_indicators(
-    profile: pd.DataFrame, dictionary: pd.DataFrame
-) -> pd.DataFrame:
+def summarize_indicators(profile: pd.DataFrame, dictionary: pd.DataFrame) -> pd.DataFrame:
     """Summarize distributions, missingness, zeroes, and IQR outliers."""
     metadata = dictionary.set_index("column_name")
     rows: list[dict[str, Any]] = []
@@ -184,13 +182,9 @@ def spatial_outputs(
     return spatial, edges, isolated
 
 
-def district_summary(
-    profile: pd.DataFrame, summary: pd.DataFrame
-) -> pd.DataFrame:
+def district_summary(profile: pd.DataFrame, summary: pd.DataFrame) -> pd.DataFrame:
     """Return long-form district summaries for scoring candidates."""
-    candidates = summary.loc[
-        summary["analysis_role"] == SCORING_ROLE, "indicator"
-    ].tolist()
+    candidates = summary.loc[summary["analysis_role"] == SCORING_ROLE, "indicator"].tolist()
     rows: list[dict[str, Any]] = []
     for district, group in profile.groupby("sigungu_name", sort=True):
         for column in candidates:
@@ -236,9 +230,7 @@ def build(
         "profile_record_count": len(profile),
         "profile_column_count": len(profile.columns),
         "numeric_indicator_count": len(summary),
-        "scoring_candidate_numeric_count": int(
-            (summary["analysis_role"] == SCORING_ROLE).sum()
-        ),
+        "scoring_candidate_numeric_count": int((summary["analysis_role"] == SCORING_ROLE).sum()),
         "constant_numeric_columns": constant,
         "columns_with_missing_values": dict(missing.itertuples(index=False, name=None)),
         "iqr_outlier_count": int(summary["iqr_outlier_count"].sum()),

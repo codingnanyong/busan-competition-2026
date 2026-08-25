@@ -13,8 +13,8 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import adjusted_rand_score, silhouette_score
 from sklearn.preprocessing import StandardScaler
 
+from busan_imd.analysis.priority_areas import DEFAULT_PRIORITY_OUTPUT
 from busan_imd.core.artifacts import sha256_file, write_json
-from busan_imd.priority_areas import DEFAULT_PRIORITY_OUTPUT
 
 DEFAULT_OUTPUT_DIR = Path("data/processed/scores/2025")
 DEFAULT_ASSIGNMENT_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_admin_dong_deprivation_clusters_2025.csv"
@@ -130,13 +130,10 @@ def _canonical_labels(
                 "cluster_label": f"{ordered[0]}_{ordered[1]}",
                 "member_count": len(member_values),
                 "mean_excess_points": {
-                    domain: round(float(means[f"{domain}_excess_points"]), 6)
-                    for domain in DOMAINS
+                    domain: round(float(means[f"{domain}_excess_points"]), 6) for domain in DOMAINS
                 },
                 "mean_standardized_excess": {
-                    domain: round(
-                        float(standardized_means[f"{domain}_excess_points"]), 6
-                    )
+                    domain: round(float(standardized_means[f"{domain}_excess_points"]), 6)
                     for domain in DOMAINS
                 },
             }
@@ -234,9 +231,7 @@ def build(priority_areas: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, dic
         },
         "recommended_for_policy_typology": recommended,
         "decision": (
-            "use_as_exploratory_policy_typology"
-            if recommended
-            else "do_not_use_as_policy_typology"
+            "use_as_exploratory_policy_typology" if recommended else "do_not_use_as_policy_typology"
         ),
         "cluster_summaries": cluster_summaries,
     }
@@ -257,9 +252,7 @@ def run(
     assignments.to_csv(
         assignment_output_path, index=False, encoding="utf-8-sig", lineterminator="\n"
     )
-    metrics.to_csv(
-        metrics_output_path, index=False, encoding="utf-8-sig", lineterminator="\n"
-    )
+    metrics.to_csv(metrics_output_path, index=False, encoding="utf-8-sig", lineterminator="\n")
     report.update(
         {
             "input_path": priority_path.as_posix(),
