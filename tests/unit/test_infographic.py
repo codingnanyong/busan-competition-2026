@@ -7,7 +7,7 @@ import pandas as pd
 import pytest
 from shapely.geometry import box
 
-import busan_imd.infographic as infographic
+import busan_imd.infographic.rendering as infographic_rendering
 from busan_imd.infographic import (
     build_action_profiles,
     render,
@@ -88,7 +88,7 @@ def test_render_writes_one_page_vector_pdf_and_preview(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     composite, boundaries, priority, overlay, policy = inputs()
-    monkeypatch.setattr(infographic, "_font_family", lambda: "DejaVu Sans")
+    monkeypatch.setattr(infographic_rendering, "_font_family", lambda: "DejaVu Sans")
     svg_path = tmp_path / "visual.svg"
     pdf_path = tmp_path / "visual.pdf"
     png_path = tmp_path / "visual.png"
@@ -133,11 +133,13 @@ def test_action_profiles_and_map_cover_every_dong(tmp_path) -> None:
                 "category": category,
                 "category_label": label,
                 "major_category": (
-                    "social" if category in {"income_support_need", "local_employment_opportunity"}
+                    "social"
+                    if category in {"income_support_need", "local_employment_opportunity"}
                     else "services"
                 ),
                 "major_category_weight": (
-                    0.5 if category in {"income_support_need", "local_employment_opportunity"}
+                    0.5
+                    if category in {"income_support_need", "local_employment_opportunity"}
                     else 1 / 6
                 ),
                 "category_score_0_100": 75,
@@ -291,7 +293,7 @@ def test_render_rejects_overlay_code_drift(tmp_path) -> None:
 def test_font_selection_fails_clearly_without_hangul_font(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    monkeypatch.setattr(infographic, "findSystemFonts", lambda: [])
+    monkeypatch.setattr(infographic_rendering, "findSystemFonts", lambda: [])
 
     with pytest.raises(RuntimeError, match="Noto Sans CJK"):
-        infographic._font_family()
+        infographic_rendering._font_family()
