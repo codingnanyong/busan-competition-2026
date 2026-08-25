@@ -4,7 +4,7 @@ import json
 
 import pandas as pd
 
-from busan_imd.candidate_processing import CandidatePaths, process_transport
+from busan_imd.processing.candidate_processing import CandidatePaths, process_transport
 
 
 def test_process_transport_reconciles_route_totals_and_keeps_district_unit(tmp_path) -> None:

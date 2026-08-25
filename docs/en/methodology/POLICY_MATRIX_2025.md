@@ -25,7 +25,7 @@ action from automatic recommendation.
 Run only COD-22 with:
 
 ```bash
-docker compose run --rm jupyter python -m busan_imd.policy_matrix
+docker compose run --rm jupyter python -m busan_imd.analysis.policy_matrix
 ```
 
 - [POLICY_ACTION_CATALOG_2025.csv](../../data/POLICY_ACTION_CATALOG_2025.csv): action names,

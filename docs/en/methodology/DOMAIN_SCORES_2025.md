@@ -19,7 +19,7 @@ docker compose run --rm jupyter python scripts/rebuild_processed.py
 To regenerate only this stage:
 
 ```bash
-docker compose run --rm jupyter python -m busan_imd.domain_scores
+docker compose run --rm jupyter python -m busan_imd.analysis.domain_scores
 ```
 
 The executable contract is [DOMAIN_SCORE_SPEC_2025.csv](../../data/DOMAIN_SCORE_SPEC_2025.csv).

@@ -20,7 +20,7 @@ docker compose run --rm jupyter python scripts/rebuild_processed.py
 영역 점수 이후 단계만 다시 생성하려면 다음을 실행한다.
 
 ```bash
-docker compose run --rm jupyter python -m busan_imd.composite_index
+docker compose run --rm jupyter python -m busan_imd.analysis.composite_index
 ```
 
 실행 계약은 [COMPOSITE_INDEX_SPEC_2025.csv](../data/COMPOSITE_INDEX_SPEC_2025.csv), 입력·출력

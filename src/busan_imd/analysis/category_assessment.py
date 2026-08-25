@@ -10,8 +10,8 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
+from busan_imd.analysis.domain_scores import DEFAULT_PROFILE, percentile_score
 from busan_imd.core.artifacts import sha256_file, write_json
-from busan_imd.domain_scores import DEFAULT_PROFILE, percentile_score
 
 DEFAULT_SPEC = Path("docs/data/CATEGORY_ASSESSMENT_SPEC_2025.csv")
 DEFAULT_POLICY_CATALOG = Path("docs/data/CATEGORY_POLICY_CATALOG_2025.csv")
@@ -225,8 +225,7 @@ def build(
     ).sort_values(["category", "category_score_0_100"], ascending=[True, False])
     major_source = category_scores.assign(
         _major_weighted_score=(
-            category_scores["category_score_0_100"]
-            * category_scores["major_category_weight"]
+            category_scores["category_score_0_100"] * category_scores["major_category_weight"]
         )
     )
     major_scores = (
@@ -254,9 +253,9 @@ def build(
         how="left",
         validate="one_to_one",
     )
-    major_scores["triggered_child_categories"] = major_scores[
-        "triggered_child_categories"
-    ].fillna("")
+    major_scores["triggered_child_categories"] = major_scores["triggered_child_categories"].fillna(
+        ""
+    )
     major_confidence = (
         category_scores.assign(
             _confidence_rank=category_scores["category_confidence"].map(confidence_rank)

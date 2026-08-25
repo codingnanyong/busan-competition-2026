@@ -3,7 +3,7 @@ from __future__ import annotations
 import pandas as pd
 import pytest
 
-from busan_imd.data_quality import build, column_spec
+from busan_imd.processing.data_quality import build, column_spec
 
 
 def test_column_spec_rejects_undocumented_columns() -> None:

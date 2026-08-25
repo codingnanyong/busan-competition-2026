@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from busan_imd.environmental_overlay import build, run
+from busan_imd.analysis.environmental_overlay import build, run
 
 
 def inputs() -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -54,9 +54,12 @@ def test_build_identifies_exact_top_quartile_and_double_burden() -> None:
         "high_air_only": 31,
         "neither": 154,
     }
-    assert report["spearman_correlations_with_particulate_free_b_imd"][
-        "particulate_exposure_score_0_100"
-    ] == 1.0
+    assert (
+        report["spearman_correlations_with_particulate_free_b_imd"][
+            "particulate_exposure_score_0_100"
+        ]
+        == 1.0
+    )
     assert report["port_industrial_overlay"]["status"] == (
         "not_evaluated_no_versioned_site_geometry"
     )

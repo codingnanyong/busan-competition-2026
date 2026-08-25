@@ -91,7 +91,7 @@
 ## 실행과 산출물
 
 ```bash
-docker compose run --rm jupyter python -m busan_imd.category_assessment
+docker compose run --rm jupyter python -m busan_imd.analysis.category_assessment
 docker compose run --rm jupyter python -m busan_imd.infographic
 ```
 

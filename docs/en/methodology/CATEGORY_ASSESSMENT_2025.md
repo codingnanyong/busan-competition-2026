@@ -62,7 +62,7 @@ low relative to denser Busan dongs. The centroid-radius limitation remains visib
 ## Run
 
 ```bash
-docker compose run --rm jupyter python -m busan_imd.category_assessment
+docker compose run --rm jupyter python -m busan_imd.analysis.category_assessment
 docker compose run --rm jupyter python -m busan_imd.infographic
 ```
 

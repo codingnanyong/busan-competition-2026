@@ -2,10 +2,10 @@
 
 from pathlib import Path
 
-from busan_imd.composite_index import DEFAULT_OUTPUT as _DEFAULT_COMPOSITE
-from busan_imd.environmental_overlay import DEFAULT_OUTPUT as _DEFAULT_OVERLAY
-from busan_imd.policy_matrix import DEFAULT_OUTPUT as _DEFAULT_POLICY_MATRIX
-from busan_imd.priority_areas import DEFAULT_PRIORITY_OUTPUT as _DEFAULT_PRIORITY_OUTPUT
+from busan_imd.analysis.composite_index import DEFAULT_OUTPUT as _DEFAULT_COMPOSITE
+from busan_imd.analysis.environmental_overlay import DEFAULT_OUTPUT as _DEFAULT_OVERLAY
+from busan_imd.analysis.policy_matrix import DEFAULT_OUTPUT as _DEFAULT_POLICY_MATRIX
+from busan_imd.analysis.priority_areas import DEFAULT_PRIORITY_OUTPUT as _DEFAULT_PRIORITY_OUTPUT
 
 DEFAULT_COMPOSITE = _DEFAULT_COMPOSITE
 DEFAULT_OVERLAY = _DEFAULT_OVERLAY

@@ -57,7 +57,7 @@
 
 ```powershell
 $env:PYTHONPATH = "src"
-python -m busan_imd.data_catalog docs/data/DATASET_AUDIT.csv --raw-dir data/raw/audit
+python -m busan_imd.processing.data_catalog docs/data/DATASET_AUDIT.csv --raw-dir data/raw/audit
 ```
 
 ## 기록 및 결측 규칙

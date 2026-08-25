@@ -9,7 +9,7 @@ COD-18은 기준 종합지수의 순위가 영역 가중치와 영역점수 이�
 ## 실행과 산출물
 
 ```bash
-docker compose run --rm jupyter python -m busan_imd.sensitivity_analysis
+docker compose run --rm jupyter python -m busan_imd.analysis.sensitivity_analysis
 ```
 
 시나리오 계약은

@@ -11,9 +11,9 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from busan_imd.composite_index import DEFAULT_DOMAIN_SCORES, DEFAULT_SPEC, load_weights
+from busan_imd.analysis.composite_index import DEFAULT_DOMAIN_SCORES, DEFAULT_SPEC, load_weights
+from busan_imd.analysis.domain_scores import IDENTITY_COLUMNS
 from busan_imd.core.artifacts import sha256_file, write_json
-from busan_imd.domain_scores import IDENTITY_COLUMNS
 
 DEFAULT_SCENARIOS = Path("docs/data/SENSITIVITY_SCENARIOS_2025.csv")
 DEFAULT_OUTPUT = Path("data/processed/scores/2025/busan_admin_dong_sensitivity_2025.csv")
@@ -246,9 +246,7 @@ def main() -> int:
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
     args = parser.parse_args()
-    report = run(
-        args.domain_scores, args.weight_spec, args.scenarios, args.output, args.report
-    )
+    report = run(args.domain_scores, args.weight_spec, args.scenarios, args.output, args.report)
     print(
         f"tested {report['scenario_count']} sensitivity scenarios across "
         f"{report['record_count']} administrative dongs"

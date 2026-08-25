@@ -11,15 +11,15 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from busan_imd.cluster_analysis import (
+from busan_imd.analysis.cluster_analysis import (
     DEFAULT_ASSIGNMENT_OUTPUT,
     FEATURE_COLUMNS,
 )
-from busan_imd.cluster_analysis import (
+from busan_imd.analysis.cluster_analysis import (
     DEFAULT_REPORT as DEFAULT_CLUSTER_REPORT,
 )
+from busan_imd.analysis.environmental_overlay import DEFAULT_OUTPUT as DEFAULT_OVERLAY
 from busan_imd.core.artifacts import sha256_file, write_json
-from busan_imd.environmental_overlay import DEFAULT_OUTPUT as DEFAULT_OVERLAY
 
 DEFAULT_CATALOG = Path("docs/data/POLICY_ACTION_CATALOG_2025.csv")
 DEFAULT_OUTPUT = Path("data/processed/scores/2025/busan_admin_dong_policy_matrix_2025.csv")
@@ -125,9 +125,7 @@ def _validate(
     if not set(catalog["implementation_difficulty"]).issubset(allowed_difficulties):
         raise ValueError("Implementation difficulty must be low, medium, or high")
 
-    numeric = assignments[["b_imd_rank", *FEATURE_COLUMNS]].apply(
-        pd.to_numeric, errors="raise"
-    )
+    numeric = assignments[["b_imd_rank", *FEATURE_COLUMNS]].apply(pd.to_numeric, errors="raise")
     if not np.isfinite(numeric).all().all():
         raise ValueError("Ranks and domain-excess values must be finite")
     assignments[["b_imd_rank", *FEATURE_COLUMNS]] = numeric
@@ -266,9 +264,7 @@ def build(
         )
 
     matrix = pd.DataFrame.from_records(records, columns=MATRIX_COLUMNS)
-    matrix["_trigger_group"] = np.where(
-        matrix["policy_trigger"].str.startswith("domain:"), 0, 1
-    )
+    matrix["_trigger_group"] = np.where(matrix["policy_trigger"].str.startswith("domain:"), 0, 1)
     matrix = matrix.sort_values(
         ["cluster_id", "_trigger_group", "policy_priority", "policy_trigger"],
         kind="stable",

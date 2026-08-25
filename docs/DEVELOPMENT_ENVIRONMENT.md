@@ -60,7 +60,7 @@ tests/           # 환경, 구조와 분석 코드 테스트
 재생성하려면 다음을 실행합니다.
 
 ```bash
-docker compose run --rm jupyter python -m busan_imd.standardization
+docker compose run --rm jupyter python -m busan_imd.processing.standardization
 ```
 
 세부 규칙과 현재 매칭 결과는 [2025 행정동 데이터 표준화와 검증](data/STANDARDIZATION.md)에

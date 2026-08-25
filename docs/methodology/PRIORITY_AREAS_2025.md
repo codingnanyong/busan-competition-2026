@@ -18,7 +18,7 @@ docker compose run --rm jupyter python scripts/rebuild_processed.py
 COD-19 단계만 실행하려면 다음 명령을 사용한다.
 
 ```bash
-docker compose run --rm jupyter python -m busan_imd.priority_areas
+docker compose run --rm jupyter python -m busan_imd.analysis.priority_areas
 ```
 
 실행 결과는 다음 파일에 생성된다.

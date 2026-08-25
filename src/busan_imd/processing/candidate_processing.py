@@ -18,8 +18,8 @@ import pandas as pd
 from busan_imd.core.artifacts import sha256_file, write_json
 from busan_imd.core.config import read_env_file, require_values
 from busan_imd.core.http import encoded_secret_url, fetch_json
+from busan_imd.processing.standardization import load_boundaries, read_csv_fallback
 from busan_imd.sources.sgis import authenticate, request_json
-from busan_imd.standardization import load_boundaries, read_csv_fallback
 
 OUTPUT_DIR = Path("data/processed/candidates/2025")
 REPORT_PATH = Path("docs/data/manifests/CANDIDATE_PROCESSING_REPORT_2025.json")
@@ -38,30 +38,20 @@ class CandidatePaths:
         "data/raw/sgis/admin_boundaries/2025/busan_admin_dong_boundaries_2025_valid.geojson"
     )
     population: Path = Path(
-        "data/raw/mois/resident_population/2025/"
-        "busan_resident_population_admin_dong_2025_12.csv"
+        "data/raw/mois/resident_population/2025/busan_resident_population_admin_dong_2025_12.csv"
     )
     living_population: Path = Path(
-        "data/raw/supplemental/living_population/"
-        "busan_living_population_2023_2025.xlsx.download"
+        "data/raw/supplemental/living_population/busan_living_population_2023_2025.xlsx.download"
     )
-    schools: Path = Path(
-        "data/raw/reference/EDU-SCHOOL-NEIS-001/busan_school_info.json"
-    )
+    schools: Path = Path("data/raw/reference/EDU-SCHOOL-NEIS-001/busan_school_info.json")
     school_coordinates: Path = SCHOOL_COORDINATES
     school_disclosures: Path = Path(
         "data/raw/reference/EDU-SCHOOLINFO-2025-001/busan_school_disclosures_2025.json"
     )
-    air_daily: Path = Path(
-        "data/raw/heis/air_daily/2025/busan_heis_air_daily_2025_01_12.csv"
-    )
+    air_daily: Path = Path("data/raw/heis/air_daily/2025/busan_heis_air_daily_2025_01_12.csv")
     air_stations: Path = AIR_STATIONS
-    route_usage: Path = Path(
-        "data/raw/supplemental/bus_route_usage/busan_bus_route_usage_2025.csv"
-    )
-    village_bus: Path = Path(
-        "data/raw/supplemental/village_bus/busan_village_bus_status.json"
-    )
+    route_usage: Path = Path("data/raw/supplemental/bus_route_usage/busan_bus_route_usage_2025.csv")
+    village_bus: Path = Path("data/raw/supplemental/village_bus/busan_village_bus_status.json")
 
 
 def collect_school_coordinates(
@@ -296,16 +286,12 @@ def process_schools(paths: CandidatePaths) -> tuple[pd.DataFrame, dict[str, Any]
     canonical = set(boundaries["admin_dong_code"])
     matched["admin_dong_code"] = matched["sgis_admin_dong_code"].astype(str)
     matched.loc[~matched["admin_dong_code"].isin(canonical), "admin_dong_code"] = None
-    usable_types = matched[
-        matched["school_type"].isin(["초등학교", "중학교", "고등학교"])
-    ].copy()
+    usable_types = matched[matched["school_type"].isin(["초등학교", "중학교", "고등학교"])].copy()
     usable_types["school_name"] = usable_types["school_name"].astype(str).str.strip()
     usable_types["disclosure_school_name"] = usable_types["school_name"].replace(
         SCHOOLINFO_2025_NAME_ALIASES
     )
-    usable_types["district_name"] = usable_types["road_address"].map(
-        _school_district_from_address
-    )
+    usable_types["district_name"] = usable_types["road_address"].map(_school_district_from_address)
     disclosures = load_school_disclosures(paths.school_disclosures)
     usable_types = usable_types.merge(
         disclosures[
@@ -384,9 +370,7 @@ def process_schools(paths: CandidatePaths) -> tuple[pd.DataFrame, dict[str, Any]
         "schoolinfo_unmatched_core_school_records": (
             current_register_core_school_count - len(usable_types)
         ),
-        "active_teacher_count_2025": int(
-            usable_types["active_teacher_count_2025"].sum()
-        ),
+        "active_teacher_count_2025": int(usable_types["active_teacher_count_2025"].sum()),
         "facility_present_admin_dongs": int((result["school_count_2025"] > 0).sum()),
         "output_records": len(result),
         "maximum_nearest_core_school_distance_m": round(
@@ -416,9 +400,11 @@ def process_air_quality(paths: CandidatePaths) -> tuple[pd.DataFrame, dict[str, 
     station_annual = daily.groupby(["station_code", "match_name"], as_index=False)[
         pollutants
     ].mean()
-    station_annual["observed_days"] = daily.groupby("station_code")["measurement_status"].apply(
-        lambda values: int((values == "observed").sum())
-    ).values
+    station_annual["observed_days"] = (
+        daily.groupby("station_code")["measurement_status"]
+        .apply(lambda values: int((values == "observed").sum()))
+        .values
+    )
     joined = station_annual.merge(
         stations[["match_name", "latitude", "longitude"]],
         on="match_name",
@@ -480,9 +466,9 @@ def process_transport(paths: CandidatePaths) -> tuple[pd.DataFrame, pd.DataFrame
     usage = read_csv_fallback(paths.route_usage)
     usage = usage.rename(columns={"노선": "route_no", "교통카드건수합계": "card_trip_count_2025"})
     detail = [column for column in usage if column.startswith("건수(")]
-    usage[detail + ["card_trip_count_2025"]] = usage[
-        detail + ["card_trip_count_2025"]
-    ].apply(pd.to_numeric, errors="coerce")
+    usage[detail + ["card_trip_count_2025"]] = usage[detail + ["card_trip_count_2025"]].apply(
+        pd.to_numeric, errors="coerce"
+    )
     usage["recalculated_card_trip_count_2025"] = usage[detail].sum(axis=1)
     route_output = usage[
         ["route_no", "card_trip_count_2025", "recalculated_card_trip_count_2025"]

@@ -28,19 +28,15 @@ class SourcePaths:
         "data/raw/sgis/admin_boundaries/2025/busan_admin_dong_boundaries_2025_valid.geojson"
     )
     population: Path = Path(
-        "data/raw/mois/resident_population/2025/"
-        "busan_resident_population_admin_dong_2025_12.csv"
+        "data/raw/mois/resident_population/2025/busan_resident_population_admin_dong_2025_12.csv"
     )
     employment: Path = Path("data/raw/collection/EMP-SGIS-001/sgis_company_2024.json")
-    housing: Path = Path(
-        "data/raw/sgis/housing/2024/busan_admin_dong_old_housing_proxy_2025.csv"
-    )
+    housing: Path = Path("data/raw/sgis/housing/2024/busan_admin_dong_old_housing_proxy_2025.csv")
     basic_livelihood: Path = Path(
         "data/processed/candidates/2025/basic_livelihood_inferred_2025.csv"
     )
     elderly: Path = Path(
-        "data/raw/supplemental/elderly_alone/"
-        "busan_elderly_alone_latest_by_admin_dong.csv"
+        "data/raw/supplemental/elderly_alone/busan_elderly_alone_latest_by_admin_dong.csv"
     )
     bus_stops: Path = Path("data/raw/bus_stops/2025/busan_bus_stops_20250121.zip")
     hospitals: Path = Path(
@@ -57,13 +53,10 @@ class SourcePaths:
     )
     aed: Path = Path("data/raw/collection/HLT-AED-001/response.json")
     cctv: Path = Path(
-        "data/raw/supplemental/crime_prevention_cctv/"
-        "busan_crime_prevention_cctv_2025.csv"
+        "data/raw/supplemental/crime_prevention_cctv/busan_crime_prevention_cctv_2025.csv"
     )
     heat_shelters: Path = Path("data/raw/audit/15152994.download")
-    living_population: Path = Path(
-        "data/processed/candidates/2025/living_population_2025.csv"
-    )
+    living_population: Path = Path("data/processed/candidates/2025/living_population_2025.csv")
     schools: Path = Path("data/processed/candidates/2025/school_counts_2025.csv")
     air_exposure: Path = Path("data/processed/candidates/2025/air_exposure_idw_2025.csv")
 
@@ -356,9 +349,7 @@ def build_standardized_profile(
             paths.elderly,
         )
     )
-    elderly["elderly_alone_total"] = pd.to_numeric(
-        elderly["elderly_alone_total"], errors="coerce"
-    )
+    elderly["elderly_alone_total"] = pd.to_numeric(elderly["elderly_alone_total"], errors="coerce")
     profile = profile.merge(
         elderly[["sgis_admin_dong_code", "elderly_alone_total", "reference_date"]].rename(
             columns={
@@ -444,64 +435,64 @@ def build_standardized_profile(
     if include_basic_livelihood:
         processed_sources.append(
             (
-            "INC-BLF-INFERRED-2025-001",
-            paths.basic_livelihood,
-            [
-                "basic_livelihood_recipients_2025_inferred",
-                "basic_livelihood_households_2025_inferred",
-                "basic_livelihood_recipients_per_1000_population_2025_inferred",
-                "allocation_method",
-                "pattern_source_dataset_id",
-                "pattern_source_period",
-                "district_total_source_dataset_id",
-                "inference_pattern_source_dataset_ids",
-                "inference_feature_source_dataset_ids",
-                "inference_basis",
-                "inference_quality_tier",
-                "is_inferred",
-                "value_status",
-            ],
+                "INC-BLF-INFERRED-2025-001",
+                paths.basic_livelihood,
+                [
+                    "basic_livelihood_recipients_2025_inferred",
+                    "basic_livelihood_households_2025_inferred",
+                    "basic_livelihood_recipients_per_1000_population_2025_inferred",
+                    "allocation_method",
+                    "pattern_source_dataset_id",
+                    "pattern_source_period",
+                    "district_total_source_dataset_id",
+                    "inference_pattern_source_dataset_ids",
+                    "inference_feature_source_dataset_ids",
+                    "inference_basis",
+                    "inference_quality_tier",
+                    "is_inferred",
+                    "value_status",
+                ],
             )
         )
     processed_sources.extend(
         [
-        (
-            "DEM-BUSAN-LIVING-001",
-            paths.living_population,
-            [
-                "observed_months_2025",
-                "avg_daily_residential_living_population_2025",
-                "avg_daily_workplace_living_population_2025",
-                "avg_daily_visitor_living_population_2025",
-            ],
-        ),
-        (
-            "EDU-SCHOOL-001",
-            paths.schools,
-            [
-                "elementary",
-                "middle",
-                "high",
-                "school_count_2025",
-                "nearest_core_school_distance_m_2025",
-                "core_schools_within_2000m_2025",
-                "core_school_teachers_within_2000m_2025",
-            ],
-        ),
-        (
-            "ENV-AIR-HEIS-DAILY-2025-001",
-            paths.air_exposure,
-            [
-                "air_idw_station_count",
-                "nearest_air_station_distance_m",
-                "annual_pm25_ug_m3_idw_2025",
-                "annual_pm10_ug_m3_idw_2025",
-                "annual_so2_ppm_idw_2025",
-                "annual_o3_ppm_idw_2025",
-                "annual_no2_ppm_idw_2025",
-                "annual_co_ppm_idw_2025",
-            ],
-        ),
+            (
+                "DEM-BUSAN-LIVING-001",
+                paths.living_population,
+                [
+                    "observed_months_2025",
+                    "avg_daily_residential_living_population_2025",
+                    "avg_daily_workplace_living_population_2025",
+                    "avg_daily_visitor_living_population_2025",
+                ],
+            ),
+            (
+                "EDU-SCHOOL-001",
+                paths.schools,
+                [
+                    "elementary",
+                    "middle",
+                    "high",
+                    "school_count_2025",
+                    "nearest_core_school_distance_m_2025",
+                    "core_schools_within_2000m_2025",
+                    "core_school_teachers_within_2000m_2025",
+                ],
+            ),
+            (
+                "ENV-AIR-HEIS-DAILY-2025-001",
+                paths.air_exposure,
+                [
+                    "air_idw_station_count",
+                    "nearest_air_station_distance_m",
+                    "annual_pm25_ug_m3_idw_2025",
+                    "annual_pm10_ug_m3_idw_2025",
+                    "annual_so2_ppm_idw_2025",
+                    "annual_o3_ppm_idw_2025",
+                    "annual_no2_ppm_idw_2025",
+                    "annual_co_ppm_idw_2025",
+                ],
+            ),
         ]
     )
     for dataset_id, path, columns in processed_sources:
@@ -541,9 +532,7 @@ def build_standardized_profile(
                 != profile["total_population_2025"]
             ).sum()
         ),
-        "count_column_totals": {
-            column: int(profile[column].sum()) for column in count_columns
-        },
+        "count_column_totals": {column: int(profile[column].sum()) for column in count_columns},
     }
     if not profile_checks["unique_admin_dong_codes"]:
         raise ValueError("Standardized profile contains duplicate administrative-dong codes")
@@ -551,9 +540,7 @@ def build_standardized_profile(
         raise ValueError("Population denominator contains zero-population administrative dongs")
     if profile_checks["sex_total_mismatch_admin_dongs"]:
         raise ValueError("Population sex totals do not reconcile with total population")
-    missing_by_column = {
-        column: int(profile[column].isna().sum()) for column in profile.columns
-    }
+    missing_by_column = {column: int(profile[column].isna().sum()) for column in profile.columns}
     report_document: dict[str, Any] = {
         "schema_version": 1,
         "generated_at": datetime.now(UTC).replace(microsecond=0).isoformat(),
