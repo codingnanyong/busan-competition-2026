@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import argparse
 import json
 from datetime import UTC, datetime
 from html import escape
@@ -17,76 +16,14 @@ import pandas as pd
 from matplotlib.font_manager import FontProperties, findSystemFonts
 from matplotlib.lines import Line2D
 
-from busan_imd.composite_index import DEFAULT_OUTPUT as DEFAULT_COMPOSITE
-from busan_imd.core.artifacts import sha256_file, write_json
-from busan_imd.environmental_overlay import DEFAULT_OUTPUT as DEFAULT_OVERLAY
-from busan_imd.policy_matrix import DEFAULT_OUTPUT as DEFAULT_POLICY_MATRIX
-from busan_imd.priority_areas import DEFAULT_PRIORITY_OUTPUT
+from busan_imd.infographic.config import (
+    DOMAIN_COLUMNS,
+    EXPECTED_DONG_COUNT,
+    EXPECTED_PRIORITY_COUNT,
+    PALETTE,
+)
+from busan_imd.infographic.profiles import build_action_profiles
 
-DEFAULT_BOUNDARIES = Path(
-    "data/raw/sgis/admin_boundaries/2025/busan_admin_dong_boundaries_2025_valid.geojson"
-)
-DEFAULT_OUTPUT_DIR = Path("outputs/infographic")
-DEFAULT_SVG_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_imd_one_page_2025.svg"
-DEFAULT_PDF_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_imd_one_page_2025.pdf"
-DEFAULT_PNG_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_imd_one_page_2025.png"
-DEFAULT_PROFILE_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_admin_dong_action_profile_2025.csv"
-DEFAULT_HTML_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_admin_dong_action_map_2025.html"
-DEFAULT_CATEGORY_ASSESSMENT = (
-    DEFAULT_OUTPUT_DIR / "busan_admin_dong_category_assessment_2025.csv"
-)
-DEFAULT_MAJOR_CATEGORY_ASSESSMENT = (
-    DEFAULT_OUTPUT_DIR / "busan_admin_dong_major_category_assessment_2025.csv"
-)
-DEFAULT_INDICATOR_SCORES = Path(
-    "outputs/infographic/busan_admin_dong_category_indicator_scores_2025.csv"
-)
-DEFAULT_POLICY_CATALOG = Path("docs/data/CATEGORY_POLICY_CATALOG_2025.csv")
-DEFAULT_REPORT = Path("docs/data/manifests/INFOGRAPHIC_REPORT_2025.json")
-EXPECTED_DONG_COUNT = 206
-EXPECTED_PRIORITY_COUNT = 21
-PALETTE = {
-    "ink": "#18323D",
-    "muted": "#5D7078",
-    "paper": "#F7F4ED",
-    "panel": "#FFFFFF",
-    "accent": "#D84A3A",
-    "blue": "#087E8B",
-    "gold": "#D99A25",
-    "line": "#D7DED9",
-}
-DOMAIN_COLUMNS = {
-    "education": ("education_score_0_100", "교육"),
-    "employment": ("employment_score_0_100", "고용"),
-    "health": ("health_score_0_100", "건강"),
-    "housing_access": ("housing_access_score_0_100", "주거·접근성"),
-    "income": ("income_score_0_100", "소득"),
-    "living_environment": ("living_environment_score_0_100", "생활환경"),
-}
-DOMAIN_COLORS = {
-    "education": "#D99A25",
-    "employment": "#087E8B",
-    "health": "#A44A7A",
-    "housing_access": "#596FB7",
-    "income": "#D84A3A",
-    "living_environment": "#4F8A5B",
-}
-IMPROVEMENT_ACTIONS = {
-    "education": "학습지원·학교 접근성 점검",
-    "employment": "주민 고용자료 검증 후 일자리·훈련 연계",
-    "health": "의료·건강관리 접근성 점검",
-    "housing_access": "주거·교통·생활시설 접근 개선",
-    "income": "복지급여 누락 점검·통합사례관리",
-    "living_environment": "생활환경·안전·대기질 현장점검",
-}
-PRESERVATION_DIRECTIONS = {
-    "education": "교육 기반 보전·연계 검토",
-    "employment": "지역 일자리 기반 보전 검토",
-    "health": "건강·의료 접근 기반 보전 검토",
-    "housing_access": "주거·교통 접근 기반 보전 검토",
-    "income": "경제 안정 기반 보전 검토",
-    "living_environment": "생활환경 기반 보전 검토",
-}
 INDICATOR_PRESENTATION = {
     "basic_livelihood_recipients_per_1000_population_2025_inferred": (
         "추정 기초생활수급자",
@@ -122,75 +59,6 @@ INDICATOR_PRESENTATION = {
     ),
     "annual_pm25_ug_m3_idw_2025": ("연평균 PM2.5", "㎍/㎥", "높을수록 취약"),
 }
-
-
-def build_action_profiles(composite: pd.DataFrame) -> pd.DataFrame:
-    """Translate six-domain scores into transparent dong-level review directions."""
-    required = {
-        "admin_dong_code",
-        "sigungu_name",
-        "admin_dong_name",
-        "b_imd_score_0_100",
-        "b_imd_rank",
-        "b_imd_decile",
-        *(column for column, _ in DOMAIN_COLUMNS.values()),
-    }
-    missing = sorted(required - set(composite.columns))
-    if missing:
-        raise ValueError(f"Composite input is missing action-profile columns: {missing}")
-    profiles = composite.copy()
-    score_columns = [column for column, _ in DOMAIN_COLUMNS.values()]
-    ordered = profiles[score_columns].apply(
-        lambda row: row.sort_values(ascending=False, kind="stable").index.tolist(), axis=1
-    )
-    column_to_domain = {column: domain for domain, (column, _) in DOMAIN_COLUMNS.items()}
-    profiles["primary_vulnerability_domain"] = ordered.map(
-        lambda values: column_to_domain[values[0]]
-    )
-    profiles["secondary_vulnerability_domain"] = ordered.map(
-        lambda values: column_to_domain[values[1]]
-    )
-    profiles["relative_low_deprivation_domain"] = ordered.map(
-        lambda values: column_to_domain[values[-1]]
-    )
-    label = {domain: values[1] for domain, values in DOMAIN_COLUMNS.items()}
-    profiles["primary_vulnerability_ko"] = profiles["primary_vulnerability_domain"].map(label)
-    profiles["secondary_vulnerability_ko"] = profiles["secondary_vulnerability_domain"].map(label)
-    profiles["relative_low_deprivation_ko"] = profiles["relative_low_deprivation_domain"].map(label)
-    profiles["improvement_direction"] = profiles["primary_vulnerability_domain"].map(
-        IMPROVEMENT_ACTIONS
-    )
-    profiles["preservation_direction"] = profiles["relative_low_deprivation_domain"].map(
-        PRESERVATION_DIRECTIONS
-    )
-    profiles["review_level"] = pd.cut(
-        profiles["b_imd_decile"],
-        bins=[0, 1, 3, 7, 10],
-        labels=["현장검증 우선", "집중 모니터링", "정기 모니터링", "상대 저취약"],
-    ).astype(str)
-    profiles["specialization_evidence_status"] = (
-        "특화 확정 불가: 산업·상권·관광·생활SOC 자산 데이터 결합 필요"
-    )
-    columns = [
-        "admin_dong_code",
-        "sigungu_name",
-        "admin_dong_name",
-        "b_imd_score_0_100",
-        "b_imd_rank",
-        "b_imd_decile",
-        *score_columns,
-        "primary_vulnerability_domain",
-        "primary_vulnerability_ko",
-        "secondary_vulnerability_domain",
-        "secondary_vulnerability_ko",
-        "improvement_direction",
-        "relative_low_deprivation_domain",
-        "relative_low_deprivation_ko",
-        "preservation_direction",
-        "review_level",
-        "specialization_evidence_status",
-    ]
-    return profiles[columns].sort_values("b_imd_rank", kind="stable").reset_index(drop=True)
 
 
 def _font_family() -> str:
@@ -232,9 +100,7 @@ def _validate(
         raise ValueError("Priority input requires 21 unique administrative-dong rows")
     if set(composite["admin_dong_code"].astype(str)) != set(boundaries["adm_cd"].astype(str)):
         raise ValueError("Composite and boundary administrative-dong codes must match")
-    if set(composite["admin_dong_code"].astype(str)) != set(
-        overlay["admin_dong_code"].astype(str)
-    ):
+    if set(composite["admin_dong_code"].astype(str)) != set(overlay["admin_dong_code"].astype(str)):
         raise ValueError("Composite and overlay administrative-dong codes must match")
     if not set(priority["admin_dong_code"].astype(str)).issubset(
         set(composite["admin_dong_code"].astype(str))
@@ -248,12 +114,13 @@ def _validate(
         "b_imd_rank",
         "b_imd_decile",
     ]
-    provided_priority = priority[comparison_columns].sort_values("admin_dong_code").reset_index(
-        drop=True
+    provided_priority = (
+        priority[comparison_columns].sort_values("admin_dong_code").reset_index(drop=True)
     )
     canonical_priority = (
-        composite[composite["admin_dong_code"].isin(priority["admin_dong_code"])]
-        [comparison_columns]
+        composite[composite["admin_dong_code"].isin(priority["admin_dong_code"])][
+            comparison_columns
+        ]
         .sort_values("admin_dong_code")
         .reset_index(drop=True)
     )
@@ -398,8 +265,7 @@ def _write_action_map_legacy(
             f'data-{key}="{escape(str(value), quote=True)}"' for key, value in attributes.items()
         )
         paths.append(
-            f'<path d="{_geometry_svg_path(row.geometry, bounds)}" '
-            f'fill="#f4a261" {encoded}/>'
+            f'<path d="{_geometry_svg_path(row.geometry, bounds)}" fill="#f4a261" {encoded}/>'
         )
     buttons = "".join(
         f'<button data-domain="{domain}">{label}</button>'
@@ -437,16 +303,16 @@ button.active{{background:#18323d;color:white;border-color:#18323d}}
 <h2 id="map-title"></h2><div class="scale"></div>
 <div class="scale-label"><span>0 상대 저취약</span><span>100 상대 고취약</span></div>
 <svg viewBox="0 0 900 900" role="img"
-aria-label="부산 행정동별 카테고리 취약도 지도">{''.join(paths)}</svg>
+aria-label="부산 행정동별 카테고리 취약도 지도">{"".join(paths)}</svg>
 </div><aside class="card" id="detail"><h2>지도의 행정동을 선택하세요</h2>
 <p>평가지표와 정책 예시가 이곳에 표시됩니다.</p></aside></div>
 <p class="note warning">높은 점수는 부산 내 상대적 취약성을 뜻합니다.
 개선방향은 현장검증 후보이며 공식 지수·개인 자격·인과효과 판정이 아닙니다.
 정책은 카테고리별 예시이며 현장 수요와 행정자료 검증 후 확정해야 합니다.</p>
 </main><script>
-const indicators={json.dumps(indicator_payload, ensure_ascii=False, separators=(',', ':'))};
-const policies={json.dumps(policy_payload, ensure_ascii=False, separators=(',', ':'))};
-const labels={json.dumps(domain_labels, ensure_ascii=False, separators=(',', ':'))};
+const indicators={json.dumps(indicator_payload, ensure_ascii=False, separators=(",", ":"))};
+const policies={json.dumps(policy_payload, ensure_ascii=False, separators=(",", ":"))};
+const labels={json.dumps(domain_labels, ensure_ascii=False, separators=(",", ":"))};
 const detail=document.getElementById('detail');let domain='education';let selected=null;
 function color(score){{const hue=48-score*.45;return `hsl(${{hue}} 88% ${{62-score*.18}}%)`;}}
 function scoreOf(path){{return Number(path.getAttribute('data-'+domain.replace('_','-')));}}
@@ -502,6 +368,17 @@ def write_action_map(
     categories = policy_catalog["category"].tolist()
     if set(category_assessments["category"]) != set(categories):
         raise ValueError("Assessment and policy categories must match")
+    required_policy_columns = {
+        "problem_signal_ko",
+        "priority_target_ko",
+        "implementation_steps_ko",
+        "policy_case_ko",
+        "policy_case_source_url",
+        "case_application_note_ko",
+    }
+    missing_policy_columns = required_policy_columns - set(policy_catalog.columns)
+    if missing_policy_columns:
+        raise ValueError(f"Policy catalog is missing columns: {sorted(missing_policy_columns)}")
 
     indicator_payload: dict[str, dict[str, list[dict[str, Any]]]] = {}
     for row in indicator_scores.itertuples(index=False):
@@ -546,8 +423,7 @@ def write_action_map(
             "status": row.policy_review_status,
             "triggered_children": (
                 str(row.triggered_child_categories)
-                if pd.notna(row.triggered_child_categories)
-                and str(row.triggered_child_categories)
+                if pd.notna(row.triggered_child_categories) and str(row.triggered_child_categories)
                 else "없음"
             ),
         }
@@ -555,8 +431,14 @@ def write_action_map(
         str(row.category): {
             "title": row.policy_title_ko,
             "lead": row.lead_implementer,
+            "signal": row.problem_signal_ko,
+            "target": row.priority_target_ko,
+            "steps": row.implementation_steps_ko,
             "example": row.policy_example,
             "monitor": row.monitoring_indicator,
+            "case": row.policy_case_ko,
+            "case_url": row.policy_case_source_url,
+            "case_note": row.case_application_note_ko,
             "limit": row.evidence_limit,
         }
         for row in policy_catalog.itertuples(index=False)
@@ -572,8 +454,7 @@ def write_action_map(
             f'data-{key}="{escape(str(value), quote=True)}"' for key, value in attributes.items()
         )
         paths.append(
-            f'<path d="{_geometry_svg_path(row.geometry, bounds)}" '
-            f'fill="#f4a261" {encoded}/>'
+            f'<path d="{_geometry_svg_path(row.geometry, bounds)}" fill="#f4a261" {encoded}/>'
         )
     major_rows = major_category_assessments[
         ["major_category", "major_category_label"]
@@ -598,21 +479,20 @@ def write_action_map(
     )
     major_categories = major_rows["major_category"].tolist()
     child_rows = category_assessments[
-            [
-                "major_category",
-                "category",
-                "category_label",
-                "major_category_weight",
-            ]
-        ].drop_duplicates()
+        [
+            "major_category",
+            "category",
+            "category_label",
+            "major_category_weight",
+        ]
+    ].drop_duplicates()
     child_rows = child_rows.assign(
         _display_order=child_rows["category"].map(
             {value: index for index, value in enumerate(categories)}
         )
     ).sort_values(["major_category", "_display_order"])
     children = (
-        child_rows
-        .groupby("major_category", observed=True)
+        child_rows.groupby("major_category", observed=True)
         .apply(
             lambda rows: [
                 {
@@ -629,6 +509,8 @@ def write_action_map(
     category_labels = dict(
         child_rows[["category", "category_label"]].itertuples(index=False, name=None)
     )
+    indicator_key = "indicator" if "indicator" in indicator_scores else "indicator_label"
+    indicator_count = int(indicator_scores[indicator_key].nunique())
     tree_branches: list[str] = []
     for row in major_rows.itertuples(index=False):
         child_nodes = "".join(
@@ -636,7 +518,7 @@ def write_action_map(
                 f'<button class="tree-child" data-major-category="{row.major_category}" '
                 f'data-category="{child["category"]}" role="treeitem">'
                 f'<span class="tree-line">└</span><span>{escape(child["label"])}</span>'
-                f'<small>{child["weight"]:.0%}</small></button>'
+                f"<small>{child['weight']:.0%}</small></button>"
             )
             for child in children[row.major_category]
         )
@@ -644,7 +526,7 @@ def write_action_map(
             f'<details class="tree-branch" data-branch="{row.major_category}" open>'
             f'<summary class="tree-major" data-major-category="{row.major_category}" '
             f'role="treeitem"><span>{escape(row.major_category_label)}</span>'
-            f'<small>종합분포</small></summary>'
+            f"<small>종합분포</small></summary>"
             f'<div class="tree-children" role="group">{child_nodes}</div></details>'
         )
     category_tree = "".join(tree_branches)
@@ -699,6 +581,13 @@ path:hover,path:focus{{stroke:#18323d;stroke-width:2}}
 .metric{{margin:14px 0}} .bar{{height:8px;background:#edf0ed;border-radius:5px;overflow:hidden}}
 .bar i{{display:block;height:100%;background:#d84a3a}}
 .policy{{background:#f7f4ed;border-radius:9px;padding:12px;margin-top:18px}}
+.policy-grid{{display:grid;grid-template-columns:1fr 1fr;gap:8px}}
+.policy-item{{background:white;border:1px solid #d7ded9;border-radius:7px;padding:9px;
+ font-size:13px;line-height:1.5}}
+.policy-item b{{display:block;color:#087e8b;margin-bottom:3px}}
+.policy-case{{border-left:4px solid #087e8b;background:#eaf2f2;border-radius:0 7px 7px 0;
+ padding:10px;margin-top:10px;line-height:1.5}}
+.policy-case a{{color:#075e67;font-weight:700}}
 .subcategory{{border-top:2px solid #d7ded9;margin-top:20px;padding-top:12px}}
 .subcategory h3{{margin-bottom:5px}}
 .child-overview{{display:grid;grid-template-columns:1fr auto;gap:4px 12px;
@@ -712,7 +601,8 @@ path:hover,path:focus{{stroke:#18323d;stroke-width:2}}
 @media(max-width:1100px){{.layout{{grid-template-columns:240px 1fr}}.card#detail{{grid-column:1/-1}}
  .category-tree{{position:static}}.guide{{grid-template-columns:1fr}}}}
 @media(max-width:720px){{.layout{{grid-template-columns:1fr}}.card#detail{{grid-column:auto}}
- .steps{{grid-template-columns:1fr 1fr}}svg{{height:55vh;min-height:400px}}}}
+ .steps{{grid-template-columns:1fr 1fr}}.policy-grid{{grid-template-columns:1fr}}
+ svg{{height:55vh;min-height:400px}}}}
 </style></head><body><main><h1>부산 행정동 생활여건 진단: 취약 요인과 정책 방향</h1>
 <section class="guide" aria-label="대시보드 이용 방법과 점수 계산 구조">
 <div class="guide-card"><h2>이 화면을 보는 방법</h2><ol class="steps">
@@ -730,7 +620,7 @@ path:hover,path:focus{{stroke:#18323d;stroke-width:2}}
 <p class="aggregation-caption">점수가 높을수록 부산 안에서 상대적으로 더 취약하다는 뜻입니다.
 절대적 결핍 판정이나 정책 확정 점수가 아닙니다.</p></div>
 <div class="guide-card"><h2>점수는 이렇게 만들어집니다</h2><ol class="score-flow">
-<li class="score-level level-1"><strong>1단계 · 평가지표 13개</strong><br>
+<li class="score-level level-1"><strong>1단계 · 평가지표 {indicator_count}개</strong><br>
 교육시설 수, 의료 접근성, 대기오염 노출처럼 측정 가능한 근거를 정리합니다.</li>
 <li class="flow-arrow" aria-hidden="true">↓ 지표별 방향과 가중치 반영</li>
 <li class="score-level level-2"><strong>2단계 · 하위 카테고리 8개</strong><br>
@@ -748,19 +638,19 @@ path:hover,path:focus{{stroke:#18323d;stroke-width:2}}
 <div class="scale"></div><div class="scale-label">
 <span>0 상대 저취약</span><span>100 상대 고취약</span></div>
 <svg viewBox="0 0 900 900" aria-label="부산 행정동별 선택 카테고리 취약도 분포">
-{''.join(paths)}</svg>
+{"".join(paths)}</svg>
 </div><aside class="card" id="detail"><h2>행정동을 선택하세요</h2>
 <p>트리에서 큰 카테고리를 선택하면 종합 결과를, 하위 항목을 선택하면
 세부 평가지표와 정책 예시를 표시합니다.</p></aside></div>
 <p class="note warning">70점 이상은 정책 확정이 아니라 추가 행정자료·현장 검증 후보입니다.
 기존 B-IMD 순위는 비교용이며 개선형 카테고리 점수와 혼합하지 않습니다.</p></main><script>
-const indicators={json.dumps(indicator_payload, ensure_ascii=False, separators=(',', ':'))};
-const assessments={json.dumps(assessment_payload, ensure_ascii=False, separators=(',', ':'))};
-const majorAssessments={json.dumps(major_payload, ensure_ascii=False, separators=(',', ':'))};
-const children={json.dumps(children, ensure_ascii=False, separators=(',', ':'))};
-const policies={json.dumps(policy_payload, ensure_ascii=False, separators=(',', ':'))};
-const labels={json.dumps(labels, ensure_ascii=False, separators=(',', ':'))};
-const categoryLabels={json.dumps(category_labels, ensure_ascii=False, separators=(',', ':'))};
+const indicators={json.dumps(indicator_payload, ensure_ascii=False, separators=(",", ":"))};
+const assessments={json.dumps(assessment_payload, ensure_ascii=False, separators=(",", ":"))};
+const majorAssessments={json.dumps(major_payload, ensure_ascii=False, separators=(",", ":"))};
+const children={json.dumps(children, ensure_ascii=False, separators=(",", ":"))};
+const policies={json.dumps(policy_payload, ensure_ascii=False, separators=(",", ":"))};
+const labels={json.dumps(labels, ensure_ascii=False, separators=(",", ":"))};
+const categoryLabels={json.dumps(category_labels, ensure_ascii=False, separators=(",", ":"))};
 const detail=document.getElementById('detail');
 let majorCategory='{major_categories[0]}';let category=null;let selected=null;
 function color(score){{const hue=48-score*.45;return `hsl(${{hue}} 88% ${{62-score*.18}}%)`;}}
@@ -797,9 +687,17 @@ function childHtml(code,child){{const a=assessments[code][child.category];
  <h3>하위 카테고리 · ${{child.label}} ${{a.score.toFixed(1)}}</h3>
  <p class="scores">큰 카테고리 반영 가중치 ${{child.weight}} ·
  신뢰 ${{a.confidence}} · ${{gate}}</p><p class="scores">임계지표: ${{a.triggers}}</p>
- ${{metrics}}<div class="policy"><b>조건부 정책 예시</b><h3>${{policy.title}}</h3>
- <p>주관: ${{policy.lead}}</p><p>${{policy.example}}</p>
- <p>성과지표: ${{policy.monitor}}</p><p class="warning">${{policy.limit}}</p></div>
+ ${{metrics}}<div class="policy"><b>조건부 정책 방향</b><h3>${{policy.title}}</h3>
+ <p>주관: ${{policy.lead}}</p><div class="policy-grid">
+ <div class="policy-item"><b>분석이 포착한 신호</b>${{policy.signal}}</div>
+ <div class="policy-item"><b>우선 확인 대상</b>${{policy.target}}</div></div>
+ <div class="policy-item"><b>실행 순서</b>${{policy.steps}}</div>
+ <p><b>적용 예시</b><br>${{policy.example}}</p>
+ <p><b>성과지표</b><br>${{policy.monitor}}</p>
+ <div class="policy-case"><b>정책 설계 참고사례</b><br>${{policy.case}}<br>
+ <a href="${{policy.case_url}}" target="_blank" rel="noopener noreferrer">공식 자료 보기 ↗</a>
+ <p class="scores">이 분석에 적용할 때: ${{policy.case_note}}</p></div>
+ <p class="warning"><b>해석 제한</b><br>${{policy.limit}}</p></div>
  </section>`;}}
 function childOverviewHtml(code,child){{const a=assessments[code][child.category];return `
  <div class="child-overview"><span>${{child.label}} · 가중치 ${{child.weight}}</span>
@@ -1139,171 +1037,7 @@ def render(
         "page_count": 1,
         "priority_area_count": len(priority),
         "double_burden_area_count": len(burden_map),
-        "top_10_names": (
-            ranked["sigungu_name"] + " " + ranked["admin_dong_name"]
-        ).tolist(),
+        "top_10_names": (ranked["sigungu_name"] + " " + ranked["admin_dong_name"]).tolist(),
         "policy_candidate_count": len(policy_matrix),
         "font_family": family,
     }
-
-
-def run(
-    composite_path: Path = DEFAULT_COMPOSITE,
-    boundaries_path: Path = DEFAULT_BOUNDARIES,
-    priority_path: Path = DEFAULT_PRIORITY_OUTPUT,
-    overlay_path: Path = DEFAULT_OVERLAY,
-    policy_matrix_path: Path = DEFAULT_POLICY_MATRIX,
-    category_assessment_path: Path = DEFAULT_CATEGORY_ASSESSMENT,
-    major_category_assessment_path: Path = DEFAULT_MAJOR_CATEGORY_ASSESSMENT,
-    indicator_scores_path: Path = DEFAULT_INDICATOR_SCORES,
-    policy_catalog_path: Path = DEFAULT_POLICY_CATALOG,
-    svg_output: Path = DEFAULT_SVG_OUTPUT,
-    pdf_output: Path = DEFAULT_PDF_OUTPUT,
-    png_output: Path = DEFAULT_PNG_OUTPUT,
-    profile_output: Path = DEFAULT_PROFILE_OUTPUT,
-    html_output: Path = DEFAULT_HTML_OUTPUT,
-    report_path: Path = DEFAULT_REPORT,
-) -> dict[str, Any]:
-    """Write the one-page draft, 206-dong action profiles, map, and manifest."""
-    composite = pd.read_csv(composite_path, dtype={"admin_dong_code": str})
-    boundaries = gpd.read_file(boundaries_path)
-    priority = pd.read_csv(priority_path, dtype={"admin_dong_code": str})
-    overlay = pd.read_csv(overlay_path, dtype={"admin_dong_code": str})
-    policy_matrix = pd.read_csv(policy_matrix_path)
-    category_assessments = pd.read_csv(
-        category_assessment_path,
-        dtype={"admin_dong_code": str},
-    )
-    major_category_assessments = pd.read_csv(
-        major_category_assessment_path,
-        dtype={"admin_dong_code": str},
-    )
-    indicator_scores = pd.read_csv(indicator_scores_path, dtype={"admin_dong_code": str})
-    policy_catalog = pd.read_csv(policy_catalog_path)
-    summary = render(
-        composite,
-        boundaries,
-        priority,
-        overlay,
-        policy_matrix,
-        svg_output,
-        pdf_output,
-        png_output,
-    )
-    profiles = build_action_profiles(composite)
-    profile_output.parent.mkdir(parents=True, exist_ok=True)
-    profiles.to_csv(profile_output, index=False, encoding="utf-8-sig", lineterminator="\n")
-    write_action_map(
-        profiles,
-        boundaries,
-        category_assessments,
-        major_category_assessments,
-        indicator_scores,
-        policy_catalog,
-        html_output,
-    )
-    report = {
-        "schema_version": 1,
-        "generated_at": datetime.now(UTC).replace(microsecond=0).isoformat(),
-        "reference_year": 2025,
-        "artifact_status": "submission_draft",
-        "format": "A4 portrait one-page infographic",
-        "dong_action_profile_count": len(profiles),
-        **summary,
-        "input_paths": {
-            "composite_index": composite_path.as_posix(),
-            "boundaries": boundaries_path.as_posix(),
-            "priority_areas": priority_path.as_posix(),
-            "environmental_overlay": overlay_path.as_posix(),
-            "policy_matrix": policy_matrix_path.as_posix(),
-            "category_assessment": category_assessment_path.as_posix(),
-            "major_category_assessment": major_category_assessment_path.as_posix(),
-            "indicator_scores": indicator_scores_path.as_posix(),
-            "policy_catalog": policy_catalog_path.as_posix(),
-        },
-        "input_sha256": {
-            "composite_index": sha256_file(composite_path),
-            "boundaries": sha256_file(boundaries_path),
-            "priority_areas": sha256_file(priority_path),
-            "environmental_overlay": sha256_file(overlay_path),
-            "policy_matrix": sha256_file(policy_matrix_path),
-            "category_assessment": sha256_file(category_assessment_path),
-            "major_category_assessment": sha256_file(major_category_assessment_path),
-            "indicator_scores": sha256_file(indicator_scores_path),
-            "policy_catalog": sha256_file(policy_catalog_path),
-        },
-        "output_paths": {
-            "svg": svg_output.as_posix(),
-            "pdf": pdf_output.as_posix(),
-            "png": png_output.as_posix(),
-            "action_profile_csv": profile_output.as_posix(),
-            "interactive_action_map": html_output.as_posix(),
-        },
-        "output_sha256": {
-            "svg": sha256_file(svg_output),
-            "pdf": sha256_file(pdf_output),
-            "png": sha256_file(png_output),
-            "action_profile_csv": sha256_file(profile_output),
-            "interactive_action_map": sha256_file(html_output),
-        },
-        "interpretation": (
-            "Public-data experimental screening; not an official index, causal estimate, "
-            "individual eligibility rule, or final funding decision"
-        ),
-    }
-    write_json(report_path, report)
-    return report
-
-
-def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--composite-index", type=Path, default=DEFAULT_COMPOSITE)
-    parser.add_argument("--boundaries", type=Path, default=DEFAULT_BOUNDARIES)
-    parser.add_argument("--priority-areas", type=Path, default=DEFAULT_PRIORITY_OUTPUT)
-    parser.add_argument("--environmental-overlay", type=Path, default=DEFAULT_OVERLAY)
-    parser.add_argument("--policy-matrix", type=Path, default=DEFAULT_POLICY_MATRIX)
-    parser.add_argument(
-        "--category-assessment",
-        type=Path,
-        default=DEFAULT_CATEGORY_ASSESSMENT,
-    )
-    parser.add_argument(
-        "--major-category-assessment",
-        type=Path,
-        default=DEFAULT_MAJOR_CATEGORY_ASSESSMENT,
-    )
-    parser.add_argument("--indicator-scores", type=Path, default=DEFAULT_INDICATOR_SCORES)
-    parser.add_argument("--policy-catalog", type=Path, default=DEFAULT_POLICY_CATALOG)
-    parser.add_argument("--svg-output", type=Path, default=DEFAULT_SVG_OUTPUT)
-    parser.add_argument("--pdf-output", type=Path, default=DEFAULT_PDF_OUTPUT)
-    parser.add_argument("--png-output", type=Path, default=DEFAULT_PNG_OUTPUT)
-    parser.add_argument("--profile-output", type=Path, default=DEFAULT_PROFILE_OUTPUT)
-    parser.add_argument("--html-output", type=Path, default=DEFAULT_HTML_OUTPUT)
-    parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
-    args = parser.parse_args()
-    report = run(
-        args.composite_index,
-        args.boundaries,
-        args.priority_areas,
-        args.environmental_overlay,
-        args.policy_matrix,
-        args.category_assessment,
-        args.major_category_assessment,
-        args.indicator_scores,
-        args.policy_catalog,
-        args.svg_output,
-        args.pdf_output,
-        args.png_output,
-        args.profile_output,
-        args.html_output,
-        args.report,
-    )
-    print(
-        f"rendered {report['page_count']}-page infographic with "
-        f"{report['priority_area_count']} priority areas"
-    )
-    return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())

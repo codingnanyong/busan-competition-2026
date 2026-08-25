@@ -18,7 +18,7 @@ docker compose run --rm jupyter python scripts/rebuild_processed.py
 영역 점수만 다시 생성하려면 다음을 실행한다.
 
 ```bash
-docker compose run --rm jupyter python -m busan_imd.domain_scores
+docker compose run --rm jupyter python -m busan_imd.analysis.domain_scores
 ```
 
 실행 계약은 [DOMAIN_SCORE_SPEC_2025.csv](../data/DOMAIN_SCORE_SPEC_2025.csv), 입력·출력

@@ -21,8 +21,8 @@ from busan_imd.collectors.supplemental_data import (
     validate_manifest as validate_supplemental_manifest,
 )
 from busan_imd.collectors.traffic_accidents import validate_manifest as validate_traffic_manifest
-from busan_imd.data_catalog import validate_catalog
-from busan_imd.income_inference import validate_manifest as validate_income_manifest
+from busan_imd.processing.data_catalog import validate_catalog
+from busan_imd.processing.income_inference import validate_manifest as validate_income_manifest
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 
@@ -125,7 +125,9 @@ def test_eda_notebook_is_clean_and_reuses_the_pipeline() -> None:
 
     assert notebook["nbformat"] == 4
     code_cells = [cell for cell in notebook["cells"] if cell["cell_type"] == "code"]
-    assert any("from busan_imd.eda import run" in "".join(cell["source"]) for cell in code_cells)
+    assert any(
+        "from busan_imd.analysis.eda import run" in "".join(cell["source"]) for cell in code_cells
+    )
     assert any("os.chdir(project_root)" in "".join(cell["source"]) for cell in code_cells)
     assert all(cell["execution_count"] is None for cell in code_cells)
     assert all(cell["outputs"] == [] for cell in code_cells)
@@ -139,7 +141,7 @@ def test_cluster_notebook_is_clean_and_portable() -> None:
     code_cells = [cell for cell in notebook["cells"] if cell["cell_type"] == "code"]
     sources = ["".join(cell["source"]) for cell in code_cells]
     assert any("os.chdir(project_root)" in source for source in sources)
-    assert any("from busan_imd.cluster_analysis import" in source for source in sources)
+    assert any("from busan_imd.analysis.cluster_analysis import" in source for source in sources)
     assert any("px.scatter" in source for source in sources)
     assert any("px.imshow" in source for source in sources)
     assert all(cell["execution_count"] is None for cell in code_cells)
@@ -154,7 +156,9 @@ def test_environmental_overlay_notebook_is_clean_and_portable() -> None:
     code_cells = [cell for cell in notebook["cells"] if cell["cell_type"] == "code"]
     sources = ["".join(cell["source"]) for cell in code_cells]
     assert any("os.chdir(project_root)" in source for source in sources)
-    assert any("from busan_imd.environmental_overlay import" in source for source in sources)
+    assert any(
+        "from busan_imd.analysis.environmental_overlay import" in source for source in sources
+    )
     assert any("px.scatter" in source for source in sources)
     assert any("px.choropleth_mapbox" in source for source in sources)
     assert all(cell["execution_count"] is None for cell in code_cells)
@@ -169,7 +173,7 @@ def test_policy_matrix_notebook_is_clean_and_portable() -> None:
     code_cells = [cell for cell in notebook["cells"] if cell["cell_type"] == "code"]
     sources = ["".join(cell["source"]) for cell in code_cells]
     assert any("os.chdir(project_root)" in source for source in sources)
-    assert any("from busan_imd.policy_matrix import" in source for source in sources)
+    assert any("from busan_imd.analysis.policy_matrix import" in source for source in sources)
     assert any("px.bar" in source for source in sources)
     assert any("px.scatter" in source for source in sources)
     assert all(cell["execution_count"] is None for cell in code_cells)
@@ -180,11 +184,11 @@ def test_eda_report_covers_the_canonical_profile() -> None:
     report = read_json("docs/data/manifests/EDA_REPORT_2025.json")
 
     assert report["profile_record_count"] == 206
-    assert report["numeric_indicator_count"] == 48
-    assert report["scoring_candidate_numeric_count"] == 36
+    assert report["numeric_indicator_count"] == 49
+    assert report["scoring_candidate_numeric_count"] == 37
     assert report["constant_numeric_columns"] == ["air_idw_station_count"]
     assert report["columns_with_missing_values"] == {}
-    assert report["high_correlation_pair_count"] == 5
+    assert report["high_correlation_pair_count"] == 7
     assert report["contiguity_edge_count"] == 532
     assert report["isolated_admin_dong_count"] == len(report["isolated_admin_dongs"]) == 6
     assert all(re.fullmatch(r"[0-9A-F]{64}", value) for value in report["output_sha256"].values())
@@ -251,10 +255,7 @@ def test_priority_area_report_covers_cod19_scope() -> None:
     assert report["indicator_count"] == 9
     assert sum(report["leading_domain_counts"].values()) == 21
     assert len(report["top_10_priority_areas"]) == 10
-    assert all(
-        re.fullmatch(r"[0-9A-F]{64}", value)
-        for value in report["output_sha256"].values()
-    )
+    assert all(re.fullmatch(r"[0-9A-F]{64}", value) for value in report["output_sha256"].values())
 
 
 def test_cluster_analysis_report_records_cod20_typology_decision() -> None:
@@ -267,17 +268,15 @@ def test_cluster_analysis_report_records_cod20_typology_decision() -> None:
     assert report["recommended_for_policy_typology"] is True
     assert report["decision"] == "use_as_exploratory_policy_typology"
     assert report["input_sha256"] == priority_report["output_sha256"]["priority_areas"]
-    assert report["selected_metrics"]["mean_seed_stability_ari"] >= report[
-        "quality_gate"
-    ]["minimum_mean_seed_stability_ari"]
+    assert (
+        report["selected_metrics"]["mean_seed_stability_ari"]
+        >= report["quality_gate"]["minimum_mean_seed_stability_ari"]
+    )
     assert {item["cluster_label"] for item in report["cluster_summaries"]} == {
         "education_living_environment",
         "employment_income",
     }
-    assert all(
-        re.fullmatch(r"[0-9A-F]{64}", value)
-        for value in report["output_sha256"].values()
-    )
+    assert all(re.fullmatch(r"[0-9A-F]{64}", value) for value in report["output_sha256"].values())
 
 
 def test_environmental_overlay_report_records_cod21_scope() -> None:
@@ -290,16 +289,14 @@ def test_environmental_overlay_report_records_cod21_scope() -> None:
     assert report["priority_area_count"] == 21
     assert report["double_burden_count"] == 4
     assert sum(report["category_counts"].values()) == 206
-    assert report["decision"] == (
-        "use_for_particulate_independent_double_burden_screening_only"
-    )
+    assert report["decision"] == ("use_for_particulate_independent_double_burden_screening_only")
     assert report["port_industrial_overlay"]["status"] == (
         "not_evaluated_no_versioned_site_geometry"
     )
     assert report["input_sha256"]["composite_index"] == composite_report["output_sha256"]
-    assert report["input_sha256"]["standardized_profile"] == standardization_report[
-        "profile_sha256"
-    ]
+    assert (
+        report["input_sha256"]["standardized_profile"] == standardization_report["profile_sha256"]
+    )
     assert re.fullmatch(r"[0-9A-F]{64}", report["output_sha256"])
 
 
@@ -313,12 +310,11 @@ def test_policy_matrix_report_records_cod22_scope() -> None:
     assert report["matrix_row_count"] == 5
     assert report["unique_policy_count"] == 4
     assert report["decision_status"] == "candidate_for_field_validation"
-    assert report["input_sha256"]["cluster_assignments"] == cluster_report[
-        "output_sha256"
-    ]["assignments"]
-    assert report["input_sha256"]["environmental_overlay"] == overlay_report[
-        "output_sha256"
-    ]
+    assert (
+        report["input_sha256"]["cluster_assignments"]
+        == cluster_report["output_sha256"]["assignments"]
+    )
+    assert report["input_sha256"]["environmental_overlay"] == overlay_report["output_sha256"]
     assert report["cluster_summaries"][0]["excluded_nonpositive_domains"] == [
         {"domain": "living_environment", "mean_excess_points": -0.252867}
     ]
@@ -354,15 +350,17 @@ def test_infographic_report_and_outputs_cover_cod23_scope() -> None:
     assert profiles["admin_dong_code"].nunique() == 206
     assert profiles["improvement_direction"].notna().all()
     assert profiles["specialization_evidence_status"].str.contains("특화 확정 불가").all()
-    action_map = (
-        REPOSITORY_ROOT / report["output_paths"]["interactive_action_map"]
-    ).read_text(encoding="utf-8")
+    action_map = (REPOSITORY_ROOT / report["output_paths"]["interactive_action_map"]).read_text(
+        encoding="utf-8"
+    )
     assert action_map.count("data-code=") == 206
     assert action_map.count('class="tree-major"') == 3
     assert action_map.count('class="tree-child"') == 8
     assert 'role="tree"' in action_map
     assert "큰 카테고리 종합점수 산정" in action_map
     assert "생활 인프라·주거" in action_map
+    assert "정책 설계 참고사례" in action_map
+    assert "부산형 DRT '타바라'" in action_map
 
 
 def test_category_assessment_is_complete_and_flags_estimation() -> None:
@@ -371,10 +369,10 @@ def test_category_assessment_is_complete_and_flags_estimation() -> None:
     assert report["admin_dong_count"] == 206
     assert report["major_category_count"] == 3
     assert report["category_count"] == 8
-    assert report["indicator_count"] == 13
+    assert report["indicator_count"] == 14
     assert report["category_score_row_count"] == 206 * 8
     assert report["major_category_score_row_count"] == 206 * 3
-    assert report["indicator_score_row_count"] == 206 * 13
+    assert report["indicator_score_row_count"] == 206 * 14
     assert report["policy_trigger_threshold"] == 70
     for name, relative_path in report["output_paths"].items():
         actual = hashlib.sha256((REPOSITORY_ROOT / relative_path).read_bytes()).hexdigest().upper()
@@ -396,12 +394,8 @@ def test_category_assessment_is_complete_and_flags_estimation() -> None:
     ]
     assert len(myeongji) == 2
     assert myeongji["category_score_0_100"].lt(70).all()
-    indicators = pd.read_csv(
-        REPOSITORY_ROOT / report["output_paths"]["indicator_scores"]
-    )
-    assert {"estimate_used", "estimation_method_ko", "estimation_reason"} <= set(
-        indicators.columns
-    )
+    indicators = pd.read_csv(REPOSITORY_ROOT / report["output_paths"]["indicator_scores"])
+    assert {"estimate_used", "estimation_method_ko", "estimation_reason"} <= set(indicators.columns)
     estimated = indicators[indicators["estimate_used"]]
     assert len(estimated) == 206 * 9
     assert estimated["estimation_reason"].str.len().gt(0).all()
@@ -566,9 +560,7 @@ def test_housing_proxy_discloses_2024_to_2025_inference() -> None:
 
 
 def test_basic_livelihood_proxy_discloses_dong_inference() -> None:
-    manifest = read_json(
-        "docs/data/manifests/BASIC_LIVELIHOOD_INFERENCE_MANIFEST_2025.json"
-    )
+    manifest = read_json("docs/data/manifests/BASIC_LIVELIHOOD_INFERENCE_MANIFEST_2025.json")
     validate_income_manifest(manifest, REPOSITORY_ROOT)
 
     assert manifest["reference_period"] == "2025-12"
@@ -579,9 +571,7 @@ def test_basic_livelihood_proxy_discloses_dong_inference() -> None:
     assert manifest["observed_pattern_admin_dongs"] == 86
     assert manifest["district_people_total"] == 256393
     assert manifest["analysis_role"] == "provisional_scoring_proxy"
-    assert manifest["lineage"]["district_total_dataset_id"] == (
-        "INC-WELFARE-SIGUNGU-2025-001"
-    )
+    assert manifest["lineage"]["district_total_dataset_id"] == ("INC-WELFARE-SIGUNGU-2025-001")
     assert set(manifest["lineage"]["model_feature_dataset_ids"].values()) == {
         "SOC-BUSAN-ELDERLY-ALONE-001",
         "HOU-SGIS-OLD-001",
@@ -612,6 +602,7 @@ def test_standardization_report_covers_canonical_dongs_and_discloses_failures() 
         "SAF-BUSAN-CCTV-001",
         "ENV-HEAT-SHELTER-001",
         "EDU-SCHOOL-001",
+        "EDU-SCHOOLINFO-2025-001",
         "ENV-AIR-HEIS-DAILY-2025-001",
     }
     assert set(report["analysis_roles"]["validation_only"]) == {
@@ -647,6 +638,8 @@ def test_committed_manifests_do_not_contain_credentials() -> None:
         "docs/data/manifests/DATA_QUALITY_REPORT_2025.json",
         "docs/data/manifests/CONSUMER_SALES_MANIFEST_2025.json",
         "docs/data/manifests/CITY_PARKS_MANIFEST.json",
+        "docs/data/manifests/SCHOOLINFO_DISCLOSURE_MANIFEST_2025.json",
+        "docs/data/manifests/BUS_SERVICE_CURRENT_MANIFEST.json",
     ):
         text = (REPOSITORY_ROOT / relative_path).read_text(encoding="utf-8")
         assert "serviceKey=" not in text

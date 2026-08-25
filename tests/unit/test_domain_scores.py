@@ -3,7 +3,7 @@ from __future__ import annotations
 import pandas as pd
 import pytest
 
-from busan_imd.domain_scores import IndicatorRule, build, percentile_score
+from busan_imd.analysis.domain_scores import IndicatorRule, build, percentile_score
 
 
 def rule(domain: str, indicator: str, direction: str, weight: float = 1.0) -> IndicatorRule:

@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from busan_imd.sensitivity_analysis import Scenario, build, load_scenarios
+from busan_imd.analysis.sensitivity_analysis import Scenario, build, load_scenarios
 
 
 def scenario(
@@ -64,9 +64,7 @@ def test_median_imputation_reports_real_missingness() -> None:
     frame.loc[0, "income_score_0_100"] = np.nan
     scenarios = [scenario("baseline", missing_policy="median_imputation")]
 
-    output, report = build(
-        frame, pd.Series({"income": 0.5, "employment": 0.5}), scenarios
-    )
+    output, report = build(frame, pd.Series({"income": 0.5, "employment": 0.5}), scenarios)
 
     assert len(output) == 206
     assert report["actual_missing_domain_score_count"] == 1

@@ -9,7 +9,7 @@ priority areas.
 ## Run and outputs
 
 ```bash
-docker compose run --rm jupyter python -m busan_imd.sensitivity_analysis
+docker compose run --rm jupyter python -m busan_imd.analysis.sensitivity_analysis
 ```
 
 The executable contract is

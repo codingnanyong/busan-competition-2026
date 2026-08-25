@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from busan_imd.cluster_analysis import DOMAINS, build, run
+from busan_imd.analysis.cluster_analysis import DOMAINS, build, run
 
 
 def priority_input() -> pd.DataFrame:

@@ -6,7 +6,7 @@
 
 - 감사일: 2026-08-11
 - 등록 후보: 40개
-- 현재 판정: `include` 11개, `validation-only` 13개, `hold` 6개, `exclude` 10개
+- 현재 판정: `include` 12개, `validation-only` 14개, `hold` 6개, `exclude` 10개
 - 결론: 소득 추정 대리를 포함한 6개 영역은 부산 206개 동 잠정 대리지표를 구성했다.
   안전 영역은 행정동 직접 사건자료가 없어 기본 점수를 계속 보류한다.
 
@@ -57,7 +57,7 @@
 
 ```powershell
 $env:PYTHONPATH = "src"
-python -m busan_imd.data_catalog docs/data/DATASET_AUDIT.csv --raw-dir data/raw/audit
+python -m busan_imd.processing.data_catalog docs/data/DATASET_AUDIT.csv --raw-dir data/raw/audit
 ```
 
 ## 기록 및 결측 규칙

@@ -21,7 +21,7 @@ docker compose run --rm jupyter python scripts/rebuild_processed.py
 To regenerate only the stage after domain scoring:
 
 ```bash
-docker compose run --rm jupyter python -m busan_imd.composite_index
+docker compose run --rm jupyter python -m busan_imd.analysis.composite_index
 ```
 
 The executable contract is

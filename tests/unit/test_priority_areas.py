@@ -4,8 +4,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from busan_imd.composite_index import DomainWeight
-from busan_imd.priority_areas import build
+from busan_imd.analysis.composite_index import DomainWeight
+from busan_imd.analysis.priority_areas import build
 
 DOMAINS = (
     "income",

@@ -5,7 +5,7 @@ import pandas as pd
 import pytest
 from shapely.geometry import box
 
-from busan_imd.eda import build, correlation_outputs, morans_i, summarize_indicators
+from busan_imd.analysis.eda import build, correlation_outputs, morans_i, summarize_indicators
 
 
 def dictionary_for(columns: list[str]) -> pd.DataFrame:

@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from busan_imd.composite_index import DomainWeight, build, load_weights
+from busan_imd.analysis.composite_index import DomainWeight, build, load_weights
 
 
 def weight(domain: str, value: float) -> DomainWeight:

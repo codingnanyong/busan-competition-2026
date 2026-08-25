@@ -10,7 +10,7 @@ score. Sources with incompatible periods or definitions remain `validation_only`
 ## Run
 
 ```bash
-docker compose run --rm jupyter python -m busan_imd.standardization
+docker compose run --rm jupyter python -m busan_imd.processing.standardization
 ```
 
 Outputs:

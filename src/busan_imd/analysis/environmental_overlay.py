@@ -11,14 +11,12 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from busan_imd.composite_index import DEFAULT_OUTPUT as DEFAULT_COMPOSITE
+from busan_imd.analysis.composite_index import DEFAULT_OUTPUT as DEFAULT_COMPOSITE
 from busan_imd.core.artifacts import sha256_file, write_json
-from busan_imd.standardization import DEFAULT_OUTPUT_DIR as STANDARDIZED_OUTPUT_DIR
+from busan_imd.processing.standardization import DEFAULT_OUTPUT_DIR as STANDARDIZED_OUTPUT_DIR
 
 DEFAULT_PROFILE = STANDARDIZED_OUTPUT_DIR / "busan_admin_dong_candidate_profile_2025.csv"
-DEFAULT_OUTPUT = Path(
-    "data/processed/scores/2025/busan_admin_dong_environmental_overlay_2025.csv"
-)
+DEFAULT_OUTPUT = Path("data/processed/scores/2025/busan_admin_dong_environmental_overlay_2025.csv")
 DEFAULT_REPORT = Path("docs/data/manifests/ENVIRONMENTAL_OVERLAY_REPORT_2025.json")
 EXPECTED_RECORD_COUNT = 206
 HIGH_EXPOSURE_SHARE = 0.25
@@ -68,15 +66,11 @@ def _validate(composite: pd.DataFrame, profile: pd.DataFrame) -> tuple[pd.DataFr
         "b_imd_decile",
         *(f"{domain}_score_0_100" for domain in SOCIAL_DOMAIN_WEIGHTS),
     ]
-    composite[composite_numeric] = composite[composite_numeric].apply(
-        pd.to_numeric, errors="raise"
-    )
+    composite[composite_numeric] = composite[composite_numeric].apply(pd.to_numeric, errors="raise")
     profile[[PM25_COLUMN, PM10_COLUMN]] = profile[[PM25_COLUMN, PM10_COLUMN]].apply(
         pd.to_numeric, errors="raise"
     )
-    values = pd.concat(
-        [composite[composite_numeric], profile[[PM25_COLUMN, PM10_COLUMN]]], axis=1
-    )
+    values = pd.concat([composite[composite_numeric], profile[[PM25_COLUMN, PM10_COLUMN]]], axis=1)
     if not np.isfinite(values).all().all():
         raise ValueError("B-IMD and particulate exposure values must be finite")
     return composite, profile
@@ -105,29 +99,29 @@ def build(composite: pd.DataFrame, profile: pd.DataFrame) -> tuple[pd.DataFrame,
     social_weight_total = sum(SOCIAL_DOMAIN_WEIGHTS.values())
     social_score = pd.Series(0.0, index=overlay.index)
     for domain, published_weight in SOCIAL_DOMAIN_WEIGHTS.items():
-        social_score += (
-            overlay[f"{domain}_score_0_100"] * published_weight / social_weight_total
+        social_score += overlay[f"{domain}_score_0_100"] * published_weight / social_weight_total
+    social_ordered = (
+        overlay.assign(_score_exact=social_score)
+        .sort_values(
+            ["_score_exact", "admin_dong_code"],
+            ascending=[False, True],
+            kind="stable",
         )
-    social_ordered = overlay.assign(_score_exact=social_score).sort_values(
-        ["_score_exact", "admin_dong_code"],
-        ascending=[False, True],
-        kind="stable",
-    ).index
+        .index
+    )
     overlay["particulate_free_b_imd_score_0_100"] = social_score.round(6)
     overlay["particulate_free_b_imd_rank"] = 0
-    overlay.loc[social_ordered, "particulate_free_b_imd_rank"] = np.arange(
-        1, len(overlay) + 1
-    )
+    overlay.loc[social_ordered, "particulate_free_b_imd_rank"] = np.arange(1, len(overlay) + 1)
     overlay["particulate_free_b_imd_decile"] = (
         (overlay["particulate_free_b_imd_rank"] - 1) * 10 // len(overlay) + 1
     ).astype(int)
 
-    overlay["pm25_exposure_percentile"] = overlay[PM25_COLUMN].rank(
-        method="average", pct=True
-    ) * 100
-    overlay["pm10_exposure_percentile"] = overlay[PM10_COLUMN].rank(
-        method="average", pct=True
-    ) * 100
+    overlay["pm25_exposure_percentile"] = (
+        overlay[PM25_COLUMN].rank(method="average", pct=True) * 100
+    )
+    overlay["pm10_exposure_percentile"] = (
+        overlay[PM10_COLUMN].rank(method="average", pct=True) * 100
+    )
     overlay["particulate_exposure_score_0_100"] = overlay[
         ["pm25_exposure_percentile", "pm10_exposure_percentile"]
     ].mean(axis=1)
@@ -140,12 +134,9 @@ def build(composite: pd.DataFrame, profile: pd.DataFrame) -> tuple[pd.DataFrame,
     overlay.loc[ordered, "particulate_exposure_rank"] = np.arange(1, len(overlay) + 1)
     high_count = math.ceil(len(overlay) * HIGH_EXPOSURE_SHARE)
     overlay["high_particulate_exposure"] = overlay["particulate_exposure_rank"] <= high_count
-    overlay["social_vulnerability_priority_area"] = (
-        overlay["particulate_free_b_imd_decile"] == 1
-    )
+    overlay["social_vulnerability_priority_area"] = overlay["particulate_free_b_imd_decile"] == 1
     overlay["double_burden"] = (
-        overlay["high_particulate_exposure"]
-        & overlay["social_vulnerability_priority_area"]
+        overlay["high_particulate_exposure"] & overlay["social_vulnerability_priority_area"]
     )
     overlay["overlay_category"] = np.select(
         [
@@ -164,9 +155,7 @@ def build(composite: pd.DataFrame, profile: pd.DataFrame) -> tuple[pd.DataFrame,
 
     priority = overlay[overlay["social_vulnerability_priority_area"]]
     other = overlay[~overlay["social_vulnerability_priority_area"]]
-    double_burden = overlay[overlay["double_burden"]].sort_values(
-        "particulate_free_b_imd_rank"
-    )
+    double_burden = overlay[overlay["double_burden"]].sort_values("particulate_free_b_imd_rank")
     report: dict[str, Any] = {
         "schema_version": 1,
         "generated_at": datetime.now(UTC).replace(microsecond=0).isoformat(),
@@ -187,12 +176,8 @@ def build(composite: pd.DataFrame, profile: pd.DataFrame) -> tuple[pd.DataFrame,
         ),
         "social_domain_published_weights": SOCIAL_DOMAIN_WEIGHTS,
         "priority_area_rule": "particulate-free B-IMD decile 1",
-        "priority_area_count": int(
-            overlay["social_vulnerability_priority_area"].sum()
-        ),
-        "double_burden_rule": (
-            "high particulate exposure and particulate-free B-IMD decile 1"
-        ),
+        "priority_area_count": int(overlay["social_vulnerability_priority_area"].sum()),
+        "double_burden_rule": ("high particulate exposure and particulate-free B-IMD decile 1"),
         "double_burden_count": int(overlay["double_burden"].sum()),
         "category_counts": {
             str(key): int(value)
@@ -200,15 +185,11 @@ def build(composite: pd.DataFrame, profile: pd.DataFrame) -> tuple[pd.DataFrame,
         },
         "spearman_correlations_with_particulate_free_b_imd": {
             "annual_pm25_ug_m3_idw_2025": round(
-                _spearman(
-                    overlay["particulate_free_b_imd_score_0_100"], overlay[PM25_COLUMN]
-                ),
+                _spearman(overlay["particulate_free_b_imd_score_0_100"], overlay[PM25_COLUMN]),
                 6,
             ),
             "annual_pm10_ug_m3_idw_2025": round(
-                _spearman(
-                    overlay["particulate_free_b_imd_score_0_100"], overlay[PM10_COLUMN]
-                ),
+                _spearman(overlay["particulate_free_b_imd_score_0_100"], overlay[PM10_COLUMN]),
                 6,
             ),
             "particulate_exposure_score_0_100": round(
@@ -222,9 +203,7 @@ def build(composite: pd.DataFrame, profile: pd.DataFrame) -> tuple[pd.DataFrame,
         "particulate_exposure_score_by_priority_status": {
             "priority_area": {
                 "mean": round(float(priority["particulate_exposure_score_0_100"].mean()), 6),
-                "median": round(
-                    float(priority["particulate_exposure_score_0_100"].median()), 6
-                ),
+                "median": round(float(priority["particulate_exposure_score_0_100"].median()), 6),
             },
             "other_area": {
                 "mean": round(float(other["particulate_exposure_score_0_100"].mean()), 6),

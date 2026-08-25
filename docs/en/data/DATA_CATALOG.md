@@ -54,7 +54,7 @@ Raw files remain in the Git-ignored `data/raw/audit/` directory. Recheck catalog
 
 ```powershell
 $env:PYTHONPATH = "src"
-python -m busan_imd.data_catalog docs/data/DATASET_AUDIT.csv --raw-dir data/raw/audit
+python -m busan_imd.processing.data_catalog docs/data/DATASET_AUDIT.csv --raw-dir data/raw/audit
 ```
 
 ## Missing-value states

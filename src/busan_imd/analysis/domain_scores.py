@@ -63,9 +63,10 @@ def load_rules(path: Path = DEFAULT_SPEC) -> list[IndicatorRule]:
     if set(frame["normalization"]) != {"percentile_rank"}:
         raise ValueError("The 2025 base model requires percentile-rank normalization")
     weights = frame.groupby("domain")["within_domain_weight"].sum()
-    if not np.allclose(weights.to_numpy(dtype=float), 1.0) or (
-        frame["within_domain_weight"] <= 0
-    ).any():
+    if (
+        not np.allclose(weights.to_numpy(dtype=float), 1.0)
+        or (frame["within_domain_weight"] <= 0).any()
+    ):
         raise ValueError("Positive within-domain weights must sum to one")
     return [IndicatorRule(**row) for row in frame.to_dict(orient="records")]
 
@@ -133,9 +134,9 @@ def build(
         )
     indicator_scores = pd.concat(indicator_frames, ignore_index=True)
 
-    totals = indicator_scores.groupby(
-        ["admin_dong_code", "domain"], sort=True, observed=True
-    )["weighted_score"].sum()
+    totals = indicator_scores.groupby(["admin_dong_code", "domain"], sort=True, observed=True)[
+        "weighted_score"
+    ].sum()
     wide = totals.unstack("domain").reset_index()
     wide = wide.rename(columns={domain: f"{domain}_score_0_100" for domain in scored_domains})
     domain_scores = profile[IDENTITY_COLUMNS].merge(

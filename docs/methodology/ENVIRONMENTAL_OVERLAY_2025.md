@@ -13,7 +13,7 @@ COD-21은 2025년 부산 206개 행정동의 미세먼지 독립 사회취약성
 COD-21 단계만 다시 만들려면 저장소 루트에서 다음 명령을 실행한다.
 
 ```bash
-docker compose run --rm jupyter python -m busan_imd.environmental_overlay
+docker compose run --rm jupyter python -m busan_imd.analysis.environmental_overlay
 ```
 
 - `data/processed/scores/2025/busan_admin_dong_environmental_overlay_2025.csv`: 206개 동의

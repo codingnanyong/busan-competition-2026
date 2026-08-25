@@ -11,12 +11,10 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
+from busan_imd.analysis.domain_scores import HELD_DOMAINS, IDENTITY_COLUMNS
 from busan_imd.core.artifacts import sha256_file, write_json
-from busan_imd.domain_scores import HELD_DOMAINS, IDENTITY_COLUMNS
 
-DEFAULT_DOMAIN_SCORES = Path(
-    "data/processed/scores/2025/busan_admin_dong_domain_scores_2025.csv"
-)
+DEFAULT_DOMAIN_SCORES = Path("data/processed/scores/2025/busan_admin_dong_domain_scores_2025.csv")
 DEFAULT_SPEC = Path("docs/data/COMPOSITE_INDEX_SPEC_2025.csv")
 DEFAULT_OUTPUT = Path("data/processed/scores/2025/busan_admin_dong_imd_2025.csv")
 DEFAULT_REPORT = Path("docs/data/manifests/COMPOSITE_INDEX_REPORT_2025.json")
@@ -90,16 +88,13 @@ def build(
     composite = pd.Series(0.0, index=output.index)
     for weight in weights:
         composite += (
-            output[f"{weight.domain}_score_0_100"].astype(float)
-            * weight.scored_model_weight
+            output[f"{weight.domain}_score_0_100"].astype(float) * weight.scored_model_weight
         )
     ordered = output.assign(_score_exact=composite, _code=codes).sort_values(
         ["_score_exact", "_code"], ascending=[False, True], kind="stable"
     )
     ordered["b_imd_rank"] = np.arange(1, len(ordered) + 1)
-    ordered["b_imd_decile"] = (
-        ((ordered["b_imd_rank"] - 1) * 10 // len(ordered)) + 1
-    ).astype(int)
+    ordered["b_imd_decile"] = (((ordered["b_imd_rank"] - 1) * 10 // len(ordered)) + 1).astype(int)
     ordered["b_imd_score_0_100"] = ordered["_score_exact"].round(6)
     result_columns = [
         *IDENTITY_COLUMNS,

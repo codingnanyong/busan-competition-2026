@@ -29,7 +29,7 @@
 큰 카테고리 종합점수는 하위 카테고리별 취약도에 정해진 반영 비율을 적용한 뒤
 합산한다. 단순 평균이 아니며, 표의 비율은 각 하위 항목이 종합점수에 미치는 비중이다.
 
-따라서 지도에 표시되는 분포는 어느 한 세부지표의 분포가 아니라, 먼저 13개 지표로
+따라서 지도에 표시되는 분포는 어느 한 세부지표의 분포가 아니라, 먼저 14개 지표로
 8개 하위 카테고리를 계산한 뒤 이를 다시 종합한 결과다. 하위 카테고리 가중치는 같은
 큰 카테고리 안에서 합계 1이다.
 
@@ -39,7 +39,7 @@
 |---|---|---|
 | 소득·복지수요 | 추정 기초생활수급자율 | 206개 동 모두 추정, C1/C2 구분 |
 | 지역 고용기회 | 주민 대비 사업장 종사자·사업체 공급 대리 | 주민 실업·고용률이 아님 |
-| 교육시설 접근·공급 | 최근접 거리, 동 내 학교 수, 2km 학교 수 | 학령인구·정원·통학경로 미반영 |
+| 교육시설 접근·공급 | 최근접 거리, 동 내 학교 수, 2km 학교 수·활동 교원 수 | 학령인구·정원·통학경로 미반영 |
 | 의료공급 접근 | 소지역 보정 병원·의원 공급량 | 경계 밖 접근·수용력 미반영 |
 | 주거환경 | 30년 이상 노후주택 하한 비율 | 2024년·억제 셀 하한 |
 | 대중교통 접근 | 소지역 보정 정류장 공급량 | 미매칭·배차·노선 미반영 |
@@ -48,7 +48,7 @@
 
 ## 추정·보정값 공개 기준
 
-13개 지표 중 9개는 추정·재구성·보간 또는 소지역 보정을 사용한다. 대시보드에는 이들을
+14개 지표 중 9개는 추정·재구성·보간 또는 소지역 보정을 사용한다. 대시보드에는 이들을
 `⚠ 추정값 사용`으로 표시하고 방법과 사유를 함께 보여준다.
 
 - 구·군 총계 배분: 행정동별 수급자 관측값이 공개되지 않아 사용한다.
@@ -57,7 +57,7 @@
 - IDW 공간보간: 모든 행정동에 측정소가 없어 32개 측정소에서 PM2.5를 보간한다.
 - 혼합시점 보정: 독거노인 공개 기준일이 동별로 달라 시점 한계를 유지한 채 보정한다.
 
-학교 수·공간거리·노후주택 하한처럼 결측 대체 추정을 쓰지 않은 4개 지표도
+학교 수·교원 수·공간거리·노후주택 하한처럼 결측 대체 추정을 쓰지 않은 5개 지표도
 `추정값 미사용`과 산출 방식을 표시한다. 공간 대리값이나 하한값이라는 한계가 없어지는
 것은 아니다.
 
@@ -65,22 +65,39 @@
 [CATEGORY_ASSESSMENT_SPEC_2025.csv](../data/CATEGORY_ASSESSMENT_SPEC_2025.csv), 정책 예시는
 [CATEGORY_POLICY_CATALOG_2025.csv](../data/CATEGORY_POLICY_CATALOG_2025.csv)에 고정한다.
 
+## 정책 방향을 읽는 방법
+
+정책 카드는 `분석이 포착한 신호 → 우선 확인 대상 → 실행 순서 → 성과지표 →
+공식 참고사례 → 적용 주의점`을 함께 보여준다. 참고사례는 해당 행정동의 정책이
+이미 확정됐다는 뜻이 아니라, 현장 검증 후 비교할 수 있는 실행수단이다.
+
+- 소득·복지: [부산 '이웃의 재발견'](https://www.busan.go.kr/nbtnewsBU/1551025)
+- 고용: [고용노동부 국민취업지원제 우수사례](https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=18692)
+- 교육: [교육부 안전한 통학로 조성](https://www.moe.go.kr/mnstrBoardView.do?boardID=430&boardSeq=94002&lev=0)
+- 건강: [부산 건강생활지원센터](https://www.busan.go.kr/expdetail/view?curPage=339&schDbiz=6260000200930231&schYear=2025)
+- 주거: [국토교통부 그린리모델링](https://www.molit.go.kr/USR/NEWS/m_71/dtl.jsp?id=95083756&lcmspage=4)
+- 교통: [부산형 DRT '타바라'](https://www.busan.go.kr/15minute/space022)
+- 대기: [환경부 미세먼지 집중관리구역](https://me.go.kr/home/web/board/read.do?boardId=1416120&boardMasterId=939)
+- 폭염: [행정안전부 무더위쉼터 점검](https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&nttId=126779)
+
 ## 명지 회귀검증
 
 기존 교육점수는 중심점 최근접 거리만 사용해 명지1동 84.9, 명지2동 90.7로 나타났다.
-개선형 평가는 학교 수와 2km 공급을 함께 반영해 각각 51.9, 58.6으로 낮아졌으며 두 동
-모두 정책검토 임계값 70을 넘지 않는다. 거리 자체의 한계는 `medium_low`로 계속 표시한다.
+개선형 평가는 학교 수, 2km 공급, 2025년 활동 교원 수를 함께 반영해
+각각 58.1, 67.9로 조정되었다. 두 동 모두 정책검토 임계값 70을 넘지 않지만,
+명지2동은 고밀도 동과 비교한 2km 서비스권 공급이 상대적으로 낮아 경계에 가깝다.
+거리·반경 할당의 한계는 `medium_low`로 계속 표시한다.
 
 ## 실행과 산출물
 
 ```bash
-docker compose run --rm jupyter python -m busan_imd.category_assessment
+docker compose run --rm jupyter python -m busan_imd.analysis.category_assessment
 docker compose run --rm jupyter python -m busan_imd.infographic
 ```
 
 - `outputs/infographic/busan_admin_dong_category_assessment_2025.csv`: 206×8 카테고리 결과
 - `outputs/infographic/busan_admin_dong_major_category_assessment_2025.csv`: 206×3 큰 카테고리 결과
-- `outputs/infographic/busan_admin_dong_category_indicator_scores_2025.csv`: 206×13 근거표
+- `outputs/infographic/busan_admin_dong_category_indicator_scores_2025.csv`: 206×14 근거표
 - `docs/data/manifests/CATEGORY_ASSESSMENT_REPORT_2025.json`: 입력·출력 체크섬과 계약
 
 이 결과는 정책 후보를 좁히는 탐색 도구다. 최종 정책은 관측 행정자료, 이동시간·수용력,

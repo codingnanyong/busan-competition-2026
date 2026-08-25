@@ -6,8 +6,8 @@ import json
 import pandas as pd
 import pytest
 
-from busan_imd.cluster_analysis import DOMAINS
-from busan_imd.policy_matrix import CATALOG_COLUMNS, build, run
+from busan_imd.analysis.cluster_analysis import DOMAINS
+from busan_imd.analysis.policy_matrix import CATALOG_COLUMNS, build, run
 
 
 def cluster_report() -> dict:
@@ -29,9 +29,7 @@ def inputs() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
             "admin_dong_name": f"Dong {index}",
             "b_imd_rank": index + 1,
             "cluster_id": "type_1" if first else "type_2",
-            "cluster_label": (
-                "education_living_environment" if first else "income_employment"
-            ),
+            "cluster_label": ("education_living_environment" if first else "income_employment"),
             "dominant_domain": dominant,
             "secondary_domain": secondary,
         }
@@ -97,8 +95,7 @@ def test_build_creates_type_and_overlay_policy_candidates() -> None:
     assert set(matrix["decision_status"]) == {"candidate_for_field_validation"}
     assert matrix.groupby("cluster_id").size().to_dict() == {"type_1": 2, "type_2": 3}
     type_2_domains = matrix[
-        (matrix["cluster_id"] == "type_2")
-        & matrix["policy_trigger"].str.startswith("domain:")
+        (matrix["cluster_id"] == "type_2") & matrix["policy_trigger"].str.startswith("domain:")
     ]
     assert type_2_domains["policy_priority"].tolist() == [1, 2]
     assert type_2_domains["policy_trigger"].tolist() == [

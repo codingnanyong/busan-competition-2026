@@ -19,7 +19,7 @@ docker compose run --rm jupyter python scripts/rebuild_processed.py
 Run only COD-20 with:
 
 ```bash
-docker compose run --rm jupyter python -m busan_imd.cluster_analysis
+docker compose run --rm jupyter python -m busan_imd.analysis.cluster_analysis
 ```
 
 - `data/processed/scores/2025/busan_admin_dong_deprivation_clusters_2025.csv`: exploratory

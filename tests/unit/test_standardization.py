@@ -5,7 +5,7 @@ import pandas as pd
 import pytest
 from shapely.geometry import Point, box
 
-from busan_imd.standardization import points_from_xy, spatial_counts, validate_code_frame
+from busan_imd.processing.standardization import points_from_xy, spatial_counts, validate_code_frame
 
 
 def synthetic_boundaries() -> gpd.GeoDataFrame:

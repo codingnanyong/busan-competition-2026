@@ -21,15 +21,10 @@ DEFAULT_PROFILE_PATH = Path(
     "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv"
 )
 DEFAULT_DISTRICT_TOTALS_PATH = Path(
-    "data/raw/supplemental/welfare_beneficiaries/"
-    "welfare_beneficiaries_by_sigungu_2025.csv"
+    "data/raw/supplemental/welfare_beneficiaries/welfare_beneficiaries_by_sigungu_2025.csv"
 )
-DEFAULT_OUTPUT_PATH = Path(
-    "data/processed/candidates/2025/basic_livelihood_inferred_2025.csv"
-)
-DEFAULT_MANIFEST_PATH = Path(
-    "docs/data/manifests/BASIC_LIVELIHOOD_INFERENCE_MANIFEST_2025.json"
-)
+DEFAULT_OUTPUT_PATH = Path("data/processed/candidates/2025/basic_livelihood_inferred_2025.csv")
+DEFAULT_MANIFEST_PATH = Path("docs/data/manifests/BASIC_LIVELIHOOD_INFERENCE_MANIFEST_2025.json")
 
 
 @dataclass(frozen=True)
@@ -88,8 +83,7 @@ PATTERN_SOURCES = (
     PatternSource(
         "해운대구",
         Path(
-            "data/raw/supplemental/basic_livelihood/"
-            "busan_haeundae_basic_livelihood_2025_08_20.csv"
+            "data/raw/supplemental/basic_livelihood/busan_haeundae_basic_livelihood_2025_08_20.csv"
         ),
         "행정동",
         ("기초생계급여 수급권자수",),
@@ -172,9 +166,7 @@ def load_pattern(source: PatternSource) -> pd.DataFrame:
             source.name_remove, "", regex=False
         )
     frame["pattern_people"] = sum(_number(frame[column]) for column in source.people_columns)
-    frame["pattern_households"] = sum(
-        _number(frame[column]) for column in source.household_columns
-    )
+    frame["pattern_households"] = sum(_number(frame[column]) for column in source.household_columns)
     if frame["admin_dong_name"].duplicated().any():
         raise ValueError(f"Duplicate dong names in {source.dataset_id}")
     return frame[["admin_dong_name", "pattern_people", "pattern_households"]]
@@ -333,12 +325,12 @@ def infer(
             if has_pattern
             else rows["households_2025"] * rows["_model_risk"]
         )
-        output.loc[index, "basic_livelihood_recipients_2025_inferred"] = (
-            largest_remainder(people_weights, int(rows["people_total"].iloc[0])).to_numpy()
-        )
-        output.loc[index, "basic_livelihood_households_2025_inferred"] = (
-            largest_remainder(household_weights, int(rows["household_total"].iloc[0])).to_numpy()
-        )
+        output.loc[index, "basic_livelihood_recipients_2025_inferred"] = largest_remainder(
+            people_weights, int(rows["people_total"].iloc[0])
+        ).to_numpy()
+        output.loc[index, "basic_livelihood_households_2025_inferred"] = largest_remainder(
+            household_weights, int(rows["household_total"].iloc[0])
+        ).to_numpy()
         output.loc[index, "allocation_method"] = (
             "observed_dong_pattern_rescaled_to_2025_district_total"
             if has_pattern
@@ -355,16 +347,10 @@ def infer(
     output["district_total_reference_period"] = "2025-12"
     output["district_total_source_dataset_id"] = "INC-WELFARE-SIGUNGU-2025-001"
     model_rows = output["pattern_source_dataset_id"].isna()
-    output["inference_pattern_source_dataset_ids"] = output[
-        "pattern_source_dataset_id"
-    ]
-    output.loc[model_rows, "inference_pattern_source_dataset_ids"] = (
-        MODEL_PATTERN_DATASET_IDS
-    )
+    output["inference_pattern_source_dataset_ids"] = output["pattern_source_dataset_id"]
+    output.loc[model_rows, "inference_pattern_source_dataset_ids"] = MODEL_PATTERN_DATASET_IDS
     output["inference_feature_source_dataset_ids"] = "not_used"
-    output.loc[model_rows, "inference_feature_source_dataset_ids"] = (
-        MODEL_FEATURE_DATASET_IDS
-    )
+    output.loc[model_rows, "inference_feature_source_dataset_ids"] = MODEL_FEATURE_DATASET_IDS
     output["inference_basis"] = "observed_dong_pattern_plus_observed_2025_district_total"
     output.loc[model_rows, "inference_basis"] = (
         "ridge_relative_risk_plus_observed_2025_district_total"
@@ -372,9 +358,7 @@ def infer(
     output["inference_quality_tier"] = "C1_observed_pattern_rescaled"
     output.loc[model_rows, "inference_quality_tier"] = "C2_model_pattern_rescaled"
     output.loc[model_rows, "pattern_source_dataset_id"] = DATASET_ID
-    output.loc[output["pattern_source_period"].isna(), "pattern_source_period"] = (
-        "model_based"
-    )
+    output.loc[output["pattern_source_period"].isna(), "pattern_source_period"] = "model_based"
 
     reconciled = output.groupby("sigungu_name", as_index=False).agg(
         inferred_people=("basic_livelihood_recipients_2025_inferred", "sum"),
@@ -387,8 +371,7 @@ def infer(
     if not (reconciled["inferred_households"] == reconciled["household_total"]).all():
         raise ValueError("Inferred household counts do not reconcile to district totals")
     recipients_exceed_population = (
-        output["basic_livelihood_recipients_2025_inferred"]
-        > output["total_population_2025"]
+        output["basic_livelihood_recipients_2025_inferred"] > output["total_population_2025"]
     )
     if recipients_exceed_population.any():
         raise ValueError("An inferred recipient count exceeds the dong population")
