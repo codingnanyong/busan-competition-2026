@@ -10,6 +10,9 @@ After a `feat/* → develop` pull request is merged, the `PR policy` workflow:
 4. posts the PR, merge commit, GitHub, and Linear links to Slack only after both issues are complete.
 
 If Linear completion or Slack delivery fails, no success message is sent and the Actions job fails.
+Merged pull requests are not re-validated when Linear later edits the GitHub PR. The mirrored
+GitHub Issue is already closed by then, so repeating the pre-merge open-issue check would send a
+false failure alert.
 
 ## One-time external setup
 

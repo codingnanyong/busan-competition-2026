@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   validate-flow:
-    if: github.event.action != 'closed'
+    if: github.event.action != 'closed' && github.event.pull_request.merged != true
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -81,6 +81,9 @@ jobs:
             const issueLinearId = issue.title.match(/^(COD-\d+)\b/i)?.[1]?.toUpperCase();
             if (issue.pull_request || issueLinearId !== linearId) {
               core.setFailed(`#${issueNumber} is not the GitHub mirror for ${linearId}`);
+              return;
+            }
+            if (pr.merged) {
               return;
             }
             if (issue.state !== "open") {
