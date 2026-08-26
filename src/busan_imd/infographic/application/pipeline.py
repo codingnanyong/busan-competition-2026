@@ -132,6 +132,24 @@ def run(
         how="left",
         validate="one_to_one",
     )
+    reference_context["senior_consumer_minus_living_share_pp_2025_context"] = (
+        reference_context["consumer_sales_senior_transaction_share_pct_2025"]
+        - reference_context["senior_living_population_share_pct_2025"]
+    )
+    reference_context["under_30_consumer_minus_living_share_pp_2025_context"] = (
+        reference_context["consumer_sales_under_30_transaction_share_pct_2025"]
+        - reference_context["under_30_living_population_share_pct_2025"]
+    )
+    reference_context["living_consumer_age_composition_divergence_pp_2025_context"] = (
+        reference_context[
+            [
+                "senior_consumer_minus_living_share_pp_2025_context",
+                "under_30_consumer_minus_living_share_pp_2025_context",
+            ]
+        ]
+        .abs()
+        .mean(axis=1)
+    )
     reference_context = add_park_context(
         reference_context,
         boundaries,
@@ -198,6 +216,9 @@ def run(
         city_parks,
         traffic_citywide_trend,
     )
+    dashboard_outputs = {
+        key: path.as_posix() for key, path in map_summary.pop("dashboard_outputs").items()
+    }
 
     report = {
         "schema_version": 1,
@@ -253,14 +274,14 @@ def run(
             "pdf": pdf_output.as_posix(),
             "png": png_output.as_posix(),
             "action_profile_csv": profile_output.as_posix(),
-            "interactive_action_map": html_output.as_posix(),
+            **dashboard_outputs,
         },
         "output_sha256": {
             "svg": sha256_file(svg_output),
             "pdf": sha256_file(pdf_output),
             "png": sha256_file(png_output),
             "action_profile_csv": sha256_file(profile_output),
-            "interactive_action_map": sha256_file(html_output),
+            **{key: sha256_file(Path(path)) for key, path in dashboard_outputs.items()},
         },
         "interpretation": (
             "Public-data experimental screening; not an official index, causal estimate, "

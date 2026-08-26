@@ -1,6 +1,6 @@
 # 데이터 카탈로그
 
-이 문서는 부산형 다중박탈지수(B-IMD)의 데이터 후보를 관리한다. COD-10 감사 결과의 행 단위 원장은 [DATASET_AUDIT.csv](DATASET_AUDIT.csv)이며, 이 문서는 판단 근거와 사용 규칙을 설명한다.
+이 문서는 부산형 다중박탈지수(B-IMD)의 데이터 후보를 관리한다. COD-10 감사 결과의 행 단위 원장은 [DATASET_AUDIT.csv](tables/DATASET_AUDIT.csv)이며, 이 문서는 판단 근거와 사용 규칙을 설명한다.
 
 ## COD-10 감사 결과
 
@@ -57,7 +57,7 @@
 
 ```powershell
 $env:PYTHONPATH = "src"
-python -m busan_imd.processing.data_catalog docs/data/DATASET_AUDIT.csv --raw-dir data/raw/audit
+python -m busan_imd.processing.data_catalog docs/data/tables/DATASET_AUDIT.csv --raw-dir data/raw/audit
 ```
 
 ## 기록 및 결측 규칙

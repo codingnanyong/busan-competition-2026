@@ -22,7 +22,7 @@ To regenerate only this stage:
 docker compose run --rm jupyter python -m busan_imd.analysis.domain_scores
 ```
 
-The executable contract is [DOMAIN_SCORE_SPEC_2025.csv](../../data/DOMAIN_SCORE_SPEC_2025.csv).
+The executable contract is [DOMAIN_SCORE_SPEC_2025.csv](../../data/tables/DOMAIN_SCORE_SPEC_2025.csv).
 Input and output hashes and summary checks are recorded in
 [DOMAIN_SCORE_REPORT_2025.json](../../data/manifests/DOMAIN_SCORE_REPORT_2025.json). Generated CSV
 files are written to the Git-ignored `data/processed/scores/2025/` directory.

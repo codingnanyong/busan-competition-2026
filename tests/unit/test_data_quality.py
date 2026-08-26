@@ -11,6 +11,17 @@ def test_column_spec_rejects_undocumented_columns() -> None:
         column_spec("mystery_indicator")
 
 
+def test_column_spec_describes_late_demand_service_mismatch_ranks() -> None:
+    spec = column_spec(
+        "late_bus_demand_service_mismatch_percentile_2023_current_validation"
+    )
+
+    assert spec.transformation == (
+        "mean of high late-demand and low late-service percentile ranks"
+    )
+    assert "schedule proxy" in spec.quality_warning
+
+
 def test_quality_report_counts_missing_and_requires_unique_dongs() -> None:
     profile = pd.DataFrame(
         {

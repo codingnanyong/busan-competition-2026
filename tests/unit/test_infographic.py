@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+from pathlib import Path
 
 import geopandas as gpd
 import pandas as pd
@@ -13,6 +14,16 @@ from busan_imd.infographic import (
     render,
     write_action_map,
 )
+from busan_imd.infographic.presentation.dashboard.assemble import ASSET_ROOT
+
+
+def dashboard_bundle(html_path: Path) -> str:
+    root = html_path.parent
+    parts = [html_path.read_text(encoding="utf-8")]
+    for folder in ("css", "js"):
+        for path in sorted((root / folder).iterdir()):
+            parts.append(path.read_text(encoding="utf-8"))
+    return "\n".join(parts)
 
 
 def inputs() -> tuple[
@@ -229,11 +240,37 @@ def test_action_profiles_and_map_cover_every_dong(tmp_path) -> None:
             "core_school_students_within_2000m_2025": range(206),
             "core_school_teachers_within_2000m_2025": range(1, 207),
             "students_per_teacher_within_2000m_2025": range(206),
+            "core_school_teachers_per_1000_under_20_living_population_2025_context": range(206),
+            "healthcare_facilities_per_1000_senior_living_population_2025_context": range(206),
+            "boundary_adjusted_healthcare_access_2000m_2025_context": range(206),
             "avg_daily_residential_living_population_2025": range(206),
             "avg_daily_workplace_living_population_2025": range(206),
             "avg_daily_visitor_living_population_2025": range(206),
+            "senior_living_population_share_pct_2025": range(206),
+            "under_20_living_population_share_pct_2025": range(206),
+            "under_30_living_population_share_pct_2025": range(206),
+            "daytime_to_residential_living_population_ratio_2025": range(206),
+            "reachable_multi_leg_trip_share_pct_2025_current_proxy": range(206),
+            "reachable_youth_child_trip_share_pct_2025_current_proxy": range(206),
+            "bus_boarding_alighting_2023_validation": range(206),
+            "peak_bus_demand_share_pct_2023_validation": range(206),
+            "late_bus_demand_share_pct_2023_validation": range(206),
+            "bus_service_opportunities_per_1000_total_living_population_context": range(206),
+            "bus_service_opportunities_per_1000_senior_living_population_context": range(206),
+            "late_bus_service_share_pct_current_proxy": range(206),
+            "late_bus_demand_service_mismatch_percentile_2023_current_validation": range(206),
+            "boundary_adjusted_bus_stop_access_1000m_2025_context": range(206),
             "consumer_sales_avg_daily_amount_2025": range(206),
             "consumer_sales_avg_daily_transactions_2025": range(206),
+            "consumer_sales_under_30_transaction_share_pct_2025": range(206),
+            "consumer_sales_senior_transaction_share_pct_2025": range(206),
+            "consumer_sales_late_night_transaction_share_pct_2025": range(206),
+            "consumer_sales_daytime_transaction_share_pct_2025": range(206),
+            "senior_consumer_minus_living_share_pp_2025_context": range(206),
+            "under_30_consumer_minus_living_share_pp_2025_context": range(206),
+            "living_consumer_age_composition_divergence_pp_2025_context": range(206),
+            "heat_shelters_per_1000_senior_living_population_2025_context": range(206),
+            "boundary_adjusted_heat_shelter_access_1000m_2025_context": range(206),
             "park_count_current": range(206),
             "nearest_park_distance_m_current": range(206),
             "district_accident_count_2025": range(206),
@@ -270,45 +307,63 @@ def test_action_profiles_and_map_cover_every_dong(tmp_path) -> None:
     assert profiles.loc[0, "relative_low_deprivation_ko"] == "생활환경"
     assert profiles["specialization_evidence_status"].str.contains("특화 확정 불가").all()
     html = html_path.read_text(encoding="utf-8")
+    bundle = dashboard_bundle(html_path)
+    assert "Assembled dashboard" in html
+    assert "__GUIDE__" not in html
+    assert "__GUIDE__" in (ASSET_ROOT / "html" / "document.html").read_text(encoding="utf-8")
+    assert 'href="css/policy.css"' in html
+    assert 'src="js/data.js"' in html
+    assert 'src="js/boot.js"' in html
     assert html.count("data-code=") == 206
     assert "부산 행정동 생활여건 진단: 취약 요인과 정책 방향" in html
     assert html.count('class="tree-major"') == 2
     assert html.count('class="tree-child"') == len(categories)
     assert 'role="tree"' in html
-    assert "function selectNode(nextMajor,nextCategory=null)" in html
+    assert "function selectNode(nextMajor,nextCategory=null)" in bundle
     assert "생활여건 영역 점수 산정" in html
     assert "단순 평균이 아니며" in html
     assert "세부 평가항목" in html
-    assert "취약도 백분위" in html
-    assert "영역 점수 반영 비율" in html
-    assert "percentage(child.weight)" in html
-    assert '"confidence":"낮음"' in html
-    assert "자료 신뢰도 ${a.confidence}" in html
-    assert "큰 카테고리" not in html
-    assert "하위 카테고리" not in html
-    assert "추정값 사용" in html
-    assert "사용 사유" in html
-    assert "추정값 미사용" not in html
-    assert "산출 설명" not in html
-    assert "정책 설계 참고사례" in html
-    assert "실행 순서" in html
+    assert "취약도 백분위" in bundle
+    assert "영역 점수 반영 비율" in bundle
+    assert "percentage(child.weight)" in bundle
+    assert '"confidence":"낮음"' in bundle
+    assert "자료 신뢰도 ${a.confidence}" in bundle
+    assert "큰 카테고리" not in bundle
+    assert "하위 카테고리" not in bundle
+    assert "추정값 사용" in bundle
+    assert "사용 사유" in bundle
+    assert "추정값 미사용" not in bundle
+    assert "산출 설명" not in bundle
+    assert "정책 설계 참고사례" in bundle
+    assert "실행 순서" in bundle
     assert html.count('class="accident-hotspot"') == 1
     assert "교통사고 다발지역 표시" in html
-    assert "category==='traffic_accident_risk'?accidentHtml(d.code):''" in html
-    assert "accidentControl.hidden=!accidentSelected" in html
-    assert "#accident-layer[hidden]{display:none}" in html
-    assert "accidentLayer.style.display='none'" in html
-    assert "점수 제외 참고지표" in html
-    assert "인구 1만 명당 AED" in html
-    assert "2025 연평균 PM10 추정" in html
-    assert "일평균 소비매출" in html
-    assert "행정동 내 도시공원 수" in html
-    assert "행정동 중심점 최근접 도시공원 거리" in html
+    assert "category==='traffic_accident_risk'?accidentHtml(d.code):''" in bundle
+    assert "accidentControl.hidden=!accidentSelected" in bundle
+    assert "#accident-layer[hidden]{display:none}" in bundle
+    assert "accidentLayer.style.display='none'" in bundle
+    assert "점수 제외 참고지표" in bundle
+    assert "인구 1만 명당 AED" in bundle
+    assert "2025 연평균 PM10 추정" in bundle
+    assert "일평균 소비매출" in bundle
+    assert "행정동 내 도시공원 수" in bundle
+    assert "행정동 중심점 최근접 도시공원 거리" in bundle
     assert html.count('class="safety-risk-area"') == 1
     assert "생활안전 위험지역 표시" in html
-    assert "majorCategory==='safety'&&category===null" in html
-    assert '"occurrence_count":7' in html
+    assert "majorCategory==='safety'&&category===null" in bundle
+    assert '"occurrence_count":7' in bundle
     assert "안전 영역의 교통사고 위험 평가에 반영" in html
+    assert 'id="policy-panel"' in html
+    assert "function policyHtml(name,code,child)" in bundle
+    assert "policyPanel.innerHTML=policyHtml(d.name,d.code,child)" in bundle
+    assert "이 동에는 적용하지" in bundle
+    assert "이 동의 분포에 따른 정책 판단" in bundle
+    assert "정책검토 후보인지 모니터링인지" in html
+    assert "오른쪽에서 평가지표, 추정 사유, 신뢰도와 조건부 정책 예시" not in html
+    assert "align-items:stretch" in bundle
+    assert "height:min(46vh,440px)" in bundle
+    assert "function syncPanelHeights()" in bundle
+    assert "box-sizing:border-box" in bundle
 
 
 def test_render_rejects_incomplete_canonical_population(tmp_path) -> None:

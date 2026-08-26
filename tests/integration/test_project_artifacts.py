@@ -27,6 +27,14 @@ from busan_imd.processing.income_inference import validate_manifest as validate_
 REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 
 
+def dashboard_bundle(html_path: Path) -> str:
+    parts = [html_path.read_text(encoding="utf-8")]
+    for folder in ("css", "js"):
+        for path in sorted((html_path.parent / folder).iterdir()):
+            parts.append(path.read_text(encoding="utf-8"))
+    return "\n".join(parts)
+
+
 def read_json(relative_path: str) -> dict:
     return json.loads((REPOSITORY_ROOT / relative_path).read_text(encoding="utf-8"))
 
@@ -39,16 +47,29 @@ def test_project_structure_and_required_documents() -> None:
         "outputs",
         "outputs/infographic/2025/static",
         "outputs/infographic/2025/interactive",
+        "outputs/infographic/2025/interactive/html",
+        "outputs/infographic/2025/interactive/css",
+        "outputs/infographic/2025/interactive/js",
         "outputs/infographic/2025/tables",
+        "docs/data/tables",
         "src/busan_imd/core",
         "src/busan_imd/collectors",
         "src/busan_imd/sources",
+        "src/busan_imd/processing",
+        "src/busan_imd/analysis",
+        "src/busan_imd/infographic",
+        "src/busan_imd/infographic/presentation/dashboard",
         "tests/integration",
     )
     required_documents = (
         ".env.example",
+        "LICENSE",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "SECURITY.md",
         "docs/MACOS_SETUP.md",
         "docs/PROJECT_STRUCTURE.md",
+        "docs/en/PROJECT_STRUCTURE.md",
         "docs/data/AED_HISTORY_ASSESSMENT.md",
         "docs/data/DATA_REQUEST_ROADMAP.md",
         "docs/data/DATA_REQUEST_TEMPLATES.md",
@@ -63,16 +84,16 @@ def test_project_structure_and_required_documents() -> None:
         "docs/data/manifests/BASIC_LIVELIHOOD_INFERENCE_MANIFEST_2025.json",
         "docs/data/manifests/STANDARDIZATION_REPORT_2025.json",
         "docs/data/manifests/DATA_QUALITY_REPORT_2025.json",
-        "docs/data/DATA_DICTIONARY_2025.csv",
+        "docs/data/tables/DATA_DICTIONARY_2025.csv",
         "docs/data/DATA_QUALITY.md",
         "docs/data/EDA_2025.md",
-        "docs/data/EDA_INDICATOR_DECISIONS_2025.csv",
+        "docs/data/tables/EDA_INDICATOR_DECISIONS_2025.csv",
         "docs/data/manifests/EDA_REPORT_2025.json",
-        "docs/data/DOMAIN_SCORE_SPEC_2025.csv",
+        "docs/data/tables/DOMAIN_SCORE_SPEC_2025.csv",
         "docs/data/manifests/DOMAIN_SCORE_REPORT_2025.json",
-        "docs/data/COMPOSITE_INDEX_SPEC_2025.csv",
+        "docs/data/tables/COMPOSITE_INDEX_SPEC_2025.csv",
         "docs/data/manifests/COMPOSITE_INDEX_REPORT_2025.json",
-        "docs/data/SENSITIVITY_SCENARIOS_2025.csv",
+        "docs/data/tables/SENSITIVITY_SCENARIOS_2025.csv",
         "docs/data/manifests/SENSITIVITY_ANALYSIS_REPORT_2025.json",
         "docs/data/manifests/PRIORITY_AREA_REPORT_2025.json",
         "docs/data/manifests/CLUSTER_ANALYSIS_REPORT_2025.json",
@@ -80,9 +101,9 @@ def test_project_structure_and_required_documents() -> None:
         "docs/data/manifests/POLICY_MATRIX_REPORT_2025.json",
         "docs/data/manifests/INFOGRAPHIC_REPORT_2025.json",
         "docs/data/manifests/CATEGORY_ASSESSMENT_REPORT_2025.json",
-        "docs/data/POLICY_ACTION_CATALOG_2025.csv",
-        "docs/data/CATEGORY_ASSESSMENT_SPEC_2025.csv",
-        "docs/data/CATEGORY_POLICY_CATALOG_2025.csv",
+        "docs/data/tables/POLICY_ACTION_CATALOG_2025.csv",
+        "docs/data/tables/CATEGORY_ASSESSMENT_SPEC_2025.csv",
+        "docs/data/tables/CATEGORY_POLICY_CATALOG_2025.csv",
         "docs/data/DATA_PORTABILITY.md",
         "docs/data/manifests/CONSUMER_SALES_MANIFEST_2025.json",
         "docs/data/manifests/CITY_PARKS_MANIFEST.json",
@@ -106,6 +127,9 @@ def test_project_structure_and_required_documents() -> None:
         "docs/en/methodology/INFOGRAPHIC_2025.md",
         "docs/methodology/CATEGORY_ASSESSMENT_2025.md",
         "docs/en/methodology/CATEGORY_ASSESSMENT_2025.md",
+        "outputs/infographic/2025/interactive/html/document.html",
+        "outputs/infographic/2025/interactive/css/layout.css",
+        "outputs/infographic/2025/interactive/js/boot.js",
         "outputs/infographic/2025/static/busan_imd_one_page_2025.svg",
         "outputs/infographic/2025/static/busan_imd_one_page_2025.pdf",
         "outputs/infographic/2025/static/busan_imd_one_page_2025.png",
@@ -187,10 +211,22 @@ def test_eda_report_covers_the_canonical_profile() -> None:
     report = read_json("docs/data/manifests/EDA_REPORT_2025.json")
 
     assert report["profile_record_count"] == 206
-    assert report["numeric_indicator_count"] == 50
+    assert report["numeric_indicator_count"] == 85
     assert report["scoring_candidate_numeric_count"] == 37
     assert report["constant_numeric_columns"] == ["air_idw_station_count"]
-    assert report["columns_with_missing_values"] == {}
+    assert report["columns_with_missing_values"] == {
+        "bus_alighting_2023_validation": 10,
+        "bus_boarding_2023_validation": 10,
+        "bus_boarding_alighting_2023_validation": 10,
+        "late_bus_demand_2023_validation": 10,
+        "late_bus_demand_service_mismatch_percentile_2023_current_validation": 13,
+        "late_bus_demand_share_pct_2023_validation": 13,
+        "late_bus_service_share_pct_current_proxy": 3,
+        "peak_bus_demand_2023_validation": 10,
+        "peak_bus_demand_share_pct_2023_validation": 13,
+        "reachable_multi_leg_trip_share_pct_2025_current_proxy": 2,
+        "reachable_youth_child_trip_share_pct_2025_current_proxy": 2,
+    }
     assert report["high_correlation_pair_count"] == 7
     assert report["contiguity_edge_count"] == 532
     assert report["isolated_admin_dong_count"] == len(report["isolated_admin_dongs"]) == 6
@@ -361,9 +397,14 @@ def test_infographic_report_and_outputs_cover_cod23_scope() -> None:
     assert profiles["admin_dong_code"].nunique() == 206
     assert profiles["improvement_direction"].notna().all()
     assert profiles["specialization_evidence_status"].str.contains("특화 확정 불가").all()
-    action_map = (REPOSITORY_ROOT / report["output_paths"]["interactive_action_map"]).read_text(
-        encoding="utf-8"
-    )
+    html_path = REPOSITORY_ROOT / report["output_paths"]["interactive_action_map"]
+    action_map = dashboard_bundle(html_path)
+    html = html_path.read_text(encoding="utf-8")
+    assert 'href="css/layout.css"' in html
+    assert 'src="js/policy.js"' in html
+    assert "Assembled dashboard" in html
+    assert "__GUIDE__" not in html
+    assert report["output_paths"]["interactive_action_map_js_data"].endswith("js/data.js")
     assert action_map.count("data-code=") == 206
     assert action_map.count('class="tree-major"') == 4
     assert action_map.count('class="tree-child"') == 10
@@ -406,6 +447,15 @@ def test_infographic_report_and_outputs_cover_cod23_scope() -> None:
     assert "소비매출 상위 업종 구성" in action_map
     assert "주변 학교 학생·교원 비율" in action_map
     assert "부산 교통사고 최근 5년 추이" in action_map
+    assert 'id="policy-panel"' in action_map
+    assert "function policyHtml(name,code,child)" in action_map
+    assert "policyPanel.innerHTML=policyHtml(d.name,d.code,child)" in action_map
+    assert "이 동에는 적용하지" in action_map
+    assert "이 동의 분포에 따른 정책 판단" in action_map
+    assert "정책검토 후보인지 모니터링인지" in action_map
+    assert "align-items:stretch" in action_map
+    assert "height:min(46vh,440px)" in action_map
+    assert "function syncPanelHeights()" in action_map
 
 
 def test_category_assessment_is_complete_and_flags_estimation() -> None:
@@ -414,10 +464,10 @@ def test_category_assessment_is_complete_and_flags_estimation() -> None:
     assert report["admin_dong_count"] == 206
     assert report["major_category_count"] == 4
     assert report["category_count"] == 10
-    assert report["indicator_count"] == 17
+    assert report["indicator_count"] == 19
     assert report["category_score_row_count"] == 206 * 10
     assert report["major_category_score_row_count"] == 206 * 4
-    assert report["indicator_score_row_count"] == 206 * 17
+    assert report["indicator_score_row_count"] == 206 * 19
     assert report["policy_trigger_threshold"] == 70
     for name, relative_path in report["output_paths"].items():
         actual = hashlib.sha256((REPOSITORY_ROOT / relative_path).read_bytes()).hexdigest().upper()
@@ -442,12 +492,12 @@ def test_category_assessment_is_complete_and_flags_estimation() -> None:
     indicators = pd.read_csv(REPOSITORY_ROOT / report["output_paths"]["indicator_scores"])
     assert {"estimate_used", "estimation_method_ko", "estimation_reason"} <= set(indicators.columns)
     estimated = indicators[indicators["estimate_used"]]
-    assert len(estimated) == 206 * 11
+    assert len(estimated) == 206 * 13
     assert estimated["estimation_reason"].str.len().gt(0).all()
 
 
 def test_dataset_audit_is_valid() -> None:
-    rows = validate_catalog(REPOSITORY_ROOT / "docs/data/DATASET_AUDIT.csv")
+    rows = validate_catalog(REPOSITORY_ROOT / "docs/data/tables/DATASET_AUDIT.csv")
 
     assert len(rows) >= 18
     assert {row["availability_grade"] for row in rows} >= {"B", "C"}
@@ -654,6 +704,10 @@ def test_standardization_report_covers_canonical_dongs_and_discloses_failures() 
         "SOC-BUSAN-ELDERLY-ALONE-001",
         "HLT-AED-001",
         "DEM-BUSAN-LIVING-001",
+    }
+    assert set(report["analysis_roles"]["supplemental_category_indicator"]) == {
+        "TRN-BUSAN-ROUTE-USAGE-2025-001",
+        "TRN-BUSAN-BIMS-CURRENT-001",
     }
     assert entries["DEM-MOIS-POP-2025-001"]["matched_admin_dongs"] == 206
     assert entries["INC-BLF-INFERRED-2025-001"]["matched_admin_dongs"] == 206

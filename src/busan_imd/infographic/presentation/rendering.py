@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 from datetime import UTC, datetime
 from html import escape
 from pathlib import Path
@@ -23,42 +22,7 @@ from busan_imd.infographic.config import (
     PALETTE,
 )
 from busan_imd.infographic.domain.profiles import build_action_profiles
-
-INDICATOR_PRESENTATION = {
-    "basic_livelihood_recipients_per_1000_population_2025_inferred": (
-        "추정 기초생활수급자",
-        "명/1천명",
-        "높을수록 취약",
-    ),
-    "workplace_workers_2024": ("사업장 종사자", "명", "낮을수록 취약"),
-    "nearest_core_school_distance_m_2025": ("핵심학교 최근접 거리", "m", "높을수록 취약"),
-    "hospital_count_2025_candidate_per_10000_population": (
-        "병원 접근량",
-        "개/1만명",
-        "낮을수록 취약",
-    ),
-    "clinic_count_2025_candidate_per_10000_population": (
-        "의원 접근량",
-        "개/1만명",
-        "낮을수록 취약",
-    ),
-    "old_house_share_30plus_2024_lower_bound_pct": (
-        "30년 이상 노후주택 비율",
-        "%",
-        "높을수록 취약",
-    ),
-    "bus_stop_count_2025_per_10000_population": (
-        "버스정류소 접근량",
-        "개/1만명",
-        "낮을수록 취약",
-    ),
-    "heat_shelter_count_2025_per_10000_population": (
-        "무더위쉼터 접근량",
-        "개/1만명",
-        "낮을수록 취약",
-    ),
-    "annual_pm25_ug_m3_idw_2025": ("연평균 PM2.5", "㎍/㎥", "높을수록 취약"),
-}
+from busan_imd.infographic.presentation.dashboard import write_dashboard_files
 
 
 def _font_family() -> str:
@@ -198,152 +162,6 @@ def _geometry_svg_path(geometry: Any, bounds: tuple[float, float, float, float])
             coordinates = list(ring.coords)
             parts.append("M" + " L".join(point(x, y) for x, y in coordinates) + " Z")
     return " ".join(parts)
-
-
-def _write_action_map_legacy(
-    profiles: pd.DataFrame,
-    boundaries: gpd.GeoDataFrame,
-    indicator_scores: pd.DataFrame,
-    policy_catalog: pd.DataFrame,
-    output_path: Path,
-) -> None:
-    """Write a category-first dashboard for scores, indicators, and policy examples."""
-    map_data = boundaries.copy()
-    map_data["adm_cd"] = map_data["adm_cd"].astype(str)
-    map_data = map_data.merge(
-        profiles,
-        left_on="adm_cd",
-        right_on="admin_dong_code",
-        validate="one_to_one",
-    )
-    bounds = tuple(float(value) for value in map_data.total_bounds)
-    required_indicators = set(INDICATOR_PRESENTATION)
-    if set(indicator_scores["indicator"]) != required_indicators:
-        raise ValueError("Indicator scores must contain the nine presentation indicators")
-    domain_policies = policy_catalog[
-        (policy_catalog["trigger_kind"] == "domain")
-        & (policy_catalog["trigger_value"].isin(DOMAIN_COLUMNS))
-    ]
-    if set(domain_policies["trigger_value"]) != set(DOMAIN_COLUMNS):
-        raise ValueError("Policy catalog must contain one policy for every scored domain")
-
-    indicator_payload: dict[str, dict[str, list[dict[str, Any]]]] = {}
-    for row in indicator_scores.itertuples(index=False):
-        label, unit, direction = INDICATOR_PRESENTATION[row.indicator]
-        item = {
-            "label": label,
-            "unit": unit,
-            "direction": direction,
-            "raw": round(float(row.raw_value), 2),
-            "percentile": round(float(row.deprivation_percentile_0_100), 1),
-            "weight": float(row.within_domain_weight),
-        }
-        indicator_payload.setdefault(str(row.admin_dong_code), {}).setdefault(
-            str(row.domain), []
-        ).append(item)
-    policy_payload = {
-        str(row.trigger_value): {
-            "title": row.policy_title_ko,
-            "lead": row.lead_implementer,
-            "effect": row.expected_effect,
-            "monitor": row.monitoring_indicator,
-            "limit": row.evidence_limit,
-        }
-        for row in domain_policies.itertuples(index=False)
-    }
-    paths: list[str] = []
-    for row in map_data.itertuples(index=False):
-        attributes = {
-            "code": row.admin_dong_code,
-            "name": f"{row.sigungu_name} {row.admin_dong_name}",
-            "rank": f"{int(row.b_imd_rank)}위 / 206개 · B-IMD {row.b_imd_score_0_100:.1f}",
-            "level": row.review_level,
-        }
-        for domain, (column, _) in DOMAIN_COLUMNS.items():
-            attributes[domain.replace("_", "-")] = f"{getattr(row, column):.1f}"
-        encoded = " ".join(
-            f'data-{key}="{escape(str(value), quote=True)}"' for key, value in attributes.items()
-        )
-        paths.append(
-            f'<path d="{_geometry_svg_path(row.geometry, bounds)}" fill="#f4a261" {encoded}/>'
-        )
-    buttons = "".join(
-        f'<button data-domain="{domain}">{label}</button>'
-        for domain, (_, label) in DOMAIN_COLUMNS.items()
-    )
-    domain_labels = {domain: label for domain, (_, label) in DOMAIN_COLUMNS.items()}
-    document = f"""<!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
-<title>2025 부산 행정동 카테고리별 평가·정책 대시보드</title><style>
-body{{margin:0;background:#f7f4ed;color:#18323d;font-family:Arial,'Noto Sans KR',sans-serif}}
-main{{max-width:1180px;margin:auto;padding:24px}} h1{{margin:0 0 8px;font-size:28px}}
-.note{{color:#5d7078;line-height:1.55}}
-.layout{{display:grid;grid-template-columns:2fr 1fr;gap:20px}}
-.map,.card{{background:white;border:1px solid #d7ded9;border-radius:12px;padding:16px}}
-svg{{width:100%;height:72vh;min-height:560px}} path{{stroke:white;stroke-width:.55;cursor:pointer}}
-path:hover,path:focus{{stroke:#18323d;stroke-width:2;filter:brightness(1.08)}}
-.tabs{{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}}
-button{{border:1px solid #d7ded9;background:white;border-radius:20px;padding:9px 16px}}
-button{{cursor:pointer}}
-button.active{{background:#18323d;color:white;border-color:#18323d}}
-.scale{{height:10px;background:linear-gradient(90deg,#fff7bc,#fdae61,#d7301f);border-radius:6px}}
-.scale-label{{display:flex;justify-content:space-between;font-size:12px;color:#5d7078}}
-.card h2{{margin-top:0}} .card p{{line-height:1.55}} .action{{font-weight:700;color:#d84a3a}}
-.scores{{font-size:13px;color:#5d7078}}
-.metric{{margin:13px 0}} .metric-head{{display:flex;justify-content:space-between;font-size:13px}}
-.bar{{height:8px;background:#edf0ed;border-radius:5px;overflow:hidden;margin-top:5px}}
-.bar i{{display:block;height:100%;background:#d84a3a}}
-.policy{{background:#f7f4ed;border-radius:9px;padding:12px;margin-top:18px}}
-.warning{{border-top:1px solid #d7ded9;padding-top:12px;font-size:12px}}
-@media(max-width:800px){{.layout{{grid-template-columns:1fr}} svg{{height:60vh;min-height:420px}}}}
-</style></head><body><main><h1>부산 206개 행정동: 카테고리별 평가와 정책 예시</h1>
-<p class="note">카테고리를 선택하면 해당 영역 점수의 공간분포가 나타납니다.
-행정동을 선택해 구성 평가지표, 취약 백분위, 정책 예시와 성과지표를 확인하세요.</p>
-<div class="tabs">{buttons}</div><div class="layout"><div class="map">
-<h2 id="map-title"></h2><div class="scale"></div>
-<div class="scale-label"><span>0 상대 저취약</span><span>100 상대 고취약</span></div>
-<svg viewBox="0 0 900 900" role="img"
-aria-label="부산 행정동별 카테고리 취약도 지도">{"".join(paths)}</svg>
-</div><aside class="card" id="detail"><h2>지도의 행정동을 선택하세요</h2>
-<p>평가지표와 정책 예시가 이곳에 표시됩니다.</p></aside></div>
-<p class="note warning">높은 점수는 부산 내 상대적 취약성을 뜻합니다.
-개선방향은 현장검증 후보이며 공식 지수·개인 자격·인과효과 판정이 아닙니다.
-정책은 카테고리별 예시이며 현장 수요와 행정자료 검증 후 확정해야 합니다.</p>
-</main><script>
-const indicators={json.dumps(indicator_payload, ensure_ascii=False, separators=(",", ":"))};
-const policies={json.dumps(policy_payload, ensure_ascii=False, separators=(",", ":"))};
-const labels={json.dumps(domain_labels, ensure_ascii=False, separators=(",", ":"))};
-const detail=document.getElementById('detail');let domain='education';let selected=null;
-function color(score){{const hue=48-score*.45;return `hsl(${{hue}} 88% ${{62-score*.18}}%)`;}}
-function scoreOf(path){{return Number(path.getAttribute('data-'+domain.replace('_','-')));}}
-function selectDomain(next){{domain=next;document.querySelectorAll('button').forEach(b=>
- b.classList.toggle('active',b.dataset.domain===domain));
- document.getElementById('map-title').textContent=labels[domain]+' 취약도 분포';
- document.querySelectorAll('path').forEach(p=>p.style.fill=color(scoreOf(p)));
- if(selected)show({{target:selected}});
-}}
-function show(e){{const d=e.target.dataset;if(!d.name)return;selected=e.target;
- const score=scoreOf(e.target);const policy=policies[domain];
- const metrics=indicators[d.code][domain].map(m=>`<div class="metric">
- <div class="metric-head"><b>${{m.label}}</b><span>${{m.raw}} ${{m.unit}}</span></div>
- <div class="scores">취약 백분위 ${{m.percentile}} · 가중치 ${{m.weight}} · ${{m.direction}}</div>
- <div class="bar"><i style="width:${{m.percentile}}%"></i></div></div>`).join('');
- detail.innerHTML=`<h2>${{d.name}}</h2><p>${{d.rank}} · ${{d.level}}</p>
- <h3>${{labels[domain]}} 영역 점수 ${{score.toFixed(1)}}</h3>${{metrics}}
- <div class="policy"><b>정책 예시</b><h3>${{policy.title}}</h3><p>주관: ${{policy.lead}}</p>
- <p>기대효과: ${{policy.effect}}</p><p>성과지표: ${{policy.monitor}}</p>
- <p class="warning">${{policy.limit}}</p></div>`;
-}}
-document.querySelectorAll('path').forEach(p=>{{
- p.tabIndex=0;p.addEventListener('mouseenter',show);
- p.addEventListener('click',show);p.addEventListener('focus',show);
-}});
-document.querySelectorAll('button').forEach(b=>
- b.addEventListener('click',()=>selectDomain(b.dataset.domain)));
-selectDomain(domain);
-</script></body></html>"""
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(document, encoding="utf-8", newline="\n")
 
 
 def write_action_map(
@@ -688,6 +506,110 @@ def write_action_map(
             "2km 내 학교 재학생÷현원 교원 참고값이며 학급당 학생 수와 다름",
         ),
         (
+            "education_access_supply",
+            "core_school_teachers_per_1000_under_20_living_population_2025_context",
+            "20대 미만 생활인구 1천명당 주변 교원",
+            1.0,
+            "명/1천명",
+            "통신 생활인구 수요 대비 2km 교원 공급 참고값이며 거주 학령인구가 아님",
+        ),
+        (
+            "healthcare_supply",
+            "healthcare_facilities_per_1000_senior_living_population_2025_context",
+            "고령 생활인구 1천명당 의료시설",
+            1.0,
+            "곳/1천명",
+            "동 내부 병원·의원·약국을 60대 이상 생활인구로 나눈 점수 제외 참고값",
+        ),
+        (
+            "healthcare_supply",
+            "boundary_adjusted_healthcare_access_2000m_2025_context",
+            "경계보정 의료시설 접근량",
+            1.0,
+            "가중 곳",
+            "동 내부는 1, 경계 밖 2km 이내는 거리감쇠한 직선거리 접근 참고값",
+        ),
+        (
+            "transit_access",
+            "reachable_multi_leg_trip_share_pct_2025_current_proxy",
+            "연결 노선의 2·3통행 비율",
+            1.0,
+            "%",
+            "2025 노선 이용구성과 현재 노선망의 결합값이며 환승 불편을 직접 뜻하지 않음",
+        ),
+        (
+            "transit_access",
+            "reachable_youth_child_trip_share_pct_2025_current_proxy",
+            "연결 노선의 청소년·어린이 통행 비율",
+            1.0,
+            "%",
+            "2025 노선 이용구성 기반 정책대상 참고값이며 동 거주자의 이용률이 아님",
+        ),
+        (
+            "transit_access",
+            "bus_boarding_alighting_2023_validation",
+            "2023 매칭 정류장 승하차",
+            1.0,
+            "건",
+            "현재 노선·정류장명으로 재매칭한 과거 수요 검증값이며 2025 점수에서 제외",
+        ),
+        (
+            "transit_access",
+            "peak_bus_demand_share_pct_2023_validation",
+            "2023 출퇴근시간 승하차 비율",
+            1.0,
+            "%",
+            "07~09시·17~19시 30분 구간의 과거 수요 검증값",
+        ),
+        (
+            "transit_access",
+            "late_bus_demand_share_pct_2023_validation",
+            "2023 심야 승하차 비율",
+            1.0,
+            "%",
+            "22~04시 30분 구간의 과거 수요 검증값",
+        ),
+        (
+            "transit_access",
+            "bus_service_opportunities_per_1000_total_living_population_context",
+            "생활인구 1천명당 버스 서비스 기회",
+            1.0,
+            "회/1천명",
+            "현재 배차계획과 2025 생활인구를 결합한 혼합시점 공급 참고값",
+        ),
+        (
+            "transit_access",
+            "bus_service_opportunities_per_1000_senior_living_population_context",
+            "고령 생활인구 1천명당 버스 서비스 기회",
+            1.0,
+            "회/1천명",
+            "현재 배차계획을 60대 이상 생활인구로 나눈 정책대상 진단값",
+        ),
+        (
+            "transit_access",
+            "late_bus_service_share_pct_current_proxy",
+            "현재 심야 서비스 기회 비율",
+            1.0,
+            "%",
+            "22~04시 운행시간과 평시 배차로 근사했으며 실제 심야 운행횟수가 아님",
+        ),
+        (
+            "transit_access",
+            "late_bus_demand_service_mismatch_percentile_2023_current_validation",
+            "심야 수요·공급 불일치 백분위",
+            1.0,
+            "점",
+            "2023 심야수요 상위와 현재 심야서비스 하위를 결합한 혼합시점 검증값",
+        ),
+        (
+            "transit_access",
+            "boundary_adjusted_bus_stop_access_1000m_2025_context",
+            "경계보정 버스정류장 접근량",
+            1.0,
+            "가중 곳",
+            "동 내부는 1, 경계 밖 1km 이내는 거리감쇠한 직선거리 접근 참고값",
+        ),
+        (
             "local_employment_opportunity",
             "avg_daily_residential_living_population_2025",
             "일평균 거주 생활인구",
@@ -713,6 +635,38 @@ def write_action_map(
         ),
         (
             "local_employment_opportunity",
+            "senior_living_population_share_pct_2025",
+            "60대 이상 생활인구 비율",
+            1.0,
+            "%",
+            "거주·직장·방문 생활인구를 합친 서비스 수요 구성비이며 취약점수가 아님",
+        ),
+        (
+            "local_employment_opportunity",
+            "under_20_living_population_share_pct_2025",
+            "20대 미만 생활인구 비율",
+            1.0,
+            "%",
+            "거주·직장·방문 생활인구를 합친 교육·교통 수요 참고값",
+        ),
+        (
+            "local_employment_opportunity",
+            "under_30_living_population_share_pct_2025",
+            "30대 미만 생활인구 비율",
+            1.0,
+            "%",
+            "20대 미만·20대 생활인구 구성비이며 주민등록 연령구조가 아님",
+        ),
+        (
+            "local_employment_opportunity",
+            "daytime_to_residential_living_population_ratio_2025",
+            "직장·방문/거주 생활인구 비",
+            1.0,
+            "배",
+            "주간 서비스 압력 참고값이며 주민 고용률이나 소득을 뜻하지 않음",
+        ),
+        (
+            "local_employment_opportunity",
             "consumer_sales_avg_daily_amount_2025",
             "일평균 소비매출",
             1_000_000.0,
@@ -726,6 +680,78 @@ def write_action_map(
             1.0,
             "건/일",
             "점포 소재지 소비활동이며 주민소득이나 고용기회 점수에는 반영하지 않음",
+        ),
+        (
+            "local_employment_opportunity",
+            "consumer_sales_under_30_transaction_share_pct_2025",
+            "30대 미만 소비건수 비율",
+            1.0,
+            "%",
+            "가맹점 소재지의 20대 미만·20대 결제 구성으로 주민 연령구조가 아님",
+        ),
+        (
+            "local_employment_opportunity",
+            "consumer_sales_senior_transaction_share_pct_2025",
+            "60대 이상 소비건수 비율",
+            1.0,
+            "%",
+            "가맹점 소재지 결제 구성으로 고령 주민의 소비수준이나 소득을 뜻하지 않음",
+        ),
+        (
+            "local_employment_opportunity",
+            "consumer_sales_late_night_transaction_share_pct_2025",
+            "22~05시 소비건수 비율",
+            1.0,
+            "%",
+            "22~05시 가맹점 결제 구성으로 야간 서비스 수요 참고값이며 취약점수가 아님",
+        ),
+        (
+            "local_employment_opportunity",
+            "consumer_sales_daytime_transaction_share_pct_2025",
+            "09~17시 소비건수 비율",
+            1.0,
+            "%",
+            "09~17시 가맹점 결제 구성으로 주간 상권활동 참고값이며 취약점수가 아님",
+        ),
+        (
+            "local_employment_opportunity",
+            "senior_consumer_minus_living_share_pp_2025_context",
+            "고령 소비－생활인구 구성 차이",
+            1.0,
+            "%p",
+            "60대 이상 소비건수 비율에서 생활인구 비율을 뺀 교차검증값",
+        ),
+        (
+            "local_employment_opportunity",
+            "under_30_consumer_minus_living_share_pp_2025_context",
+            "청년 소비－생활인구 구성 차이",
+            1.0,
+            "%p",
+            "30대 미만 소비건수 비율에서 생활인구 비율을 뺀 교차검증값",
+        ),
+        (
+            "local_employment_opportunity",
+            "living_consumer_age_composition_divergence_pp_2025_context",
+            "생활·소비 연령구성 평균 차이",
+            1.0,
+            "%p",
+            "고령·청년 구성 차이의 절댓값 평균이며 소득이나 소비취약도를 뜻하지 않음",
+        ),
+        (
+            "heat_response",
+            "heat_shelters_per_1000_senior_living_population_2025_context",
+            "고령 생활인구 1천명당 무더위쉼터",
+            1.0,
+            "곳/1천명",
+            "60대 이상 생활인구 수요 대비 동 내부 쉼터 공급 참고값",
+        ),
+        (
+            "heat_response",
+            "boundary_adjusted_heat_shelter_access_1000m_2025_context",
+            "경계보정 무더위쉼터 접근량",
+            1.0,
+            "가중 곳",
+            "동 내부는 1, 경계 밖 1km 이내는 거리감쇠한 직선거리 접근 참고값",
         ),
         (
             "major_environment",
@@ -780,6 +806,8 @@ def write_action_map(
                 percentiles,
                 strict=True,
             ):
+                if pd.isna(value):
+                    continue
                 reference_payload.setdefault(code, {}).setdefault(category_key, []).append(
                     {
                         "label": label,
@@ -932,337 +960,38 @@ def write_action_map(
             f'<div class="tree-children" role="group">{child_nodes}</div></details>'
         )
     category_tree = "".join(tree_branches)
-    document = f"""<!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
-<title>2025 부산 행정동 생활여건 진단</title><style>
-body{{margin:0;background:#f7f4ed;color:#18323d;font-family:Arial,'Noto Sans KR',sans-serif}}
-main{{max-width:1540px;margin:auto;padding:24px}} h1{{margin:0 0 8px;font-size:28px}}
-.note,.scores{{color:#5d7078;line-height:1.5}}
-.layout{{display:grid;grid-template-columns:270px minmax(520px,2fr) minmax(330px,1fr);gap:16px}}
-.map,.card{{background:white;border:1px solid #d7ded9;border-radius:12px;padding:16px}}
-svg{{width:100%;height:70vh;min-height:540px}} path{{stroke:white;stroke-width:.55;cursor:pointer}}
-path:hover,path:focus{{stroke:#18323d;stroke-width:2}}
-.category-tree{{align-self:start;position:sticky;top:16px}}
-.category-tree h2{{font-size:18px;margin:0 0 5px}}
-.category-tree>.scores{{font-size:12px;margin-top:0}}
-.tree-branch{{border-top:1px solid #d7ded9;padding:7px 0}}
-.tree-branch:last-child{{border-bottom:1px solid #d7ded9}}
-.tree-major{{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 8px;
- cursor:pointer;border-radius:7px;font-weight:700}}
-.tree-major::marker{{color:#087e8b}}
-.tree-major small,.tree-child small{{margin-left:auto;color:#74858b;font-size:11px}}
-.tree-major.active{{background:#18323d;color:white}}
-.tree-major.active small{{color:#dce8e8}}
-.tree-children{{border-left:2px solid #c9d8d8;margin-left:13px;padding:3px 0 6px 8px}}
-.tree-child{{display:grid;grid-template-columns:18px 1fr auto;align-items:center;text-align:left;
- width:100%;gap:3px;border:0;background:transparent;border-radius:7px;padding:9px 7px;
- cursor:pointer;color:#29434c}}
-.tree-child:hover{{background:#eef5f4}} .tree-child.active{{background:#087e8b;color:white}}
-.tree-child.active small{{color:#dce8e8}} .tree-line{{color:#87a5a7}}
-.guide{{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin:16px 0 20px}}
-.guide-card{{background:#eaf2f2;border-left:5px solid #087e8b;border-radius:10px;padding:16px}}
-.guide-card h2{{font-size:17px;margin:0 0 12px}}
-.steps{{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0;padding:0;list-style:none}}
-.step{{background:white;border-radius:8px;padding:10px;font-size:13px;line-height:1.45}}
-.step-number{{display:block;color:#087e8b;font-size:12px;font-weight:700;margin-bottom:4px}}
-.aggregation-note{{background:#18323d;color:white;border-radius:7px;margin-top:10px;
- padding:10px 12px;font-size:13px;line-height:1.5}}
-.aggregation-note strong{{display:block;color:#9ed8d3;margin-bottom:2px}}
-.aggregation-caption{{font-size:12px;color:#5d7078;margin:7px 2px 0;line-height:1.45}}
-.score-flow{{margin:0;padding:0;list-style:none}}
-.score-level{{background:white;border-radius:7px;padding:8px 10px;font-size:13px;line-height:1.4}}
-.score-level strong{{color:#087e8b}}
-.score-level.level-2{{margin-left:22px}} .score-level.level-3{{margin-left:44px}}
-.flow-arrow{{color:#087e8b;font-weight:700;line-height:18px;margin-left:12px}}
-.flow-arrow.level-2{{margin-left:34px}}
-.estimate-guide{{border-left:4px solid #d84a3a;background:#fff4ed;border-radius:0 7px 7px 0;
- margin:11px 0 0 44px;padding:9px 10px;font-size:12px;line-height:1.45}}
-.scale{{height:10px;background:linear-gradient(90deg,#fff7bc,#fdae61,#d7301f)}}
-.scale{{border-radius:6px}}
-.scale-label,.metric-head{{display:flex;justify-content:space-between;font-size:12px}}
-.overlay-control{{display:flex;align-items:center;gap:9px;margin:12px 0 4px;flex-wrap:wrap}}
-.overlay-control[hidden]{{display:none}}
-.overlay-control button{{border:1px solid #d84a3a;background:white;color:#9f3025;border-radius:18px;
- padding:7px 12px;cursor:pointer;font-weight:700}}
-.overlay-control button[aria-pressed="true"]{{background:#d84a3a;color:white}}
-.accident-hotspot{{fill:#7b1e1e;fill-opacity:.72;stroke:white;stroke-width:1.4;
- pointer-events:auto}}
-#accident-layer[hidden]{{display:none}}
-.safety-risk-area{{fill:#334e9b;fill-opacity:.8;stroke:white;stroke-width:1.1}}
-#safety-risk-layer[hidden]{{display:none}}
-.aed-point{{fill:#0b7285;fill-opacity:.78;stroke:white;stroke-width:.8}}
-.park-point{{fill:#2f8f46;fill-opacity:.72;stroke:white;stroke-width:.8}}
-#aed-layer[hidden],#park-layer[hidden]{{display:none}}
-.accident-reference{{border-left:4px solid #d84a3a;background:#fff4ed;border-radius:0 7px 7px 0;
- padding:9px 10px;margin:9px 0;font-size:12px;line-height:1.5}}
-.metric{{margin:14px 0}} .bar{{height:8px;background:#edf0ed;border-radius:5px;overflow:hidden}}
-.bar i{{display:block;height:100%;background:#d84a3a}}
-.policy{{background:#f7f4ed;border-radius:9px;padding:12px;margin-top:18px}}
-.policy-grid{{display:grid;grid-template-columns:1fr 1fr;gap:8px}}
-.policy-item{{background:white;border:1px solid #d7ded9;border-radius:7px;padding:9px;
- font-size:13px;line-height:1.5}}
-.policy-item b{{display:block;color:#087e8b;margin-bottom:3px}}
-.policy-case{{border-left:4px solid #087e8b;background:#eaf2f2;border-radius:0 7px 7px 0;
- padding:10px;margin-top:10px;line-height:1.5}}
-.policy-case a{{color:#075e67;font-weight:700}}
-.subcategory{{border-top:2px solid #d7ded9;margin-top:20px;padding-top:12px}}
-.subcategory h3{{margin-bottom:5px}}
-.child-overview{{display:grid;grid-template-columns:1fr auto;gap:4px 12px;
- border-top:1px solid #d7ded9;padding:11px 0}}
-.child-overview strong{{color:#d84a3a}} .child-overview .scores{{grid-column:1/-1;font-size:12px}}
-.badge{{display:inline-block;border-radius:12px;padding:3px 8px;background:#edf0ed;font-size:12px}}
-.estimate{{border-left:4px solid #d84a3a;background:#fff4ed;padding:9px;margin:8px 0}}
-.observed{{border-left:4px solid #4f8a5b;background:#f2f8f2;padding:9px;margin:8px 0}}
-.reference-context{{border-left:4px solid #6677a8;background:#f3f5fb;padding:10px;margin:14px 0}}
-.reference-context h4{{margin:0 0 8px;color:#394d82}}
-.composition-row{{display:grid;grid-template-columns:72px 1fr 48px;gap:7px;align-items:center;
- font-size:12px;margin:6px 0}}
-.trigger{{color:#d84a3a;font-weight:700}}
-.warning{{border-top:1px solid #d7ded9;padding-top:12px;font-size:12px}}
-@media(max-width:1100px){{.layout{{grid-template-columns:240px 1fr}}.card#detail{{grid-column:1/-1}}
- .category-tree{{position:static}}.guide{{grid-template-columns:1fr}}}}
-@media(max-width:720px){{.layout{{grid-template-columns:1fr}}.card#detail{{grid-column:auto}}
- .steps{{grid-template-columns:1fr 1fr}}.policy-grid{{grid-template-columns:1fr}}
- svg{{height:55vh;min-height:400px}}}}
-</style></head><body><main><h1>부산 행정동 생활여건 진단: 취약 요인과 정책 방향</h1>
-<section class="guide" aria-label="대시보드 이용 방법과 점수 계산 구조">
-<div class="guide-card"><h2>이 화면을 보는 방법</h2><ol class="steps">
-<li class="step"><span class="step-number">1 · 항목 선택</span>
-왼쪽 트리에서 생활여건 영역 또는 세부 평가항목을 선택합니다.</li>
-<li class="step"><span class="step-number">2 · 분포 비교</span>
-지도 색으로 부산 행정동의 상대적 취약도 분포를 비교합니다.</li>
-<li class="step"><span class="step-number">3 · 지역 선택</span>
-관심 행정동을 누르거나 마우스를 올려 해당 지역 결과를 엽니다.</li>
-<li class="step"><span class="step-number">4 · 정책 해석</span>
-오른쪽에서 평가지표, 추정 사유, 신뢰도와 조건부 정책 예시를 확인합니다.</li>
-</ol><div class="aggregation-note"><strong>생활여건 영역 점수 산정</strong>
-세부 평가항목별 취약도에 화면에 표시된 반영 비율을 적용한 뒤 합산합니다.
-단순 평균이 아니며, 각 평가항목이 영역 점수에 미치는 비중을 함께 보여줍니다.</div>
-<p class="aggregation-caption">점수가 높을수록 부산 안에서 상대적으로 더 취약하다는 뜻입니다.
-절대적 결핍 판정이나 정책 확정 점수가 아닙니다.</p></div>
-<div class="guide-card"><h2>점수는 이렇게 만들어집니다</h2><ol class="score-flow">
-<li class="score-level level-1"><strong>1단계 · 평가지표 {indicator_count}개</strong><br>
-교육시설 수, 의료 접근성, 대기오염 노출처럼 측정 가능한 근거를 정리합니다.</li>
-<li class="flow-arrow" aria-hidden="true">↓ 지표별 취약 방향과 반영 비율 적용</li>
-<li class="score-level level-2"><strong>2단계 · 세부 평가항목 {len(categories)}개</strong><br>
-관련 지표를 묶어 각 세부 영역의 취약도 점수를 계산합니다.</li>
-<li class="flow-arrow level-2" aria-hidden="true">↓ 세부 점수와 반영 비율을 합산</li>
-<li class="score-level level-3"><strong>3단계 · 생활여건 영역 {len(major_categories)}개</strong><br>
-세부 평가항목 결과를 합산해 영역별 종합분포를 만듭니다.</li>
-</ol><div class="estimate-guide"><b>⚠ 추정값 사용 표시</b><br>
-원자료가 행정동 단위로 없거나 기준연도·공간단위를 맞춰야 할 때만 추정·보정합니다.
-사용한 방법과 이유는 선택한 행정동의 세부 평가지표 아래에 함께 표시합니다.</div></div>
-</section>
-<div class="layout"><nav class="card category-tree"
-aria-label="생활여건 평가항목 선택 트리" role="tree">
-<h2>생활여건 평가항목</h2><p class="scores">
-▸를 눌러 세부 항목을 접거나 펼치고, 항목명을 선택하세요.</p>
-{category_tree}</nav><div class="map"><h2 id="map-title"></h2>
-<div class="scale"></div><div class="scale-label">
-<span>0 상대 저취약</span><span>100 상대 고취약</span></div>
-<div class="overlay-control" id="accident-control" hidden><button id="accident-toggle"
-type="button" aria-pressed="false">
-교통사고 다발지역 표시</button><span class="scores">2024년 선정 다발지역
-{len(hotspot_circles)}곳 · 안전 영역의 교통사고 위험 평가에 반영</span></div>
-<div class="overlay-control" id="safety-risk-control" hidden>
-<button id="safety-risk-toggle" type="button" aria-pressed="false">생활안전 위험지역 표시</button>
-<span class="scores">2023년 공개 위험지역 {len(safety_risk_markers)}곳 · 안전점수에는 반영하지 않음
-· 수난·산악 등 포함</span></div>
-<div class="overlay-control" id="aed-control" hidden>
-<button id="aed-toggle" type="button" aria-pressed="false">AED 위치 표시</button>
-<span class="scores">현재 공개 위치 {len(aed_markers)}곳 · 의료공급 접근 점수에는
-반영하지 않음</span></div>
-<div class="overlay-control" id="park-control" hidden>
-<button id="park-toggle" type="button" aria-pressed="false">도시공원 위치 표시</button>
-<span class="scores">현재 공개 위치 {len(park_markers)}곳 · 2025 환경점수에는
-반영하지 않음</span></div>
-<svg viewBox="0 0 900 900" aria-label="부산 행정동별 선택 항목 취약도 분포">
-{"".join(paths)}<g id="accident-layer" hidden>{"".join(hotspot_circles)}</g>
-<g id="safety-risk-layer" hidden>{"".join(safety_risk_markers)}</g>
-<g id="aed-layer" hidden>{"".join(aed_markers)}</g>
-<g id="park-layer" hidden>{"".join(park_markers)}</g></svg>
-</div><aside class="card" id="detail"><h2>행정동을 선택하세요</h2>
-<p>트리에서 생활여건 영역을 선택하면 종합 결과를, 세부 항목을 선택하면
-세부 평가지표와 정책 예시를 표시합니다.</p></aside></div>
-<p class="note warning">70점 이상은 정책 확정이 아니라 추가 행정자료·현장 검증 후보입니다.
-기존 B-IMD 순위는 비교용이며 생활여건 영역 점수와 혼합하지 않습니다.</p></main><script>
-const indicators={json.dumps(indicator_payload, ensure_ascii=False, separators=(",", ":"))};
-const assessments={json.dumps(assessment_payload, ensure_ascii=False, separators=(",", ":"))};
-const majorAssessments={json.dumps(major_payload, ensure_ascii=False, separators=(",", ":"))};
-const children={json.dumps(children, ensure_ascii=False, separators=(",", ":"))};
-const policies={json.dumps(policy_payload, ensure_ascii=False, separators=(",", ":"))};
-const labels={json.dumps(labels, ensure_ascii=False, separators=(",", ":"))};
-const categoryLabels={json.dumps(category_labels, ensure_ascii=False, separators=(",", ":"))};
-const accidentSummary={json.dumps(accident_summary, ensure_ascii=False, separators=(",", ":"))};
-const referenceContext={json.dumps(reference_payload, ensure_ascii=False, separators=(",", ":"))};
-const referenceCompositions={
-        json.dumps(composition_payload, ensure_ascii=False, separators=(",", ":"))
-    };
-const trafficTrend={json.dumps(trend_payload, ensure_ascii=False, separators=(",", ":"))};
-const detail=document.getElementById('detail');
-let majorCategory='{major_categories[0]}';let category=null;let selected=null;
-function color(score){{const hue=48-score*.45;return `hsl(${{hue}} 88% ${{62-score*.18}}%)`;}}
-function percentage(value){{return `${{Math.round(Number(value)*100)}}%`;}}
-function accidentHtml(code){{const summary=accidentSummary[code];return summary
- ?`<div class="accident-reference"><b>교통사고 다발지역 근거</b><br>
- 2024년 선정 다발지역 ${{summary.location_count}}곳 · 사고 ${{summary.occurrence_count}}건 ·
- 사상자 ${{summary.casualty_count}}명<br>선정 지점의 사고 발생 건수는 안전 영역에
- 반영됩니다. 전체 사고 전수자료는 아닙니다.</div>`
- :`<div class="accident-reference"><b>교통사고 다발지역 근거</b><br>
- 이 행정동에서는 2024년 선정 다발지점이 확인되지 않았습니다. 이는 사고가 없거나
- 안전하다는 뜻이 아니며, 전체 사고자료 확인이 필요합니다.</div>`;}}
-function scoreOf(path){{return category
- ?assessments[path.dataset.code][category].score
- :majorAssessments[path.dataset.code][majorCategory].score;}}
-function selectNode(nextMajor,nextCategory=null){{majorCategory=nextMajor;category=nextCategory;
- document.querySelectorAll('.tree-major').forEach(node=>node.classList.toggle('active',
-  category===null&&node.dataset.majorCategory===majorCategory));
- document.querySelectorAll('.tree-child').forEach(node=>node.classList.toggle('active',
-  node.dataset.category===category));
- const selectedLabel=category?categoryLabels[category]:labels[majorCategory];
- document.getElementById('map-title').textContent=selectedLabel+' 취약도 분포';
- const accidentSelected=category==='traffic_accident_risk';
- accidentControl.hidden=!accidentSelected;
- if(!accidentSelected){{accidentLayer.hidden=true;accidentLayer.style.display='none';
-  accidentToggle.setAttribute('aria-pressed','false');
-  accidentToggle.textContent='교통사고 다발지역 표시';}}
- const safetyOverview=majorCategory==='safety'&&category===null;
- safetyRiskControl.hidden=!safetyOverview;
- if(!safetyOverview){{safetyRiskLayer.hidden=true;safetyRiskLayer.style.display='none';
-  safetyRiskToggle.setAttribute('aria-pressed','false');
-  safetyRiskToggle.textContent='생활안전 위험지역 표시';}}
- const aedSelected=category==='healthcare_supply';aedControl.hidden=!aedSelected;
- if(!aedSelected){{aedLayer.hidden=true;aedLayer.style.display='none';
-  aedToggle.setAttribute('aria-pressed','false');aedToggle.textContent='AED 위치 표시';}}
- const parkOverview=majorCategory==='environment'&&category===null;parkControl.hidden=!parkOverview;
- if(!parkOverview){{parkLayer.hidden=true;parkLayer.style.display='none';
-  parkToggle.setAttribute('aria-pressed','false');parkToggle.textContent='도시공원 위치 표시';}}
- document.querySelectorAll('path').forEach(p=>p.style.fill=color(scoreOf(p)));
- if(selected)show({{target:selected}});
-}}
-function metricHtml(m){{const disclosure=m.estimate_used
-  ?`<div class="estimate"><b>⚠ 추정값 사용</b><br>방법: ${{m.estimation_method}}<br>
-  사용 사유: ${{m.estimation_reason}}</div>`
-  :'';return `<div class="metric">
- <div class="metric-head"><b>${{m.label}}</b><span>${{m.raw}}</span></div>
- <div class="scores">취약도 백분위 ${{m.percentile}} · 평가 반영 비율 ${{percentage(m.weight)}} ·
- 자료 유형 ${{m.value_status}} · 자료 신뢰도 ${{m.confidence}}</div>${{disclosure}}
- <div class="bar"><i style="width:${{m.percentile}}%"></i></div>
- <div class="scores">원자료 한계: ${{m.quality}} ·
- 기술 근거: ${{m.evidence}}</div></div>`;}}
-function referenceHtml(code,categoryKey){{const items=referenceContext[code]?.[categoryKey]||[];
- if(!items.length)return '';return `<div class="reference-context"><h4>점수 제외 참고지표</h4>
- ${{items.map(item=>`<div class="metric"><div class="metric-head"><b>${{item.label}}</b>
- <span>${{item.value.toLocaleString()}} ${{item.unit}}</span></div>
- <div class="scores">부산 내 값의 상대 위치 ${{item.percentile}} · ${{item.note}}</div>
- <div class="bar"><i style="width:${{item.percentile}}%"></i></div></div>`).join('')}}</div>`;}}
-function compositionBlock(title,items,note){{if(!items?.length)return '';
- return `<div class="reference-context">
- <h4>${{title}}</h4>${{items.map(item=>`<div class="composition-row"><b>${{item.label}}</b>
- <div class="bar"><i style="width:${{item.share}}%"></i></div>
- <span>${{item.share}}%</span></div>`).join('')}}
- <div class="scores">${{note}}</div></div>`;}}
-function compositionHtml(code,categoryKey){{
- if(categoryKey!=='local_employment_opportunity')return '';
- const data=referenceCompositions[code]||{{}};
- return compositionBlock('생활인구 구성',data.living_population,
- '거주·직장·방문 생활인구의 구성비이며 점수에는 반영하지 않음')+
- compositionBlock('소비매출 상위 업종 구성',data.sales,
- '일평균 업종별 매출액 구성비 상위 5개이며 주민소득·고용 점수에는 반영하지 않음');}}
-function trafficTrendHtml(){{if(!trafficTrend.length)return '';
- const max=Math.max(...trafficTrend.map(d=>d.accidents));
- return `<div class="reference-context"><h4>부산 교통사고 최근 5년 추이</h4>${{trafficTrend.map(d=>
- `<div class="composition-row"><b>${{d.year}}</b><div class="bar">
- <i style="width:${{d.accidents/max*100}}%"></i></div>
- <span>${{d.accidents.toLocaleString()}}건</span></div>`).join('')}}
- <div class="scores">도로교통공단 부산 전체 통계 · 행정동 점수에는 반영하지 않음</div></div>`;}}
-function childHtml(code,child){{const a=assessments[code][child.category];
- const policy=policies[child.category];const metrics=indicators[code][child.category]
-  .map(metricHtml).join('');const gate=a.status==='candidate_after_validation'
-  ?'<span class="trigger">검증 후 정책검토 후보</span>'
-  :'<span class="badge">모니터링</span>';return `<section class="subcategory">
- <h3>${{child.label}} ${{a.score.toFixed(1)}}</h3>
- <p class="scores">영역 점수 반영 비율 ${{percentage(child.weight)}} ·
- 자료 신뢰도 ${{a.confidence}} · ${{gate}}</p>
- <p class="scores">우선 점검 지표: ${{a.triggers}}</p>
- ${{metrics}}${{referenceHtml(code,child.category)}}
- ${{compositionHtml(code,child.category)}}<div class="policy">
- <b>조건부 정책 방향</b><h3>${{policy.title}}</h3>
- <p>주관: ${{policy.lead}}</p><div class="policy-grid">
- <div class="policy-item"><b>분석이 포착한 신호</b>${{policy.signal}}</div>
- <div class="policy-item"><b>우선 확인 대상</b>${{policy.target}}</div></div>
- <div class="policy-item"><b>실행 순서</b>${{policy.steps}}</div>
- <p><b>적용 예시</b><br>${{policy.example}}</p>
- <p><b>성과지표</b><br>${{policy.monitor}}</p>
- <div class="policy-case"><b>정책 설계 참고사례</b><br>${{policy.case}}<br>
- <a href="${{policy.case_url}}" target="_blank" rel="noopener noreferrer">공식 자료 보기 ↗</a>
- <p class="scores">이 분석에 적용할 때: ${{policy.case_note}}</p></div>
- <p class="warning"><b>해석 제한</b><br>${{policy.limit}}</p></div>
- </section>`;}}
-function childOverviewHtml(code,child){{const a=assessments[code][child.category];return `
- <div class="child-overview"><span>${{child.label}} · 영역 점수 반영 비율
- ${{percentage(child.weight)}}</span><strong>${{a.score.toFixed(1)}}</strong>
- <span class="scores">자료 신뢰도 ${{a.confidence}} ·
- 우선 점검 지표 ${{a.triggers}}</span></div>`;}}
-function show(e){{const d=e.target.dataset;if(!d.name)return;selected=e.target;
- const major=majorAssessments[d.code][majorCategory];
- const gate=major.status==='candidate_after_validation'
-  ?'<span class="trigger">현장 검증 후 정책 검토</span>'
-  :'<span class="badge">모니터링</span>';
- const accidentEvidence=category==='traffic_accident_risk'?accidentHtml(d.code):'';
- const heading=`<h2>${{d.name}}</h2><p class="scores">${{d.rank}}</p>${{accidentEvidence}}`;
- if(category){{const child=children[majorCategory].find(c=>c.category===category);
-  detail.innerHTML=heading+`<p class="scores">소속 생활여건 영역 · ${{labels[majorCategory]}}
-  ${{major.score.toFixed(1)}}</p>`+childHtml(d.code,child);return;}}
- const childOverview=children[majorCategory].map(c=>childOverviewHtml(d.code,c)).join('');
- detail.innerHTML=heading+`<h3>${{labels[majorCategory]}} ${{major.score.toFixed(1)}}</h3>
- <p>종합 자료 신뢰도 <span class="badge">${{major.confidence}}</span>
- · ${{gate}}</p><p class="scores">70점 이상 우선 점검 항목:
- ${{major.triggered_children}}</p><p class="scores">세부 평가항목 점수에 표시된 반영 비율을
- 적용해 합산한 결과입니다. 트리에서 세부 항목을 선택하면 평가에 사용한 지표와 정책
- 예시가 열립니다.</p>${{childOverview}}
- ${{referenceHtml(d.code,'major_'+majorCategory)}}
- ${{majorCategory==='safety'?trafficTrendHtml():''}}`;
-}}
-document.querySelectorAll('path').forEach(p=>{{p.tabIndex=0;p.addEventListener('mouseenter',show);
-p.addEventListener('click',show);p.addEventListener('focus',show);}});
-document.querySelectorAll('.tree-major').forEach(node=>node.addEventListener('click',()=>
- selectNode(node.dataset.majorCategory)));
-document.querySelectorAll('.tree-child').forEach(node=>node.addEventListener('click',()=>{{
- node.closest('details').open=true;selectNode(node.dataset.majorCategory,node.dataset.category);
-}}));
-const accidentToggle=document.getElementById('accident-toggle');
-const accidentLayer=document.getElementById('accident-layer');
-const accidentControl=document.getElementById('accident-control');
-const safetyRiskToggle=document.getElementById('safety-risk-toggle');
-const safetyRiskLayer=document.getElementById('safety-risk-layer');
-const safetyRiskControl=document.getElementById('safety-risk-control');
-const aedToggle=document.getElementById('aed-toggle');
-const aedLayer=document.getElementById('aed-layer');
-const aedControl=document.getElementById('aed-control');
-const parkToggle=document.getElementById('park-toggle');
-const parkLayer=document.getElementById('park-layer');
-const parkControl=document.getElementById('park-control');
-accidentToggle.addEventListener('click',()=>{{const visible=accidentLayer.hidden;
- accidentLayer.hidden=!visible;accidentLayer.style.display=visible?'inline':'none';
- accidentToggle.setAttribute('aria-pressed',String(visible));
- accidentToggle.textContent=visible?'교통사고 다발지역 숨기기':'교통사고 다발지역 표시';}});
-safetyRiskToggle.addEventListener('click',()=>{{const visible=safetyRiskLayer.hidden;
- safetyRiskLayer.hidden=!visible;safetyRiskLayer.style.display=visible?'inline':'none';
- safetyRiskToggle.setAttribute('aria-pressed',String(visible));
- safetyRiskToggle.textContent=visible?'생활안전 위험지역 숨기기':'생활안전 위험지역 표시';}});
-aedToggle.addEventListener('click',()=>{{const visible=aedLayer.hidden;
- aedLayer.hidden=!visible;aedLayer.style.display=visible?'inline':'none';
- aedToggle.setAttribute('aria-pressed',String(visible));
- aedToggle.textContent=visible?'AED 위치 숨기기':'AED 위치 표시';}});
-parkToggle.addEventListener('click',()=>{{const visible=parkLayer.hidden;
- parkLayer.hidden=!visible;parkLayer.style.display=visible?'inline':'none';
- parkToggle.setAttribute('aria-pressed',String(visible));
- parkToggle.textContent=visible?'도시공원 위치 숨기기':'도시공원 위치 표시';}});
-selectNode(majorCategory);
-</script></body></html>"""
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(document, encoding="utf-8", newline="\n")
+    dashboard_outputs = write_dashboard_files(
+        output_path,
+        replacements={
+            "INDICATOR_COUNT": str(indicator_count),
+            "CATEGORY_COUNT": str(len(categories)),
+            "MAJOR_COUNT": str(len(major_categories)),
+            "CATEGORY_TREE": category_tree,
+            "HOTSPOT_COUNT": str(len(hotspot_circles)),
+            "SAFETY_RISK_COUNT": str(len(safety_risk_markers)),
+            "AED_COUNT": str(len(aed_markers)),
+            "PARK_COUNT": str(len(park_markers)),
+            "DONG_PATHS": "".join(paths),
+            "HOTSPOT_MARKERS": "".join(hotspot_circles),
+            "SAFETY_RISK_MARKERS": "".join(safety_risk_markers),
+            "AED_MARKERS": "".join(aed_markers),
+            "PARK_MARKERS": "".join(park_markers),
+        },
+        payloads={
+            "indicators": indicator_payload,
+            "assessments": assessment_payload,
+            "majorAssessments": major_payload,
+            "children": children,
+            "policies": policy_payload,
+            "labels": labels,
+            "categoryLabels": category_labels,
+            "accidentSummary": accident_summary,
+            "referenceContext": reference_payload,
+            "referenceCompositions": composition_payload,
+            "trafficTrend": trend_payload,
+        },
+        major_category=major_categories[0],
+    )
     return {
         "traffic_hotspot_count": len(traffic_hotspots) if traffic_hotspots is not None else 0,
         "mapped_traffic_hotspot_count": mapped_hotspot_count,
@@ -1272,6 +1001,7 @@ selectNode(majorCategory);
         "mapped_aed_point_count": mapped_aed_count,
         "park_point_count": len(park_points) if park_points is not None else 0,
         "mapped_park_point_count": mapped_park_count,
+        "dashboard_outputs": dashboard_outputs,
     }
 
 

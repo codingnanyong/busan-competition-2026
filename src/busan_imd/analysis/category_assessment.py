@@ -14,8 +14,8 @@ import pandas as pd
 from busan_imd.analysis.domain_scores import DEFAULT_PROFILE, percentile_score
 from busan_imd.core.artifacts import sha256_file, write_json
 
-DEFAULT_SPEC = Path("docs/data/CATEGORY_ASSESSMENT_SPEC_2025.csv")
-DEFAULT_POLICY_CATALOG = Path("docs/data/CATEGORY_POLICY_CATALOG_2025.csv")
+DEFAULT_SPEC = Path("docs/data/tables/CATEGORY_ASSESSMENT_SPEC_2025.csv")
+DEFAULT_POLICY_CATALOG = Path("docs/data/tables/CATEGORY_POLICY_CATALOG_2025.csv")
 DEFAULT_OUTPUT_DIR = Path("outputs/infographic/2025/tables")
 DEFAULT_CATEGORY_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_admin_dong_category_assessment_2025.csv"
 DEFAULT_MAJOR_CATEGORY_OUTPUT = (
@@ -176,7 +176,12 @@ def _confidence(profile: pd.DataFrame, rule: Any) -> pd.Series:
         )
     elif rule.category == "transit_access":
         confidence = pd.Series(
-            np.where(profile["bus_stop_count_2025"] == 0, "low", "medium_low"),
+            np.where(
+                (profile["bus_stop_count_2025"] == 0)
+                | (profile["matched_bus_routes_2025_current_proxy"] == 0),
+                "low",
+                "medium_low",
+            ),
             index=profile.index,
         )
     if confidence.isna().any():
@@ -352,6 +357,10 @@ def build(
             "Estimated and proxy inputs are retained with row-level evidence labels",
             "Category scores are relative Busan percentiles, not absolute service standards",
             "Traffic safety uses 48 selected hotspots, not a complete dong-level crash census",
+            (
+                "Transit route demand uses current route topology because a dated 2025 "
+                "topology is unavailable"
+            ),
             "Policy examples require observed administrative data and field validation",
         ],
     }

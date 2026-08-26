@@ -22,6 +22,9 @@ def profile() -> pd.DataFrame:
             "pharmacy_count_2025_candidate": 3 + index % 13,
             "crime_prevention_cctv_count_2025": 10 + index % 31,
             "bus_stop_count_2025": 3 + index % 17,
+            "matched_bus_routes_2025_current_proxy": 1 + index % 23,
+            "demand_weighted_bus_route_access_2025_current_proxy": 10 + index / 2,
+            "scheduled_bus_service_opportunities_current_proxy": 20 + index,
             "heat_shelter_count_2025": 1 + index % 9,
             "elderly_alone_latest_count": 50 + index * 2,
             "nearest_core_school_distance_m_2025": 50 + index * 10,
@@ -48,8 +51,8 @@ def test_build_creates_complete_transparent_category_contract() -> None:
 
     assert report["major_category_count"] == 4
     assert report["category_count"] == 10
-    assert report["indicator_count"] == 17
-    assert len(indicators) == 206 * 17
+    assert report["indicator_count"] == 19
+    assert len(indicators) == 206 * 19
     assert len(categories) == 206 * 10
     assert len(major_categories) == 206 * 4
     assert categories.groupby("admin_dong_code")["category"].nunique().eq(10).all()
@@ -67,7 +70,7 @@ def test_build_creates_complete_transparent_category_contract() -> None:
     ].sort_index()
     pd.testing.assert_series_equal(actual_major, expected_major, check_names=False)
     assert set(indicators["confidence_level"]) == {"low", "medium_low", "medium"}
-    assert indicators["estimate_used"].sum() == 206 * 11
+    assert indicators["estimate_used"].sum() == 206 * 13
     assert indicators.loc[indicators["estimate_used"], "estimation_reason"].str.len().gt(0).all()
     assert indicators.loc[indicators["estimate_used"], "estimation_method_ko"].ne("해당 없음").all()
     assert set(categories["policy_review_status"]) <= {

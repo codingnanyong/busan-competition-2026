@@ -13,7 +13,7 @@ docker compose run --rm jupyter python -m busan_imd.analysis.sensitivity_analysi
 ```
 
 시나리오 계약은
-[SENSITIVITY_SCENARIOS_2025.csv](../data/SENSITIVITY_SCENARIOS_2025.csv), 요약과 체크섬은
+[SENSITIVITY_SCENARIOS_2025.csv](../data/tables/SENSITIVITY_SCENARIOS_2025.csv), 요약과 체크섬은
 [SENSITIVITY_ANALYSIS_REPORT_2025.json](../data/manifests/SENSITIVITY_ANALYSIS_REPORT_2025.json)에
 기록한다. 행정동별 결과는 Git에서 제외되는
 `data/processed/scores/2025/busan_admin_dong_sensitivity_2025.csv`에 생성된다.

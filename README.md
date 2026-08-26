@@ -14,6 +14,10 @@
 - [Linear·GitHub 이슈 맵](docs/ISSUES.md)
 - [Git 워크플로](docs/GIT_WORKFLOW.md)
 - [릴리스 정책](docs/RELEASE_POLICY.md)
+- [기여 안내](CONTRIBUTING.md)
+- [행동 강령](CODE_OF_CONDUCT.md)
+- [보안 정책](SECURITY.md)
+- [라이선스](LICENSE)
 
 ## English
 
@@ -25,3 +29,7 @@ This project adapts the UK Index of Multiple Deprivation (IMD) to Busan's admini
 - [Linear/GitHub issue map](docs/en/ISSUES.md)
 - [Git workflow](docs/en/GIT_WORKFLOW.md)
 - [Release policy](docs/en/RELEASE_POLICY.md)
+- [Contributing](CONTRIBUTING.md)
+- [Code of conduct](CODE_OF_CONDUCT.md)
+- [Security policy](SECURITY.md)
+- [License](LICENSE)

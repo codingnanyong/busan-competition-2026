@@ -15,7 +15,7 @@ from busan_imd.analysis.composite_index import DEFAULT_DOMAIN_SCORES, DEFAULT_SP
 from busan_imd.analysis.domain_scores import IDENTITY_COLUMNS
 from busan_imd.core.artifacts import sha256_file, write_json
 
-DEFAULT_SCENARIOS = Path("docs/data/SENSITIVITY_SCENARIOS_2025.csv")
+DEFAULT_SCENARIOS = Path("docs/data/tables/SENSITIVITY_SCENARIOS_2025.csv")
 DEFAULT_OUTPUT = Path("data/processed/scores/2025/busan_admin_dong_sensitivity_2025.csv")
 DEFAULT_REPORT = Path("docs/data/manifests/SENSITIVITY_ANALYSIS_REPORT_2025.json")
 SUPPORTED_WEIGHT_POLICIES = {"baseline", "equal"}

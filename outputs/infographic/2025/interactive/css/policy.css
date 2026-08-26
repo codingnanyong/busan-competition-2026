@@ -1,0 +1,12 @@
+#policy-panel .policy{margin-top:0}
+.policy{background:#f7f4ed;border-radius:9px;padding:12px;margin-top:18px}
+.policy.monitor{background:#eef3f1}
+.policy.low{background:#f2f5f2}
+.policy-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#policy-panel .policy-grid{grid-template-columns:repeat(3,1fr)}
+.policy-item{background:white;border:1px solid #d7ded9;border-radius:7px;padding:9px;
+ font-size:13px;line-height:1.5}
+.policy-item b{display:block;color:#087e8b;margin-bottom:3px}
+.policy-case{border-left:4px solid #087e8b;background:#eaf2f2;border-radius:0 7px 7px 0;
+ padding:10px;margin-top:10px;line-height:1.5}
+.policy-case a{color:#075e67;font-weight:700}

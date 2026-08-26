@@ -21,7 +21,7 @@ from busan_imd.analysis.cluster_analysis import (
 from busan_imd.analysis.environmental_overlay import DEFAULT_OUTPUT as DEFAULT_OVERLAY
 from busan_imd.core.artifacts import sha256_file, write_json
 
-DEFAULT_CATALOG = Path("docs/data/POLICY_ACTION_CATALOG_2025.csv")
+DEFAULT_CATALOG = Path("docs/data/tables/POLICY_ACTION_CATALOG_2025.csv")
 DEFAULT_OUTPUT = Path("data/processed/scores/2025/busan_admin_dong_policy_matrix_2025.csv")
 DEFAULT_REPORT = Path("docs/data/manifests/POLICY_MATRIX_REPORT_2025.json")
 EXPECTED_PRIORITY_COUNT = 21

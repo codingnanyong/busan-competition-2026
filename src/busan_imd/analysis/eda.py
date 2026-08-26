@@ -17,7 +17,7 @@ from busan_imd.processing.standardization import load_boundaries
 DEFAULT_PROFILE = Path(
     "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv"
 )
-DEFAULT_DICTIONARY = Path("docs/data/DATA_DICTIONARY_2025.csv")
+DEFAULT_DICTIONARY = Path("docs/data/tables/DATA_DICTIONARY_2025.csv")
 DEFAULT_BOUNDARIES = Path(
     "data/raw/sgis/admin_boundaries/2025/busan_admin_dong_boundaries_2025_valid.geojson"
 )

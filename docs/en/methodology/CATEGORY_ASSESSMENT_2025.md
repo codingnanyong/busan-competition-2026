@@ -8,7 +8,7 @@ usable, but their evidence type, row-level confidence, and policy limitation are
 
 ## Improvements
 
-- Place eight child categories under three major categories.
+- Place ten child categories under four major categories.
 - Stabilize small-area facility rates toward the Busan-wide rate using a 5,000-person prior.
 - Record `estimate_used`, estimation method and reason, `confidence_level`, and
   `quality_note` for every indicator.
@@ -16,8 +16,8 @@ usable, but their evidence type, row-level confidence, and policy limitation are
 - Keep the baseline B-IMD rank for comparison only; do not combine it with improved scores.
 
 The versioned indicator contract is
-[CATEGORY_ASSESSMENT_SPEC_2025.csv](../../data/CATEGORY_ASSESSMENT_SPEC_2025.csv), and conditional
-examples are in [CATEGORY_POLICY_CATALOG_2025.csv](../../data/CATEGORY_POLICY_CATALOG_2025.csv).
+[CATEGORY_ASSESSMENT_SPEC_2025.csv](../../data/tables/CATEGORY_ASSESSMENT_SPEC_2025.csv), and conditional
+examples are in [CATEGORY_POLICY_CATALOG_2025.csv](../../data/tables/CATEGORY_POLICY_CATALOG_2025.csv).
 
 ## Three-level structure
 
@@ -25,6 +25,7 @@ The calculation follows `major category → child category → indicator`:
 
 - Socioeconomic base: income/support need and local employment opportunity, each weighted 0.50.
 - Living infrastructure and housing: education, healthcare, housing, and transit, each weighted 0.25.
+- Safety: traffic-accident risk and crime-prevention access, each weighted 0.50.
 - Environment and climate response: air exposure and heat response, each weighted 0.50.
 
 The major-category score applies the stated contribution share to each child-category
@@ -36,16 +37,32 @@ and then the underlying indicators.
 
 ## Estimation disclosure
 
-Nine of the fourteen indicators use estimation, reconstruction, interpolation, or small-area
+Thirteen of the nineteen indicators use estimation, reconstruction, interpolation, or small-area
 shrinkage. The dashboard marks each one as `estimated value used` and displays both the method
 and why it was necessary. The reasons distinguish unavailable dong-level income observations,
 small population denominators, reconstructed operating-facility inventories, the absence of an
-air monitor in every dong, and mixed reference dates. The other five indicators are marked as
+air monitor in every dong, mixed reference dates, and a mixed-date transit topology. The other
+six indicators are marked as
 not using missing-value estimation, while their proxy or lower-bound limitations remain visible.
+
+Transit access combines the stabilized stop-supply rate at 0.60, a demand-weighted route-reach
+proxy at 0.20, and a current scheduled-service opportunity proxy at 0.20. Route reach joins 278
+of 333 routes with 2025 annual card-trip totals to current BIMS topology. Service opportunity
+sums operating-span minutes divided by normal headway for the 258 routes with usable fields.
+These remain mixed-date proxies, not observed 2025 departures, travel time, or crowding. Route
+multi-leg and youth/child composition and matched 2023 stop time-band demand remain unscored
+validation context.
+
+Unscored economic-activity context also includes merchant-location transaction composition for
+under-30 and 60-plus age bands and for 22:00–05:59 and 09:00–17:59 time bands. Two dongs have
+incomplete hourly bands, so their time-band shares remain missing rather than being zero-filled.
 
 ## Reading the policy direction
 
-Each policy card follows `detected signal → priority population → implementation sequence →
+The dashboard shows a category's intervention as a review candidate only when the selected
+dong scores 70 or above on that category. Below the gate it shows monitoring or relative
+low-deprivation and does not apply the same package. Candidate cards follow `this dong's
+threshold evidence → detected signal → priority population → implementation sequence →
 outcome measures → official reference case → adaptation caution`. Reference cases illustrate
 implementable instruments; they do not mean that the same intervention has already been selected
 for the dong. Field evidence must still determine whether to adapt, pilot, or reject an instrument.
@@ -67,6 +84,6 @@ docker compose run --rm jupyter python -m busan_imd.infographic
 ```
 
 The outputs contain 206×4 area assessments, 206×10 detailed assessments,
-206×17 indicator evidence rows, and a manifest with reproducibility checksums. They support
+206×19 indicator evidence rows, and a manifest with reproducibility checksums. They support
 screening only; observed administrative data, travel time, capacity, and field demand must
 validate final policy choices.

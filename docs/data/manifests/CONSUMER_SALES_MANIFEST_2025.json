@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-25T05:42:16+00:00",
+  "generated_at": "2026-08-26T00:29:09+00:00",
   "dataset_id": "ECO-BUSAN-CONSUMER-SALES-2025-001",
   "provider": "Busan Metropolitan City (Busan Data Wave)",
   "reference_period": "2025-01/2025-12",
@@ -8,23 +8,52 @@
   "spatial_unit": "administrative dong (merchant location)",
   "analysis_role": "validation",
   "eligible_for_primary_analysis": false,
-  "limitations": "Card consumption is observed at merchant locations, not residents' household income. It is retained as economic-activity context and is not a direct income deprivation score. One dong has 11 observed months and is not zero-filled.",
+  "limitations": "Card consumption is observed at merchant locations, not residents' household income. It is retained as economic-activity context and is not a direct income deprivation score. One dong has 11 observed months; two dongs have incomplete hour bands. Missing periods and bands are not zero-filled.",
   "aggregation": "day-weighted mean of monthly average-daily values",
   "protected_download_path": "data/raw/busan_data_wave/consumer_sales/2025/busan_admin_dong_consumer_sales_by_industry_2023_2025.xlsx",
   "protected_download_sha256": "674CBD2F54856673A0512845D0C397044A0DFEE23EB9EF32F8BCAED1B264159C",
-  "conversion_note": "The portal download was protected by a non-OOXML wrapper. The parsed workbook is a value-preserving Excel CSV export; the protected original is retained.",
+  "conversion_note": "The three portal downloads were protected by non-OOXML wrappers. Their parsed industry, age, and hour files are value-preserving Excel CSV exports; protected originals are retained.",
   "input_path": "data/raw/busan_data_wave/consumer_sales/2025/busan_admin_dong_consumer_sales_by_industry_2023_2025_parsed.csv",
   "input_sha256": "1EC000249A5171507F0C4AE0C3F05944E96071AD52C64A5DCD190F9C77574C9A",
+  "age_protected_download_path": "data/raw/busan_data_wave/consumer_sales/2025/busan_admin_dong_consumer_sales_by_age_download.xlsx",
+  "age_protected_download_sha256": "D2B1AE8C2D4B0C27566C6506E971D1C419CB938B9E355F5996DE708E8AC1065F",
+  "age_input_path": "data/raw/busan_data_wave/consumer_sales/2025/busan_admin_dong_consumer_sales_by_age_2023_2025_parsed.csv",
+  "age_input_sha256": "82757414CCF8471A8A08A498EAEB2BFA7AA5748DB2AC9C7A7FCC107F055BBC66",
+  "hour_protected_download_path": "data/raw/busan_data_wave/consumer_sales/2025/busan_admin_dong_consumer_sales_by_hour_download.xlsx",
+  "hour_protected_download_sha256": "FD06F51495EFC02FB8EFBEA4203EE5B25F9F031260D051CE3C3115CE46445E7D",
+  "hour_input_path": "data/raw/busan_data_wave/consumer_sales/2025/busan_admin_dong_consumer_sales_by_hour_2023_2025_parsed.csv",
+  "hour_input_sha256": "187131E98A78FB6F1CA516691B4E98A7E5FC443C16B15654404275F5F2DDF754",
   "output_path": "data/processed/candidates/2025/consumer_sales_2025.csv",
-  "output_sha256": "C54540440D353B4068FA6D3975593BA492927D15B953823E0D7B017E82EC7B62",
+  "output_sha256": "7AEC516DA064A93D4B219AE334023A06F1BE8A1F17A2FEF6E4D1776DDAE78919",
   "category_output_path": "data/processed/candidates/2025/consumer_sales_by_category_2025.csv",
-  "category_output_sha256": "3BF309A39659789644593BA7BD604483921962C323C5A3912EDD35974106C7C0",
+  "category_output_sha256": "E9BFC77A5AB606AAE92E34CDEC333310699F906449B7AAA7D8D21618896D1AFE",
   "source_rows_2025": 27181,
   "admin_dong_count": 206,
   "industry_category_count": 11,
   "complete_admin_dongs": 205,
   "incomplete_admin_dongs": 1,
   "recovered_names": [
+    {
+      "portal_code": "2644059000",
+      "canonical_code": "21120562",
+      "name": "강서구 신호동"
+    }
+  ],
+  "age_source_rows_2025": 14826,
+  "hour_source_rows_2025": 59241,
+  "composition_admin_dong_count": 206,
+  "age_complete_admin_dongs": 205,
+  "hour_complete_admin_dongs": 205,
+  "hour_complete_band_admin_dongs": 204,
+  "hour_missing_band_records": 63,
+  "age_recovered_names": [
+    {
+      "portal_code": "2644059000",
+      "canonical_code": "21120562",
+      "name": "강서구 신호동"
+    }
+  ],
+  "hour_recovered_names": [
     {
       "portal_code": "2644059000",
       "canonical_code": "21120562",

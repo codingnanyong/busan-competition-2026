@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-25T05:42:13+00:00",
+  "generated_at": "2026-08-26T00:13:35+00:00",
   "dataset_id": "INC-BLF-INFERRED-2025-001",
   "primary_reference_year": 2025,
   "reference_period": "2025-12",
@@ -40,7 +40,7 @@
   },
   "profile_source": {
     "path": "data/processed/bootstrap/2025/busan_admin_dong_candidate_profile_2025.csv",
-    "sha256": "05A1FA4523FACEFE2E3FA90B80EC4BC01D981D4BD51251DFF30CF1BD097DE2F2"
+    "sha256": "84650195862DC724014E7D91AAE76BE5278E1027B4C71A33F92F44B9CD5F70CD"
   },
   "pattern_sources": [
     {
@@ -149,5 +149,5 @@
   "integerization": "largest remainder within each district",
   "limitations": "Only the 16 district totals are observed December 2025 matched-benefit counts. All 206 administrative-dong values are inferred. Six districts use disclosed dong patterns from varying reference dates or benefit subsets; ten districts use a ridge relative-risk model. The values must not be represented as observed counts and require sensitivity analysis before final IMD publication.",
   "output_path": "data/processed/candidates/2025/basic_livelihood_inferred_2025.csv",
-  "output_sha256": "7CBD04F1DF8C987B119C50BBAB5280ED695AE6D93C8F510288A4B7BFE609E6FE"
+  "output_sha256": "59FABD3A67A3B0039880186EE193486B1C6CD8C30C3506FF7005A5CF5E96EE81"
 }

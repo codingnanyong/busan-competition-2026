@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-25T05:42:11+00:00",
+  "generated_at": "2026-08-26T01:36:55+00:00",
   "reference_year": 2025,
   "canonical_admin_dong_count": 206,
   "assessments": [
@@ -53,37 +53,41 @@
       ],
       "route_usage_records": 333,
       "route_usage_reconciliation_failures": 0,
+      "citywide_multi_leg_card_trip_share_pct_2025": 23.535373,
+      "citywide_youth_child_card_trip_share_pct_2025": 11.015313,
       "village_bus_records": 136,
       "district_output_records": 16,
-      "decision": "validation-only",
-      "reason": "Route demand lacks stop geography and village-bus supply is only attributable to districts; neither can be allocated to 206 dongs without inventing data."
+      "decision": "mixed-supplemental-use",
+      "route_usage_decision": "supplemental-category-indicator",
+      "village_bus_decision": "validation-only",
+      "reason": "Route demand is linked to current BIMS route-stop topology as a mixed-date category indicator; village-bus supply remains attributable only to districts."
     }
   ],
   "artifacts": {
     "living_population": {
       "path": "data/processed/candidates/2025/living_population_2025.csv",
       "records": 206,
-      "sha256": "3EEB4E6E0A15E26211C038B4CFDEBBB722FCB9F5DF0639C45F59DDEF94F30E85"
+      "sha256": "714EF4BFAFFCD51120390ABF0741937EDD1061BE22209FF39A85814C9ED9F05E"
     },
     "school_access": {
       "path": "data/processed/candidates/2025/school_counts_2025.csv",
       "records": 206,
-      "sha256": "02717DF8EF7E38D51C2AA3BB6F03FA21D75C24B1A7767BAC97DAF6C4ED82CEE7"
+      "sha256": "4C5A1B2F43562BFAAE5B4C71DC9AAC0CAA88ACD55F4205B30858A4CCB4E5775A"
     },
     "air_exposure": {
       "path": "data/processed/candidates/2025/air_exposure_idw_2025.csv",
       "records": 206,
-      "sha256": "D4A471EC2A31A060408B4736C5A1958D50C5C7050402B88C86CADBB08662D508"
+      "sha256": "3B1E0AFC400140D3E0F2EBF091DD8F8AF9CFBC2064AC2283D7A3007152619B2E"
     },
     "route_usage": {
       "path": "data/processed/candidates/2025/bus_route_usage_2025.csv",
       "records": 333,
-      "sha256": "2706D42EB02EDF86F701F70B082F270E3DCB2B789C13B33A552C599168D98F5D"
+      "sha256": "8D824288249015372C46095A3BF04D2020A4482D6EB51F5C40ADFF33AAF2DAB0"
     },
     "village_bus_district": {
       "path": "data/processed/candidates/2025/village_bus_by_district_2025.csv",
       "records": 16,
-      "sha256": "FB420598431402825426BBB3A27409C89604CD86402C32163DB41197E14BFDEC"
+      "sha256": "5A1F2A85CA335DE6C06F23538F31518CCD21AC62C4C4FE0ABB04F245B7E4959F"
     }
   }
 }

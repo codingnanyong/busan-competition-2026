@@ -33,7 +33,7 @@ DEFAULT_MAJOR_CATEGORY_ASSESSMENT = (
 DEFAULT_INDICATOR_SCORES = (
     DEFAULT_TABLE_OUTPUT_DIR / "busan_admin_dong_category_indicator_scores_2025.csv"
 )
-DEFAULT_POLICY_CATALOG = Path("docs/data/CATEGORY_POLICY_CATALOG_2025.csv")
+DEFAULT_POLICY_CATALOG = Path("docs/data/tables/CATEGORY_POLICY_CATALOG_2025.csv")
 DEFAULT_CANDIDATE_PROFILE = Path(
     "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv"
 )

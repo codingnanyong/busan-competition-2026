@@ -23,7 +23,7 @@ docker compose run --rm jupyter python scripts/rebuild_processed.py
 docker compose run --rm jupyter python -m busan_imd.analysis.composite_index
 ```
 
-실행 계약은 [COMPOSITE_INDEX_SPEC_2025.csv](../data/COMPOSITE_INDEX_SPEC_2025.csv), 입력·출력
+실행 계약은 [COMPOSITE_INDEX_SPEC_2025.csv](../data/tables/COMPOSITE_INDEX_SPEC_2025.csv), 입력·출력
 체크섬과 요약값은
 [COMPOSITE_INDEX_REPORT_2025.json](../data/manifests/COMPOSITE_INDEX_REPORT_2025.json)에
 기록한다. 결과 테이블은 Git에서 제외되는

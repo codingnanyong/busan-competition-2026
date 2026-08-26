@@ -28,7 +28,7 @@ Run only COD-22 with:
 docker compose run --rm jupyter python -m busan_imd.analysis.policy_matrix
 ```
 
-- [POLICY_ACTION_CATALOG_2025.csv](../../data/POLICY_ACTION_CATALOG_2025.csv): action names,
+- [POLICY_ACTION_CATALOG_2025.csv](../../data/tables/POLICY_ACTION_CATALOG_2025.csv): action names,
   implementation roles, partners, difficulty rationale, expected effects, monitoring, and
   evidence limits
 - `data/processed/scores/2025/busan_admin_dong_policy_matrix_2025.csv`: executable matrix

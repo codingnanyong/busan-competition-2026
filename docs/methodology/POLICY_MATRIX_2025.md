@@ -27,7 +27,7 @@ COD-22 단계만 재생성하려면 다음 명령을 실행한다.
 docker compose run --rm jupyter python -m busan_imd.analysis.policy_matrix
 ```
 
-- [POLICY_ACTION_CATALOG_2025.csv](../data/POLICY_ACTION_CATALOG_2025.csv): 정책명,
+- [POLICY_ACTION_CATALOG_2025.csv](../data/tables/POLICY_ACTION_CATALOG_2025.csv): 정책명,
   실행 주체 역할, 협력기관, 난이도 근거, 기대효과, 모니터링 지표와 근거 한계
 - `data/processed/scores/2025/busan_admin_dong_policy_matrix_2025.csv`: 유형별 대상지역과
   분석값을 결합한 실행 매트릭스

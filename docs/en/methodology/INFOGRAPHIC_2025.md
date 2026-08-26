@@ -32,20 +32,29 @@ requires additional local asset data on industry, commerce, tourism, and living 
 - [`busan_imd_one_page_2025.png`](../../../outputs/infographic/2025/static/busan_imd_one_page_2025.png):
   quick-review preview
 - [`busan_admin_dong_action_map_2025.html`](../../../outputs/infographic/2025/interactive/busan_admin_dong_action_map_2025.html):
-  standalone 206-dong dashboard with a collapsible tree for three major categories, eight child
-  categories, fourteen indicators, and policy examples
+  standalone 206-dong dashboard with a collapsible tree for four major categories, ten child
+  categories, nineteen indicators, and policy examples. Sibling `css/` (layout, overlays,
+  evidence, policy) and `js/` (data, map, evidence, policy, boot) files load by relative
+  path; the page opens in a browser with no JavaScript server. Edit `html/`, `css/`, and
+  `js/` in this output folder. Only `js/data.js` is regenerated.
 - [`busan_admin_dong_action_profile_2025.csv`](../../../outputs/infographic/2025/tables/busan_admin_dong_action_profile_2025.csv):
   six scores, vulnerability order, improvement direction, and relative low-deprivation domain
 - [INFOGRAPHIC_REPORT_2025.json](../../data/manifests/INFOGRAPHIC_REPORT_2025.json):
   input/output checksums, page count, displayed statistics, and artifact status
 
 The PNG is a screen preview; page-count and submission-format checks use the PDF.
-The HTML opens directly in a browser and has no external map or JavaScript-server dependency.
+The HTML opens directly in a browser with its sibling CSS and JS files and has no external
+map or JavaScript-server dependency. Edit the files under
+`outputs/infographic/2025/interactive/`.
 Selecting a major tree node maps its weighted child-category composite. Selecting a child node
-switches the map to that category's score distribution. Selecting a dong then displays indicators,
-deprivation percentiles, weights, estimation reasons, confidence, and a conditional policy example.
-Each policy card also gives a priority population, implementation sequence, outcome measures, an
-official reference case, and a caution against copying the case without local validation.
+switches the map to that category's score distribution. Selecting a dong then shows indicators,
+deprivation percentiles, weights, estimation reasons, and confidence in the right-hand evidence
+panel. Selecting a child category also opens a full-width policy panel below the map. The panel
+recommends that category's intervention only when the selected dong scores 70 or above; below
+the gate it shows monitoring or relative low-deprivation instead of the same package for every
+dong. Each candidate card also gives this dong's threshold evidence, a priority population,
+implementation sequence, outcome measures, an official reference case, and a caution against
+copying the case without local validation.
 The contract and Myeongji regression check are documented in the
 [2025 category assessment](CATEGORY_ASSESSMENT_2025.md).
 

@@ -1853,209 +1853,209 @@
 21510120,기장군,장안읍,safety,안전,0.5,traffic_accident_risk,교통사고 위험,0.0,0,,monitor,low
 21510130,기장군,정관읍,safety,안전,0.5,traffic_accident_risk,교통사고 위험,0.0,0,,monitor,low
 21510330,기장군,철마면,safety,안전,0.5,traffic_accident_risk,교통사고 위험,0.0,0,,monitor,low
-21090750,해운대구,우3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,100.0,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21140560,수영구,광안1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,99.512195,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21080550,북구,화명1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,99.02439,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21050680,부산진구,당감2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,98.536585,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21080630,북구,화명3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,98.04878,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21070570,남구,용호1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,97.560976,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21090590,해운대구,반여3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,97.073171,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21110580,금정구,부곡2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,96.585366,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21070680,남구,문현3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,96.097561,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21100560,사하구,하단1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,95.609756,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21030510,동구,초량1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,95.121951,1,소지역 보정 버스정류장 공급량,candidate_after_validation,low
-21130630,연제구,연산9동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,94.634146,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21130550,연제구,연산1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,94.146341,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21050540,부산진구,연지동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,93.658537,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21140520,수영구,남천2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,93.170732,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21140600,수영구,민락동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,92.682927,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21130590,연제구,연산5동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,92.195122,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21130620,연제구,연산8동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,91.707317,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21100540,사하구,괴정4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,91.219512,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21140570,수영구,광안2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,90.731707,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21090670,해운대구,좌2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,90.243902,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21110610,금정구,장전1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,89.756098,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21050660,부산진구,부암3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,89.268293,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21110700,금정구,구서2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,88.780488,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21050720,부산진구,가야2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,88.292683,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21060510,동래구,수민동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,87.804878,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21130510,연제구,거제1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,87.317073,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21060550,동래구,온천1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,86.829268,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21090690,해운대구,좌4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,86.341463,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21050840,부산진구,범천2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,85.853659,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21090620,해운대구,반송2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,85.365854,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21050570,부산진구,양정2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,84.878049,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21090530,해운대구,중1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,84.390244,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21090680,해운대구,좌3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,83.902439,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21050640,부산진구,부암1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,83.414634,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21050740,부산진구,개금1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,82.926829,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21140590,수영구,광안4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,82.439024,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21090730,해운대구,우1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,81.95122,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21100530,사하구,괴정3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,81.463415,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21090650,해운대구,재송2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,80.97561,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21050770,부산진구,범천1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,80.487805,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21090740,해운대구,우2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,80.0,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21060570,동래구,온천3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,79.512195,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21070590,남구,용호3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,79.02439,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21100570,사하구,하단2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,78.536585,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21080610,북구,만덕3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,78.04878,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21150640,사상구,엄궁동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,77.560976,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21130580,연제구,연산4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,77.073171,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21100510,사하구,괴정1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,76.585366,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21050800,부산진구,당감1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,76.097561,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21150570,사상구,괘법동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,75.609756,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21100630,사하구,다대2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,75.121951,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21090580,해운대구,반여2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,74.634146,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21050760,부산진구,개금3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,74.146341,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21110720,금정구,서3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,73.658537,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21100520,사하구,괴정2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,73.170732,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21130530,연제구,거제3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,72.682927,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21060600,동래구,사직3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,72.195122,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21030560,동구,수정1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,71.707317,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21070580,남구,용호2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,71.219512,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21130540,연제구,거제4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,70.731707,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21140530,수영구,수영동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,70.243902,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
-21060620,동래구,안락2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,69.756098,0,,monitor,medium_low
-21070530,남구,대연3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,69.268293,0,,monitor,medium_low
-21130560,연제구,연산2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,68.780488,0,,monitor,medium_low
-21090640,해운대구,재송1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,68.292683,0,,monitor,medium_low
-21140510,수영구,남천1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,67.804878,0,,monitor,medium_low
-21080540,북구,금곡동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,67.317073,0,,monitor,medium_low
-21070660,남구,문현1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,66.829268,0,,monitor,medium_low
-21110600,금정구,부곡4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,66.341463,0,,monitor,medium_low
-21070560,남구,대연6동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,65.853659,0,,monitor,medium_low
-21150550,사상구,덕포1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,65.365854,0,,monitor,medium_low
-21080520,북구,구포2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,64.878049,0,,monitor,medium_low
-21020640,서구,충무동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,64.390244,0,,monitor,medium_low
-21010590,중구,영주1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,63.902439,0,,monitor,medium_low
-21080590,북구,만덕1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,63.414634,0,,monitor,medium_low
-21140540,수영구,망미1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,62.926829,0,,monitor,medium_low
-21080510,북구,구포1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,62.439024,0,,monitor,medium_low
-21020540,서구,서대신1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,61.95122,0,,monitor,medium_low
-21020510,서구,동대신1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,61.463415,0,,monitor,medium_low
-21070600,남구,용호4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,60.97561,0,,monitor,medium_low
-21080530,북구,구포3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,60.487805,0,,monitor,medium_low
-21010560,중구,부평동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,60.0,0,,monitor,medium_low
-21070550,남구,대연5동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,59.512195,0,,monitor,medium_low
-21130520,연제구,거제2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,59.02439,0,,monitor,medium_low
-21070700,남구,대연1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,58.536585,0,,monitor,medium_low
-21100550,사하구,당리동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,58.04878,0,,monitor,medium_low
-21150540,사상구,모라3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,57.560976,0,,monitor,medium_low
-21110690,금정구,구서1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,57.073171,0,,monitor,medium_low
-21010570,중구,광복동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,56.585366,0,,monitor,low
-21110570,금정구,부곡1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,56.097561,0,,monitor,medium_low
-21030700,동구,좌천동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,55.609756,0,,monitor,medium_low
-21110680,금정구,남산동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,55.121951,0,,monitor,medium_low
-21060590,동래구,사직2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,54.634146,0,,monitor,medium_low
-21090700,해운대구,반여1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,54.146341,0,,monitor,medium_low
-21050810,부산진구,가야1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,53.658537,0,,monitor,medium_low
-21080560,북구,덕천1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,53.170732,0,,monitor,medium_low
-21020590,서구,부민동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,52.682927,0,,monitor,medium_low
-21090660,해운대구,좌1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,52.195122,0,,monitor,medium_low
-21080580,북구,덕천3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,51.707317,0,,monitor,medium_low
-21100580,사하구,신평1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,51.219512,0,,monitor,medium_low
-21060650,동래구,명륜동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,50.731707,0,,monitor,medium_low
-21120600,강서구,명지2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,50.243902,0,,monitor,medium_low
-21030530,동구,초량3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,49.756098,0,,monitor,medium_low
-21130600,연제구,연산6동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,49.268293,0,,monitor,medium_low
-21050520,부산진구,부전2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,48.780488,0,,monitor,medium_low
-21100590,사하구,신평2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,48.292683,0,,monitor,medium_low
-21050610,부산진구,전포2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,47.804878,0,,monitor,medium_low
-21080600,북구,만덕2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,47.317073,0,,monitor,medium_low
-21110510,금정구,서1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,46.829268,0,,monitor,medium_low
-21140580,수영구,광안3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,46.341463,0,,monitor,medium_low
-21060610,동래구,안락1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,45.853659,0,,monitor,medium_low
-21120590,강서구,명지1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,45.365854,0,,monitor,medium_low
-21050750,부산진구,개금2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,44.878049,0,,monitor,medium_low
-21090710,해운대구,반여4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,44.390244,0,,monitor,medium_low
-21150520,사상구,모라1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,43.902439,0,,monitor,medium_low
-21020630,서구,초장동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,43.414634,0,,monitor,medium_low
-21020690,서구,남부민2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,42.926829,0,,monitor,medium_low
-21070670,남구,문현2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,42.439024,0,,monitor,medium_low
-21110520,금정구,서2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,41.95122,0,,monitor,medium_low
-21050550,부산진구,초읍동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,41.463415,0,,monitor,medium_low
-21040590,영도구,봉래1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,40.97561,0,,monitor,medium_low
-21060630,동래구,명장1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,40.487805,0,,monitor,medium_low
-21030680,동구,범일5동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,40.0,0,,monitor,medium_low
-21110740,금정구,장전2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,39.512195,0,,monitor,medium_low
-21150630,사상구,학장동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,39.02439,0,,monitor,medium_low
-21150560,사상구,덕포2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,38.536585,0,,monitor,medium_low
-21510130,기장군,정관읍,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,38.04878,0,,monitor,medium_low
-21100660,사하구,감천2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,37.560976,0,,monitor,medium_low
-21080570,북구,덕천2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,37.073171,0,,monitor,medium_low
-21010520,중구,동광동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,36.585366,0,,monitor,medium_low
-21030550,동구,초량6동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,36.097561,0,,monitor,medium_low
-21100620,사하구,다대1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,35.609756,0,,monitor,medium_low
-21150600,사상구,주례1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,35.121951,0,,monitor,medium_low
-21100650,사하구,감천1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,34.634146,0,,monitor,medium_low
-21060580,동래구,사직1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,34.146341,0,,monitor,medium_low
-21020680,서구,암남동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,33.658537,0,,monitor,medium_low
-21030520,동구,초량2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,33.170732,0,,monitor,medium_low
-21150610,사상구,주례2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,32.682927,0,,monitor,medium_low
-21020520,서구,동대신2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,32.195122,0,,monitor,medium_low
-21050560,부산진구,양정1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,31.707317,0,,monitor,medium_low
-21090540,해운대구,중2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,31.219512,0,,monitor,medium_low
-21010530,중구,대청동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,30.731707,0,,monitor,medium_low
-21070630,남구,감만2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,30.243902,0,,monitor,medium_low
-21070540,남구,대연4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,29.756098,0,,monitor,medium_low
-21150620,사상구,주례3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,29.268293,0,,monitor,medium_low
-21020650,서구,남부민1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,28.780488,0,,monitor,medium_low
-21090560,해운대구,송정동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,28.292683,0,,monitor,medium_low
-21080620,북구,화명2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,27.804878,0,,monitor,medium_low
-21050830,부산진구,전포1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,27.317073,0,,monitor,medium_low
-21040550,영도구,영선2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,26.829268,0,,monitor,medium_low
-21140550,수영구,망미2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,26.341463,0,,monitor,medium_low
-21010540,중구,보수동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,25.853659,0,,monitor,medium_low
-21040660,영도구,동삼2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,25.365854,0,,monitor,medium_low
-21060640,동래구,명장2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,24.878049,0,,monitor,medium_low
-21130570,연제구,연산3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,24.390244,0,,monitor,medium_low
-21010600,중구,영주2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,23.902439,0,,monitor,medium_low
-21100610,사하구,장림2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,23.414634,0,,monitor,medium_low
-21060560,동래구,온천2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,22.926829,0,,monitor,medium_low
-21020560,서구,서대신3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,22.439024,0,,monitor,medium_low
-21030570,동구,수정2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,21.95122,0,,monitor,medium_low
-21030590,동구,수정4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,21.463415,0,,monitor,medium_low
-21050700,부산진구,당감4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,20.97561,0,,monitor,medium_low
-21040670,영도구,동삼3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,20.487805,0,,monitor,medium_low
-21040640,영도구,청학2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,20.0,0,,monitor,medium_low
-21110590,금정구,부곡3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,19.512195,0,,monitor,medium_low
-21040650,영도구,동삼1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,19.02439,0,,monitor,medium_low
-21120562,강서구,신호동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,18.536585,0,,monitor,medium_low
-21040690,영도구,봉래2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,18.04878,0,,monitor,medium_low
-21020530,서구,동대신3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,17.560976,0,,monitor,medium_low
-21070690,남구,문현4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,17.073171,0,,monitor,medium_low
-21090720,해운대구,반송1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,16.585366,0,,monitor,medium_low
-21040630,영도구,청학1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,16.097561,0,,monitor,medium_low
-21100600,사하구,장림1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,15.609756,0,,monitor,medium_low
-21050820,부산진구,부전1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,15.121951,0,,monitor,medium_low
-21020570,서구,서대신4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,14.634146,0,,monitor,medium_low
-21030660,동구,범일2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,14.146341,0,,monitor,medium_low
-21060520,동래구,복산동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,13.658537,0,,monitor,medium_low
-21110670,금정구,청룡노포동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,13.170732,0,,monitor,medium_low
-21030710,동구,범일1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,12.682927,0,,monitor,medium_low
-21040530,영도구,남항동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,12.195122,0,,monitor,medium_low
-21150650,사상구,감전동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,11.707317,0,,monitor,medium_low
-21070610,남구,용당동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,11.219512,0,,monitor,medium_low
-21070710,남구,우암동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,10.731707,0,,monitor,medium_low
-21040540,영도구,영선1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,10.243902,0,,monitor,medium_low
-21510110,기장군,기장읍,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,9.756098,0,,monitor,medium_low
-21030600,동구,수정5동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,9.268293,0,,monitor,medium_low
-21070620,남구,감만1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,8.780488,0,,monitor,medium_low
-21010510,중구,중앙동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,8.292683,0,,monitor,medium_low
-21510111,기장군,일광읍,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,7.804878,0,,monitor,medium_low
-21120530,강서구,강동동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,7.317073,0,,monitor,medium_low
-21010580,중구,남포동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,6.829268,0,,monitor,medium_low
-21040680,영도구,신선동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,6.341463,0,,monitor,medium_low
-21100640,사하구,구평동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,5.853659,0,,monitor,medium_low
-21150510,사상구,삼락동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,5.365854,0,,monitor,medium_low
-21110730,금정구,금사회동동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,4.878049,0,,monitor,medium_low
-21020610,서구,아미동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,4.390244,0,,monitor,medium_low
-21110710,금정구,금성동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,3.902439,0,,monitor,medium_low
-21110640,금정구,선두구동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,3.414634,0,,monitor,medium_low
-21510330,기장군,철마면,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,2.926829,0,,monitor,medium_low
-21120550,강서구,가락동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,2.439024,0,,monitor,medium_low
-21510120,기장군,장안읍,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,1.95122,0,,monitor,medium_low
-21120580,강서구,가덕도동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,1.463415,0,,monitor,medium_low
-21120520,강서구,대저2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,0.97561,0,,monitor,medium_low
-21120510,강서구,대저1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,0.487805,0,,monitor,medium_low
-21120561,강서구,녹산동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,0.0,0,,monitor,medium_low
+21030510,동구,초량1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,96.92683,3,소지역 보정 버스정류장 공급량|수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,low
+21140520,수영구,남천2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,95.414634,3,소지역 보정 버스정류장 공급량|수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,medium_low
+21110580,금정구,부곡2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,92.682928,3,소지역 보정 버스정류장 공급량|수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,medium_low
+21090590,해운대구,반여3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,89.951219,3,소지역 보정 버스정류장 공급량|수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,medium_low
+21070570,남구,용호1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,87.707316,3,소지역 보정 버스정류장 공급량|수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,medium_low
+21050740,부산진구,개금1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,87.512195,3,소지역 보정 버스정류장 공급량|수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,medium_low
+21050720,부산진구,가야2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,86.341463,3,소지역 보정 버스정류장 공급량|수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,medium_low
+21050660,부산진구,부암3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,85.365854,3,소지역 보정 버스정류장 공급량|수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,medium_low
+21080550,북구,화명1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,85.268293,2,소지역 보정 버스정류장 공급량|수요가중 버스노선 접근성,candidate_after_validation,medium_low
+21090680,해운대구,좌3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,85.268293,3,소지역 보정 버스정류장 공급량|수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,medium_low
+21130620,연제구,연산8동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,85.268292,3,소지역 보정 버스정류장 공급량|수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,medium_low
+21090670,해운대구,좌2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,85.170731,3,소지역 보정 버스정류장 공급량|수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,medium_low
+21080630,북구,화명3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,84.682927,2,소지역 보정 버스정류장 공급량|수요가중 버스노선 접근성,candidate_after_validation,medium_low
+21140560,수영구,광안1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,83.414634,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
+21090620,해운대구,반송2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,82.634146,3,소지역 보정 버스정류장 공급량|수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,medium_low
+21050680,부산진구,당감2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,82.439024,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
+21130540,연제구,거제4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,81.756097,3,소지역 보정 버스정류장 공급량|수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,medium_low
+21100540,사하구,괴정4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,80.390244,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
+21110700,금정구,구서2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,79.804879,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
+21030560,동구,수정1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,78.536585,3,소지역 보정 버스정류장 공급량|수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,medium_low
+21050840,부산진구,범천2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,78.341464,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
+21070590,남구,용호3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,78.146341,3,소지역 보정 버스정류장 공급량|수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,medium_low
+21130630,연제구,연산9동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,77.756097,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
+21070660,남구,문현1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,77.658536,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,medium_low
+21130550,연제구,연산1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,75.707317,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
+21080590,북구,만덕1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,75.024389,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,medium_low
+21100630,사하구,다대2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,74.92683,2,소지역 보정 버스정류장 공급량|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,medium_low
+21090750,해운대구,우3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,74.829268,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
+21070580,남구,용호2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,74.097561,3,소지역 보정 버스정류장 공급량|수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,medium_low
+21010570,중구,광복동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,73.804879,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,low
+21090580,해운대구,반여2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,73.463415,2,소지역 보정 버스정류장 공급량|수요가중 버스노선 접근성,candidate_after_validation,medium_low
+21090530,해운대구,중1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,73.365854,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
+21080530,북구,구포3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,73.073171,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,medium_low
+21080540,북구,금곡동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,72.390244,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,medium_low
+21100520,사하구,괴정2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,72.097561,2,소지역 보정 버스정류장 공급량|수요가중 버스노선 접근성,candidate_after_validation,medium_low
+21140590,수영구,광안4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,72.097561,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
+21050540,부산진구,연지동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,72.0,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
+21110720,금정구,서3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,71.317073,2,소지역 보정 버스정류장 공급량|수요가중 버스노선 접근성,candidate_after_validation,medium_low
+21150540,사상구,모라3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,70.731707,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,candidate_after_validation,medium_low
+21140600,수영구,민락동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,70.24390199999999,1,소지역 보정 버스정류장 공급량,candidate_after_validation,medium_low
+21070680,남구,문현3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,69.95122,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21110570,금정구,부곡1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,69.95122,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21150640,사상구,엄궁동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,69.85365900000001,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21110610,금정구,장전1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,69.658537,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21090650,해운대구,재송2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,69.463415,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21050810,부산진구,가야1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,68.292683,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21130590,연제구,연산5동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,68.292683,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21070600,남구,용호4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,67.95122,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21080610,북구,만덕3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,67.609756,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21090690,해운대구,좌4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,66.439024,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21110600,금정구,부곡4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,66.04878000000001,1,수요가중 버스노선 접근성,monitor,medium_low
+21080580,북구,덕천3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,65.463414,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21140570,수영구,광안2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,64.58536600000001,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21130580,연제구,연산4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,64.390243,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21010590,중구,영주1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,64.195122,0,,monitor,medium_low
+21090710,해운대구,반여4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,63.804877000000005,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21060550,동래구,온천1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,62.926829999999995,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21100560,사하구,하단1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,62.926829999999995,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21090730,해운대구,우1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,61.95122,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21100530,사하구,괴정3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,61.463414,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21070670,남구,문현2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,61.365854,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21110510,금정구,서1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,61.170732,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21100660,사하구,감천2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,60.487804,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21020630,서구,초장동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,60.195122,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21050570,부산진구,양정2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,59.707316999999996,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21050760,부산진구,개금3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,58.92683,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21050750,부산진구,개금2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,58.536585,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21050800,부산진구,당감1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,57.95122,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21080560,북구,덕천1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,57.756098,0,,monitor,medium_low
+21130510,연제구,거제1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,57.560975,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21130530,연제구,거제3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,57.170730999999996,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21110690,금정구,구서1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,56.975609,0,,monitor,medium_low
+21060510,동래구,수민동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,56.487805,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21050640,부산진구,부암1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,55.414633,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21120600,강서구,명지2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,55.317071999999996,1,현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21030550,동구,초량6동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,55.024391,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21010560,중구,부평동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,54.439025,0,,monitor,medium_low
+21100510,사하구,괴정1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,54.439025,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21090740,해운대구,우2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,54.04878,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21110680,금정구,남산동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,53.658537,0,,monitor,medium_low
+21100550,사하구,당리동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,53.560976,0,,monitor,medium_low
+21100590,사하구,신평2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,53.365854,0,,monitor,medium_low
+21140510,수영구,남천1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,53.073171,0,,monitor,medium_low
+21140540,수영구,망미1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,52.878049000000004,0,,monitor,medium_low
+21020590,서구,부민동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,52.487805,0,,monitor,medium_low
+21070630,남구,감만2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,52.487804999999994,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21090640,해운대구,재송1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,52.195123,0,,monitor,medium_low
+21060590,동래구,사직2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,52.195122,0,,monitor,medium_low
+21100580,사하구,신평1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,52.097561,0,,monitor,medium_low
+21100570,사하구,하단2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,52.0,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21060570,동래구,온천3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,51.609756000000004,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21090540,해운대구,중2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,51.609756000000004,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21510130,기장군,정관읍,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,51.31707299999999,1,현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21140530,수영구,수영동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,50.634146,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21100620,사하구,다대1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,50.536586,1,현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21070560,남구,대연6동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,50.146341,0,,monitor,medium_low
+21140550,수영구,망미2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,50.048781000000005,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21060620,동래구,안락2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,50.048781,0,,monitor,medium_low
+21020510,서구,동대신1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,49.853659,0,,monitor,medium_low
+21050770,부산진구,범천1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,49.85365899999999,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21050550,부산진구,초읍동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,48.97561,0,,monitor,medium_low
+21150570,사상구,괘법동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,48.87805,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21060600,동래구,사직3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,48.878048,1,소지역 보정 버스정류장 공급량,monitor,medium_low
+21130600,연제구,연산6동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,48.195123,0,,monitor,medium_low
+21150550,사상구,덕포1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,48.097561,0,,monitor,medium_low
+21130560,연제구,연산2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,47.512195,0,,monitor,medium_low
+21040660,영도구,동삼2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,47.317073,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21010600,중구,영주2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,47.31707299999999,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21010530,중구,대청동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,47.121950999999996,1,수요가중 버스노선 접근성,monitor,medium_low
+21060630,동래구,명장1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,46.439024,0,,monitor,medium_low
+21110590,금정구,부곡3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,46.439024,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21070530,남구,대연3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,45.951218999999995,0,,monitor,medium_low
+21080620,북구,화명2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,45.658537,1,수요가중 버스노선 접근성,monitor,medium_low
+21090700,해운대구,반여1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,45.365853,0,,monitor,medium_low
+21020520,서구,동대신2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,45.170732,0,,monitor,medium_low
+21150610,사상구,주례2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,45.170732,0,,monitor,medium_low
+21030590,동구,수정4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,45.073171,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21110520,금정구,서2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,44.682927,0,,monitor,medium_low
+21080520,북구,구포2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,44.487804,0,,monitor,medium_low
+21070550,남구,대연5동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,43.804878,0,,monitor,medium_low
+21020540,서구,서대신1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,43.707317,0,,monitor,medium_low
+21020690,서구,남부민2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,42.92683,0,,monitor,medium_low
+21090660,해운대구,좌1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,42.926829,0,,monitor,medium_low
+21080600,북구,만덕2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,42.536585,0,,monitor,medium_low
+21040590,영도구,봉래1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,42.341464,0,,monitor,medium_low
+21130520,연제구,거제2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,41.951219,0,,monitor,medium_low
+21120590,강서구,명지1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,41.853658,0,,monitor,medium_low
+21510111,기장군,일광읍,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,41.365854,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21110710,금정구,금성동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,41.365853,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21070700,남구,대연1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,40.878048,0,,monitor,medium_low
+21060520,동래구,복산동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,40.682927,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21080510,북구,구포1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,40.585367,0,,monitor,medium_low
+21040550,영도구,영선2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,40.487805,0,,monitor,medium_low
+21150620,사상구,주례3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,40.292683,0,,monitor,medium_low
+21030600,동구,수정5동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,40.097561999999996,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21070540,남구,대연4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,40.0,0,,monitor,medium_low
+21120580,강서구,가덕도동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,40.0,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21020640,서구,충무동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,39.902439,0,,monitor,medium_low
+21120530,강서구,강동동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,39.609756000000004,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21120550,강서구,가락동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,39.414634,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21070620,남구,감만1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,39.02439,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21120520,강서구,대저2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,38.926829,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21030680,동구,범일5동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,38.829268,0,,monitor,medium_low
+21050700,부산진구,당감4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,38.731707,1,수요가중 버스노선 접근성,monitor,medium_low
+21130570,연제구,연산3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,38.341463,0,,monitor,medium_low
+21110640,금정구,선두구동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,38.04878,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21100650,사하구,감천1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,38.048779999999994,0,,monitor,medium_low
+21020680,서구,암남동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,37.95122,0,,monitor,medium_low
+21150510,사상구,삼락동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,37.463414,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21510120,기장군,장안읍,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,37.170732,2,수요가중 버스노선 접근성|현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21100600,사하구,장림1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,36.682927,1,현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21140580,수영구,광안3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,36.292683,0,,monitor,medium_low
+21150520,사상구,모라1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,35.609756000000004,0,,monitor,medium_low
+21030700,동구,좌천동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,35.609756,0,,monitor,medium_low
+21120562,강서구,신호동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,35.121950999999996,1,현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21090720,해운대구,반송1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,34.926829999999995,0,,monitor,medium_low
+21050610,부산진구,전포2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,34.634146,0,,monitor,medium_low
+21110740,금정구,장전2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,34.536586,0,,monitor,medium_low
+21020650,서구,남부민1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,34.439025,0,,monitor,medium_low
+21150560,사상구,덕포2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,34.04878,0,,monitor,medium_low
+21060640,동래구,명장2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,33.951219,0,,monitor,medium_low
+21150630,사상구,학장동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,33.853659,0,,monitor,medium_low
+21010540,중구,보수동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,33.658536,0,,monitor,medium_low
+21090560,해운대구,송정동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,33.073171,0,,monitor,medium_low
+21060650,동래구,명륜동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,32.780488,0,,monitor,medium_low
+21060580,동래구,사직1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,32.487805,0,,monitor,medium_low
+21060610,동래구,안락1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,31.609755999999997,0,,monitor,medium_low
+21040680,영도구,신선동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,31.317073,1,현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21070710,남구,우암동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,31.317072,1,수요가중 버스노선 접근성,monitor,medium_low
+21030530,동구,초량3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,30.829269,0,,monitor,medium_low
+21070610,남구,용당동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,30.829268,0,,monitor,medium_low
+21100640,사하구,구평동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,30.829268,1,현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21120510,강서구,대저1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,29.951219000000002,1,현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21050520,부산진구,부전2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,29.756098,0,,monitor,medium_low
+21510330,기장군,철마면,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,29.560976,1,현재 배차·운행시간 기반 서비스 기회,monitor,medium_low
+21040650,영도구,동삼1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,29.268293,0,,monitor,medium_low
+21150600,사상구,주례1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,28.780488,0,,monitor,medium_low
+21080570,북구,덕천2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,27.414633,0,,monitor,medium_low
+21040670,영도구,동삼3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,27.317073,0,,monitor,medium_low
+21040690,영도구,봉래2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,26.536585,0,,monitor,medium_low
+21020610,서구,아미동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,26.243902,0,,monitor,medium_low
+21110670,금정구,청룡노포동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,26.04878,0,,monitor,medium_low
+21100610,사하구,장림2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,25.756097,0,,monitor,medium_low
+21040630,영도구,청학1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,25.463415,0,,monitor,medium_low
+21110730,금정구,금사회동동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,25.268292000000002,0,,monitor,medium_low
+21010520,중구,동광동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,24.682928,0,,monitor,medium_low
+21040540,영도구,영선1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,24.097561,0,,monitor,medium_low
+21020570,서구,서대신4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,23.609756,0,,monitor,medium_low
+21040640,영도구,청학2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,23.512196,0,,monitor,medium_low
+21020530,서구,동대신3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,23.121951000000003,0,,monitor,medium_low
+21030710,동구,범일1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,22.536585000000002,0,,monitor,medium_low
+21020560,서구,서대신3동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,22.243903,0,,monitor,medium_low
+21030520,동구,초량2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,21.365854000000002,0,,monitor,medium_low
+21050830,부산진구,전포1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,20.780488,0,,monitor,medium_low
+21050560,부산진구,양정1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,20.585366,0,,monitor,medium_low
+21510110,기장군,기장읍,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,19.414635,0,,monitor,medium_low
+21120561,강서구,녹산동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,17.560976,0,,monitor,medium_low
+21040530,영도구,남항동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,16.780488,0,,monitor,medium_low
+21070690,남구,문현4동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,16.780487,0,,monitor,medium_low
+21060560,동래구,온천2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,15.707318,0,,monitor,medium_low
+21030570,동구,수정2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,15.414634,0,,monitor,medium_low
+21150650,사상구,감전동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,10.243903,0,,monitor,medium_low
+21030660,동구,범일2동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,9.365854,0,,monitor,medium_low
+21050820,부산진구,부전1동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,9.268293,0,,monitor,medium_low
+21010510,중구,중앙동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,4.97561,0,,monitor,medium_low
+21010580,중구,남포동,living_services_settlement,생활 인프라·주거,0.25,transit_access,대중교통 접근,4.682926999999999,0,,monitor,medium_low
