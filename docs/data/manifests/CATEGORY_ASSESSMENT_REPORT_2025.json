@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-25T05:42:20+00:00",
+  "generated_at": "2026-08-26T02:36:51+00:00",
   "reference_year": 2025,
   "admin_dong_count": 206,
   "category_count": 10,
   "major_category_count": 4,
-  "indicator_count": 17,
-  "indicator_score_row_count": 3502,
+  "indicator_count": 19,
+  "indicator_score_row_count": 3914,
   "category_score_row_count": 2060,
   "major_category_score_row_count": 824,
   "policy_trigger_threshold": 70,
@@ -16,6 +16,7 @@
     "Estimated and proxy inputs are retained with row-level evidence labels",
     "Category scores are relative Busan percentiles, not absolute service standards",
     "Traffic safety uses 48 selected hotspots, not a complete dong-level crash census",
+    "Transit route demand uses current route topology because a dated 2025 topology is unavailable",
     "Policy examples require observed administrative data and field validation"
   ],
   "input_paths": {
@@ -26,8 +27,8 @@
     "traffic_accident_hotspots": "data/raw/koroad/traffic_accidents/hotspots/2024/busan_traffic_accident_hotspots_2024.csv"
   },
   "input_sha256": {
-    "profile": "49A663FCD1A2868D03213778CEE77F4D3DE17AD27F1AFCBE5AB8B2C4219DBC2F",
-    "spec": "32F4497DCD2BB0875118A09C580A57CCCB9B857D8ECA7A9756A14194E59AFE50",
+    "profile": "1A3A622D1BA396B25FF5FE7AE7CA945EA2EAEE105BDF2D6CF745C132132A8794",
+    "spec": "898C6E7CBDA129C77357AA933EDDE62642AEFAB12E7545FD8E4B0F3F18ED6899",
     "policy_catalog": "C0C9D3B80A9F8434CE3BA89EB38FB01039C6773112659F3F2C70480D25D66066",
     "boundaries": "7CC99595FC753F81C7B9A9D480B8EBBF3114808A1496D46FC6662C21BF362487",
     "traffic_accident_hotspots": "93CAFF9379675CB22EEAC657C54713A2204CC008C0FA553C781798833B42AABD"
@@ -38,8 +39,8 @@
     "indicator_scores": "outputs/infographic/2025/tables/busan_admin_dong_category_indicator_scores_2025.csv"
   },
   "output_sha256": {
-    "category_assessment": "73ECCEB184679B6DF8B9AD6E5BC31EF768FCD51D51065A7BC1570C9C50513F9B",
-    "major_category_assessment": "163580FCFB4B6C6F20F894D4F6E3672E6B01D23A82C6E8FB443DAB96166CBF9A",
-    "indicator_scores": "2380663A16FE10CF958F52E002D6ECE084AD9E3DD24197CF9FE85F19B53616A2"
+    "category_assessment": "BEDB1EC89BC7ECE4D4CEBB5E634EA29F149FC21861859737F4613F8312C2B442",
+    "major_category_assessment": "C40BCDFDE429FA17E4EE215D97D732938EB47D8EB68FF547252162567FFCA5A1",
+    "indicator_scores": "DC6B32CFC72999832687FDD6B345F139BABC0D897C7FD51F5E84FEFC330DE6E8"
   }
 }

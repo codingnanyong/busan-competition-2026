@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-25T05:42:14+00:00",
+  "generated_at": "2026-08-26T02:35:36+00:00",
   "reference_year": 2025,
   "reference_crs": "EPSG:5179",
   "canonical_admin_dong_count": 206,
@@ -43,18 +43,39 @@
     "elderly_alone_latest_per_1000_population_2025_validation": 0,
     "bus_stop_count_2025": 0,
     "bus_stop_count_2025_per_10000_population": 0,
+    "boundary_adjusted_bus_stop_access_1000m_2025_context": 0,
+    "matched_bus_routes_2025_current_proxy": 0,
+    "demand_weighted_bus_route_access_2025_current_proxy": 0,
+    "reachable_card_trip_count_2025_current_proxy": 0,
+    "reachable_multi_leg_card_trip_count_2025_current_proxy": 0,
+    "reachable_youth_child_card_trip_count_2025_current_proxy": 0,
+    "reachable_multi_leg_trip_share_pct_2025_current_proxy": 2,
+    "reachable_youth_child_trip_share_pct_2025_current_proxy": 2,
+    "current_routes_with_service_schedule": 0,
+    "scheduled_bus_service_opportunities_current_proxy": 0,
+    "late_bus_service_opportunities_current_proxy": 0,
+    "late_bus_service_share_pct_current_proxy": 3,
+    "bus_boarding_2023_validation": 10,
+    "bus_alighting_2023_validation": 10,
+    "bus_boarding_alighting_2023_validation": 10,
+    "peak_bus_demand_2023_validation": 10,
+    "late_bus_demand_2023_validation": 10,
+    "peak_bus_demand_share_pct_2023_validation": 13,
+    "late_bus_demand_share_pct_2023_validation": 13,
     "hospital_count_2025_candidate": 0,
     "hospital_count_2025_candidate_per_10000_population": 0,
     "clinic_count_2025_candidate": 0,
     "clinic_count_2025_candidate_per_10000_population": 0,
     "pharmacy_count_2025_candidate": 0,
     "pharmacy_count_2025_candidate_per_10000_population": 0,
+    "boundary_adjusted_healthcare_access_2000m_2025_context": 0,
     "aed_count_current_unverified": 0,
     "aed_count_current_unverified_per_10000_population": 0,
     "crime_prevention_cctv_count_2025": 0,
     "crime_prevention_cctv_count_2025_per_10000_population": 0,
     "heat_shelter_count_2025": 0,
     "heat_shelter_count_2025_per_10000_population": 0,
+    "boundary_adjusted_heat_shelter_access_1000m_2025_context": 0,
     "basic_livelihood_recipients_2025_inferred": 0,
     "basic_livelihood_households_2025_inferred": 0,
     "basic_livelihood_recipients_per_1000_population_2025_inferred": 0,
@@ -72,6 +93,14 @@
     "avg_daily_residential_living_population_2025": 0,
     "avg_daily_workplace_living_population_2025": 0,
     "avg_daily_visitor_living_population_2025": 0,
+    "avg_daily_total_living_population_2025": 0,
+    "avg_daily_senior_living_population_2025": 0,
+    "avg_daily_under_20_living_population_2025": 0,
+    "avg_daily_under_30_living_population_2025": 0,
+    "senior_living_population_share_pct_2025": 0,
+    "under_20_living_population_share_pct_2025": 0,
+    "under_30_living_population_share_pct_2025": 0,
+    "daytime_to_residential_living_population_ratio_2025": 0,
     "elementary": 0,
     "middle": 0,
     "high": 0,
@@ -87,7 +116,13 @@
     "annual_so2_ppm_idw_2025": 0,
     "annual_o3_ppm_idw_2025": 0,
     "annual_no2_ppm_idw_2025": 0,
-    "annual_co_ppm_idw_2025": 0
+    "annual_co_ppm_idw_2025": 0,
+    "bus_service_opportunities_per_1000_total_living_population_context": 0,
+    "bus_service_opportunities_per_1000_senior_living_population_context": 0,
+    "core_school_teachers_per_1000_under_20_living_population_2025_context": 0,
+    "healthcare_facilities_per_1000_senior_living_population_2025_context": 0,
+    "heat_shelters_per_1000_senior_living_population_2025_context": 0,
+    "late_bus_demand_service_mismatch_percentile_2023_current_validation": 13
   },
   "datasets": [
     {
@@ -159,6 +194,59 @@
       "source_sha256": "F34A6F1034B479FEA6E48C5E5B8FBA7DE30A52136BAC39D2F09B179F8D31D22F"
     },
     {
+      "dataset_id": "HOU-BUSSTOP-001-BOUNDARY-CONTEXT",
+      "join_method": "polygon_distance_with_exponential_decay",
+      "input_records": 8522,
+      "valid_coordinate_records": 8522,
+      "matched_admin_dongs": 206,
+      "match_rate": 1.0,
+      "cutoff_m": 1000,
+      "decay_m": 500,
+      "inside_polygon_weight": 1.0,
+      "decision": "validation_only",
+      "limitation": "Straight-line polygon distance includes nearby cross-boundary supply but does not represent entrances, walking networks, capacity, or facilities outside Busan.",
+      "source_path": "data/raw/bus_stops/2025/busan_bus_stops_20250121.zip",
+      "source_sha256": "F34A6F1034B479FEA6E48C5E5B8FBA7DE30A52136BAC39D2F09B179F8D31D22F"
+    },
+    {
+      "dataset_id": "TRN-BUSAN-ROUTE-USAGE-2025-001+TRN-BUSAN-BIMS-CURRENT-001",
+      "join_method": "exact_route_number_then_current_stop_point_within_2025_admin_dong",
+      "route_usage_records": 333,
+      "current_route_count": 290,
+      "matched_route_count": 278,
+      "route_match_rate": 0.834835,
+      "match_rate": 0.834835,
+      "current_route_stop_records": 22408,
+      "unmatched_2025_stop_id_records": 1305,
+      "mapped_route_stop_records": 20207,
+      "matched_admin_dongs": 204,
+      "demand_transform": "sum of log1p(2025 annual card trips) over unique matched routes",
+      "current_routes_with_usable_service_schedule": 258,
+      "service_transform": "sum of operating-span minutes divided by normal headway over unique current routes",
+      "late_service_window": "22:00-04:00 scheduled-span overlap divided by normal headway",
+      "decision": "supplemental_category_indicator",
+      "limitation": "2025 route demand is located with a current BIMS route topology snapshot; it measures demand-weighted route reach; service opportunities use the current published normal headway rather than a dated 2025 timetable or observed departures.",
+      "source_path": "data/raw/supplemental/bus_service_current/busan_bus_route_stops_current.csv",
+      "source_sha256": "6CA2ABA8E3988DAF157BB37D213AF7C1B9DEEBFA946C934BC17466B47B14869B",
+      "route_usage_source_path": "data/processed/candidates/2025/bus_route_usage_2025.csv",
+      "route_usage_source_sha256": "8D824288249015372C46095A3BF04D2020A4482D6EB51F5C40ADFF33AAF2DAB0",
+      "route_service_source_path": "data/raw/supplemental/bus_service_current/busan_bus_routes_current.csv",
+      "route_service_source_sha256": "B17F674958D09EF32089BD4558641D95C6775E4744DD3C00ADCD9684A71E70CA"
+    },
+    {
+      "dataset_id": "TRN-BUSAN-BOARDING-2023-001+TRN-BUSAN-BIMS-CURRENT-001",
+      "join_method": "exact_route_number_and_stop_name_to_unique_current_dong",
+      "input_records": 17088,
+      "matched_records": 10347,
+      "unmatched_records": 6741,
+      "match_rate": 0.605513,
+      "matched_admin_dongs": 196,
+      "decision": "validation_only",
+      "limitation": "2023 route-stop demand is matched to current BIMS names and 2025 stop locations; it validates temporal demand patterns but is excluded from 2025 scoring.",
+      "source_path": "data/raw/supplemental/bus_boarding/busan_bus_boarding_alighting_2023.csv",
+      "source_sha256": "FC98249D689691D06A4834ED1374D96ECEF7D4D01E95FC4273D7B64D611B0D0F"
+    },
+    {
       "dataset_id": "HLT-HOSPITAL-001",
       "join_method": "point_within_2025_admin_dong",
       "source_crs": "EPSG:5174",
@@ -205,6 +293,26 @@
       "match_rate": 1.0,
       "source_path": "data/raw/public_data_portal/healthcare_facilities/HLT-PHARMACY-001/busan_pharmacies_operating_2025_12_31.csv",
       "source_sha256": "B759B4F52C902C002FD7CEB1CA7F41221239086FFC5B7DC9F012F7D254568CFE"
+    },
+    {
+      "dataset_id": "HLT-HEALTHCARE-BOUNDARY-CONTEXT",
+      "join_method": "polygon_distance_with_exponential_decay",
+      "input_records": 7359,
+      "valid_coordinate_records": 7359,
+      "matched_admin_dongs": 206,
+      "match_rate": 1.0,
+      "cutoff_m": 2000,
+      "decay_m": 1000,
+      "inside_polygon_weight": 1.0,
+      "decision": "validation_only",
+      "limitation": "Straight-line polygon distance includes nearby cross-boundary supply but does not represent entrances, walking networks, capacity, or facilities outside Busan.",
+      "source_path": "data/raw/public_data_portal/healthcare_facilities/HLT-HOSPITAL-001/busan_hospitals_operating_2025_12_31.csv;data/raw/public_data_portal/healthcare_facilities/HLT-CLINIC-001/busan_clinics_operating_2025_12_31.csv;data/raw/public_data_portal/healthcare_facilities/HLT-PHARMACY-001/busan_pharmacies_operating_2025_12_31.csv",
+      "source_paths": [
+        "data/raw/public_data_portal/healthcare_facilities/HLT-HOSPITAL-001/busan_hospitals_operating_2025_12_31.csv",
+        "data/raw/public_data_portal/healthcare_facilities/HLT-CLINIC-001/busan_clinics_operating_2025_12_31.csv",
+        "data/raw/public_data_portal/healthcare_facilities/HLT-PHARMACY-001/busan_pharmacies_operating_2025_12_31.csv"
+      ],
+      "source_sha256": "E1EACAC16F7D124C9EC090EF8399DEC8FD7510D4B16A6D780DC0A1A8FFE595CB"
     },
     {
       "dataset_id": "HLT-AED-001",
@@ -256,6 +364,21 @@
       "source_sha256": "EF549B03AE13FF9BC4BEC1FF3008D02974FB19B50F9FB4B683749852FCFE717A"
     },
     {
+      "dataset_id": "ENV-HEAT-SHELTER-BOUNDARY-CONTEXT",
+      "join_method": "polygon_distance_with_exponential_decay",
+      "input_records": 1789,
+      "valid_coordinate_records": 1789,
+      "matched_admin_dongs": 206,
+      "match_rate": 1.0,
+      "cutoff_m": 1000,
+      "decay_m": 500,
+      "inside_polygon_weight": 1.0,
+      "decision": "validation_only",
+      "limitation": "Straight-line polygon distance includes nearby cross-boundary supply but does not represent entrances, walking networks, capacity, or facilities outside Busan.",
+      "source_path": "data/raw/audit/15152994.download",
+      "source_sha256": "EF549B03AE13FF9BC4BEC1FF3008D02974FB19B50F9FB4B683749852FCFE717A"
+    },
+    {
       "dataset_id": "INC-BLF-INFERRED-2025-001",
       "join_method": "canonical_code",
       "input_records": 206,
@@ -266,7 +389,7 @@
       "missing_admin_dongs": 0,
       "match_rate": 1.0,
       "source_path": "data/processed/candidates/2025/basic_livelihood_inferred_2025.csv",
-      "source_sha256": "7CBD04F1DF8C987B119C50BBAB5280ED695AE6D93C8F510288A4B7BFE609E6FE"
+      "source_sha256": "59FABD3A67A3B0039880186EE193486B1C6CD8C30C3506FF7005A5CF5E96EE81"
     },
     {
       "dataset_id": "DEM-BUSAN-LIVING-001",
@@ -279,7 +402,7 @@
       "missing_admin_dongs": 0,
       "match_rate": 1.0,
       "source_path": "data/processed/candidates/2025/living_population_2025.csv",
-      "source_sha256": "3EEB4E6E0A15E26211C038B4CFDEBBB722FCB9F5DF0639C45F59DDEF94F30E85"
+      "source_sha256": "714EF4BFAFFCD51120390ABF0741937EDD1061BE22209FF39A85814C9ED9F05E"
     },
     {
       "dataset_id": "EDU-SCHOOL-001",
@@ -292,7 +415,7 @@
       "missing_admin_dongs": 0,
       "match_rate": 1.0,
       "source_path": "data/processed/candidates/2025/school_counts_2025.csv",
-      "source_sha256": "02717DF8EF7E38D51C2AA3BB6F03FA21D75C24B1A7767BAC97DAF6C4ED82CEE7"
+      "source_sha256": "4C5A1B2F43562BFAAE5B4C71DC9AAC0CAA88ACD55F4205B30858A4CCB4E5775A"
     },
     {
       "dataset_id": "ENV-AIR-HEIS-DAILY-2025-001",
@@ -305,7 +428,35 @@
       "missing_admin_dongs": 0,
       "match_rate": 1.0,
       "source_path": "data/processed/candidates/2025/air_exposure_idw_2025.csv",
-      "source_sha256": "D4A471EC2A31A060408B4736C5A1958D50C5C7050402B88C86CADBB08662D508"
+      "source_sha256": "3B1E0AFC400140D3E0F2EBF091DD8F8AF9CFBC2064AC2283D7A3007152619B2E"
+    },
+    {
+      "dataset_id": "DEM-BUSAN-LIVING-001+SERVICE-SUPPLY-CONTEXT",
+      "join_method": "canonical_dong_supply_divided_by_annual_mean_living_population",
+      "input_records": 206,
+      "matched_records": 206,
+      "matched_admin_dongs": 206,
+      "match_rate": 1.0,
+      "decision": "validation_only",
+      "limitation": "Telecom living population is a service-demand context denominator, not a resident deprivation population or observed facility utilization measure.",
+      "source_path": "data/processed/candidates/2025/living_population_2025.csv",
+      "source_sha256": "714EF4BFAFFCD51120390ABF0741937EDD1061BE22209FF39A85814C9ED9F05E"
+    },
+    {
+      "dataset_id": "TRN-BUSAN-BOARDING-2023-001+TRN-BUSAN-BIMS-CURRENT-001-MISMATCH",
+      "join_method": "mean_of_high_late_demand_and_low_late_service_percentile_ranks",
+      "input_records": 206,
+      "matched_records": 193,
+      "matched_admin_dongs": 193,
+      "match_rate": 0.936893,
+      "decision": "validation_only",
+      "limitation": "The mismatch combines 2023 observed stop demand with a current scheduled service proxy and cannot establish a 2025 service deficit.",
+      "source_path": "data/raw/supplemental/bus_boarding/busan_bus_boarding_alighting_2023.csv;data/raw/supplemental/bus_service_current/busan_bus_routes_current.csv",
+      "source_paths": [
+        "data/raw/supplemental/bus_boarding/busan_bus_boarding_alighting_2023.csv",
+        "data/raw/supplemental/bus_service_current/busan_bus_routes_current.csv"
+      ],
+      "source_sha256": "102C3F0F88880789EE2FF725AD52C11C735AE7B3DD7259A53AA8E24DA5B6A215"
     }
   ],
   "zero_is_observed_count_only": true,
@@ -328,6 +479,10 @@
       "EDU-SCHOOLINFO-2025-001",
       "ENV-AIR-HEIS-DAILY-2025-001"
     ],
+    "supplemental_category_indicator": [
+      "TRN-BUSAN-ROUTE-USAGE-2025-001",
+      "TRN-BUSAN-BIMS-CURRENT-001"
+    ],
     "validation_only": [
       "SOC-BUSAN-ELDERLY-ALONE-001",
       "HLT-AED-001",
@@ -335,5 +490,5 @@
     ]
   },
   "profile_path": "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv",
-  "profile_sha256": "49A663FCD1A2868D03213778CEE77F4D3DE17AD27F1AFCBE5AB8B2C4219DBC2F"
+  "profile_sha256": "1A3A622D1BA396B25FF5FE7AE7CA945EA2EAEE105BDF2D6CF745C132132A8794"
 }

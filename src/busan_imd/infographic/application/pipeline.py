@@ -132,6 +132,24 @@ def run(
         how="left",
         validate="one_to_one",
     )
+    reference_context["senior_consumer_minus_living_share_pp_2025_context"] = (
+        reference_context["consumer_sales_senior_transaction_share_pct_2025"]
+        - reference_context["senior_living_population_share_pct_2025"]
+    )
+    reference_context["under_30_consumer_minus_living_share_pp_2025_context"] = (
+        reference_context["consumer_sales_under_30_transaction_share_pct_2025"]
+        - reference_context["under_30_living_population_share_pct_2025"]
+    )
+    reference_context["living_consumer_age_composition_divergence_pp_2025_context"] = (
+        reference_context[
+            [
+                "senior_consumer_minus_living_share_pp_2025_context",
+                "under_30_consumer_minus_living_share_pp_2025_context",
+            ]
+        ]
+        .abs()
+        .mean(axis=1)
+    )
     reference_context = add_park_context(
         reference_context,
         boundaries,

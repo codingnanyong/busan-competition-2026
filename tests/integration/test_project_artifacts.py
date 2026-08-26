@@ -187,10 +187,22 @@ def test_eda_report_covers_the_canonical_profile() -> None:
     report = read_json("docs/data/manifests/EDA_REPORT_2025.json")
 
     assert report["profile_record_count"] == 206
-    assert report["numeric_indicator_count"] == 50
+    assert report["numeric_indicator_count"] == 85
     assert report["scoring_candidate_numeric_count"] == 37
     assert report["constant_numeric_columns"] == ["air_idw_station_count"]
-    assert report["columns_with_missing_values"] == {}
+    assert report["columns_with_missing_values"] == {
+        "bus_alighting_2023_validation": 10,
+        "bus_boarding_2023_validation": 10,
+        "bus_boarding_alighting_2023_validation": 10,
+        "late_bus_demand_2023_validation": 10,
+        "late_bus_demand_service_mismatch_percentile_2023_current_validation": 13,
+        "late_bus_demand_share_pct_2023_validation": 13,
+        "late_bus_service_share_pct_current_proxy": 3,
+        "peak_bus_demand_2023_validation": 10,
+        "peak_bus_demand_share_pct_2023_validation": 13,
+        "reachable_multi_leg_trip_share_pct_2025_current_proxy": 2,
+        "reachable_youth_child_trip_share_pct_2025_current_proxy": 2,
+    }
     assert report["high_correlation_pair_count"] == 7
     assert report["contiguity_edge_count"] == 532
     assert report["isolated_admin_dong_count"] == len(report["isolated_admin_dongs"]) == 6
@@ -414,10 +426,10 @@ def test_category_assessment_is_complete_and_flags_estimation() -> None:
     assert report["admin_dong_count"] == 206
     assert report["major_category_count"] == 4
     assert report["category_count"] == 10
-    assert report["indicator_count"] == 17
+    assert report["indicator_count"] == 19
     assert report["category_score_row_count"] == 206 * 10
     assert report["major_category_score_row_count"] == 206 * 4
-    assert report["indicator_score_row_count"] == 206 * 17
+    assert report["indicator_score_row_count"] == 206 * 19
     assert report["policy_trigger_threshold"] == 70
     for name, relative_path in report["output_paths"].items():
         actual = hashlib.sha256((REPOSITORY_ROOT / relative_path).read_bytes()).hexdigest().upper()
@@ -442,7 +454,7 @@ def test_category_assessment_is_complete_and_flags_estimation() -> None:
     indicators = pd.read_csv(REPOSITORY_ROOT / report["output_paths"]["indicator_scores"])
     assert {"estimate_used", "estimation_method_ko", "estimation_reason"} <= set(indicators.columns)
     estimated = indicators[indicators["estimate_used"]]
-    assert len(estimated) == 206 * 11
+    assert len(estimated) == 206 * 13
     assert estimated["estimation_reason"].str.len().gt(0).all()
 
 
@@ -654,6 +666,10 @@ def test_standardization_report_covers_canonical_dongs_and_discloses_failures() 
         "SOC-BUSAN-ELDERLY-ALONE-001",
         "HLT-AED-001",
         "DEM-BUSAN-LIVING-001",
+    }
+    assert set(report["analysis_roles"]["supplemental_category_indicator"]) == {
+        "TRN-BUSAN-ROUTE-USAGE-2025-001",
+        "TRN-BUSAN-BIMS-CURRENT-001",
     }
     assert entries["DEM-MOIS-POP-2025-001"]["matched_admin_dongs"] == 206
     assert entries["INC-BLF-INFERRED-2025-001"]["matched_admin_dongs"] == 206

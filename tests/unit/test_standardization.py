@@ -5,7 +5,14 @@ import pandas as pd
 import pytest
 from shapely.geometry import Point, box
 
-from busan_imd.processing.standardization import points_from_xy, spatial_counts, validate_code_frame
+from busan_imd.processing.standardization import (
+    attach_combined_source_metadata,
+    historical_stop_demand_validation,
+    points_from_xy,
+    route_demand_access,
+    spatial_counts,
+    validate_code_frame,
+)
 
 
 def synthetic_boundaries() -> gpd.GeoDataFrame:
@@ -79,3 +86,101 @@ def test_spatial_counts_reports_unmatched_points_without_assigning_them() -> Non
     assert report["matched_records"] == 2
     assert report["unmatched_records"] == 1
     assert report["match_rate"] == pytest.approx(2 / 3, abs=1e-6)
+
+
+def test_route_demand_access_maps_unique_routes_and_logs_annual_usage() -> None:
+    boundaries = synthetic_boundaries().set_crs("EPSG:4326", allow_override=True)
+    bus_stops = gpd.GeoDataFrame(
+        {"bstopid": ["a", "b", "c", "d", "e"], "arsno": ["1", "2", "3", "4", "5"]},
+        geometry=[Point(0.2, 0.2), Point(1.2, 0.2), Point(0.4, 0.4), Point(3, 3), Point(0.6, 0.6)],
+        crs="EPSG:4326",
+    )
+    route_stops = pd.DataFrame(
+        {
+            "buslinenum": ["10", "10", "20", "20", "30"],
+            "nodeid": ["a", "b", "c", "d", "e"],
+            "arsno": ["1", "2", "3", "4", "5"],
+        }
+    )
+    usage = pd.DataFrame(
+        {
+            "route_no": ["10", "20", "missing"],
+            "card_trip_count_2025": [99, 9, 999],
+        }
+    )
+    service = pd.DataFrame(
+        {
+            "buslinenum": ["10", "20", "30"],
+            "firsttime": ["05:00", "06:00", ""],
+            "endtime": ["23:00", "22:00", ""],
+            "headwaynorm": [10, 20, None],
+        }
+    )
+
+    result, report = route_demand_access(
+        boundaries, bus_stops, route_stops, usage, service
+    )
+    indexed = result.set_index("admin_dong_code")
+
+    assert indexed.loc["21000001", "matched_bus_routes_2025_current_proxy"] == 2
+    assert indexed.loc[
+        "21000001", "demand_weighted_bus_route_access_2025_current_proxy"
+    ] == pytest.approx(6.907755)
+    assert indexed.loc["21000002", "matched_bus_routes_2025_current_proxy"] == 1
+    assert indexed.loc[
+        "21000001", "scheduled_bus_service_opportunities_current_proxy"
+    ] == pytest.approx(156)
+    assert report["matched_route_count"] == 2
+    assert report["route_match_rate"] == pytest.approx(2 / 3, abs=1e-6)
+
+
+def test_historical_stop_demand_validation_keeps_only_unique_route_name_matches() -> None:
+    boundaries = synthetic_boundaries().set_crs("EPSG:4326", allow_override=True)
+    bus_stops = gpd.GeoDataFrame(
+        {"bstopid": ["a", "b"], "arsno": ["1", "2"]},
+        geometry=[Point(0.2, 0.2), Point(1.2, 0.2)],
+        crs="EPSG:4326",
+    )
+    route_stops = pd.DataFrame(
+        {
+            "buslinenum": ["10", "20"],
+            "nodeid": ["a", "b"],
+            "arsno": ["1", "2"],
+            "bstopnm": ["첫째", "둘째"],
+        }
+    )
+    boarding = pd.DataFrame(
+        {
+            "노선번호": ["10", "20", "99"],
+            "정류장명": ["첫째", "둘째", "없음"],
+            "승차합계": [100, 50, 999],
+            "하차합계": [50, 50, 999],
+            "오전7시00분_승차건수(선탑_후탑)": [20, 10, 999],
+            "오후10시00분_하차건수": [5, 4, 999],
+        }
+    )
+
+    result, report = historical_stop_demand_validation(
+        boundaries, bus_stops, route_stops, boarding
+    )
+    indexed = result.set_index("admin_dong_code")
+
+    assert indexed.loc["21000001", "bus_boarding_alighting_2023_validation"] == 150
+    assert indexed.loc["21000002", "peak_bus_demand_share_pct_2023_validation"] == 10
+    assert report["matched_records"] == 2
+    assert report["decision"] == "validation_only"
+
+
+def test_attach_combined_source_metadata_keeps_a_single_hex_digest(tmp_path) -> None:
+    first = tmp_path / "a.csv"
+    second = tmp_path / "b.csv"
+    first.write_text("a", encoding="utf-8")
+    second.write_text("b", encoding="utf-8")
+
+    report = attach_combined_source_metadata({"dataset_id": "combined"}, [first, second])
+
+    assert report["source_path"] == f"{first.as_posix()};{second.as_posix()}"
+    assert report["source_paths"] == [first.as_posix(), second.as_posix()]
+    assert len(report["source_sha256"]) == 64
+    assert report["source_sha256"].isupper()
+    assert isinstance(report["source_sha256"], str)
