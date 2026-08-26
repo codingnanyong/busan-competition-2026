@@ -21,6 +21,7 @@ from busan_imd.processing.data_quality import run as write_quality_report
 from busan_imd.processing.income_inference import infer
 from busan_imd.processing.income_inference import write_outputs as write_income_outputs
 from busan_imd.processing.standardization import build_standardized_profile, write_outputs
+from busan_imd.submission import run as write_submission
 
 BOOTSTRAP_DIR = Path("data/processed/bootstrap/2025")
 BOOTSTRAP_REPORT = BOOTSTRAP_DIR / "standardization_report_without_income.json"
@@ -51,6 +52,7 @@ def rebuild() -> None:
     write_policy_matrix()
     write_category_assessment()
     write_infographic()
+    write_submission()
 
 
 def main() -> int:
@@ -59,7 +61,8 @@ def main() -> int:
     print(
         "rebuilt candidate, inference, standardized, consumer-sales, quality, EDA, "
         "domain-score, composite-index, sensitivity-analysis, priority-area, cluster-analysis, "
-        "environmental-overlay, policy-matrix, category-assessment, and infographic artifacts"
+        "environmental-overlay, policy-matrix, category-assessment, infographic, "
+        "and submission-draft artifacts"
     )
     return 0
 

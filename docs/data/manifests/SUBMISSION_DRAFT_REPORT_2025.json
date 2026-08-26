@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-26T23:15:15.524934+00:00",
+  "reference_year": 2025,
+  "artifact_status": "submission_draft",
+  "cover_pages": 1,
+  "body_pages": 7,
+  "total_pages": 8,
+  "max_body_pages": 10,
+  "visualization_page_count": 1,
+  "dataset_count": 42,
+  "data_dictionary_row_count": 100,
+  "analysis_tables": [
+    "outputs/submission/2025/03_data/busan_admin_dong_action_profile_2025.csv",
+    "outputs/submission/2025/03_data/busan_admin_dong_category_assessment_2025.csv",
+    "outputs/submission/2025/03_data/busan_admin_dong_major_category_assessment_2025.csv",
+    "outputs/submission/2025/03_data/busan_admin_dong_category_indicator_scores_2025.csv"
+  ],
+  "font_family": "Noto Sans CJK JP",
+  "hwpx_status": "hangul_paste_required",
+  "official_template": "docs/templates/2026-big-data-competition-submission-template.hwpx",
+  "output_paths": {
+    "visualization_pdf": "outputs/submission/2025/01_data-visualization.pdf",
+    "report_pdf": "outputs/submission/2025/02_analysis-report.pdf",
+    "report_markdown": "outputs/submission/2025/02_analysis-report.md",
+    "source_catalog": "outputs/submission/2025/03_data/source-catalog.xlsx",
+    "source_catalog_csv": "outputs/submission/2025/03_data/source-catalog.csv",
+    "data_dictionary": "outputs/submission/2025/03_data/data-dictionary.xlsx",
+    "data_dictionary_csv": "outputs/submission/2025/03_data/data-dictionary.csv",
+    "package_readme": "outputs/submission/2025/README.md"
+  },
+  "output_sha256": {
+    "visualization_pdf": "CF32580579A1C41789937E05F1ED80D14FE7582A08170D2FFE145C204AA6FAEB",
+    "report_pdf": "827E7729A787D66D39B755C6365997D2FC2014826EAD32A103D331E9AB0117A3",
+    "report_markdown": "4EE0BB94C64447F605AF1E8B364063D69A2D69C229453238E5EB45369E15453D",
+    "source_catalog_csv": "79861F7F7B75868FA84E4E57A577131C47B6C910D7BC1127BBD74429AB6FD9DB",
+    "data_dictionary_csv": "0FC34704C5E5A9B8D84F96B3085CA737DFF454DAFBFA3620FAB3C368B28250E5",
+    "package_readme": "3C779A060062E600742EECD14E62F8C5230E8319A74BAACB3ADCE49B9FA310D5",
+    "busan_admin_dong_action_profile_2025.csv": "8B7976BDFF3D7A75D23EBA5671F3530E82196225A1DB2BBD1543CAF6A573D3C7",
+    "busan_admin_dong_category_assessment_2025.csv": "BEDB1EC89BC7ECE4D4CEBB5E634EA29F149FC21861859737F4613F8312C2B442",
+    "busan_admin_dong_major_category_assessment_2025.csv": "C40BCDFDE429FA17E4EE215D97D732938EB47D8EB68FF547252162567FFCA5A1",
+    "busan_admin_dong_category_indicator_scores_2025.csv": "DC6B32CFC72999832687FDD6B345F139BABC0D897C7FD51F5E84FEFC330DE6E8"
+  }
+}

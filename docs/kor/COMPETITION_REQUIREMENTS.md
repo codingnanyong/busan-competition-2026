@@ -48,6 +48,10 @@ team-name_project-name.zip
 
 원천데이터의 재배포가 라이선스상 허용되지 않으면 해당 파일을 압축파일에 포함하지 않는다. 대신 제공기관, 원문 URL, 기준일, 라이선스, 수집 방법을 `source-catalog.xlsx`에 기록하고 공개 가능한 파생데이터만 제출한다.
 
+기계 작성 초안은 [2025 제출물 초안](methodology/SUBMISSION_DRAFT_2025.md)과
+`outputs/submission/2025/`에 둔다. 공식 HWPX는 Hangul에서 서식 원본 복사본에 본문을
+옮기며, 빈 서식 파일을 제출 보고서로 쓰지 않는다.
+
 ## 분석보고서 필수 구성
 
 - 개인정보 수집·이용 및 제3자 제공 동의서

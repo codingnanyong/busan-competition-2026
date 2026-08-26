@@ -89,6 +89,7 @@ The map uses a continuous B-IMD scale, bold outlines for first-decile areas, and
 for COD-21 double burden. Policy cards include only candidates passing COD-22's positive-excess
 gate. The footer always displays experimental status and prohibited interpretations.
 
-This is a `submission_draft`. COD-24 should align report terminology, after which the final
+This is a `submission_draft`. The report and data-package draft in the
+[2025 submission draft](SUBMISSION_DRAFT_2025.md) uses the same terms. The final
 submission check must reconfirm naming, source-note size, exactly one PDF page, and print
 legibility.

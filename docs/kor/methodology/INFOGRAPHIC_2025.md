@@ -89,5 +89,6 @@ docker compose run --rm jupyter python scripts/rebuild_processed.py
 청록 점으로 구분한다. 정책 카드는 COD-22의 양의 초과점수 게이트를 통과한 후보만 요약한다.
 하단에는 비공식·실험 지위와 금지 해석을 항상 표시한다.
 
-현재 파일은 `submission_draft`다. COD-24 보고서와 용어를 맞춘 뒤 제출 직전에 공식 파일명,
-출처 표기 크기, PDF 1페이지, 인쇄 가독성을 다시 검수한다.
+현재 파일은 `submission_draft`다. 보고서·데이터 패키지 초안은
+[2025 제출물 초안](SUBMISSION_DRAFT_2025.md)과 같은 용어를 쓴다. 제출 직전에 공식
+파일명, 출처 표기 크기, PDF 1페이지, 인쇄 가독성을 다시 검수한다.

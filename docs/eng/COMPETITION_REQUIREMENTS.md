@@ -37,6 +37,10 @@ The official material does not specify a filename convention. Recheck the applic
 
 Do not redistribute source data when its license prohibits redistribution. Include the provider, source URL, reference date, license, and acquisition method in a source catalog, and submit only redistributable derived data.
 
+The machine-written draft lives in the [2025 submission draft](methodology/SUBMISSION_DRAFT_2025.md)
+and `outputs/submission/2025/`. Fill the official HWPX in Hangul from a copy of the template;
+do not treat the blank template as the submitted report.
+
 ## Report contents
 
 - Consent to the collection, use, and third-party provision of personal information

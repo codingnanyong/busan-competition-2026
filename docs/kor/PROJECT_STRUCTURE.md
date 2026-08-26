@@ -20,8 +20,9 @@
 ```text
 수집(src/collectors) → data/raw
   → 가공(src/processing) → data/processed
-    → 분석(src/analysis) → docs/data/manifests + 점수 CSV
+      → 분석(src/analysis) → docs/data/manifests + 점수 CSV
       → 시각화(src/infographic) → outputs/infographic/2025
+        → 제출초안(src/submission) → outputs/submission/2025
 ```
 
 ## 디렉터리 나무
@@ -33,12 +34,13 @@ src/busan_imd/
 ├─ core/           # HTTP, 설정, 체크섬 등 공통 유틸
 ├─ processing/     # data/raw → data/processed (표준화·추정·품질)
 ├─ analysis/       # 영역점수·종합지수·민감도·군집·정책 후보
-└─ infographic/    # 이미 만든 점수를 PDF·지도·대시보드로 내보냄. 화면 파일이 아님
+├─ infographic/    # 이미 만든 점수를 PDF·지도·대시보드로 내보냄. 화면 파일이 아님
    ├─ config.py
    ├─ application/     # 입력 경로를 모아 생성 순서를 실행
    ├─ domain/          # 동별 개선방향 등 표시용 표 계산
    └─ presentation/    # PDF 렌더, 대시보드 HTML에 지도·점수를 채워 넣음
       └─ dashboard/    # assemble.py 만. HTML/CSS/JS 원본은 여기 없음
+└─ submission/     # 재배포 가능한 표와 보고서 초안을 공모전 폴더로 모음
 
 data/
 ├─ raw/            # 원본 보존. Git 제외
@@ -47,7 +49,7 @@ data/
 
 outputs/
 ├─ eda/            # EDA 중간 표. Git 제외
-└─ infographic/2025/                 # 제출·검토용 시각화. 이 트리만 Git에 둠
+├─ infographic/2025/                 # 제출·검토용 시각화. Git에 둠
    ├─ static/                        # 1페이지 PDF·SVG·PNG. 파이프라인이 다시 그림
    ├─ tables/                        # 동별 점수·프로필 CSV. 파이프라인이 다시 씀
    └─ interactive/                   # 브라우저 대시보드. 화면 수정은 여기
@@ -58,11 +60,16 @@ outputs/
       └─ busan_admin_dong_action_map_2025.html
                                      # html/ 조각을 합치고 지도를 넣은 결과. 이 파일을 연다
                                      # 직접 고치면 다음 생성에서 덮어씀
+└─ submission/2025/                  # 공모전 압축 초안. 파이프라인이 다시 모음
+   ├─ 01_data-visualization.pdf      # 1페이지 PDF 복사본
+   ├─ 02_analysis-report.pdf         # 표지+본문. 본문 10페이지 이하
+   ├─ 02_analysis-report.md          # HWPX에 붙여 넣을 본문
+   └─ 03_data/                       # 출처 목록·데이터 사전·파생 CSV. 원천 없음
 
 docs/
 ├─ kor/            # 국문 문서
 │  ├─ data/        # 데이터 정책·요청 설명
-│  ├─ methodology/ # 점수·정책·인포그래픽 방법
+│  ├─ methodology/ # 점수·정책·인포그래픽·제출 초안 방법
 │  └─ releases/    # 버전별 릴리스 설명
 ├─ eng/            # 영문 대응 문서
 ├─ data/           # 언어에 묶이지 않는 표와 체크섬
@@ -108,6 +115,7 @@ docker compose run --rm jupyter python -m busan_imd.processing.standardization
 docker compose run --rm jupyter python -m scripts.bootstrap_data prepare
 docker compose run --rm jupyter python scripts/rebuild_processed.py
 docker compose run --rm jupyter python -m busan_imd.infographic
+docker compose run --rm jupyter python -m busan_imd.submission
 docker compose run --rm jupyter python -m pytest -q
 ```
 
@@ -117,4 +125,4 @@ docker compose run --rm jupyter python -m pytest -q
 
 수집기는 가능한 한 `sources/` 계약을 쓰고, 인증키는 `.env`에서만 읽는다.
 `from busan_imd.infographic import run`과 `python -m busan_imd.infographic`은 내부 폴더가
-바뀌어도 그대로 둔다.
+바뀌어도 그대로 둔다. `python -m busan_imd.submission`도 같다.
