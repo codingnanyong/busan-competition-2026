@@ -28,56 +28,56 @@ publish_page README.md Home
 publish_page README.ko.md KO-Home
 publish_page README.en.md EN-Home
 
-publish_page docs/PROJECT_PLAN.md KO-Project-Plan
-publish_page docs/GIT_WORKFLOW.md KO-Git-Workflow
-publish_page docs/INTEGRATIONS.md KO-Integrations
-publish_page docs/RELEASE_POLICY.md KO-Release-Policy
-publish_page docs/ISSUES.md KO-Linear-Issues
-publish_page docs/data/DATA_CATALOG.md KO-Data-Catalog
-publish_page docs/data/AVAILABILITY_MATRIX.md KO-Data-Availability
-publish_page docs/data/DATA_REQUEST_ROADMAP.md KO-Data-Request-Roadmap
-publish_page docs/data/EDA_2025.md KO-EDA-2025
-publish_page docs/methodology/DOMAIN_SCORES_2025.md KO-Domain-Scores-2025
-publish_page docs/methodology/COMPOSITE_INDEX_2025.md KO-Composite-Index-2025
-publish_page docs/methodology/SENSITIVITY_ANALYSIS_2025.md KO-Sensitivity-Analysis-2025
-publish_page docs/methodology/PRIORITY_AREAS_2025.md KO-Priority-Areas-2025
-publish_page docs/methodology/CLUSTER_ANALYSIS_2025.md KO-Cluster-Analysis-2025
-publish_page docs/methodology/ENVIRONMENTAL_OVERLAY_2025.md KO-Environmental-Overlay-2025
-publish_page docs/methodology/POLICY_MATRIX_2025.md KO-Policy-Matrix-2025
-publish_page docs/methodology/INFOGRAPHIC_2025.md KO-Infographic-2025
-publish_page docs/methodology/CATEGORY_ASSESSMENT_2025.md KO-Category-Assessment-2025
-publish_page docs/methodology/INDICATOR_SPEC.md KO-Indicator-Spec
-publish_page docs/methodology/LIMITATIONS.md KO-Limitations
-publish_page docs/methodology/EXPANSION_MODEL.md KO-Expansion-Model
+publish_page docs/kor/PROJECT_PLAN.md KO-Project-Plan
+publish_page docs/kor/GIT_WORKFLOW.md KO-Git-Workflow
+publish_page docs/kor/INTEGRATIONS.md KO-Integrations
+publish_page docs/kor/RELEASE_POLICY.md KO-Release-Policy
+publish_page docs/kor/ISSUES.md KO-Linear-Issues
+publish_page docs/kor/data/DATA_CATALOG.md KO-Data-Catalog
+publish_page docs/kor/data/AVAILABILITY_MATRIX.md KO-Data-Availability
+publish_page docs/kor/data/DATA_REQUEST_ROADMAP.md KO-Data-Request-Roadmap
+publish_page docs/kor/data/EDA_2025.md KO-EDA-2025
+publish_page docs/kor/methodology/DOMAIN_SCORES_2025.md KO-Domain-Scores-2025
+publish_page docs/kor/methodology/COMPOSITE_INDEX_2025.md KO-Composite-Index-2025
+publish_page docs/kor/methodology/SENSITIVITY_ANALYSIS_2025.md KO-Sensitivity-Analysis-2025
+publish_page docs/kor/methodology/PRIORITY_AREAS_2025.md KO-Priority-Areas-2025
+publish_page docs/kor/methodology/CLUSTER_ANALYSIS_2025.md KO-Cluster-Analysis-2025
+publish_page docs/kor/methodology/ENVIRONMENTAL_OVERLAY_2025.md KO-Environmental-Overlay-2025
+publish_page docs/kor/methodology/POLICY_MATRIX_2025.md KO-Policy-Matrix-2025
+publish_page docs/kor/methodology/INFOGRAPHIC_2025.md KO-Infographic-2025
+publish_page docs/kor/methodology/CATEGORY_ASSESSMENT_2025.md KO-Category-Assessment-2025
+publish_page docs/kor/methodology/INDICATOR_SPEC.md KO-Indicator-Spec
+publish_page docs/kor/methodology/LIMITATIONS.md KO-Limitations
+publish_page docs/kor/methodology/EXPANSION_MODEL.md KO-Expansion-Model
 
-publish_page docs/en/PROJECT_PLAN.md EN-Project-Plan
-publish_page docs/en/GIT_WORKFLOW.md EN-Git-Workflow
-publish_page docs/en/INTEGRATIONS.md EN-Integrations
-publish_page docs/en/RELEASE_POLICY.md EN-Release-Policy
-publish_page docs/en/ISSUES.md EN-Linear-Issues
-publish_page docs/en/data/DATA_CATALOG.md EN-Data-Catalog
-publish_page docs/en/data/AVAILABILITY_MATRIX.md EN-Data-Availability
-publish_page docs/en/data/DATA_REQUEST_ROADMAP.md EN-Data-Request-Roadmap
-publish_page docs/en/data/EDA_2025.md EN-EDA-2025
-publish_page docs/en/methodology/DOMAIN_SCORES_2025.md EN-Domain-Scores-2025
-publish_page docs/en/methodology/COMPOSITE_INDEX_2025.md EN-Composite-Index-2025
-publish_page docs/en/methodology/SENSITIVITY_ANALYSIS_2025.md EN-Sensitivity-Analysis-2025
-publish_page docs/en/methodology/PRIORITY_AREAS_2025.md EN-Priority-Areas-2025
-publish_page docs/en/methodology/CLUSTER_ANALYSIS_2025.md EN-Cluster-Analysis-2025
-publish_page docs/en/methodology/ENVIRONMENTAL_OVERLAY_2025.md EN-Environmental-Overlay-2025
-publish_page docs/en/methodology/POLICY_MATRIX_2025.md EN-Policy-Matrix-2025
-publish_page docs/en/methodology/INFOGRAPHIC_2025.md EN-Infographic-2025
-publish_page docs/en/methodology/CATEGORY_ASSESSMENT_2025.md EN-Category-Assessment-2025
-publish_page docs/en/methodology/INDICATOR_SPEC.md EN-Indicator-Spec
-publish_page docs/en/methodology/LIMITATIONS.md EN-Limitations
-publish_page docs/en/methodology/EXPANSION_MODEL.md EN-Expansion-Model
+publish_page docs/eng/PROJECT_PLAN.md EN-Project-Plan
+publish_page docs/eng/GIT_WORKFLOW.md EN-Git-Workflow
+publish_page docs/eng/INTEGRATIONS.md EN-Integrations
+publish_page docs/eng/RELEASE_POLICY.md EN-Release-Policy
+publish_page docs/eng/ISSUES.md EN-Linear-Issues
+publish_page docs/eng/data/DATA_CATALOG.md EN-Data-Catalog
+publish_page docs/eng/data/AVAILABILITY_MATRIX.md EN-Data-Availability
+publish_page docs/eng/data/DATA_REQUEST_ROADMAP.md EN-Data-Request-Roadmap
+publish_page docs/eng/data/EDA_2025.md EN-EDA-2025
+publish_page docs/eng/methodology/DOMAIN_SCORES_2025.md EN-Domain-Scores-2025
+publish_page docs/eng/methodology/COMPOSITE_INDEX_2025.md EN-Composite-Index-2025
+publish_page docs/eng/methodology/SENSITIVITY_ANALYSIS_2025.md EN-Sensitivity-Analysis-2025
+publish_page docs/eng/methodology/PRIORITY_AREAS_2025.md EN-Priority-Areas-2025
+publish_page docs/eng/methodology/CLUSTER_ANALYSIS_2025.md EN-Cluster-Analysis-2025
+publish_page docs/eng/methodology/ENVIRONMENTAL_OVERLAY_2025.md EN-Environmental-Overlay-2025
+publish_page docs/eng/methodology/POLICY_MATRIX_2025.md EN-Policy-Matrix-2025
+publish_page docs/eng/methodology/INFOGRAPHIC_2025.md EN-Infographic-2025
+publish_page docs/eng/methodology/CATEGORY_ASSESSMENT_2025.md EN-Category-Assessment-2025
+publish_page docs/eng/methodology/INDICATOR_SPEC.md EN-Indicator-Spec
+publish_page docs/eng/methodology/LIMITATIONS.md EN-Limitations
+publish_page docs/eng/methodology/EXPANSION_MODEL.md EN-Expansion-Model
 
-for release_note in docs/releases/v*.md; do
+for release_note in docs/kor/releases/v*.md; do
   version="$(basename "$release_note" .md)"
   publish_page "$release_note" "KO-Release-${version}"
 done
 
-for release_note in docs/en/releases/v*.md; do
+for release_note in docs/eng/releases/v*.md; do
   version="$(basename "$release_note" .md)"
   publish_page "$release_note" "EN-Release-${version}"
 done

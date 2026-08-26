@@ -27,7 +27,7 @@ docker compose run --rm jupyter python -m busan_imd.analysis.priority_areas
   종합점수, 영역별 기여점수, 부산 중앙값 대비 초과점수와 대표 원인
 - `data/processed/scores/2025/busan_admin_dong_priority_indicator_contributions_2025.csv`:
   상위 21개 동 × 9개 지표의 세부 기여도
-- [PRIORITY_AREA_REPORT_2025.json](../data/manifests/PRIORITY_AREA_REPORT_2025.json):
+- [PRIORITY_AREA_REPORT_2025.json](../../data/manifests/PRIORITY_AREA_REPORT_2025.json):
   입력·출력 체크섬, 정의, 요약 결과
 
 처리 CSV는 원천데이터와 같은 방식으로 Git에서 제외되며, 복원된 데이터 번들에서 위 명령으로

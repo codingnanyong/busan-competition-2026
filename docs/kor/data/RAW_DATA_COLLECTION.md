@@ -4,12 +4,12 @@
 
 COD-12는 직접 다운로드, 인증 API와 공개 조회를 합쳐 23개 데이터셋의 원본을 로컬에
 보존한다. 기존 인증 API와 직접 다운로드는
-[RAW_DATA_MANIFEST.json](manifests/RAW_DATA_MANIFEST.json), HEIS 일평균자료는
-[HEIS_AIR_MANIFEST_2026.json](manifests/HEIS_AIR_MANIFEST_2026.json), 학교·인구는
-[REFERENCE_DATA_MANIFEST.json](manifests/REFERENCE_DATA_MANIFEST.json), 병원·의원·약국은
-[HEALTHCARE_FACILITY_MANIFEST_2025.json](manifests/HEALTHCARE_FACILITY_MANIFEST_2025.json), 교통사고는
-[KOROAD_TRAFFIC_ACCIDENT_MANIFEST.json](manifests/KOROAD_TRAFFIC_ACCIDENT_MANIFEST.json), 화재는
-[FIRE_SUMMARY_MANIFEST_2025.json](manifests/FIRE_SUMMARY_MANIFEST_2025.json)에 기록한다.
+[RAW_DATA_MANIFEST.json](../../data/manifests/RAW_DATA_MANIFEST.json), HEIS 일평균자료는
+[HEIS_AIR_MANIFEST_2026.json](../../data/manifests/HEIS_AIR_MANIFEST_2026.json), 학교·인구는
+[REFERENCE_DATA_MANIFEST.json](../../data/manifests/REFERENCE_DATA_MANIFEST.json), 병원·의원·약국은
+[HEALTHCARE_FACILITY_MANIFEST_2025.json](../../data/manifests/HEALTHCARE_FACILITY_MANIFEST_2025.json), 교통사고는
+[KOROAD_TRAFFIC_ACCIDENT_MANIFEST.json](../../data/manifests/KOROAD_TRAFFIC_ACCIDENT_MANIFEST.json), 화재는
+[FIRE_SUMMARY_MANIFEST_2025.json](../../data/manifests/FIRE_SUMMARY_MANIFEST_2025.json)에 기록한다.
 
 | 구분 | 데이터셋 | 건수 | 컷오프 판정 |
 |---|---|---:|---|
@@ -145,7 +145,7 @@ python -m busan_imd.collectors.heis_air --refresh
 2025년 SGIS 행정동 코드를 함께 보존한다.
 
 - 결합 파일: `data/raw/mois/resident_population/2025/busan_resident_population_admin_dong_2025_12.csv`
-- 출처 및 무결성 기록: [MOIS_RESIDENT_POPULATION_MANIFEST_2025.json](manifests/MOIS_RESIDENT_POPULATION_MANIFEST_2025.json)
+- 출처 및 무결성 기록: [MOIS_RESIDENT_POPULATION_MANIFEST_2025.json](../../data/manifests/MOIS_RESIDENT_POPULATION_MANIFEST_2025.json)
 - 기준시점: 2025-12-31
 - 행정동 수: 206개
 - 검증: 구·군별 합계, 부산시 합계, 남녀 인구 합, 세대당 인구, 성비, 코드 중복 및 SGIS 매칭
@@ -171,6 +171,6 @@ python -m busan_imd.collectors.supplemental_data --refresh
 
 기본 실행은 기존 원본을 재사용하며 `--refresh`일 때만 원격 자료를 다시 요청한다. 결과는
 `data/raw/supplemental`에 보존하고 출처·건수·기간·체크섬은
-[BUSAN_SUPPLEMENTAL_DATA_MANIFEST.json](manifests/BUSAN_SUPPLEMENTAL_DATA_MANIFEST.json)에 기록한다.
+[BUSAN_SUPPLEMENTAL_DATA_MANIFEST.json](../../data/manifests/BUSAN_SUPPLEMENTAL_DATA_MANIFEST.json)에 기록한다.
 독거노인 자료는 16개 구·군 응답 원본과 2025 SGIS 행정동 206개에 맞춘 최신 동별 CSV를
 함께 보존한다.

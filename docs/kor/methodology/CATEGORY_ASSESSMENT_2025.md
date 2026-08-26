@@ -74,8 +74,8 @@
 원자료 한계와 자료 신뢰도는 계속 표시한다.
 
 상세 가중치와 근거는
-[CATEGORY_ASSESSMENT_SPEC_2025.csv](../data/tables/CATEGORY_ASSESSMENT_SPEC_2025.csv), 정책 예시는
-[CATEGORY_POLICY_CATALOG_2025.csv](../data/tables/CATEGORY_POLICY_CATALOG_2025.csv)에 고정한다.
+[CATEGORY_ASSESSMENT_SPEC_2025.csv](../../data/tables/CATEGORY_ASSESSMENT_SPEC_2025.csv), 정책 예시는
+[CATEGORY_POLICY_CATALOG_2025.csv](../../data/tables/CATEGORY_POLICY_CATALOG_2025.csv)에 고정한다.
 
 ## 정책 방향을 읽는 방법
 

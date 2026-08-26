@@ -49,4 +49,4 @@
 
 SGIS 2025년 부산 행정동 206개를 기준지리로 고정하고 주 지수는 2025년 완결자료로 구성한다. 2026년 1~7월 자료는 보조 검증에만 사용한다. 2025년 자료가 없으면 가장 가까운 과거 완결기간을 사용하되 시차를 공개한다. 세부 규칙은 [데이터 기준기간 정책](REFERENCE_PERIOD_POLICY.md), 공간 검증은 [행정동 기준코드와 경계](ADMIN_BOUNDARIES.md)에 기록한다.
 
-전체 행 단위 근거는 [DATASET_AUDIT.csv](tables/DATASET_AUDIT.csv)에 있다.
+전체 행 단위 근거는 [DATASET_AUDIT.csv](../../data/tables/DATASET_AUDIT.csv)에 있다.

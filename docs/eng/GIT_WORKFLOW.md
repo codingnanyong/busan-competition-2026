@@ -49,7 +49,7 @@ Only the initial repository commit is allowed as a bootstrap exception. Direct p
 ### `develop → main`
 
 - `main` accepts pull requests only from `develop`.
-- Update `VERSION`, `CHANGELOG.md`, `docs/releases/vX.Y.Z.md`, and the matching English release note.
+- Update `VERSION`, `CHANGELOG.md`, `docs/kor/releases/vX.Y.Z.md`, and `docs/eng/releases/vX.Y.Z.md`.
 - The version must be greater than every existing tag and follow Semantic Versioning.
 - The merge automatically creates a tag, GitHub Release, and bilingual Wiki update.
 

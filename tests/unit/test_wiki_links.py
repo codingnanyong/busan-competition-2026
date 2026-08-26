@@ -17,11 +17,11 @@ def test_rewrite_page_links_to_wiki_pages_and_repository_files() -> None:
     page_map = {
         "README.ko.md": "KO-Home",
         "README.en.md": "EN-Home",
-        "docs/PROJECT_PLAN.md": "KO-Project-Plan",
+        "docs/kor/PROJECT_PLAN.md": "KO-Project-Plan",
     }
     text = (
         "[English](README.en.md)\n"
-        "[계획](docs/PROJECT_PLAN.md#일정)\n"
+        "[계획](docs/kor/PROJECT_PLAN.md#일정)\n"
         "[서식](docs/templates/report.hwpx)\n"
         "[섹션](#운영-원칙)\n"
         "[외부](https://example.com/docs)\n"

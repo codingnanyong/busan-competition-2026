@@ -59,11 +59,14 @@ outputs/
                                      # hand edits are overwritten on the next generate
 
 docs/
-├─ data/           # data policy and request documents
+├─ kor/            # Korean prose
+│  ├─ data/        # data policy and request notes
+│  ├─ methodology/ # scoring, policy, infographic method
+│  └─ releases/    # versioned release notes
+├─ eng/            # English counterparts
+├─ data/           # language-neutral tables and checksums
 │  ├─ tables/      # audit, spec, and catalog CSVs
 │  └─ manifests/   # input/output checksum JSON. pipeline rewrites
-├─ methodology/    # scoring, policy, infographic method
-├─ en/             # English copies
 └─ templates/      # document and request templates
 
 tests/
@@ -104,7 +107,7 @@ docker compose run --rm jupyter python -m pytest -q
 
 Collector names and raw locations follow [raw data collection](data/RAW_DATA_COLLECTION.md).
 Adoption follows the [dataset audit](../data/tables/DATASET_AUDIT.csv). Machine moves follow
-[data portability](../data/DATA_PORTABILITY.md).
+[data portability](../kor/data/DATA_PORTABILITY.md).
 
 Collectors use `sources/` contracts where possible and read keys only from `.env`.
 `from busan_imd.infographic import run` and `python -m busan_imd.infographic` stay stable

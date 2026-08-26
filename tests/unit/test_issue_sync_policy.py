@@ -29,12 +29,12 @@ def test_pr_policy_validates_and_closes_the_mirrored_github_issue() -> None:
 
 
 def test_process_docs_keep_integration_secrets_in_one_guide() -> None:
-    git_workflow = read_text("docs/GIT_WORKFLOW.md")
-    git_workflow_en = read_text("docs/en/GIT_WORKFLOW.md")
-    integrations = read_text("docs/INTEGRATIONS.md")
-    integrations_en = read_text("docs/en/INTEGRATIONS.md")
-    issues = read_text("docs/ISSUES.md")
-    issues_en = read_text("docs/en/ISSUES.md")
+    git_workflow = read_text("docs/kor/GIT_WORKFLOW.md")
+    git_workflow_en = read_text("docs/eng/GIT_WORKFLOW.md")
+    integrations = read_text("docs/kor/INTEGRATIONS.md")
+    integrations_en = read_text("docs/eng/INTEGRATIONS.md")
+    issues = read_text("docs/kor/ISSUES.md")
+    issues_en = read_text("docs/eng/ISSUES.md")
 
     assert "INTEGRATIONS.md" in git_workflow
     assert "INTEGRATIONS.md" in git_workflow_en
@@ -62,7 +62,7 @@ def test_bilingual_issue_maps_contain_every_mirror_pair() -> None:
     mappings[38] = 74
     mappings[39] = 77
 
-    for path in ("docs/ISSUES.md", "docs/en/ISSUES.md"):
+    for path in ("docs/kor/ISSUES.md", "docs/eng/ISSUES.md"):
         issue_map = read_text(path)
         for linear_id, github_number in mappings.items():
             row_pattern = (

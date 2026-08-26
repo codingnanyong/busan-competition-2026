@@ -18,9 +18,9 @@ docker compose run --rm jupyter python -m busan_imd.analysis.environmental_overl
 
 - `data/processed/scores/2025/busan_admin_dong_environmental_overlay_2025.csv`: 206개 동의
   원 B-IMD, 미세먼지 독립 사회취약성, PM 노출 백분위·순위, 이중부담 판정
-- [`notebooks/03_environmental_overlay_review.ipynb`](../../notebooks/03_environmental_overlay_review.ipynb):
+- [`notebooks/03_environmental_overlay_review.ipynb`](../../../notebooks/03_environmental_overlay_review.ipynb):
   산점도, 행정동 지도, 이중부담 목록을 확인하는 대화형 시각화
-- [ENVIRONMENTAL_OVERLAY_REPORT_2025.json](../data/manifests/ENVIRONMENTAL_OVERLAY_REPORT_2025.json):
+- [ENVIRONMENTAL_OVERLAY_REPORT_2025.json](../../data/manifests/ENVIRONMENTAL_OVERLAY_REPORT_2025.json):
   계산 규칙, 요약 통계, 대상 목록, 입력·출력 체크섬과 해석 한계
 
 Jupyter가 켜져 있다면 `http://localhost:8888/lab/tree/notebooks/03_environmental_overlay_review.ipynb`

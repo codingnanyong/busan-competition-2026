@@ -6,7 +6,7 @@
 
 - [대회 안내 및 접수 페이지](https://www.allforyoung.com/posts/83834)
 - 부산광역시·부산테크노파크 공식 공고 포스터
-- [공식 분석보고서 작성 서식](templates/2026-big-data-competition-submission-template.hwpx)
+- [공식 분석보고서 작성 서식](../templates/2026-big-data-competition-submission-template.hwpx)
 - 참가 신청 폼의 파일 업로드 안내
 
 공고 페이지, 공식 포스터, 작성 서식, 참가 신청 폼을 서로 대조해 아래 요구사항을 확정했다. 평가항목과 세부 배점은 확인 가능한 공식 자료에 별도로 공개되지 않았다.

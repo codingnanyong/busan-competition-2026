@@ -49,7 +49,7 @@ feat/<linear-id>-<slug>
 ### `develop → main`
 
 - 다른 head 브랜치에서 `main`으로 PR을 만들 수 없습니다.
-- `VERSION`, `CHANGELOG.md`, `docs/releases/vX.Y.Z.md`를 반드시 갱신합니다.
+- `VERSION`, `CHANGELOG.md`, `docs/kor/releases/vX.Y.Z.md`, `docs/eng/releases/vX.Y.Z.md`를 반드시 갱신합니다.
 - 버전은 기존 태그보다 커야 하며 Semantic Versioning을 사용합니다.
 - 병합 후 자동으로 태그와 GitHub Release가 생성됩니다.
 

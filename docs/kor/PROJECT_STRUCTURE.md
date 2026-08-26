@@ -60,11 +60,14 @@ outputs/
                                      # 직접 고치면 다음 생성에서 덮어씀
 
 docs/
-├─ data/           # 데이터 정책·요청 문서
+├─ kor/            # 국문 문서
+│  ├─ data/        # 데이터 정책·요청 설명
+│  ├─ methodology/ # 점수·정책·인포그래픽 방법
+│  └─ releases/    # 버전별 릴리스 설명
+├─ eng/            # 영문 대응 문서
+├─ data/           # 언어에 묶이지 않는 표와 체크섬
 │  ├─ tables/      # 감사표·명세·카탈로그 CSV
 │  └─ manifests/   # 입력·출력 체크섬 JSON. 파이프라인이 다시 씀
-├─ methodology/    # 점수·정책·인포그래픽 방법
-├─ en/             # 위 문서의 영어본
 └─ templates/      # 문서·요청 서식
 
 tests/
@@ -109,7 +112,7 @@ docker compose run --rm jupyter python -m pytest -q
 ```
 
 수집기 이름과 원본 위치는 [원본 데이터 수집](data/RAW_DATA_COLLECTION.md), 채택 여부는
-[데이터 감사표](data/tables/DATASET_AUDIT.csv)를 따른다. Mac 이전은
+[데이터 감사표](../data/tables/DATASET_AUDIT.csv)를 따른다. Mac 이전은
 [데이터 이전 정책](data/DATA_PORTABILITY.md)을 따른다.
 
 수집기는 가능한 한 `sources/` 계약을 쓰고, 인증키는 `.env`에서만 읽는다.

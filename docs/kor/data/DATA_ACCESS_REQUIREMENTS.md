@@ -55,7 +55,7 @@ Git에는 출처, 요청조건, 기준기간, 레코드 수와 SHA-256을 담은
 ## 2026-08-13 추가 수집 결과
 
 이번에 승인된 두 API와 함께 공개 파일 3종을 실제로 조회·보존했다. 상세 URL, 요청조건,
-체크섬은 [BUSAN_SUPPLEMENTAL_DATA_MANIFEST.json](manifests/BUSAN_SUPPLEMENTAL_DATA_MANIFEST.json)에
+체크섬은 [BUSAN_SUPPLEMENTAL_DATA_MANIFEST.json](../../data/manifests/BUSAN_SUPPLEMENTAL_DATA_MANIFEST.json)에
 기록했다.
 
 | 자료 | 실제 확인 결과 | 분석 판단 |

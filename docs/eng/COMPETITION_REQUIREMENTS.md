@@ -33,7 +33,7 @@ Upload one archive containing all of the following files.
 | Data used | XLS, CSV, etc. | Data files used in the analysis |
 | Final upload | One archive | Maximum 1 GB |
 
-The official material does not specify a filename convention. Recheck the application form immediately before submission. A recommended package layout is documented in the [Korean requirements](../COMPETITION_REQUIREMENTS.md).
+The official material does not specify a filename convention. Recheck the application form immediately before submission. A recommended package layout is documented in the [Korean requirements](../kor/COMPETITION_REQUIREMENTS.md).
 
 Do not redistribute source data when its license prohibits redistribution. Include the provider, source URL, reference date, license, and acquisition method in a source catalog, and submit only redistributable derived data.
 

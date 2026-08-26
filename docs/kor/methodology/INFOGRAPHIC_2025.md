@@ -23,20 +23,20 @@
 
 ## 결과물
 
-- [`busan_imd_one_page_2025.pdf`](../../outputs/infographic/2025/static/busan_imd_one_page_2025.pdf):
+- [`busan_imd_one_page_2025.pdf`](../../../outputs/infographic/2025/static/busan_imd_one_page_2025.pdf):
   공모전 1페이지 PDF 초안
-- [`busan_imd_one_page_2025.svg`](../../outputs/infographic/2025/static/busan_imd_one_page_2025.svg):
+- [`busan_imd_one_page_2025.svg`](../../../outputs/infographic/2025/static/busan_imd_one_page_2025.svg):
   후속 편집용 벡터 원본
-- [`busan_imd_one_page_2025.png`](../../outputs/infographic/2025/static/busan_imd_one_page_2025.png):
+- [`busan_imd_one_page_2025.png`](../../../outputs/infographic/2025/static/busan_imd_one_page_2025.png):
   빠른 검토용 이미지
-- [`busan_admin_dong_action_map_2025.html`](../../outputs/infographic/2025/interactive/busan_admin_dong_action_map_2025.html):
+- [`busan_admin_dong_action_map_2025.html`](../../../outputs/infographic/2025/interactive/busan_admin_dong_action_map_2025.html):
   펼침·접힘 트리에서 4개 생활여건 영역과 10개 세부 평가항목을 선택하고 19개
   평가지표·정책 예시까지 내려가 확인하는 206개 동 독립형 대시보드.
   같은 폴더의 `html/`·`css/`·`js/`를 수정하고, 채워진 HTML을 브라우저에서 바로 연다.
   JavaScript 서버는 필요 없다. `js/data.js`만 파이프라인이 다시 만든다.
-- [`busan_admin_dong_action_profile_2025.csv`](../../outputs/infographic/2025/tables/busan_admin_dong_action_profile_2025.csv):
+- [`busan_admin_dong_action_profile_2025.csv`](../../../outputs/infographic/2025/tables/busan_admin_dong_action_profile_2025.csv):
   동별 6개 영역 점수·취약순위·개선방향·상대 저취약 영역
-- [INFOGRAPHIC_REPORT_2025.json](../data/manifests/INFOGRAPHIC_REPORT_2025.json):
+- [INFOGRAPHIC_REPORT_2025.json](../../data/manifests/INFOGRAPHIC_REPORT_2025.json):
   입력·출력 체크섬, 페이지 수, 표시 통계와 상태
 
 PNG는 화면 미리보기용이며, 페이지 수와 제출 형식을 판정할 때는 PDF를 기준으로 한다.

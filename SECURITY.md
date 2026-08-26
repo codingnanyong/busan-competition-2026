@@ -29,6 +29,6 @@ API keys and tokens belong only in local `.env` or GitHub Actions secrets.
 Do not put them in issues, pull requests, Linear, Slack, notebooks, or
 committed manifests.
 
-See `.env.example` and [data access requirements](docs/data/DATA_ACCESS_REQUIREMENTS.md).
+See `.env.example` and [data access requirements](docs/kor/data/DATA_ACCESS_REQUIREMENTS.md).
 If a key was committed or pasted in chat, revoke it at the provider and
 open a private advisory.
