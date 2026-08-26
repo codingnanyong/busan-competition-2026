@@ -1,0 +1,28 @@
+<div class="map"><h2 id="map-title"></h2>
+<div class="scale"></div><div class="scale-label">
+<span>0 상대 저취약</span><span>100 상대 고취약</span></div>
+<div class="overlay-control" id="accident-control" hidden>
+<button id="accident-toggle" type="button" aria-pressed="false">교통사고 다발지역 표시</button>
+<span class="scores">2024년 선정 다발지역 __HOTSPOT_COUNT__곳 · 안전 영역의 교통사고 위험 평가에 반영</span>
+</div>
+<div class="overlay-control" id="safety-risk-control" hidden>
+<button id="safety-risk-toggle" type="button" aria-pressed="false">생활안전 위험지역 표시</button>
+<span class="scores">2023년 공개 위험지역 __SAFETY_RISK_COUNT__곳 · 안전점수에는 반영하지 않음
+· 수난·산악 등 포함</span>
+</div>
+<div class="overlay-control" id="aed-control" hidden>
+<button id="aed-toggle" type="button" aria-pressed="false">AED 위치 표시</button>
+<span class="scores">현재 공개 위치 __AED_COUNT__곳 · 의료공급 접근 점수에는 반영하지 않음</span>
+</div>
+<div class="overlay-control" id="park-control" hidden>
+<button id="park-toggle" type="button" aria-pressed="false">도시공원 위치 표시</button>
+<span class="scores">현재 공개 위치 __PARK_COUNT__곳 · 2025 환경점수에는 반영하지 않음</span>
+</div>
+<svg viewBox="0 0 900 900" aria-label="부산 행정동별 선택 항목 취약도 분포">
+__DONG_PATHS__
+<g id="accident-layer" hidden>__HOTSPOT_MARKERS__</g>
+<g id="safety-risk-layer" hidden>__SAFETY_RISK_MARKERS__</g>
+<g id="aed-layer" hidden>__AED_MARKERS__</g>
+<g id="park-layer" hidden>__PARK_MARKERS__</g>
+</svg>
+</div>

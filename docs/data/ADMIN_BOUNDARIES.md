@@ -23,7 +23,7 @@ SGIS 공식 행정구역경계 API는 2025년 경계를 제공한다. `adm_cd=21
 - API 엔드포인트: `https://sgisapi.mods.go.kr/OpenAPI3/boundary/hadmarea.geojson`
 - [SGIS 이용정책](https://sgis.mods.go.kr/developer/html/newOpenApi/policy/policy.html)
 - 접근방식: 개인 SGIS consumer key/secret으로 단기 access token 발급 후 OpenAPI 호출
-- 저장소 기준코드: `docs/data/BUSAN_ADMIN_DONG_CODES_2025.csv`
+- 저장소 기준코드: `docs/data/tables/BUSAN_ADMIN_DONG_CODES_2025.csv`
 - 저장소 출처 스냅샷: `docs/data/manifests/BUSAN_ADMIN_DONG_MANIFEST_2025.json`
 
 원본 GeoJSON은 인증 API 산출물이며 크기와 재배포 조건을 고려해 Git에 커밋하지 않는다.

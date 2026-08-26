@@ -3,6 +3,7 @@
 import json
 
 import pandas as pd
+import pytest
 
 from busan_imd.processing.candidate_processing import CandidatePaths, process_transport
 
@@ -49,6 +50,10 @@ def test_process_transport_reconciles_route_totals_and_keeps_district_unit(tmp_p
     route, district, report = process_transport(paths)
 
     assert route.loc[0, "recalculated_card_trip_count_2025"] == 3
+    assert route.loc[0, "multi_leg_card_trip_count_2025"] == 0
+    assert route.loc[0, "youth_child_card_trip_share_pct_2025"] == pytest.approx(100 / 3)
     assert district.loc[0, "village_bus_route_count"] == 1
     assert report["route_usage_reconciliation_failures"] == 0
-    assert report["decision"] == "validation-only"
+    assert report["decision"] == "mixed-supplemental-use"
+    assert report["route_usage_decision"] == "supplemental-category-indicator"
+    assert report["village_bus_decision"] == "validation-only"

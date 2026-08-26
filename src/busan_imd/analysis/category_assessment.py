@@ -7,15 +7,16 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+import geopandas as gpd
 import numpy as np
 import pandas as pd
 
 from busan_imd.analysis.domain_scores import DEFAULT_PROFILE, percentile_score
 from busan_imd.core.artifacts import sha256_file, write_json
 
-DEFAULT_SPEC = Path("docs/data/CATEGORY_ASSESSMENT_SPEC_2025.csv")
-DEFAULT_POLICY_CATALOG = Path("docs/data/CATEGORY_POLICY_CATALOG_2025.csv")
-DEFAULT_OUTPUT_DIR = Path("outputs/infographic")
+DEFAULT_SPEC = Path("docs/data/tables/CATEGORY_ASSESSMENT_SPEC_2025.csv")
+DEFAULT_POLICY_CATALOG = Path("docs/data/tables/CATEGORY_POLICY_CATALOG_2025.csv")
+DEFAULT_OUTPUT_DIR = Path("outputs/infographic/2025/tables")
 DEFAULT_CATEGORY_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_admin_dong_category_assessment_2025.csv"
 DEFAULT_MAJOR_CATEGORY_OUTPUT = (
     DEFAULT_OUTPUT_DIR / "busan_admin_dong_major_category_assessment_2025.csv"
@@ -24,6 +25,13 @@ DEFAULT_INDICATOR_OUTPUT = (
     DEFAULT_OUTPUT_DIR / "busan_admin_dong_category_indicator_scores_2025.csv"
 )
 DEFAULT_REPORT = Path("docs/data/manifests/CATEGORY_ASSESSMENT_REPORT_2025.json")
+DEFAULT_BOUNDARIES = Path(
+    "data/raw/sgis/admin_boundaries/2025/busan_admin_dong_boundaries_2025_valid.geojson"
+)
+DEFAULT_TRAFFIC_HOTSPOTS = Path(
+    "data/raw/koroad/traffic_accidents/hotspots/2024/"
+    "busan_traffic_accident_hotspots_2024.csv"
+)
 EXPECTED_DONG_COUNT = 206
 SHRINKAGE_POPULATION = 5_000
 IDENTITY_COLUMNS = ["admin_dong_code", "sigungu_name", "admin_dong_name"]
@@ -71,6 +79,11 @@ def derive_indicators(profile: pd.DataFrame) -> pd.DataFrame:
         "establishments_per_1000_population_2024_smoothed": ("establishments_2024", 1_000),
         "hospital_per_10000_smoothed": ("hospital_count_2025_candidate", 10_000),
         "clinic_per_10000_smoothed": ("clinic_count_2025_candidate", 10_000),
+        "pharmacy_per_10000_smoothed": ("pharmacy_count_2025_candidate", 10_000),
+        "crime_prevention_cctv_per_1000_smoothed": (
+            "crime_prevention_cctv_count_2025",
+            1_000,
+        ),
         "bus_stops_per_10000_smoothed": ("bus_stop_count_2025", 10_000),
         "heat_shelters_per_10000_smoothed": ("heat_shelter_count_2025", 10_000),
         "elderly_alone_per_1000_smoothed": ("elderly_alone_latest_count", 1_000),
@@ -78,6 +91,48 @@ def derive_indicators(profile: pd.DataFrame) -> pd.DataFrame:
     for output, (count_column, scale) in rate_inputs.items():
         derived[output] = _smoothed_rate(derived[count_column], population, scale)
     return derived
+
+
+def add_traffic_hotspot_indicator(
+    profile: pd.DataFrame,
+    boundaries: gpd.GeoDataFrame,
+    traffic_hotspots: pd.DataFrame,
+) -> pd.DataFrame:
+    """Attach selected-hotspot occurrences without treating non-selection as zero accidents."""
+    required_boundary_columns = {"adm_cd", "geometry"}
+    required_hotspot_columns = {"lo_crd", "la_crd", "occrrnc_cnt"}
+    if not required_boundary_columns <= set(boundaries.columns):
+        raise ValueError("Traffic scoring boundaries require adm_cd and geometry")
+    if not required_hotspot_columns <= set(traffic_hotspots.columns):
+        raise ValueError("Traffic hotspots require lo_crd, la_crd, and occrrnc_cnt")
+    points = gpd.GeoDataFrame(
+        traffic_hotspots.copy(),
+        geometry=gpd.points_from_xy(traffic_hotspots["lo_crd"], traffic_hotspots["la_crd"]),
+        crs="EPSG:4326",
+    ).to_crs(boundaries.crs)
+    mapped = gpd.sjoin(
+        points,
+        boundaries[["adm_cd", "geometry"]],
+        how="left",
+        predicate="within",
+    )
+    if mapped["adm_cd"].isna().any():
+        raise ValueError("Every selected traffic hotspot must map to an administrative dong")
+    occurrences = mapped.groupby("adm_cd", observed=True)["occrrnc_cnt"].sum()
+    result = profile.copy()
+    result["selected_traffic_hotspot_occurrences_2024"] = (
+        result["admin_dong_code"].astype(str).map(occurrences).fillna(0).astype(int)
+    )
+    return result
+
+
+def _score_indicator(values: pd.Series, rule: Any) -> pd.Series:
+    if rule.indicator != "selected_traffic_hotspot_occurrences_2024":
+        return percentile_score(values, rule.direction)
+    score = pd.Series(0.0, index=values.index)
+    selected = values > 0
+    score.loc[selected] = values.loc[selected].rank(method="average", pct=True) * 100.0
+    return score
 
 
 def load_spec(path: Path = DEFAULT_SPEC) -> pd.DataFrame:
@@ -121,7 +176,12 @@ def _confidence(profile: pd.DataFrame, rule: Any) -> pd.Series:
         )
     elif rule.category == "transit_access":
         confidence = pd.Series(
-            np.where(profile["bus_stop_count_2025"] == 0, "low", "medium_low"),
+            np.where(
+                (profile["bus_stop_count_2025"] == 0)
+                | (profile["matched_bus_routes_2025_current_proxy"] == 0),
+                "low",
+                "medium_low",
+            ),
             index=profile.index,
         )
     if confidence.isna().any():
@@ -144,7 +204,7 @@ def build(
     frames: list[pd.DataFrame] = []
     for rule in spec.itertuples(index=False):
         values = pd.to_numeric(derived[rule.indicator], errors="raise").astype(float)
-        score = percentile_score(values, rule.direction)
+        score = _score_indicator(values, rule)
         frames.append(
             pd.DataFrame(
                 {
@@ -296,6 +356,11 @@ def build(
         "limitations": [
             "Estimated and proxy inputs are retained with row-level evidence labels",
             "Category scores are relative Busan percentiles, not absolute service standards",
+            "Traffic safety uses 48 selected hotspots, not a complete dong-level crash census",
+            (
+                "Transit route demand uses current route topology because a dated 2025 "
+                "topology is unavailable"
+            ),
             "Policy examples require observed administrative data and field validation",
         ],
     }
@@ -310,9 +375,14 @@ def run(
     major_category_output: Path = DEFAULT_MAJOR_CATEGORY_OUTPUT,
     indicator_output: Path = DEFAULT_INDICATOR_OUTPUT,
     report_path: Path = DEFAULT_REPORT,
+    boundaries_path: Path = DEFAULT_BOUNDARIES,
+    traffic_hotspots_path: Path = DEFAULT_TRAFFIC_HOTSPOTS,
 ) -> dict[str, Any]:
     """Read canonical inputs and write reproducible dashboard assessment artifacts."""
     profile = pd.read_csv(profile_path, dtype={"admin_dong_code": str})
+    boundaries = gpd.read_file(boundaries_path)
+    traffic_hotspots = pd.read_csv(traffic_hotspots_path)
+    profile = add_traffic_hotspot_indicator(profile, boundaries, traffic_hotspots)
     spec = load_spec(spec_path)
     policies = pd.read_csv(policy_catalog_path)
     if set(policies["category"]) != set(spec["category"]):
@@ -338,11 +408,15 @@ def run(
                 "profile": profile_path.as_posix(),
                 "spec": spec_path.as_posix(),
                 "policy_catalog": policy_catalog_path.as_posix(),
+                "boundaries": boundaries_path.as_posix(),
+                "traffic_accident_hotspots": traffic_hotspots_path.as_posix(),
             },
             "input_sha256": {
                 "profile": sha256_file(profile_path),
                 "spec": sha256_file(spec_path),
                 "policy_catalog": sha256_file(policy_catalog_path),
+                "boundaries": sha256_file(boundaries_path),
+                "traffic_accident_hotspots": sha256_file(traffic_hotspots_path),
             },
             "output_paths": {
                 "category_assessment": category_output.as_posix(),
@@ -373,6 +447,8 @@ def main() -> int:
     )
     parser.add_argument("--indicator-output", type=Path, default=DEFAULT_INDICATOR_OUTPUT)
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
+    parser.add_argument("--boundaries", type=Path, default=DEFAULT_BOUNDARIES)
+    parser.add_argument("--traffic-hotspots", type=Path, default=DEFAULT_TRAFFIC_HOTSPOTS)
     args = parser.parse_args()
     report = run(
         args.profile,
@@ -382,6 +458,8 @@ def main() -> int:
         args.major_category_output,
         args.indicator_output,
         args.report,
+        args.boundaries,
+        args.traffic_hotspots,
     )
     print(
         f"built {report['major_category_count']} major categories, "

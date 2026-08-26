@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-24T23:10:38+00:00",
+  "generated_at": "2026-08-26T00:13:40+00:00",
   "reference_year": 2025,
   "record_count": 206,
   "scored_domains": [
@@ -38,9 +38,9 @@
     "10": 20
   },
   "domain_scores_path": "data/processed/scores/2025/busan_admin_dong_domain_scores_2025.csv",
-  "domain_scores_sha256": "04AC94AE18A5929C83297BCFA8D08B55E5797FACF324ABB800969736D91805BF",
-  "spec_path": "docs/data/COMPOSITE_INDEX_SPEC_2025.csv",
+  "domain_scores_sha256": "0EA7BB158A5DFD76984D75594B18430B239D47B01282DBA8A036C86E019E39C6",
+  "spec_path": "docs/data/tables/COMPOSITE_INDEX_SPEC_2025.csv",
   "spec_sha256": "F6631F156E48F0BC3C86CB1807C83BD5DD2E81DC88A3CD769EAE48B38C06F444",
   "output_path": "data/processed/scores/2025/busan_admin_dong_imd_2025.csv",
-  "output_sha256": "380EB11360B40A6C8E480B3A1D2EBE40DD0EC11FFED20580E0D72563CBB1EC07"
+  "output_sha256": "E23A2B95FB0D19D46A13E10F90A0A3E9140657528444A15051D55D2880D1F4A3"
 }

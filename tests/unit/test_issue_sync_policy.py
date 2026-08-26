@@ -31,6 +31,12 @@ def test_bilingual_issue_maps_contain_every_mirror_pair() -> None:
     mappings = {linear_id: linear_id + 9 for linear_id in range(5, 29)}
     mappings[29] = 39
     mappings[30] = 44
+    mappings[31] = 48
+    mappings[32] = 52
+    mappings[33] = 59
+    mappings[34] = 62
+    mappings[35] = 67
+    mappings[36] = 69
 
     for path in ("docs/ISSUES.md", "docs/en/ISSUES.md"):
         issue_map = read_text(path)

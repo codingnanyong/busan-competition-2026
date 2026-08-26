@@ -1,0 +1,18 @@
+.accident-reference{border-left:4px solid #d84a3a;background:#fff4ed;border-radius:0 7px 7px 0;
+ padding:9px 10px;margin:9px 0;font-size:12px;line-height:1.5}
+.metric{margin:10px 0} .bar{height:8px;background:#edf0ed;border-radius:5px;overflow:hidden}
+.bar i{display:block;height:100%;background:#d84a3a}
+.subcategory{border-top:2px solid #d7ded9;margin-top:10px;padding-top:8px}
+.subcategory h3{margin-bottom:5px}
+.child-overview{display:grid;grid-template-columns:1fr auto;gap:4px 12px;
+ border-top:1px solid #d7ded9;padding:11px 0}
+.child-overview strong{color:#d84a3a} .child-overview .scores{grid-column:1/-1;font-size:12px}
+.badge{display:inline-block;border-radius:12px;padding:3px 8px;background:#edf0ed;font-size:12px}
+.estimate{border-left:4px solid #d84a3a;background:#fff4ed;padding:9px;margin:8px 0}
+.observed{border-left:4px solid #4f8a5b;background:#f2f8f2;padding:9px;margin:8px 0}
+.reference-context{border-left:4px solid #6677a8;background:#f3f5fb;padding:10px;margin:14px 0}
+.reference-context h4{margin:0 0 8px;color:#394d82}
+.composition-row{display:grid;grid-template-columns:72px 1fr 48px;gap:7px;align-items:center;
+ font-size:12px;margin:6px 0}
+.trigger{color:#d84a3a;font-weight:700}
+.warning{border-top:1px solid #d7ded9;padding-top:12px;font-size:12px}

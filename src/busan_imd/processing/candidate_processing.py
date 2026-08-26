@@ -176,8 +176,49 @@ def process_living_population(paths: CandidatePaths) -> tuple[pd.DataFrame, dict
     numeric = ["평균주거인구수", "평균직장인구수", "평균방문인구수"]
     raw[numeric] = raw[numeric].apply(pd.to_numeric, errors="coerce")
     monthly = raw.groupby(["기준년월", "행정동코드"], as_index=False)[numeric].sum(min_count=1)
+    age_monthly = raw.groupby(
+        ["기준년월", "행정동코드", "나이대"], as_index=False
+    )[numeric].sum(min_count=1)
     months = monthly.groupby("행정동코드")["기준년월"].nunique()
     annual = monthly.groupby("행정동코드", as_index=False)[numeric].mean()
+    age_annual = age_monthly.groupby(["행정동코드", "나이대"], as_index=False)[numeric].mean()
+    age_annual["age_total"] = age_annual[numeric].sum(axis=1)
+    senior = (
+        age_annual[age_annual["나이대"] == "60대이상"]
+        .set_index("행정동코드")["age_total"]
+    )
+    under_20 = (
+        age_annual[age_annual["나이대"] == "20대미만"]
+        .set_index("행정동코드")["age_total"]
+    )
+    under_30 = (
+        age_annual[age_annual["나이대"].isin(["20대미만", "20대"])]
+        .groupby("행정동코드")["age_total"]
+        .sum()
+    )
+    annual["avg_daily_total_living_population_2025"] = annual[numeric].sum(axis=1)
+    annual["avg_daily_senior_living_population_2025"] = annual["행정동코드"].map(senior)
+    annual["avg_daily_under_20_living_population_2025"] = annual["행정동코드"].map(under_20)
+    annual["avg_daily_under_30_living_population_2025"] = annual["행정동코드"].map(under_30)
+    annual["senior_living_population_share_pct_2025"] = (
+        annual["avg_daily_senior_living_population_2025"]
+        / annual["avg_daily_total_living_population_2025"]
+        * 100
+    )
+    annual["under_20_living_population_share_pct_2025"] = (
+        annual["avg_daily_under_20_living_population_2025"]
+        / annual["avg_daily_total_living_population_2025"]
+        * 100
+    )
+    annual["under_30_living_population_share_pct_2025"] = (
+        annual["avg_daily_under_30_living_population_2025"]
+        / annual["avg_daily_total_living_population_2025"]
+        * 100
+    )
+    annual["daytime_to_residential_living_population_ratio_2025"] = (
+        (annual["평균직장인구수"] + annual["평균방문인구수"])
+        / annual["평균주거인구수"].replace(0, np.nan)
+    )
     population = read_csv_fallback(paths.population, dtype=str)
     code_map = population[["mois_admin_dong_code", "sgis_admin_dong_code"]].copy()
     annual["행정동코드"] = annual["행정동코드"].astype(str)
@@ -203,6 +244,14 @@ def process_living_population(paths: CandidatePaths) -> tuple[pd.DataFrame, dict
         "avg_daily_residential_living_population_2025",
         "avg_daily_workplace_living_population_2025",
         "avg_daily_visitor_living_population_2025",
+        "avg_daily_total_living_population_2025",
+        "avg_daily_senior_living_population_2025",
+        "avg_daily_under_20_living_population_2025",
+        "avg_daily_under_30_living_population_2025",
+        "senior_living_population_share_pct_2025",
+        "under_20_living_population_share_pct_2025",
+        "under_30_living_population_share_pct_2025",
+        "daytime_to_residential_living_population_ratio_2025",
     ]
     result = annual[columns].sort_values("admin_dong_code").reset_index(drop=True)
     return result, {
@@ -349,6 +398,9 @@ def process_schools(paths: CandidatePaths) -> tuple[pd.DataFrame, dict[str, Any]
                 "core_school_teachers_within_2000m_2025": int(
                     points.loc[distances <= 2_000, "active_teacher_count_2025"].sum()
                 ),
+                "core_school_students_within_2000m_2025": int(
+                    points.loc[distances <= 2_000, "student_count_2025"].sum()
+                ),
             }
         )
     result = counts.merge(
@@ -470,8 +522,36 @@ def process_transport(paths: CandidatePaths) -> tuple[pd.DataFrame, pd.DataFrame
         pd.to_numeric, errors="coerce"
     )
     usage["recalculated_card_trip_count_2025"] = usage[detail].sum(axis=1)
+    multi_leg_columns = [
+        column
+        for column in detail
+        if column.startswith(("건수(2통행)", "건수(3통행)"))
+    ]
+    youth_child_columns = [
+        column for column in detail if column.endswith(("_청소년", "_어린이"))
+    ]
+    usage["multi_leg_card_trip_count_2025"] = usage[multi_leg_columns].sum(axis=1)
+    usage["youth_child_card_trip_count_2025"] = usage[youth_child_columns].sum(axis=1)
+    usage["multi_leg_card_trip_share_pct_2025"] = (
+        usage["multi_leg_card_trip_count_2025"]
+        / usage["card_trip_count_2025"].replace(0, np.nan)
+        * 100
+    )
+    usage["youth_child_card_trip_share_pct_2025"] = (
+        usage["youth_child_card_trip_count_2025"]
+        / usage["card_trip_count_2025"].replace(0, np.nan)
+        * 100
+    )
     route_output = usage[
-        ["route_no", "card_trip_count_2025", "recalculated_card_trip_count_2025"]
+        [
+            "route_no",
+            "card_trip_count_2025",
+            "recalculated_card_trip_count_2025",
+            "multi_leg_card_trip_count_2025",
+            "multi_leg_card_trip_share_pct_2025",
+            "youth_child_card_trip_count_2025",
+            "youth_child_card_trip_share_pct_2025",
+        ]
     ].sort_values("route_no")
     village_document = json.loads(paths.village_bus.read_text(encoding="utf-8"))
     items = village_document["response"]["body"]["items"]["item"]
@@ -494,12 +574,26 @@ def process_transport(paths: CandidatePaths) -> tuple[pd.DataFrame, pd.DataFrame
         "dataset_ids": ["TRN-BUSAN-ROUTE-USAGE-2025-001", "TRN-BUSAN-VILLAGE-BUS-001"],
         "route_usage_records": len(route_output),
         "route_usage_reconciliation_failures": reconciliation_failures,
+        "citywide_multi_leg_card_trip_share_pct_2025": round(
+            float(usage["multi_leg_card_trip_count_2025"].sum())
+            / float(usage["card_trip_count_2025"].sum())
+            * 100,
+            6,
+        ),
+        "citywide_youth_child_card_trip_share_pct_2025": round(
+            float(usage["youth_child_card_trip_count_2025"].sum())
+            / float(usage["card_trip_count_2025"].sum())
+            * 100,
+            6,
+        ),
         "village_bus_records": len(village),
         "district_output_records": len(district_output),
-        "decision": "validation-only",
+        "decision": "mixed-supplemental-use",
+        "route_usage_decision": "supplemental-category-indicator",
+        "village_bus_decision": "validation-only",
         "reason": (
-            "Route demand lacks stop geography and village-bus supply is only attributable "
-            "to districts; neither can be allocated to 206 dongs without inventing data."
+            "Route demand is linked to current BIMS route-stop topology as a mixed-date "
+            "category indicator; village-bus supply remains attributable only to districts."
         ),
     }
     return route_output, district_output, report

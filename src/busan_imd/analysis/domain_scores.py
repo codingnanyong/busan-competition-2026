@@ -16,7 +16,7 @@ from busan_imd.core.artifacts import sha256_file, write_json
 DEFAULT_PROFILE = Path(
     "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv"
 )
-DEFAULT_SPEC = Path("docs/data/DOMAIN_SCORE_SPEC_2025.csv")
+DEFAULT_SPEC = Path("docs/data/tables/DOMAIN_SCORE_SPEC_2025.csv")
 DEFAULT_OUTPUT_DIR = Path("data/processed/scores/2025")
 DEFAULT_REPORT = Path("docs/data/manifests/DOMAIN_SCORE_REPORT_2025.json")
 IDENTITY_COLUMNS = ["admin_dong_code", "sido_name", "sigungu_name", "admin_dong_name"]

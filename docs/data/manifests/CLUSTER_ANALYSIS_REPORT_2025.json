@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-24T23:10:40+00:00",
+  "generated_at": "2026-08-26T00:13:55+00:00",
   "reference_year": 2025,
   "analysis_population": "21 B-IMD decile-1 priority areas",
   "record_count": 21,
@@ -91,7 +91,7 @@
     }
   ],
   "input_path": "data/processed/scores/2025/busan_admin_dong_priority_areas_2025.csv",
-  "input_sha256": "848546B9B7BE40932CBF9B4D5B3B79D6151B8FF680F987A4E1EB9A85705566C9",
+  "input_sha256": "22527CA4EBE52AE1505E1C26D000C0704882B89037540102477AE235377CAE78",
   "output_paths": {
     "assignments": "data/processed/scores/2025/busan_admin_dong_deprivation_clusters_2025.csv",
     "candidate_metrics": "data/processed/scores/2025/busan_admin_dong_cluster_metrics_2025.csv"

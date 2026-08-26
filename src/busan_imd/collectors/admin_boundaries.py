@@ -149,8 +149,9 @@ def write_reference_snapshot(
     manifest: dict[str, Any], features: list[dict[str, Any]], year: int, output_dir: Path
 ) -> None:
     """Write the redistributable code table and provenance snapshot for version control."""
-    output_dir.mkdir(parents=True, exist_ok=True)
-    codes_path = output_dir / f"BUSAN_ADMIN_DONG_CODES_{year}.csv"
+    tables_dir = output_dir / "tables"
+    tables_dir.mkdir(parents=True, exist_ok=True)
+    codes_path = tables_dir / f"BUSAN_ADMIN_DONG_CODES_{year}.csv"
     manifest_path = output_dir / "manifests" / f"BUSAN_ADMIN_DONG_MANIFEST_{year}.json"
     rows = code_rows(features, year)
     with codes_path.open("w", encoding="utf-8-sig", newline="") as stream:

@@ -1,40 +1,46 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-24T23:10:40+00:00",
+  "generated_at": "2026-08-26T02:36:51+00:00",
   "reference_year": 2025,
   "admin_dong_count": 206,
-  "category_count": 8,
-  "major_category_count": 3,
-  "indicator_count": 14,
-  "indicator_score_row_count": 2884,
-  "category_score_row_count": 1648,
-  "major_category_score_row_count": 618,
+  "category_count": 10,
+  "major_category_count": 4,
+  "indicator_count": 19,
+  "indicator_score_row_count": 3914,
+  "category_score_row_count": 2060,
+  "major_category_score_row_count": 824,
   "policy_trigger_threshold": 70,
   "small_area_rate_shrinkage_population": 5000,
   "decision": "use_for_transparent_category_policy_screening_after_validation",
   "limitations": [
     "Estimated and proxy inputs are retained with row-level evidence labels",
     "Category scores are relative Busan percentiles, not absolute service standards",
+    "Traffic safety uses 48 selected hotspots, not a complete dong-level crash census",
+    "Transit route demand uses current route topology because a dated 2025 topology is unavailable",
     "Policy examples require observed administrative data and field validation"
   ],
   "input_paths": {
     "profile": "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv",
-    "spec": "docs/data/CATEGORY_ASSESSMENT_SPEC_2025.csv",
-    "policy_catalog": "docs/data/CATEGORY_POLICY_CATALOG_2025.csv"
+    "spec": "docs/data/tables/CATEGORY_ASSESSMENT_SPEC_2025.csv",
+    "policy_catalog": "docs/data/tables/CATEGORY_POLICY_CATALOG_2025.csv",
+    "boundaries": "data/raw/sgis/admin_boundaries/2025/busan_admin_dong_boundaries_2025_valid.geojson",
+    "traffic_accident_hotspots": "data/raw/koroad/traffic_accidents/hotspots/2024/busan_traffic_accident_hotspots_2024.csv"
   },
   "input_sha256": {
-    "profile": "45901948F9A998B864DB4BAD6019CD257D2983E4FA0A2D37A7F6EC203F7A4479",
-    "spec": "F91D468555FA743EF0B6EBBCCBB2EC00EDCDD2265D61F21D51583AB8E2D31911",
-    "policy_catalog": "EBB3DEA2F77036EEDFB1F305262CE14414D71EA46A6E88BC923FAC0A6E668A2F"
+    "profile": "1A3A622D1BA396B25FF5FE7AE7CA945EA2EAEE105BDF2D6CF745C132132A8794",
+    "spec": "898C6E7CBDA129C77357AA933EDDE62642AEFAB12E7545FD8E4B0F3F18ED6899",
+    "policy_catalog": "C0C9D3B80A9F8434CE3BA89EB38FB01039C6773112659F3F2C70480D25D66066",
+    "boundaries": "7CC99595FC753F81C7B9A9D480B8EBBF3114808A1496D46FC6662C21BF362487",
+    "traffic_accident_hotspots": "93CAFF9379675CB22EEAC657C54713A2204CC008C0FA553C781798833B42AABD"
   },
   "output_paths": {
-    "category_assessment": "outputs/infographic/busan_admin_dong_category_assessment_2025.csv",
-    "major_category_assessment": "outputs/infographic/busan_admin_dong_major_category_assessment_2025.csv",
-    "indicator_scores": "outputs/infographic/busan_admin_dong_category_indicator_scores_2025.csv"
+    "category_assessment": "outputs/infographic/2025/tables/busan_admin_dong_category_assessment_2025.csv",
+    "major_category_assessment": "outputs/infographic/2025/tables/busan_admin_dong_major_category_assessment_2025.csv",
+    "indicator_scores": "outputs/infographic/2025/tables/busan_admin_dong_category_indicator_scores_2025.csv"
   },
   "output_sha256": {
-    "category_assessment": "D26F987A7EF2FC11D90D353FCF013EE3796B929749BF9F00887FD7B65AD69027",
-    "major_category_assessment": "4D33B51E3F6012703D19780E76C176BDA826265EB4E1EC434A1712947B52A9A5",
-    "indicator_scores": "05782DF46D26C61348647B731E3B3151638E76CDA60F5790283DDBDA59FBD76A"
+    "category_assessment": "BEDB1EC89BC7ECE4D4CEBB5E634EA29F149FC21861859737F4613F8312C2B442",
+    "major_category_assessment": "C40BCDFDE429FA17E4EE215D97D732938EB47D8EB68FF547252162567FFCA5A1",
+    "indicator_scores": "DC6B32CFC72999832687FDD6B345F139BABC0D897C7FD51F5E84FEFC330DE6E8"
   }
 }

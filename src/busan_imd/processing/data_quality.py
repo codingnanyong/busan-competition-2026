@@ -17,7 +17,7 @@ DEFAULT_PROFILE = Path(
     "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv"
 )
 DEFAULT_STANDARDIZATION_REPORT = Path("docs/data/manifests/STANDARDIZATION_REPORT_2025.json")
-DEFAULT_DICTIONARY = Path("docs/data/DATA_DICTIONARY_2025.csv")
+DEFAULT_DICTIONARY = Path("docs/data/tables/DATA_DICTIONARY_2025.csv")
 DEFAULT_REPORT = Path("docs/data/manifests/DATA_QUALITY_REPORT_2025.json")
 
 
@@ -100,6 +100,99 @@ def column_spec(column: str) -> ColumnSpec:
             column,
             "582 source points fall outside canonical polygons",
         )
+    if column in {
+        "matched_bus_routes_2025_current_proxy",
+        "demand_weighted_bus_route_access_2025_current_proxy",
+    }:
+        return ColumnSpec(
+            "TRN-BUSAN-ROUTE-USAGE-2025-001|TRN-BUSAN-BIMS-CURRENT-001",
+            "supplemental_category_indicator",
+            "2025 demand with current route topology",
+            "routes or summed log1p annual card trips",
+            "exact route-number join and 2025 stop-ID spatial mapping",
+            "lower is more deprived",
+            column,
+            "Current route topology is not a dated 2025 route snapshot",
+        )
+    if column in {
+        "current_routes_with_service_schedule",
+        "scheduled_bus_service_opportunities_current_proxy",
+        "late_bus_service_opportunities_current_proxy",
+        "late_bus_service_share_pct_current_proxy",
+    }:
+        return ColumnSpec(
+            "TRN-BUSAN-BIMS-CURRENT-001",
+            "supplemental_category_indicator",
+            "current snapshot",
+            "routes or estimated service opportunities/day",
+            "operating span divided by normal headway over unique routes serving each dong",
+            "lower is more deprived",
+            column,
+            "Current published schedule proxy, not dated 2025 observed departures",
+        )
+    if column.startswith("boundary_adjusted_"):
+        return ColumnSpec(
+            "BOUNDARY-ADJACENT-SERVICE-CONTEXT",
+            "validation_only",
+            "2025 inventory or current context",
+            "distance-decayed facility equivalents",
+            "inside-dong weight one and exponential decay for nearby out-of-dong facilities",
+            "none",
+            column,
+            "Straight-line boundary distance is not a walking route, entrance, or capacity",
+        )
+    if column in {
+        "bus_service_opportunities_per_1000_total_living_population_context",
+        "bus_service_opportunities_per_1000_senior_living_population_context",
+        "core_school_teachers_per_1000_under_20_living_population_2025_context",
+        "healthcare_facilities_per_1000_senior_living_population_2025_context",
+        "heat_shelters_per_1000_senior_living_population_2025_context",
+    }:
+        return ColumnSpec(
+            "DEM-BUSAN-LIVING-001|SERVICE-SUPPLY-CONTEXT",
+            "validation_only",
+            "2025 demand with compatible or current supply",
+            "service opportunities or facilities per 1,000 living population",
+            "service supply divided by annual mean living-population demand context",
+            "none",
+            column,
+            "Telecom living population is not resident deprivation or observed utilization",
+        )
+    if column.startswith("reachable_"):
+        return ColumnSpec(
+            "TRN-BUSAN-ROUTE-USAGE-2025-001|TRN-BUSAN-BIMS-CURRENT-001",
+            "validation_only",
+            "2025 demand with current route topology",
+            "card trips or percent",
+            "2025 route composition allocated to every dong served by each current route",
+            "none",
+            column,
+            "Route-reach composition is not observed resident or stop-level demand",
+        )
+    if column == "late_bus_demand_service_mismatch_percentile_2023_current_validation":
+        return ColumnSpec(
+            "TRN-BUSAN-BOARDING-2023-001|TRN-BUSAN-BIMS-CURRENT-001",
+            "validation_only",
+            "2023-07-31 demand with current scheduled service",
+            "percentile",
+            "mean of high late-demand and low late-service percentile ranks",
+            "none",
+            column,
+            "Combines 2023 stop demand with a current schedule proxy; not a 2025 service deficit",
+        )
+    if column.startswith("bus_boarding_") or column.startswith(
+        ("bus_alighting_", "peak_bus_demand_", "late_bus_demand_")
+    ):
+        return ColumnSpec(
+            "TRN-BUSAN-BOARDING-2023-001|TRN-BUSAN-BIMS-CURRENT-001",
+            "validation_only",
+            "2023-07-31 demand with current route names and 2025 stop locations",
+            "boardings/alightings or percent",
+            "exact route and stop-name match to a unique current administrative dong",
+            "none",
+            column,
+            "Historical mixed-date validation only; unmatched route-stop records are excluded",
+        )
     if column.startswith("hospital_"):
         return _facility_spec("HLT-HOSPITAL-001", column)
     if column.startswith("clinic_"):
@@ -170,6 +263,33 @@ def column_spec(column: str) -> ColumnSpec:
             "none",
             column,
             "Service-demand context, not deprivation",
+        )
+    if column in {
+        "senior_living_population_share_pct_2025",
+        "under_20_living_population_share_pct_2025",
+        "under_30_living_population_share_pct_2025",
+        "daytime_to_residential_living_population_ratio_2025",
+    }:
+        return ColumnSpec(
+            "DEM-BUSAN-LIVING-001",
+            "validation_only",
+            "2025",
+            "percent or ratio",
+            "annual mean age and activity-type living-population composition",
+            "none",
+            column,
+            "Service-demand context, not deprivation or resident demographic structure",
+        )
+    if column == "core_school_students_within_2000m_2025":
+        return ColumnSpec(
+            "EDU-SCHOOL-001|EDU-SCHOOLINFO-2025-001",
+            "validation_only",
+            "2025",
+            "students",
+            "2025 SchoolInfo enrollment joined to official coordinates within 2 km of centroid",
+            "none",
+            column,
+            "Enrollment is observed by school; centroid-based access allocation is a spatial proxy",
         )
     if column == "core_school_teachers_within_2000m_2025":
         return ColumnSpec(
