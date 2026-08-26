@@ -3,9 +3,9 @@
 - Project: [Busan IMD Living-Vulnerability Analysis 2026](https://linear.app/codingnanyong/project/부산-imd-생활취약지역-분석-2026-83133e455764)
 - Team: `COD`
 - Assignee: `codingnanyong`
-- Initial state: `Todo`
 
-Linear and GitHub Issues are one-to-one copies of the same work item. Linear manages schedule, priority, and milestones; GitHub Issues provide public traceability and PR completion.
+Mirroring rules and branch/PR format are in the [Git workflow](GIT_WORKFLOW.md). Create Linear
+issues with the [integration operations guide](INTEGRATIONS.md).
 
 | Milestone | Linear | GitHub | Work item |
 |---|---|---|---|
@@ -44,5 +44,3 @@ Linear and GitHub Issues are one-to-one copies of the same work item. Linear man
 | — | [COD-37](https://linear.app/codingnanyong/issue/COD-37) | [#72](https://github.com/codingnanyong/busan-competition-2026/issues/72) | Keep missing BIMS schedules as missing and fix route-stop paths and boarding hashes |
 | — | [COD-38](https://linear.app/codingnanyong/issue/COD-38) | [#74](https://github.com/codingnanyong/busan-competition-2026/issues/74) | Stop merged PR policy false failures and ship v0.8.1 |
 | — | [COD-39](https://linear.app/codingnanyong/issue/COD-39) | [#77](https://github.com/codingnanyong/busan-competition-2026/issues/77) | Attach new Linear issues to the contest project |
-
-Use `feat/<linear-id>-<slug>` branches, for example `feat/cod-15-eda`. Pull requests include both `Closes COD-15` and `Closes #24`.

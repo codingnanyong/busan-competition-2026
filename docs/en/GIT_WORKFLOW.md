@@ -34,10 +34,8 @@ Only the initial repository commit is allowed as a bootstrap exception. Direct p
 - CI verifies that the branch, title, Linear ID, and mirrored GitHub Issue all identify the same work item.
 - Update both Korean and English documentation when analytical results, data contracts, or user-visible behavior change.
 - Squash merge only after CI, reproducibility checks, and acceptance criteria pass.
-- On merge to `develop`, the workflow closes the GitHub Issue and the Linear integration synchronizes the Linear issue to Done.
-- When completion notifications are enabled, the workflow verifies both GitHub Issue Closed and Linear completion before posting the PR result to Slack.
-- If Linear does not complete within the polling window or Slack delivery fails, no success message is sent and the Actions job fails.
 - Delete the remote `feat/*` branch immediately after the merge completes.
+- Issue close and Slack completion notifications follow the [integration operations guide](INTEGRATIONS.md).
 
 ## Issue mirroring rules
 
@@ -63,17 +61,13 @@ Only the initial repository commit is allowed as a bootstrap exception. Direct p
 - The pull request is merged into `develop`.
 - The GitHub Issue is closed as completed and the Linear issue is synchronized to Done.
 - The merged remote work branch is deleted.
-- The enabled completion notification is delivered to the configured Slack conversation.
+- The enabled completion notification is delivered in Slack as described in the [integration operations guide](INTEGRATIONS.md).
 
 ## GitHub, Linear, and Slack connection setup
 
-Repository completion notifications are disabled by default. A repository administrator enables them only after configuring these Actions Secrets and Variable:
-
-- Secret `LINEAR_API_KEY`: a Linear personal API key that can read `COD` team issues
-- Secret `SLACK_WEBHOOK_URL`: an Incoming Webhook URL connected to the target Slack conversation
-- Variable `COMPLETION_NOTIFICATIONS_ENABLED`: set to `true` after both secrets are configured and tested
-
-Never store credentials in `.env`, pull-request bodies, issues, or logs. Follow the [integration operations guide](INTEGRATIONS.md) for setup and verification.
+Record secret registration, Linear issue creation, and completion-notification checks only in
+the [integration operations guide](INTEGRATIONS.md). Never store credentials in `.env`,
+pull-request bodies, issues, or logs.
 
 ## Recommended branch protection
 

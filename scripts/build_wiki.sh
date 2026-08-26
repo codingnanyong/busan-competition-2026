@@ -30,6 +30,7 @@ publish_page README.en.md EN-Home
 
 publish_page docs/PROJECT_PLAN.md KO-Project-Plan
 publish_page docs/GIT_WORKFLOW.md KO-Git-Workflow
+publish_page docs/INTEGRATIONS.md KO-Integrations
 publish_page docs/RELEASE_POLICY.md KO-Release-Policy
 publish_page docs/ISSUES.md KO-Linear-Issues
 publish_page docs/data/DATA_CATALOG.md KO-Data-Catalog
@@ -51,6 +52,7 @@ publish_page docs/methodology/EXPANSION_MODEL.md KO-Expansion-Model
 
 publish_page docs/en/PROJECT_PLAN.md EN-Project-Plan
 publish_page docs/en/GIT_WORKFLOW.md EN-Git-Workflow
+publish_page docs/en/INTEGRATIONS.md EN-Integrations
 publish_page docs/en/RELEASE_POLICY.md EN-Release-Policy
 publish_page docs/en/ISSUES.md EN-Linear-Issues
 publish_page docs/en/data/DATA_CATALOG.md EN-Data-Catalog
@@ -88,6 +90,7 @@ printf '%s\n' \
   '- [[홈|KO-Home]]' \
   '- [[프로젝트 계획|KO-Project-Plan]]' \
   '- [[Git 워크플로|KO-Git-Workflow]]' \
+  '- [[연동 운영|KO-Integrations]]' \
   '- [[릴리스 정책|KO-Release-Policy]]' \
   '- [[Linear 이슈|KO-Linear-Issues]]' \
   '- [[데이터 카탈로그|KO-Data-Catalog]]' \
@@ -110,6 +113,7 @@ printf '%s\n' \
   '- [[Home|EN-Home]]' \
   '- [[Project Plan|EN-Project-Plan]]' \
   '- [[Git Workflow|EN-Git-Workflow]]' \
+  '- [[Integrations|EN-Integrations]]' \
   '- [[Release Policy|EN-Release-Policy]]' \
   '- [[Linear Issues|EN-Linear-Issues]]' \
   '- [[Data Catalog|EN-Data-Catalog]]' \

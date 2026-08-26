@@ -27,9 +27,11 @@ Every merge to `main` must carry a unique version. The release fails if the tag 
 - `README.en.md`: English project home
 - `docs/*.md`: Korean canonical project documents
 - `docs/en/*.md`: English counterparts
-- `docs/releases/`: bilingual-facing Korean release notes
+- `docs/GIT_WORKFLOW.md`: branch, PR, and issue policy
+- `docs/INTEGRATIONS.md`: Linear issue creation and Slack completion operations
+- `docs/releases/`: Korean release notes
 - `docs/en/releases/`: English release notes
-- Future `docs/data/` and `docs/en/data/`: data catalog and dictionary
-- Future `docs/methodology/` and `docs/en/methodology/`: indicators, normalization, weights, and sensitivity analysis
+- `docs/data/` and `docs/en/data/`: data catalog and dictionary
+- `docs/methodology/` and `docs/en/methodology/`: indicators, normalization, weights, and sensitivity analysis
 
 Wiki pages are generated with `KO-*` and `EN-*` prefixes plus a shared `_Sidebar.md`. A document change is complete only when its required counterpart is updated or the pull request explicitly explains why translation is not applicable.

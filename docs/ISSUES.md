@@ -3,9 +3,9 @@
 - 프로젝트: [부산 IMD 생활취약지역 분석 2026](https://linear.app/codingnanyong/project/부산-imd-생활취약지역-분석-2026-83133e455764)
 - 팀: `COD`
 - 담당자: `codingnanyong`
-- 상태: 초기 생성 시 모두 `Todo`
 
-Linear와 GitHub Issues는 같은 작업의 1:1 복사본입니다. Linear는 일정·우선순위·마일스톤을 관리하고, GitHub Issue는 공개 추적과 PR 종료를 담당합니다.
+미러 규칙과 브랜치·PR 형식은 [Git 워크플로](GIT_WORKFLOW.md), Linear 이슈 생성은
+[연동 운영 가이드](INTEGRATIONS.md)를 따른다.
 
 | 마일스톤 | Linear | GitHub | 작업 |
 |---|---|---|---|
@@ -44,5 +44,3 @@ Linear와 GitHub Issues는 같은 작업의 1:1 복사본입니다. Linear는 �
 | — | [COD-37](https://linear.app/codingnanyong/issue/COD-37) | [#72](https://github.com/codingnanyong/busan-competition-2026/issues/72) | 배차 결측을 0으로 합산하지 않고 노선정류장 경로와 승하차 해시를 고친다 |
 | — | [COD-38](https://linear.app/codingnanyong/issue/COD-38) | [#74](https://github.com/codingnanyong/busan-competition-2026/issues/74) | 병합된 PR 재검사 실패 알림을 막고 v0.8.1을 배포한다 |
 | — | [COD-39](https://linear.app/codingnanyong/issue/COD-39) | [#77](https://github.com/codingnanyong/busan-competition-2026/issues/77) | Linear 이슈 생성 때 공모전 프로젝트를 지정한다 |
-
-브랜치는 `feat/<linear-id>-<slug>` 형식을 사용합니다. 예: `feat/cod-15-eda`. PR은 `Closes COD-15`와 `Closes #24`를 함께 포함합니다.

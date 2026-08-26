@@ -34,10 +34,8 @@ feat/<linear-id>-<slug>
 - CI는 브랜치·제목·Linear ID가 일치하고 GitHub Issue 제목이 같은 Linear ID로 시작하는지 확인합니다.
 - 분석 결과, 데이터 스키마 또는 사용자 동작이 바뀌면 관련 국문·영문 문서를 같은 PR에서 갱신합니다.
 - CI, 재현성 검사와 완료조건을 통과한 뒤 squash merge합니다.
-- `develop` 병합 시 워크플로가 GitHub Issue를 닫고, Linear 연동이 Linear 이슈를 Done으로 동기화합니다.
-- 완료 알림이 활성화되어 있으면 워크플로가 GitHub Issue Closed와 Linear 완료 상태를 모두 확인한 뒤 Slack으로 PR 결과를 전송합니다.
-- Linear가 제한 시간 안에 완료되지 않거나 Slack 전송이 실패하면 성공 알림을 보내지 않고 Actions 실행을 실패 처리합니다.
 - 병합이 완료되면 원격 `feat/*` 브랜치를 즉시 삭제합니다.
+- 이슈 종료와 Slack 완료 알림은 [연동 운영 가이드](INTEGRATIONS.md)를 따릅니다.
 
 ## 이슈 미러링 규칙
 
@@ -63,17 +61,12 @@ feat/<linear-id>-<slug>
 - PR이 `develop`에 병합됨
 - GitHub Issue가 `completed`로 닫히고 Linear 이슈가 Done으로 동기화됨
 - 병합된 원격 작업 브랜치가 삭제됨
-- 활성화된 완료 알림이 Slack 대상 대화에 전달됨
+- 활성화된 완료 알림이 [연동 운영 가이드](INTEGRATIONS.md)대로 Slack에 전달됨
 
 ## GitHub·Linear·Slack 연결 설정
 
-저장소의 완료 알림 코드는 기본적으로 비활성화되어 있습니다. 저장소 관리자가 다음 Actions Secret과 Variable을 등록한 뒤 활성화합니다.
-
-- Secret `LINEAR_API_KEY`: `COD` 팀 이슈를 읽을 수 있는 Linear 개인 API 키
-- Secret `SLACK_WEBHOOK_URL`: 알림을 받을 Slack 대화에 연결된 Incoming Webhook URL
-- Variable `COMPLETION_NOTIFICATIONS_ENABLED`: 두 Secret을 등록하고 시험한 뒤 `true`로 설정
-
-자격정보는 `.env`, PR 본문, 이슈 또는 로그에 기록하지 않습니다. 상세 설정과 검증 절차는 [연동 운영 가이드](INTEGRATIONS.md)를 따릅니다.
+Secret 등록, Linear 이슈 생성, 완료 알림 검증은 [연동 운영 가이드](INTEGRATIONS.md)에만
+적습니다. 자격정보는 `.env`, PR 본문, 이슈 또는 로그에 기록하지 않습니다.
 
 ## 권장 브랜치 보호 설정
 

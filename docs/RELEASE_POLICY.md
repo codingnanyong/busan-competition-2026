@@ -27,10 +27,11 @@ Semantic Versioning(`MAJOR.MINOR.PATCH`)을 사용합니다.
 - `README.en.md`: 영문 프로젝트 홈
 - `docs/PROJECT_PLAN.md`: 마일스톤·백로그·리스크
 - `docs/GIT_WORKFLOW.md`: 브랜치·PR·이슈 정책
+- `docs/INTEGRATIONS.md`: Linear 이슈 생성과 Slack 완료 알림 운영
 - `docs/RELEASE_POLICY.md`: 버전·릴리스·Wiki 정책
 - `docs/releases/`: 버전별 릴리스 설명
 - `docs/en/`: 영문 대응 문서
-- 향후 `docs/data/`: 데이터 카탈로그·데이터 사전
-- 향후 `docs/methodology/`: 지표·정규화·가중치·민감도 분석
+- `docs/data/`: 데이터 카탈로그·데이터 사전
+- `docs/methodology/`: 지표·정규화·가중치·민감도 분석
 
 Wiki는 `KO-*`, `EN-*` 페이지와 공통 `_Sidebar.md`를 생성합니다. 번역이 필요하지 않은 변경은 PR에 그 이유를 명시하고, 그 외 문서 변경은 국문과 영문을 함께 갱신해야 완료로 인정합니다.
