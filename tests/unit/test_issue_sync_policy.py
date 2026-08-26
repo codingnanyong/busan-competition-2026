@@ -23,6 +23,7 @@ def test_pr_policy_validates_and_closes_the_mirrored_github_issue() -> None:
     assert "Verify Linear and GitHub issue pair" in workflow
     assert "close-mirrored-github-issue:" in workflow
     assert "github.event.pull_request.merged == true" in workflow
+    assert "github.event.action != 'closed' && github.event.pull_request.merged != true" in workflow
     assert 'state_reason: "completed"' in workflow
     assert "github.event.action != 'closed' && github.base_ref == 'main'" in workflow
 
@@ -37,6 +38,8 @@ def test_bilingual_issue_maps_contain_every_mirror_pair() -> None:
     mappings[34] = 62
     mappings[35] = 67
     mappings[36] = 69
+    mappings[37] = 72
+    mappings[38] = 74
 
     for path in ("docs/ISSUES.md", "docs/en/ISSUES.md"):
         issue_map = read_text(path)

@@ -50,3 +50,26 @@ def test_parse_and_collect_current_routes_without_scoring_claim(tmp_path: Path) 
     assert manifest["analysis_role"] == "supplemental_category_indicator"
     assert manifest["cutoff_status"] == "outside_2025_primary_period"
     assert "secret" not in manifest_path.read_text(encoding="utf-8")
+
+
+def test_collect_creates_nested_route_stops_csv_directory(tmp_path: Path) -> None:
+    raw_path = tmp_path / "routes.xml"
+    csv_path = tmp_path / "csv" / "nested" / "routes.csv"
+    route_stops_csv_path = tmp_path / "stops" / "nested" / "route-stops.csv"
+    manifest_path = tmp_path / "manifests" / "manifest.json"
+
+    def fetcher(url: str) -> bytes:
+        return STOP_PAYLOAD if "busInfoByRouteId" in url else PAYLOAD
+
+    collect(
+        "encoded%2Fsecret%3D",
+        raw_path,
+        csv_path,
+        manifest_path,
+        fetcher,
+        route_stops_csv_path,
+    )
+
+    assert csv_path.exists()
+    assert route_stops_csv_path.exists()
+    assert manifest_path.exists()

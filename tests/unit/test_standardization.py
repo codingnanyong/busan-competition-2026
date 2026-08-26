@@ -89,31 +89,52 @@ def test_spatial_counts_reports_unmatched_points_without_assigning_them() -> Non
 
 
 def test_route_demand_access_maps_unique_routes_and_logs_annual_usage() -> None:
-    boundaries = synthetic_boundaries().set_crs("EPSG:4326", allow_override=True)
+    boundaries = gpd.GeoDataFrame(
+        {
+            "admin_dong_code": ["21000001", "21000002", "21000003"],
+            "adm_nm": [
+                "부산광역시 테스트구 가동",
+                "부산광역시 테스트구 나동",
+                "부산광역시 테스트구 다동",
+            ],
+        },
+        geometry=[box(0, 0, 1, 1), box(1, 0, 2, 1), box(2, 0, 3, 1)],
+        crs="EPSG:4326",
+    )
     bus_stops = gpd.GeoDataFrame(
-        {"bstopid": ["a", "b", "c", "d", "e"], "arsno": ["1", "2", "3", "4", "5"]},
-        geometry=[Point(0.2, 0.2), Point(1.2, 0.2), Point(0.4, 0.4), Point(3, 3), Point(0.6, 0.6)],
+        {
+            "bstopid": ["a", "b", "c", "d", "e", "f"],
+            "arsno": ["1", "2", "3", "4", "5", "6"],
+        },
+        geometry=[
+            Point(0.2, 0.2),
+            Point(1.2, 0.2),
+            Point(0.4, 0.4),
+            Point(3.5, 3.5),
+            Point(0.6, 0.6),
+            Point(2.2, 0.2),
+        ],
         crs="EPSG:4326",
     )
     route_stops = pd.DataFrame(
         {
-            "buslinenum": ["10", "10", "20", "20", "30"],
-            "nodeid": ["a", "b", "c", "d", "e"],
-            "arsno": ["1", "2", "3", "4", "5"],
+            "buslinenum": ["10", "10", "20", "20", "30", "40"],
+            "nodeid": ["a", "b", "c", "d", "e", "f"],
+            "arsno": ["1", "2", "3", "4", "5", "6"],
         }
     )
     usage = pd.DataFrame(
         {
-            "route_no": ["10", "20", "missing"],
-            "card_trip_count_2025": [99, 9, 999],
+            "route_no": ["10", "20", "40", "missing"],
+            "card_trip_count_2025": [99, 9, 5, 999],
         }
     )
     service = pd.DataFrame(
         {
-            "buslinenum": ["10", "20", "30"],
-            "firsttime": ["05:00", "06:00", ""],
-            "endtime": ["23:00", "22:00", ""],
-            "headwaynorm": [10, 20, None],
+            "buslinenum": ["10", "20", "30", "40"],
+            "firsttime": ["05:00", "06:00", "", ""],
+            "endtime": ["23:00", "22:00", "", ""],
+            "headwaynorm": [10, 20, None, None],
         }
     )
 
@@ -130,8 +151,16 @@ def test_route_demand_access_maps_unique_routes_and_logs_annual_usage() -> None:
     assert indexed.loc[
         "21000001", "scheduled_bus_service_opportunities_current_proxy"
     ] == pytest.approx(156)
-    assert report["matched_route_count"] == 2
-    assert report["route_match_rate"] == pytest.approx(2 / 3, abs=1e-6)
+    assert indexed.loc["21000001", "current_routes_with_service_schedule"] == 2
+    assert pd.isna(
+        indexed.loc["21000003", "scheduled_bus_service_opportunities_current_proxy"]
+    )
+    assert pd.isna(
+        indexed.loc["21000003", "late_bus_service_opportunities_current_proxy"]
+    )
+    assert indexed.loc["21000003", "current_routes_with_service_schedule"] == 0
+    assert report["matched_route_count"] == 3
+    assert report["route_match_rate"] == pytest.approx(3 / 4, abs=1e-6)
 
 
 def test_historical_stop_demand_validation_keeps_only_unique_route_name_matches() -> None:

@@ -291,6 +291,11 @@ def _minutes_since_midnight(value: object) -> float:
     return float(int(hours) * 60 + int(minutes))
 
 
+def _sum_observed(values: pd.Series) -> float:
+    """Sum finite values and keep all-missing groups as missing."""
+    return values.sum(min_count=1)
+
+
 def route_demand_access(
     boundaries: gpd.GeoDataFrame,
     bus_stops: gpd.GeoDataFrame,
@@ -437,11 +442,11 @@ def route_demand_access(
             ),
             scheduled_bus_service_opportunities_current_proxy=(
                 "estimated_daily_service_opportunities_current",
-                "sum",
+                _sum_observed,
             ),
             late_bus_service_opportunities_current_proxy=(
                 "estimated_late_service_opportunities_current",
-                "sum",
+                _sum_observed,
             ),
         )
         service_by_dong["late_bus_service_share_pct_current_proxy"] = (
@@ -819,14 +824,17 @@ def build_standardized_profile(
     ].fillna(0.0)
     route_zero_columns = [
         "current_routes_with_service_schedule",
-        "scheduled_bus_service_opportunities_current_proxy",
-        "late_bus_service_opportunities_current_proxy",
         "reachable_card_trip_count_2025_current_proxy",
         "reachable_multi_leg_card_trip_count_2025_current_proxy",
         "reachable_youth_child_card_trip_count_2025_current_proxy",
     ]
     for column in route_zero_columns:
         profile[column] = pd.to_numeric(profile[column], errors="coerce").fillna(0.0)
+    for column in (
+        "scheduled_bus_service_opportunities_current_proxy",
+        "late_bus_service_opportunities_current_proxy",
+    ):
+        profile[column] = pd.to_numeric(profile[column], errors="coerce")
 
     boarding = read_csv_fallback(
         paths.bus_boarding_2023,
@@ -838,7 +846,12 @@ def build_standardized_profile(
         route_stops,
         boarding,
     )
-    reports.append(attach_source_metadata(report, paths.bus_boarding_2023))
+    reports.append(
+        attach_combined_source_metadata(
+            report,
+            [paths.bus_boarding_2023, paths.route_stops_current, paths.bus_stops],
+        )
+    )
     profile = profile.merge(
         boarding_context,
         on="admin_dong_code",

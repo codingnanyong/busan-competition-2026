@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import numpy as np
 import pandas as pd
 import pytest
 
@@ -82,6 +83,28 @@ def test_build_creates_complete_transparent_category_contract() -> None:
     assert traffic.loc[traffic["raw_or_derived_value"] == 0, "deprivation_percentile_0_100"].eq(
         0
     ).all()
+
+
+def test_build_ranks_observed_service_schedules_and_leaves_missing_unscored() -> None:
+    source = profile()
+    source.loc[0, "scheduled_bus_service_opportunities_current_proxy"] = np.nan
+
+    indicators, categories, _, _ = build(source, load_spec())
+    service = indicators[
+        indicators["indicator"] == "scheduled_bus_service_opportunities_current_proxy"
+    ]
+    missing = service[service["admin_dong_code"] == "000"]
+    observed = service[service["admin_dong_code"] != "000"]
+    transit = categories[
+        (categories["admin_dong_code"] == "000") & (categories["category"] == "transit_access")
+    ]
+
+    assert missing["deprivation_percentile_0_100"].isna().all()
+    assert not bool(missing["indicator_policy_triggered"].any())
+    assert missing["confidence_level"].eq("low").all()
+    assert observed["deprivation_percentile_0_100"].between(0, 100).all()
+    assert transit["category_score_0_100"].notna().all()
+    assert float(transit["category_score_0_100"].iloc[0]) <= 80
 
 
 def test_small_area_rate_shrinkage_reduces_denominator_extremes() -> None:
