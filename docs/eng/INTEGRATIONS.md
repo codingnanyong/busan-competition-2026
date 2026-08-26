@@ -18,7 +18,7 @@ false failure alert.
 
 ### 1. Linear API key
 
-Create a key under **Linear Settings → Security & access → Personal API keys**. The key owner must be able to read issues and statuses for the `COD` team.
+Create a key under **Linear Settings → Security & access → Personal API keys**. The key owner must be able to create `COD` issues, attach them to the contest project, and read issue statuses.
 
 Store it in **GitHub repository Settings → Secrets and variables → Actions → Secrets** as:
 
@@ -56,7 +56,7 @@ gh variable set COMPLETION_NOTIFICATIONS_ENABLED --body true \
 ## Required permissions
 
 - GitHub: repository administration access to manage Actions Secrets and Variables
-- Linear: permission to create a personal API key and read `COD` team issues
+- Linear: permission to create a personal API key that can create `COD` issues, attach them to the contest project, and read their status
 - Slack: permission to install an app or add an Incoming Webhook and invite it to the target conversation
 - Linear GitHub integration: a team workflow that moves the linked Linear issue to Done when a PR merges into `develop`
 
@@ -77,9 +77,9 @@ Create new COD issues with the `Create Linear issue` workflow. It attaches each 
 Creation fails instead of opening an unscoped issue if that project is missing.
 
 ```bash
-gh workflow run create-linear-issue.yml --ref develop \
+gh workflow run create-linear-issue.yml \
   -f title="work title" \
   -f description="goal and acceptance"
 ```
 
-Use `--ref develop` until the workflow is on `main`.
+The workflow must exist on the default branch `main` before the Actions UI or `gh workflow run` can dispatch it.

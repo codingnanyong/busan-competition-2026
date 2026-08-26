@@ -24,7 +24,7 @@ jobs:
         env:
           LINEAR_API_KEY: ${{ secrets.LINEAR_API_KEY }}
           LINEAR_TEAM_KEY: COD
-          LINEAR_PROJECT_SLUG: 83133e455764
+          LINEAR_PROJECT_SLUG: "83133e455764"
           LINEAR_PROJECT_NAME: 부산 IMD 생활취약지역 분석 2026
           LINEAR_ISSUE_TITLE: ${{ inputs.title }}
           LINEAR_ISSUE_DESCRIPTION: ${{ inputs.description }}

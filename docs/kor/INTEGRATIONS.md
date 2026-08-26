@@ -17,7 +17,7 @@ GitHub Issue가 이미 닫혀 있어, 병합 전 열림 검사를 다시 하면 
 
 ### 1. Linear API 키
 
-Linear의 **Settings → Security & access → Personal API keys**에서 키를 생성합니다. `COD` 팀의 이슈와 상태를 읽을 수 있는 계정의 키가 필요합니다.
+Linear의 **Settings → Security & access → Personal API keys**에서 키를 생성합니다. `COD` 팀 이슈를 만들고, 공모전 프로젝트에 붙이며, 완료 상태를 읽을 수 있는 계정의 키가 필요합니다.
 
 GitHub 저장소 **Settings → Secrets and variables → Actions → Secrets**에 다음 이름으로 저장합니다.
 
@@ -55,7 +55,7 @@ gh variable set COMPLETION_NOTIFICATIONS_ENABLED --body true \
 ## 필요한 권한
 
 - GitHub: 저장소 Actions Secret과 Variable을 관리할 수 있는 관리자 권한
-- Linear: 개인 API 키 생성 권한과 `COD` 팀 이슈 읽기 권한
+- Linear: 개인 API 키 생성 권한과 `COD` 팀 이슈 생성·프로젝트 연결·상태 읽기 권한
 - Slack: 앱 설치 또는 Incoming Webhook 추가 권한, 대상 대화에 앱을 추가할 권한
 - Linear GitHub 연동: `develop` 병합 시 연결된 Linear 이슈를 Done으로 바꾸는 팀 워크플로 자동화
 
@@ -75,9 +75,9 @@ gh variable set COMPLETION_NOTIFICATIONS_ENABLED --body true \
 함께 지정하며, 프로젝트를 찾지 못하면 이슈를 만들지 않습니다.
 
 ```bash
-gh workflow run create-linear-issue.yml --ref develop \
+gh workflow run create-linear-issue.yml \
   -f title="작업 제목" \
   -f description="목표와 완료조건"
 ```
 
-워크플로가 `main`에 올라오기 전에는 `--ref develop`이 필요합니다.
+이 워크플로는 기본 브랜치 `main`에 있어야 Actions UI와 `gh workflow run`으로 실행됩니다.

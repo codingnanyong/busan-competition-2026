@@ -24,7 +24,7 @@ def test_create_linear_issue_workflow_requires_the_contest_project() -> None:
 
     assert "workflow_dispatch:" in workflow
     assert "LINEAR_TEAM_KEY: COD" in workflow
-    assert "LINEAR_PROJECT_SLUG: 83133e455764" in workflow
+    assert 'LINEAR_PROJECT_SLUG: "83133e455764"' in workflow
     assert "LINEAR_PROJECT_NAME: 부산 IMD 생활취약지역 분석 2026" in workflow
 
 
