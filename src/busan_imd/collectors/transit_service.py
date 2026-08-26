@@ -139,7 +139,8 @@ def collect(
             )
         )
     route_stops = pd.concat(stop_frames, ignore_index=True)
-    raw_path.parent.mkdir(parents=True, exist_ok=True)
+    for path in (raw_path, csv_path, route_stops_csv_path, manifest_path):
+        path.parent.mkdir(parents=True, exist_ok=True)
     raw_path.write_bytes(payload)
     frame.to_csv(csv_path, index=False, encoding="utf-8-sig", lineterminator="\n")
     route_stops.to_csv(
