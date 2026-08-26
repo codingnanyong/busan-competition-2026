@@ -5,12 +5,13 @@
 ## 한국어
 
 이 저장소는 부산 행정동 B-IMD 공모전 분석 코드와 문서입니다. 코드 변경은
-아래 절차를 따릅니다. 상세 규칙은 [Git 워크플로](docs/GIT_WORKFLOW.md)와
-[분석 환경](docs/DEVELOPMENT_ENVIRONMENT.md)을 따릅니다.
+아래 절차를 따릅니다. 상세 규칙은 [Git 워크플로](docs/kor/GIT_WORKFLOW.md)와
+[분석 환경](docs/kor/DEVELOPMENT_ENVIRONMENT.md)을 따릅니다.
 
 ### 시작하기
 
-1. 작업을 Linear·GitHub 미러 이슈 한 쌍으로 만듭니다.
+1. 작업을 Linear·GitHub 미러 이슈 한 쌍으로 만듭니다. Linear 생성은
+   [연동 운영 가이드](docs/kor/INTEGRATIONS.md)를 따릅니다.
 2. `feat/<linear-id>-<slug>` 브랜치에서 구현합니다. 예: `feat/cod-12-data-source-audit`.
 3. `develop`과 `main`에는 직접 푸시하지 않습니다.
 4. 분석 명령은 저장소 루트에서 Docker로 실행합니다.
@@ -36,12 +37,13 @@ docker compose run --rm jupyter python -m pytest -q
 ## English
 
 This repository holds the Busan administrative-dong B-IMD analysis code and
-docs. Follow [Git workflow](docs/en/GIT_WORKFLOW.md) and the
-[development environment](docs/en/DEVELOPMENT_ENVIRONMENT.md).
+docs. Follow [Git workflow](docs/eng/GIT_WORKFLOW.md) and the
+[development environment](docs/eng/DEVELOPMENT_ENVIRONMENT.md).
 
 ### Start
 
-1. Create one mirrored Linear/GitHub issue pair.
+1. Create one mirrored Linear/GitHub issue pair. Create Linear issues with the
+   [integration operations guide](docs/eng/INTEGRATIONS.md).
 2. Work on `feat/<linear-id>-<slug>`. Example: `feat/cod-12-data-source-audit`.
 3. Do not push directly to `develop` or `main`.
 4. Run Python from the repository root in Docker.

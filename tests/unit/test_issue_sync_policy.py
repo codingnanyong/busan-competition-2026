@@ -28,6 +28,26 @@ def test_pr_policy_validates_and_closes_the_mirrored_github_issue() -> None:
     assert "github.event.action != 'closed' && github.base_ref == 'main'" in workflow
 
 
+def test_process_docs_keep_integration_secrets_in_one_guide() -> None:
+    git_workflow = read_text("docs/kor/GIT_WORKFLOW.md")
+    git_workflow_en = read_text("docs/eng/GIT_WORKFLOW.md")
+    integrations = read_text("docs/kor/INTEGRATIONS.md")
+    integrations_en = read_text("docs/eng/INTEGRATIONS.md")
+    issues = read_text("docs/kor/ISSUES.md")
+    issues_en = read_text("docs/eng/ISSUES.md")
+
+    assert "INTEGRATIONS.md" in git_workflow
+    assert "INTEGRATIONS.md" in git_workflow_en
+    assert "LINEAR_API_KEY" not in git_workflow
+    assert "LINEAR_API_KEY" not in git_workflow_en
+    assert "LINEAR_API_KEY" in integrations
+    assert "LINEAR_API_KEY" in integrations_en
+    assert "feat/<linear-id>-<slug>" not in issues
+    assert "feat/<linear-id>-<slug>" not in issues_en
+    assert "INTEGRATIONS.md" in issues
+    assert "INTEGRATIONS.md" in issues_en
+
+
 def test_bilingual_issue_maps_contain_every_mirror_pair() -> None:
     mappings = {linear_id: linear_id + 9 for linear_id in range(5, 29)}
     mappings[29] = 39
@@ -40,8 +60,9 @@ def test_bilingual_issue_maps_contain_every_mirror_pair() -> None:
     mappings[36] = 69
     mappings[37] = 72
     mappings[38] = 74
+    mappings[39] = 77
 
-    for path in ("docs/ISSUES.md", "docs/en/ISSUES.md"):
+    for path in ("docs/kor/ISSUES.md", "docs/eng/ISSUES.md"):
         issue_map = read_text(path)
         for linear_id, github_number in mappings.items():
             row_pattern = (
