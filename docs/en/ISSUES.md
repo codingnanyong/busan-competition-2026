@@ -43,5 +43,6 @@ Linear and GitHub Issues are one-to-one copies of the same work item. Linear man
 | — | [COD-36](https://linear.app/codingnanyong/issue/COD-36) | [#69](https://github.com/codingnanyong/busan-competition-2026/issues/69) | Add demand-weighted transit access and living/consumption context |
 | — | [COD-37](https://linear.app/codingnanyong/issue/COD-37) | [#72](https://github.com/codingnanyong/busan-competition-2026/issues/72) | Keep missing BIMS schedules as missing and fix route-stop paths and boarding hashes |
 | — | [COD-38](https://linear.app/codingnanyong/issue/COD-38) | [#74](https://github.com/codingnanyong/busan-competition-2026/issues/74) | Stop merged PR policy false failures and ship v0.8.1 |
+| — | [COD-39](https://linear.app/codingnanyong/issue/COD-39) | [#77](https://github.com/codingnanyong/busan-competition-2026/issues/77) | Attach new Linear issues to the contest project |
 
 Use `feat/<linear-id>-<slug>` branches, for example `feat/cod-15-eda`. Pull requests include both `Closes COD-15` and `Closes #24`.

@@ -68,3 +68,18 @@ gh variable set COMPLETION_NOTIFICATIONS_ENABLED --body true \
 4. Confirm the `notify-completion` job succeeds and the Slack message contains all four links.
 
 Failure logs identify missing configuration or incomplete state without printing secret values. Leave the Variable absent or set to `false` until both secrets are ready. While automation is disabled, the work session that performs the merge must verify both issue states and post the result to Slack manually.
+
+## Creating Linear issues
+
+Create new COD issues with the `Create Linear issue` workflow. It attaches each issue to team
+`COD` and project
+[Busan IMD Living-Vulnerability Analysis 2026](https://linear.app/codingnanyong/project/부산-imd-생활취약지역-분석-2026-83133e455764).
+Creation fails instead of opening an unscoped issue if that project is missing.
+
+```bash
+gh workflow run create-linear-issue.yml --ref develop \
+  -f title="work title" \
+  -f description="goal and acceptance"
+```
+
+Use `--ref develop` until the workflow is on `main`.

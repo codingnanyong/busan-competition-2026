@@ -43,5 +43,6 @@ Linear와 GitHub Issues는 같은 작업의 1:1 복사본입니다. Linear는 �
 | — | [COD-36](https://linear.app/codingnanyong/issue/COD-36) | [#69](https://github.com/codingnanyong/busan-competition-2026/issues/69) | 대중교통 수요가중 접근과 생활·소비 참고지표 보강 |
 | — | [COD-37](https://linear.app/codingnanyong/issue/COD-37) | [#72](https://github.com/codingnanyong/busan-competition-2026/issues/72) | 배차 결측을 0으로 합산하지 않고 노선정류장 경로와 승하차 해시를 고친다 |
 | — | [COD-38](https://linear.app/codingnanyong/issue/COD-38) | [#74](https://github.com/codingnanyong/busan-competition-2026/issues/74) | 병합된 PR 재검사 실패 알림을 막고 v0.8.1을 배포한다 |
+| — | [COD-39](https://linear.app/codingnanyong/issue/COD-39) | [#77](https://github.com/codingnanyong/busan-competition-2026/issues/77) | Linear 이슈 생성 때 공모전 프로젝트를 지정한다 |
 
 브랜치는 `feat/<linear-id>-<slug>` 형식을 사용합니다. 예: `feat/cod-15-eda`. PR은 `Closes COD-15`와 `Closes #24`를 함께 포함합니다.

@@ -4,6 +4,8 @@
 
 ### Added
 
+- Linear 이슈 생성 워크플로가 `COD` 팀과 공모전 프로젝트에 이슈를 붙인다
+
 ### Changed
 
 ### Fixed

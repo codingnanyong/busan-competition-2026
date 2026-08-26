@@ -67,3 +67,17 @@ gh variable set COMPLETION_NOTIFICATIONS_ENABLED --body true \
 4. Actions의 `notify-completion` 성공과 Slack 메시지의 네 링크를 확인합니다.
 
 알림 작업이 실패하면 Actions 로그에는 비밀값이 아닌 누락된 설정 또는 미완료 상태만 표시됩니다. Secret이 준비되기 전에는 Variable을 생성하지 않거나 `false`로 유지합니다. 자동화가 비활성화된 동안에는 병합을 수행한 작업 세션에서 두 이슈 상태를 확인하고 Slack에 직접 공유합니다.
+
+## Linear 이슈 생성
+
+새 COD 이슈는 `Create Linear issue` 워크플로로 만듭니다. 팀 `COD`와 프로젝트
+[부산 IMD 생활취약지역 분석 2026](https://linear.app/codingnanyong/project/부산-imd-생활취약지역-분석-2026-83133e455764)을
+함께 지정하며, 프로젝트를 찾지 못하면 이슈를 만들지 않습니다.
+
+```bash
+gh workflow run create-linear-issue.yml --ref develop \
+  -f title="작업 제목" \
+  -f description="목표와 완료조건"
+```
+
+워크플로가 `main`에 올라오기 전에는 `--ref develop`이 필요합니다.
