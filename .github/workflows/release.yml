@@ -32,7 +32,7 @@ jobs:
           git push origin "$TAG"
           gh release create "$TAG" \
             --title "$TAG" \
-            --notes-file "docs/releases/${TAG}.md"
+            --notes-file "docs/kor/releases/${TAG}.md"
 
   sync-wiki:
     needs: release

@@ -23,4 +23,4 @@ Closes #___
 
 - [ ] `VERSION` 갱신
 - [ ] `CHANGELOG.md` 갱신
-- [ ] `docs/releases/vX.Y.Z.md` 작성
+- [ ] `docs/kor/releases/vX.Y.Z.md`와 `docs/eng/releases/vX.Y.Z.md` 작성
