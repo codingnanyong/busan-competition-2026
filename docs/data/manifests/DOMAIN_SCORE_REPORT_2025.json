@@ -53,7 +53,7 @@
   "composite_score_created": false,
   "profile_path": "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv",
   "profile_sha256": "1A3A622D1BA396B25FF5FE7AE7CA945EA2EAEE105BDF2D6CF745C132132A8794",
-  "spec_path": "docs/data/DOMAIN_SCORE_SPEC_2025.csv",
+  "spec_path": "docs/data/tables/DOMAIN_SCORE_SPEC_2025.csv",
   "spec_sha256": "72748F96A742A6CDE9F7E69134FD7849E5B603AE5194B7828761E8528B7A6A2B",
   "output_paths": {
     "indicator_scores": "data/processed/scores/2025/busan_admin_dong_indicator_scores_2025.csv",

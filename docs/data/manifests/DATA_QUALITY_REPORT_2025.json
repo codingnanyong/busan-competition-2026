@@ -124,7 +124,7 @@
   "minimum_source_match_rate": 0.605513,
   "profile_path": "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv",
   "profile_sha256": "1A3A622D1BA396B25FF5FE7AE7CA945EA2EAEE105BDF2D6CF745C132132A8794",
-  "dictionary_path": "docs/data/DATA_DICTIONARY_2025.csv",
+  "dictionary_path": "docs/data/tables/DATA_DICTIONARY_2025.csv",
   "dictionary_sha256": "28B40812D3826551FCFEDFC5E07B738AEA6D173FEDC29667903E3EFD720AFD92",
   "standardization_report_path": "docs/data/manifests/STANDARDIZATION_REPORT_2025.json",
   "standardization_report_sha256": "D35EFC5993205181CE54731649ABD717FBD25DF1FC9EC7DC0033BF3C7B44CA7E"

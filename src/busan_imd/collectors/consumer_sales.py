@@ -34,7 +34,7 @@ DEFAULT_HOUR_INPUT = Path(
     "data/raw/busan_data_wave/consumer_sales/2025/"
     "busan_admin_dong_consumer_sales_by_hour_2023_2025_parsed.csv"
 )
-DEFAULT_REFERENCE = Path("docs/data/BUSAN_ADMIN_DONG_CODES_2025.csv")
+DEFAULT_REFERENCE = Path("docs/data/tables/BUSAN_ADMIN_DONG_CODES_2025.csv")
 DEFAULT_OUTPUT = Path("data/processed/candidates/2025/consumer_sales_2025.csv")
 DEFAULT_CATEGORY_OUTPUT = Path(
     "data/processed/candidates/2025/consumer_sales_by_category_2025.csv"

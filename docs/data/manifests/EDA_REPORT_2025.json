@@ -62,7 +62,7 @@
   "spatial_indicator_count": 36,
   "profile_path": "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv",
   "profile_sha256": "1A3A622D1BA396B25FF5FE7AE7CA945EA2EAEE105BDF2D6CF745C132132A8794",
-  "dictionary_path": "docs/data/DATA_DICTIONARY_2025.csv",
+  "dictionary_path": "docs/data/tables/DATA_DICTIONARY_2025.csv",
   "dictionary_sha256": "28B40812D3826551FCFEDFC5E07B738AEA6D173FEDC29667903E3EFD720AFD92",
   "boundaries_path": "data/raw/sgis/admin_boundaries/2025/busan_admin_dong_boundaries_2025_valid.geojson",
   "boundaries_sha256": "7CC99595FC753F81C7B9A9D480B8EBBF3114808A1496D46FC6662C21BF362487",

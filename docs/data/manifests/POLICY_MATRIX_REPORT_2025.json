@@ -57,7 +57,7 @@
   "input_paths": {
     "cluster_assignments": "data/processed/scores/2025/busan_admin_dong_deprivation_clusters_2025.csv",
     "environmental_overlay": "data/processed/scores/2025/busan_admin_dong_environmental_overlay_2025.csv",
-    "policy_catalog": "docs/data/POLICY_ACTION_CATALOG_2025.csv",
+    "policy_catalog": "docs/data/tables/POLICY_ACTION_CATALOG_2025.csv",
     "cluster_report": "docs/data/manifests/CLUSTER_ANALYSIS_REPORT_2025.json"
   },
   "input_sha256": {

@@ -49,10 +49,11 @@ src/busan_imd/   # 재사용 가능한 Python 분석 코드
 tests/           # 환경, 구조와 분석 코드 테스트
 ```
 
-세부 디렉터리 책임은 [프로젝트 파일 구조](PROJECT_STRUCTURE.md), 다른 컴퓨터로의 원본
-이전과 macOS 실행은 [macOS 작업환경 이전](MACOS_SETUP.md)을 참고합니다.
+세부 디렉터리 책임은 [프로젝트 파일 구조](PROJECT_STRUCTURE.md)에 정의한다. 다른 컴퓨터로의
+원본 이전과 macOS 실행은 [macOS 작업환경 이전](MACOS_SETUP.md)을 참고한다.
 
-`data/raw`, `data/processed`, `outputs`의 실제 파일은 기본적으로 Git과 Docker build context에서 제외합니다. 데이터 출처와 라이선스는 `docs/data`에 기록하고, 재현에 필요한 소형 공개 산출물만 후속 이슈에서 명시적으로 추적합니다.
+`data/raw`, `data/processed`, `outputs/eda`는 Git에서 제외한다. 제출용 시각화는
+`outputs/infographic/`만 추적한다. 출처와 라이선스는 `docs/data`에 기록한다.
 
 ## 품질검사
 

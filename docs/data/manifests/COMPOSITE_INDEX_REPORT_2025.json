@@ -39,7 +39,7 @@
   },
   "domain_scores_path": "data/processed/scores/2025/busan_admin_dong_domain_scores_2025.csv",
   "domain_scores_sha256": "0EA7BB158A5DFD76984D75594B18430B239D47B01282DBA8A036C86E019E39C6",
-  "spec_path": "docs/data/COMPOSITE_INDEX_SPEC_2025.csv",
+  "spec_path": "docs/data/tables/COMPOSITE_INDEX_SPEC_2025.csv",
   "spec_sha256": "F6631F156E48F0BC3C86CB1807C83BD5DD2E81DC88A3CD769EAE48B38C06F444",
   "output_path": "data/processed/scores/2025/busan_admin_dong_imd_2025.csv",
   "output_sha256": "E23A2B95FB0D19D46A13E10F90A0A3E9140657528444A15051D55D2880D1F4A3"

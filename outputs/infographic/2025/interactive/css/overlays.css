@@ -1,0 +1,13 @@
+.overlay-control{display:flex;align-items:center;gap:9px;margin:12px 0 4px;flex-wrap:wrap}
+.overlay-control[hidden]{display:none}
+.overlay-control button{border:1px solid #d84a3a;background:white;color:#9f3025;border-radius:18px;
+ padding:7px 12px;cursor:pointer;font-weight:700}
+.overlay-control button[aria-pressed="true"]{background:#d84a3a;color:white}
+.accident-hotspot{fill:#7b1e1e;fill-opacity:.72;stroke:white;stroke-width:1.4;
+ pointer-events:auto}
+#accident-layer[hidden]{display:none}
+.safety-risk-area{fill:#334e9b;fill-opacity:.8;stroke:white;stroke-width:1.1}
+#safety-risk-layer[hidden]{display:none}
+.aed-point{fill:#0b7285;fill-opacity:.78;stroke:white;stroke-width:.8}
+.park-point{fill:#2f8f46;fill-opacity:.72;stroke:white;stroke-width:.8}
+#aed-layer[hidden],#park-layer[hidden]{display:none}

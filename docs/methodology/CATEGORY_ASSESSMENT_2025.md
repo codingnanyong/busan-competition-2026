@@ -71,14 +71,16 @@
 원자료 한계와 자료 신뢰도는 계속 표시한다.
 
 상세 가중치와 근거는
-[CATEGORY_ASSESSMENT_SPEC_2025.csv](../data/CATEGORY_ASSESSMENT_SPEC_2025.csv), 정책 예시는
-[CATEGORY_POLICY_CATALOG_2025.csv](../data/CATEGORY_POLICY_CATALOG_2025.csv)에 고정한다.
+[CATEGORY_ASSESSMENT_SPEC_2025.csv](../data/tables/CATEGORY_ASSESSMENT_SPEC_2025.csv), 정책 예시는
+[CATEGORY_POLICY_CATALOG_2025.csv](../data/tables/CATEGORY_POLICY_CATALOG_2025.csv)에 고정한다.
 
 ## 정책 방향을 읽는 방법
 
-정책 카드는 `분석이 포착한 신호 → 우선 확인 대상 → 실행 순서 → 성과지표 →
-공식 참고사례 → 적용 주의점`을 함께 보여준다. 참고사례는 해당 행정동의 정책이
-이미 확정됐다는 뜻이 아니라, 현장 검증 후 비교할 수 있는 실행수단이다.
+정책 카드는 선택한 동의 세부 점수가 70점 이상일 때만 해당 항목의 정책 수단을 검토
+후보로 보여준다. 70점 미만이면 같은 패키지를 적용하지 않고 모니터링 또는 상대
+저취약으로 표시한다. 카드 구성은 `이 동이 넘은 임계값 → 분석 신호 → 우선 확인 대상 →
+실행 순서 → 성과지표 → 공식 참고사례 → 적용 주의점`이다. 참고사례는 해당 행정동의
+정책이 이미 확정됐다는 뜻이 아니라, 현장 검증 후 비교할 수 있는 실행수단이다.
 
 - 소득·복지: [부산 '이웃의 재발견'](https://www.busan.go.kr/nbtnewsBU/1551025)
 - 고용: [고용노동부 국민취업지원제 우수사례](https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=18692)

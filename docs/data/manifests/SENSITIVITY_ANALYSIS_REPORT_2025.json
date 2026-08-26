@@ -127,9 +127,9 @@
   },
   "domain_scores_path": "data/processed/scores/2025/busan_admin_dong_domain_scores_2025.csv",
   "domain_scores_sha256": "0EA7BB158A5DFD76984D75594B18430B239D47B01282DBA8A036C86E019E39C6",
-  "weight_spec_path": "docs/data/COMPOSITE_INDEX_SPEC_2025.csv",
+  "weight_spec_path": "docs/data/tables/COMPOSITE_INDEX_SPEC_2025.csv",
   "weight_spec_sha256": "F6631F156E48F0BC3C86CB1807C83BD5DD2E81DC88A3CD769EAE48B38C06F444",
-  "scenario_path": "docs/data/SENSITIVITY_SCENARIOS_2025.csv",
+  "scenario_path": "docs/data/tables/SENSITIVITY_SCENARIOS_2025.csv",
   "scenario_sha256": "0F9C717BF503B7EE27B11A8EDF199A737477B148CA3D699EAFFB45C301430C0C",
   "output_path": "data/processed/scores/2025/busan_admin_dong_sensitivity_2025.csv",
   "output_sha256": "AF42F823DE7DA0246AF1876DAED0FAF7E6CC1543C390C3ADC1E8045593EFC325"

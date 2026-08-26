@@ -23,7 +23,7 @@ remain explicit in the catalog and result metadata.
 - Endpoint: `https://sgisapi.mods.go.kr/OpenAPI3/boundary/hadmarea.geojson`
 - [SGIS use policy](https://sgis.mods.go.kr/developer/html/newOpenApi/policy/policy.html)
 - Access: short-lived access token issued from personal SGIS consumer credentials
-- Versioned codes: `docs/data/BUSAN_ADMIN_DONG_CODES_2025.csv`
+- Versioned codes: `docs/data/tables/BUSAN_ADMIN_DONG_CODES_2025.csv`
 - Versioned provenance snapshot: `docs/data/manifests/BUSAN_ADMIN_DONG_MANIFEST_2025.json`
 
 The authenticated raw GeoJSON is excluded from Git due to its size and redistribution

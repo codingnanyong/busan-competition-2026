@@ -47,7 +47,7 @@ Fixed: the geography is the 206-dong SGIS 2025 version, the primary analysis yea
 
 ## Acceptance
 
-Assign every received source a new stable ID in [DATASET_AUDIT.csv](../../data/DATASET_AUDIT.csv), then record SHA-256, period, geography, mapping rate, missingness, and licence. Institutional origin does not bypass the A/B inclusion gate.
+Assign every received source a new stable ID in [DATASET_AUDIT.csv](../../data/tables/DATASET_AUDIT.csv), then record SHA-256, period, geography, mapping rate, missingness, and licence. Institutional origin does not bypass the A/B inclusion gate.
 
 ## Sequence
 

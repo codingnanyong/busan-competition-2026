@@ -26,7 +26,9 @@ src/busan_imd/   # Reusable Python analysis code
 tests/           # Environment, structure, and analysis-code tests
 ```
 
-Files under `data/raw`, `data/processed`, and `outputs` are ignored by Git and the Docker build context by default. Record sources and licenses under `docs/data`.
+See [project file structure](PROJECT_STRUCTURE.md) for what each folder is for.
+`data/raw`, `data/processed`, and `outputs/eda` are gitignored. The submission visual tree
+`outputs/infographic/` is tracked. Record sources and licenses under `docs/data`.
 
 ## Quality checks
 

@@ -25,7 +25,7 @@ docker compose run --rm jupyter python -m busan_imd.analysis.composite_index
 ```
 
 The executable contract is
-[COMPOSITE_INDEX_SPEC_2025.csv](../../data/COMPOSITE_INDEX_SPEC_2025.csv). Input/output hashes and
+[COMPOSITE_INDEX_SPEC_2025.csv](../../data/tables/COMPOSITE_INDEX_SPEC_2025.csv). Input/output hashes and
 summary checks are recorded in
 [COMPOSITE_INDEX_REPORT_2025.json](../../data/manifests/COMPOSITE_INDEX_REPORT_2025.json). The
 result table is generated at the Git-ignored

@@ -278,7 +278,7 @@
   "input_paths": {
     "composite": "data/processed/scores/2025/busan_admin_dong_imd_2025.csv",
     "indicator_scores": "data/processed/scores/2025/busan_admin_dong_indicator_scores_2025.csv",
-    "weight_spec": "docs/data/COMPOSITE_INDEX_SPEC_2025.csv"
+    "weight_spec": "docs/data/tables/COMPOSITE_INDEX_SPEC_2025.csv"
   },
   "input_sha256": {
     "composite": "E23A2B95FB0D19D46A13E10F90A0A3E9140657528444A15051D55D2880D1F4A3",

@@ -13,7 +13,7 @@ from busan_imd.core.artifacts import sha256_file, write_csv, write_json
 from busan_imd.core.provenance import ensure_secret_free
 
 INPUT_DIR = Path("data/raw/mois/resident_population/2025")
-REFERENCE_PATH = Path("docs/data/BUSAN_ADMIN_DONG_CODES_2025.csv")
+REFERENCE_PATH = Path("docs/data/tables/BUSAN_ADMIN_DONG_CODES_2025.csv")
 OUTPUT_PATH = INPUT_DIR / "busan_resident_population_admin_dong_2025_12.csv"
 MANIFEST_PATH = Path("docs/data/manifests/MOIS_RESIDENT_POPULATION_MANIFEST_2025.json")
 SOURCE_PAGE = "https://jumin.mois.go.kr/"

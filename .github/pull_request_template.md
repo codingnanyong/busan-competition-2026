@@ -1,14 +1,16 @@
+# Pull request
+
 ## Mirrored issues
 
 Closes COD-___
 Closes #___
 
-- Linear: https://linear.app/codingnanyong/issue/COD-___
-- GitHub: https://github.com/codingnanyong/busan-competition-2026/issues/___
+- Linear: <https://linear.app/codingnanyong/issue/COD-___>
+- GitHub: <https://github.com/codingnanyong/busan-competition-2026/issues/___>
 
 ## 변경 내용
 
-- 
+- 변경 요약을 적는다
 
 ## 검증
 

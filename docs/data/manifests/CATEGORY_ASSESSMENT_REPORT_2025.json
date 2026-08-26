@@ -21,8 +21,8 @@
   ],
   "input_paths": {
     "profile": "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv",
-    "spec": "docs/data/CATEGORY_ASSESSMENT_SPEC_2025.csv",
-    "policy_catalog": "docs/data/CATEGORY_POLICY_CATALOG_2025.csv",
+    "spec": "docs/data/tables/CATEGORY_ASSESSMENT_SPEC_2025.csv",
+    "policy_catalog": "docs/data/tables/CATEGORY_POLICY_CATALOG_2025.csv",
     "boundaries": "data/raw/sgis/admin_boundaries/2025/busan_admin_dong_boundaries_2025_valid.geojson",
     "traffic_accident_hotspots": "data/raw/koroad/traffic_accidents/hotspots/2024/busan_traffic_accident_hotspots_2024.csv"
   },

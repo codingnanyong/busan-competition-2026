@@ -29,3 +29,10 @@
 ## 분석 지위
 
 B-IMD는 공개데이터로 부산 행정동의 상대적 생활취약성을 탐색하는 실험적 복합지수입니다. 공식 통계, 개인의 박탈 판정 또는 법정 예산배분 기준으로 사용하지 않으며, 직접지표와 대리지표 및 데이터 신뢰도를 결과와 함께 공개합니다.
+
+## 기여와 라이선스
+
+코드와 프로젝트 문서는 [MIT License](LICENSE)입니다. 원천 공개데이터의 이용조건은
+각 출처 문서를 따릅니다. 기여 절차는 [CONTRIBUTING.md](CONTRIBUTING.md), 행동 기준은
+[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), 취약점 신고는 [SECURITY.md](SECURITY.md)를
+따릅니다.

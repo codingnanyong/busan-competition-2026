@@ -1,6 +1,6 @@
 # Data Catalog
 
-This document manages candidate sources for the Busan Index of Multiple Deprivation (B-IMD). [DATASET_AUDIT.csv](../../data/DATASET_AUDIT.csv) is the row-level COD-10 register; this page explains the decisions and usage rules.
+This document manages candidate sources for the Busan Index of Multiple Deprivation (B-IMD). [DATASET_AUDIT.csv](../../data/tables/DATASET_AUDIT.csv) is the row-level COD-10 register; this page explains the decisions and usage rules.
 
 ## COD-10 audit result
 
@@ -54,7 +54,7 @@ Raw files remain in the Git-ignored `data/raw/audit/` directory. Recheck catalog
 
 ```powershell
 $env:PYTHONPATH = "src"
-python -m busan_imd.processing.data_catalog docs/data/DATASET_AUDIT.csv --raw-dir data/raw/audit
+python -m busan_imd.processing.data_catalog docs/data/tables/DATASET_AUDIT.csv --raw-dir data/raw/audit
 ```
 
 ## Missing-value states

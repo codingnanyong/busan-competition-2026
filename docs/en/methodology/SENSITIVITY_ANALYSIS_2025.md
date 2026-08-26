@@ -13,7 +13,7 @@ docker compose run --rm jupyter python -m busan_imd.analysis.sensitivity_analysi
 ```
 
 The executable contract is
-[SENSITIVITY_SCENARIOS_2025.csv](../../data/SENSITIVITY_SCENARIOS_2025.csv). Summary metrics and
+[SENSITIVITY_SCENARIOS_2025.csv](../../data/tables/SENSITIVITY_SCENARIOS_2025.csv). Summary metrics and
 checksums are recorded in
 [SENSITIVITY_ANALYSIS_REPORT_2025.json](../../data/manifests/SENSITIVITY_ANALYSIS_REPORT_2025.json).
 Dong-level results are written to the Git-ignored

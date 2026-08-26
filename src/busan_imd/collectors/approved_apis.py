@@ -29,7 +29,7 @@ from busan_imd.sources.sgis import authenticate
 CUTOFF = ANALYSIS_CUTOFF
 COLLECTION_ROOT = Path("data/raw/collection")
 AUDIT_ROOT = Path("data/raw/audit")
-CATALOG_PATH = Path("docs/data/DATASET_AUDIT.csv")
+CATALOG_PATH = Path("docs/data/tables/DATASET_AUDIT.csv")
 MANIFEST_PATH = Path("docs/data/manifests/RAW_DATA_MANIFEST.json")
 PORTAL_ID_PATTERN = re.compile(r"data\.go\.kr/data/(\d+)/fileData\.do")
 

@@ -17,7 +17,7 @@ DEFAULT_PROFILE = Path(
     "data/processed/standardized/2025/busan_admin_dong_candidate_profile_2025.csv"
 )
 DEFAULT_STANDARDIZATION_REPORT = Path("docs/data/manifests/STANDARDIZATION_REPORT_2025.json")
-DEFAULT_DICTIONARY = Path("docs/data/DATA_DICTIONARY_2025.csv")
+DEFAULT_DICTIONARY = Path("docs/data/tables/DATA_DICTIONARY_2025.csv")
 DEFAULT_REPORT = Path("docs/data/manifests/DATA_QUALITY_REPORT_2025.json")
 
 

@@ -34,7 +34,7 @@
     "Review SGIS terms before redistributing the raw boundary file."
   ],
   "repository_artifacts": {
-    "BUSAN_ADMIN_DONG_CODES_2025.csv": {
+    "docs/data/tables/BUSAN_ADMIN_DONG_CODES_2025.csv": {
       "sha256": "41EEE08B1D3D34D2953BB89007B9714478C5CF20B44CF2F99ED206F57794D7B5"
     },
     "raw_boundary_committed": false

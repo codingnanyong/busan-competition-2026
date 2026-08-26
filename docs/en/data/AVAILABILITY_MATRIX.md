@@ -42,4 +42,4 @@ Failure leads to `hold`, `validation-only`, or `exclude`. District values must n
 
 The project fixes its geography at 206 Busan administrative dongs in SGIS 2025. The primary index uses complete 2025 observations or a 2025-12-31 snapshot. January-July 2026 observations are supplemental validation data, despite falling within the 2026-07-31 collection cutoff. When 2025 is unavailable, the nearest earlier complete period is used with its lag disclosed. See the [reference-period policy](REFERENCE_PERIOD_POLICY.md) and [administrative-dong boundary record](ADMIN_BOUNDARIES.md).
 
-See [DATASET_AUDIT.csv](../../data/DATASET_AUDIT.csv) for row-level evidence.
+See [DATASET_AUDIT.csv](../../data/tables/DATASET_AUDIT.csv) for row-level evidence.

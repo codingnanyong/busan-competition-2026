@@ -21,7 +21,7 @@ docker compose run --rm jupyter python scripts/rebuild_processed.py
 docker compose run --rm jupyter python -m busan_imd.analysis.domain_scores
 ```
 
-실행 계약은 [DOMAIN_SCORE_SPEC_2025.csv](../data/DOMAIN_SCORE_SPEC_2025.csv), 입력·출력
+실행 계약은 [DOMAIN_SCORE_SPEC_2025.csv](../data/tables/DOMAIN_SCORE_SPEC_2025.csv), 입력·출력
 체크섬과 요약값은
 [DOMAIN_SCORE_REPORT_2025.json](../data/manifests/DOMAIN_SCORE_REPORT_2025.json)에 기록한다.
 가공 CSV는 Git에서 제외되는 `data/processed/scores/2025/`에 생성한다.

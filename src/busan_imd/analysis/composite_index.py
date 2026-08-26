@@ -15,7 +15,7 @@ from busan_imd.analysis.domain_scores import HELD_DOMAINS, IDENTITY_COLUMNS
 from busan_imd.core.artifacts import sha256_file, write_json
 
 DEFAULT_DOMAIN_SCORES = Path("data/processed/scores/2025/busan_admin_dong_domain_scores_2025.csv")
-DEFAULT_SPEC = Path("docs/data/COMPOSITE_INDEX_SPEC_2025.csv")
+DEFAULT_SPEC = Path("docs/data/tables/COMPOSITE_INDEX_SPEC_2025.csv")
 DEFAULT_OUTPUT = Path("data/processed/scores/2025/busan_admin_dong_imd_2025.csv")
 DEFAULT_REPORT = Path("docs/data/manifests/COMPOSITE_INDEX_REPORT_2025.json")
 EXPECTED_DOMAINS = {

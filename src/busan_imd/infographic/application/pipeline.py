@@ -216,6 +216,9 @@ def run(
         city_parks,
         traffic_citywide_trend,
     )
+    dashboard_outputs = {
+        key: path.as_posix() for key, path in map_summary.pop("dashboard_outputs").items()
+    }
 
     report = {
         "schema_version": 1,
@@ -271,14 +274,14 @@ def run(
             "pdf": pdf_output.as_posix(),
             "png": png_output.as_posix(),
             "action_profile_csv": profile_output.as_posix(),
-            "interactive_action_map": html_output.as_posix(),
+            **dashboard_outputs,
         },
         "output_sha256": {
             "svg": sha256_file(svg_output),
             "pdf": sha256_file(pdf_output),
             "png": sha256_file(png_output),
             "action_profile_csv": sha256_file(profile_output),
-            "interactive_action_map": sha256_file(html_output),
+            **{key: sha256_file(Path(path)) for key, path in dashboard_outputs.items()},
         },
         "interpretation": (
             "Public-data experimental screening; not an official index, causal estimate, "

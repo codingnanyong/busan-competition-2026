@@ -21,7 +21,7 @@ from busan_imd.core.provenance import ensure_secret_free
 
 OUTPUT_ROOT = Path("data/raw/supplemental")
 MANIFEST_PATH = Path("docs/data/manifests/BUSAN_SUPPLEMENTAL_DATA_MANIFEST.json")
-REFERENCE_PATH = Path("docs/data/BUSAN_ADMIN_DONG_CODES_2025.csv")
+REFERENCE_PATH = Path("docs/data/tables/BUSAN_ADMIN_DONG_CODES_2025.csv")
 ANALYSIS_CUTOFF = "2026-07-31"
 DISTRICTS = (
     "중구",

@@ -16,8 +16,8 @@ usable, but their evidence type, row-level confidence, and policy limitation are
 - Keep the baseline B-IMD rank for comparison only; do not combine it with improved scores.
 
 The versioned indicator contract is
-[CATEGORY_ASSESSMENT_SPEC_2025.csv](../../data/CATEGORY_ASSESSMENT_SPEC_2025.csv), and conditional
-examples are in [CATEGORY_POLICY_CATALOG_2025.csv](../../data/CATEGORY_POLICY_CATALOG_2025.csv).
+[CATEGORY_ASSESSMENT_SPEC_2025.csv](../../data/tables/CATEGORY_ASSESSMENT_SPEC_2025.csv), and conditional
+examples are in [CATEGORY_POLICY_CATALOG_2025.csv](../../data/tables/CATEGORY_POLICY_CATALOG_2025.csv).
 
 ## Three-level structure
 
@@ -59,7 +59,10 @@ incomplete hourly bands, so their time-band shares remain missing rather than be
 
 ## Reading the policy direction
 
-Each policy card follows `detected signal → priority population → implementation sequence →
+The dashboard shows a category's intervention as a review candidate only when the selected
+dong scores 70 or above on that category. Below the gate it shows monitoring or relative
+low-deprivation and does not apply the same package. Candidate cards follow `this dong's
+threshold evidence → detected signal → priority population → implementation sequence →
 outcome measures → official reference case → adaptation caution`. Reference cases illustrate
 implementable instruments; they do not mean that the same intervention has already been selected
 for the dong. Field evidence must still determine whether to adapt, pilot, or reject an instrument.

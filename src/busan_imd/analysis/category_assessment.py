@@ -14,8 +14,8 @@ import pandas as pd
 from busan_imd.analysis.domain_scores import DEFAULT_PROFILE, percentile_score
 from busan_imd.core.artifacts import sha256_file, write_json
 
-DEFAULT_SPEC = Path("docs/data/CATEGORY_ASSESSMENT_SPEC_2025.csv")
-DEFAULT_POLICY_CATALOG = Path("docs/data/CATEGORY_POLICY_CATALOG_2025.csv")
+DEFAULT_SPEC = Path("docs/data/tables/CATEGORY_ASSESSMENT_SPEC_2025.csv")
+DEFAULT_POLICY_CATALOG = Path("docs/data/tables/CATEGORY_POLICY_CATALOG_2025.csv")
 DEFAULT_OUTPUT_DIR = Path("outputs/infographic/2025/tables")
 DEFAULT_CATEGORY_OUTPUT = DEFAULT_OUTPUT_DIR / "busan_admin_dong_category_assessment_2025.csv"
 DEFAULT_MAJOR_CATEGORY_OUTPUT = (
