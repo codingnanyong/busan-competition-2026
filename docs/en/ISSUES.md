@@ -41,5 +41,6 @@ Linear and GitHub Issues are one-to-one copies of the same work item. Linear man
 | — | [COD-34](https://linear.app/codingnanyong/issue/COD-34) | [#62](https://github.com/codingnanyong/busan-competition-2026/issues/62) | Strengthen reliability with SchoolInfo and BIMS public data |
 | — | [COD-35](https://linear.app/codingnanyong/issue/COD-35) | [#67](https://github.com/codingnanyong/busan-competition-2026/issues/67) | Improve infographic evidence visualization and output structure |
 | — | [COD-36](https://linear.app/codingnanyong/issue/COD-36) | [#69](https://github.com/codingnanyong/busan-competition-2026/issues/69) | Add demand-weighted transit access and living/consumption context |
+| — | [COD-37](https://linear.app/codingnanyong/issue/COD-37) | [#72](https://github.com/codingnanyong/busan-competition-2026/issues/72) | Keep missing BIMS schedules as missing and fix route-stop paths and boarding hashes |
 
 Use `feat/<linear-id>-<slug>` branches, for example `feat/cod-15-eda`. Pull requests include both `Closes COD-15` and `Closes #24`.

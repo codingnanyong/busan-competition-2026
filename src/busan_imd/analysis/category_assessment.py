@@ -127,11 +127,18 @@ def add_traffic_hotspot_indicator(
 
 
 def _score_indicator(values: pd.Series, rule: Any) -> pd.Series:
-    if rule.indicator != "selected_traffic_hotspot_occurrences_2024":
+    if rule.indicator == "selected_traffic_hotspot_occurrences_2024":
+        score = pd.Series(0.0, index=values.index)
+        selected = values > 0
+        score.loc[selected] = values.loc[selected].rank(method="average", pct=True) * 100.0
+        return score
+    observed = values.notna() & np.isfinite(values)
+    if observed.all():
         return percentile_score(values, rule.direction)
-    score = pd.Series(0.0, index=values.index)
-    selected = values > 0
-    score.loc[selected] = values.loc[selected].rank(method="average", pct=True) * 100.0
+    score = pd.Series(np.nan, index=values.index, dtype=float)
+    observed_values = values.loc[observed]
+    if len(observed_values) > 1 and observed_values.nunique() > 1:
+        score.loc[observed] = percentile_score(observed_values, rule.direction)
     return score
 
 
@@ -175,13 +182,19 @@ def _confidence(profile: pd.DataFrame, rule: Any) -> pd.Series:
             index=profile.index,
         )
     elif rule.category == "transit_access":
+        missing_schedule = profile["scheduled_bus_service_opportunities_current_proxy"].isna()
+        if "current_routes_with_service_schedule" in profile.columns:
+            missing_schedule = missing_schedule | profile[
+                "current_routes_with_service_schedule"
+            ].fillna(0).eq(0)
+        no_observed_supply = (
+            (profile["bus_stop_count_2025"] == 0)
+            | (profile["matched_bus_routes_2025_current_proxy"] == 0)
+        )
+        if rule.indicator == "scheduled_bus_service_opportunities_current_proxy":
+            no_observed_supply = no_observed_supply | missing_schedule
         confidence = pd.Series(
-            np.where(
-                (profile["bus_stop_count_2025"] == 0)
-                | (profile["matched_bus_routes_2025_current_proxy"] == 0),
-                "low",
-                "medium_low",
-            ),
+            np.where(no_observed_supply, "low", "medium_low"),
             index=profile.index,
         )
     if confidence.isna().any():

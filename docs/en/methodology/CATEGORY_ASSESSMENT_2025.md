@@ -49,6 +49,9 @@ Transit access combines the stabilized stop-supply rate at 0.60, a demand-weight
 proxy at 0.20, and a current scheduled-service opportunity proxy at 0.20. Route reach joins 278
 of 333 routes with 2025 annual card-trip totals to current BIMS topology. Service opportunity
 sums operating-span minutes divided by normal headway for the 258 routes with usable fields.
+Dongs whose serving routes all lack usable BIMS schedule fields stay missing rather than
+scoring as zero supply. Rankings use observed schedules only, the 20% weight is omitted from
+the category sum, and the policy gate stays closed for that indicator.
 These remain mixed-date proxies, not observed 2025 departures, travel time, or crowding. Route
 multi-leg and youth/child composition and matched 2023 stop time-band demand remain unscored
 validation context.
