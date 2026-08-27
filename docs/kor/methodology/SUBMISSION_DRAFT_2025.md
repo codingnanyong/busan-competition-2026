@@ -18,8 +18,8 @@ HWPX는 Hangul에서 서식 원본에 본문을 옮겨 작성한다. 이 단계�
 | [`01_data-visualization.pdf`](../../../outputs/submission/2025/01_data-visualization.pdf) | COD-23 1페이지 PDF 복사본. 정확히 1장 |
 | [`02_analysis-report.pdf`](../../../outputs/submission/2025/02_analysis-report.pdf) | 표지 1장 + 본문 7장. 본문 10페이지 이하 |
 | [`02_analysis-report.md`](../../../outputs/submission/2025/02_analysis-report.md) | 공식 서식 목차에 붙여 넣을 국문 본문 |
-| [`03_data/source-catalog.xlsx`](../../../outputs/submission/2025/03_data/source-catalog.xlsx) | 감사 42개 자료의 출처·기준일·라이선스·채택. CSV 복사본을 함께 둔다 |
-| [`03_data/data-dictionary.xlsx`](../../../outputs/submission/2025/03_data/data-dictionary.xlsx) | 분석 컬럼 사전 |
+| [`03_data/source-catalog.csv`](../../../outputs/submission/2025/03_data/source-catalog.csv) | 감사 42개 자료의 출처·기준일·라이선스·채택. XLSX는 파이프라인이 로컬에서 다시 만든다 |
+| [`03_data/data-dictionary.csv`](../../../outputs/submission/2025/03_data/data-dictionary.csv) | 분석 컬럼 사전 |
 | `03_data/*.csv` | 동별 프로필·카테고리 평가 파생 표 |
 | [`README.md`](../../../outputs/submission/2025/README.md) | Hangul 붙여넣기 안내 |
 | [SUBMISSION_DRAFT_REPORT_2025.json](../../data/manifests/SUBMISSION_DRAFT_REPORT_2025.json) | 페이지 수·체크섬·HWPX 상태 |

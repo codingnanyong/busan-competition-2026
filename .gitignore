@@ -16,3 +16,5 @@ outputs/*
 # Track submission visuals and the contest draft package. Scratch under outputs/eda stays ignored.
 !outputs/infographic/
 !outputs/submission/
+# Excel zip files are generated locally. Committing them from Windows corrupted the zip.
+outputs/submission/**/*.xlsx

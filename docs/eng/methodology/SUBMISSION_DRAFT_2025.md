@@ -18,8 +18,8 @@ reproducibility, page counts, HWPX/PDF agreement, and license exclusions.
 | [`01_data-visualization.pdf`](../../../outputs/submission/2025/01_data-visualization.pdf) | Copy of the COD-23 one-page PDF. Exactly one page |
 | [`02_analysis-report.pdf`](../../../outputs/submission/2025/02_analysis-report.pdf) | One cover page plus seven body pages. Body ≤ 10 pages |
 | [`02_analysis-report.md`](../../../outputs/submission/2025/02_analysis-report.md) | Korean body to paste into the official outline |
-| [`03_data/source-catalog.xlsx`](../../../outputs/submission/2025/03_data/source-catalog.xlsx) | Provenance, dates, licenses, and decisions for 42 audited datasets, with a CSV copy |
-| [`03_data/data-dictionary.xlsx`](../../../outputs/submission/2025/03_data/data-dictionary.xlsx) | Analysis-column dictionary |
+| [`03_data/source-catalog.csv`](../../../outputs/submission/2025/03_data/source-catalog.csv) | Provenance, dates, licenses, and decisions for 42 audited datasets. XLSX is regenerated locally |
+| [`03_data/data-dictionary.csv`](../../../outputs/submission/2025/03_data/data-dictionary.csv) | Analysis-column dictionary |
 | `03_data/*.csv` | Dong-level profile and category-assessment tables |
 | [`README.md`](../../../outputs/submission/2025/README.md) | Hangul paste instructions |
 | [SUBMISSION_DRAFT_REPORT_2025.json](../../data/manifests/SUBMISSION_DRAFT_REPORT_2025.json) | Page counts, checksums, and HWPX status |

@@ -149,9 +149,7 @@ def test_project_structure_and_required_documents() -> None:
         "outputs/submission/2025/02_analysis-report.pdf",
         "outputs/submission/2025/02_analysis-report.md",
         "outputs/submission/2025/README.md",
-        "outputs/submission/2025/03_data/source-catalog.xlsx",
         "outputs/submission/2025/03_data/source-catalog.csv",
-        "outputs/submission/2025/03_data/data-dictionary.xlsx",
         "outputs/submission/2025/03_data/data-dictionary.csv",
         "outputs/submission/2025/03_data/busan_admin_dong_action_profile_2025.csv",
         "outputs/submission/2025/03_data/busan_admin_dong_category_assessment_2025.csv",
@@ -498,6 +496,8 @@ def test_submission_draft_report_covers_cod24_scope() -> None:
         assert f"## {title}" in markdown
     for name, relative_path in report["output_paths"].items():
         path = REPOSITORY_ROOT / relative_path
+        if path.suffix == ".xlsx":
+            continue
         assert path.is_file()
         if name in report["output_sha256"]:
             actual_hash = hashlib.sha256(path.read_bytes()).hexdigest().upper()
@@ -510,13 +510,9 @@ def test_submission_draft_report_covers_cod24_scope() -> None:
     assert len(re.findall(rb"/Type\s*/Page\b", visualization)) == 1
     pdf = (REPOSITORY_ROOT / report["output_paths"]["report_pdf"]).read_bytes()
     assert len(re.findall(rb"/Type\s*/Page\b", pdf)) == report["total_pages"]
-    catalog = pd.read_excel(
-        REPOSITORY_ROOT / report["output_paths"]["source_catalog"],
-        engine="openpyxl",
-    )
-    catalog_csv = pd.read_csv(REPOSITORY_ROOT / report["output_paths"]["source_catalog_csv"])
+    catalog = pd.read_csv(REPOSITORY_ROOT / report["output_paths"]["source_catalog_csv"])
     assert len(catalog) == 42
-    assert catalog["dataset_id"].tolist() == catalog_csv["dataset_id"].tolist()
+    assert "source_url" in catalog.columns
     readme_path = REPOSITORY_ROOT / report["output_paths"]["package_readme"]
     assert "Hangul" in readme_path.read_text(encoding="utf-8")
     assert len(report["analysis_tables"]) == 4
