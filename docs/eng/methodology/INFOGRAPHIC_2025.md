@@ -36,7 +36,8 @@ requires additional local asset data on industry, commerce, tourism, and living 
   categories, nineteen indicators, and policy examples. Sibling `css/` (layout, overlays,
   evidence, policy) and `js/` (data, map, evidence, policy, boot) files load by relative
   path; the page opens in a browser with no JavaScript server. Edit `html/`, `css/`, and
-  `js/` in this output folder. Only `js/data.js` is regenerated.
+  `js/` in this output folder. Only `js/data.js` is regenerated. The contest ZIP copies
+  this folder as `04_interactive/`. It does not replace the one-page PDF.
 - [`busan_admin_dong_action_profile_2025.csv`](../../../outputs/infographic/2025/tables/busan_admin_dong_action_profile_2025.csv):
   six scores, vulnerability order, improvement direction, and relative low-deprivation domain
 - [INFOGRAPHIC_REPORT_2025.json](../../data/manifests/INFOGRAPHIC_REPORT_2025.json):
@@ -89,6 +90,7 @@ The map uses a continuous B-IMD scale, bold outlines for first-decile areas, and
 for COD-21 double burden. Policy cards include only candidates passing COD-22's positive-excess
 gate. The footer always displays experimental status and prohibited interpretations.
 
-This is a `submission_draft`. COD-24 should align report terminology, after which the final
+This is a `submission_draft`. The report and data-package draft in the
+[2025 submission draft](SUBMISSION_DRAFT_2025.md) uses the same terms. The final
 submission check must reconfirm naming, source-note size, exactly one PDF page, and print
 legibility.

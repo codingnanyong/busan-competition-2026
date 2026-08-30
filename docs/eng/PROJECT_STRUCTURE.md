@@ -22,6 +22,7 @@ collect (src/collectors) → data/raw
   → transform (src/processing) → data/processed
     → analyze (src/analysis) → docs/data/manifests + score CSVs
       → visualize (src/infographic) → outputs/infographic/2025
+        → package (src/submission) → outputs/submission/2025
 ```
 
 ## Tree
@@ -33,12 +34,13 @@ src/busan_imd/
 ├─ core/           # shared HTTP, settings, checksums
 ├─ processing/     # data/raw → data/processed
 ├─ analysis/       # domain scores, composite, sensitivity, clusters, policy candidates
-└─ infographic/    # writes PDF, map, and dashboard from existing scores. not the screen
+├─ infographic/    # writes PDF, map, and dashboard from existing scores. not the screen
    ├─ config.py
    ├─ application/     # wires inputs and run order
    ├─ domain/          # display tables such as dong action profiles
    └─ presentation/    # PDF render; fills map and scores into the dashboard HTML
       └─ dashboard/    # assemble.py only. no HTML/CSS/JS originals here
+└─ submission/     # assembles redistributable tables and the report draft
 
 data/
 ├─ raw/            # immutable extracts. gitignored
@@ -46,7 +48,7 @@ data/
 
 outputs/
 ├─ eda/            # EDA scratch tables. gitignored
-└─ infographic/2025/                 # submission visuals. this tree is tracked
+├─ infographic/2025/                 # submission visuals. this tree is tracked
    ├─ static/                        # one-page PDF/SVG/PNG. pipeline redraws
    ├─ tables/                        # dong score/profile CSVs. pipeline rewrites
    └─ interactive/                   # browser dashboard. edit the screen here
@@ -57,11 +59,17 @@ outputs/
       └─ busan_admin_dong_action_map_2025.html
                                      # assembled file to open in a browser
                                      # hand edits are overwritten on the next generate
+└─ submission/2025/                  # contest-archive draft. pipeline reassembles
+   ├─ 01_data-visualization.pdf      # copy of the one-page PDF
+   ├─ 02_analysis-report.pdf         # pipeline draft PDF. not the contest file
+   ├─ 02_analysis-report.md          # body that was pasted into the HWPX
+   └─ 03_data/                       # catalog, dictionary, derived CSVs. no raw extracts
+└─ contest-upload/2025/              # contest ZIP. gitignored. copied to Drive output
 
 docs/
 ├─ kor/            # Korean prose
 │  ├─ data/        # data policy and request notes
-│  ├─ methodology/ # scoring, policy, infographic method
+│  ├─ methodology/ # scoring, policy, infographic, and submission-draft method
 │  └─ releases/    # versioned release notes
 ├─ eng/            # English counterparts
 ├─ data/           # language-neutral tables and checksums
@@ -102,6 +110,7 @@ docker compose run --rm jupyter python -m busan_imd.processing.standardization
 docker compose run --rm jupyter python -m scripts.bootstrap_data prepare
 docker compose run --rm jupyter python scripts/rebuild_processed.py
 docker compose run --rm jupyter python -m busan_imd.infographic
+docker compose run --rm jupyter python -m busan_imd.submission
 docker compose run --rm jupyter python -m pytest -q
 ```
 
@@ -111,4 +120,4 @@ Adoption follows the [dataset audit](../data/tables/DATASET_AUDIT.csv). Machine 
 
 Collectors use `sources/` contracts where possible and read keys only from `.env`.
 `from busan_imd.infographic import run` and `python -m busan_imd.infographic` stay stable
-when internal folders change.
+when internal folders change. So does `python -m busan_imd.submission`.

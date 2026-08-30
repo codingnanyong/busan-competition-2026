@@ -23,6 +23,7 @@ from busan_imd.collectors.supplemental_data import (
 from busan_imd.collectors.traffic_accidents import validate_manifest as validate_traffic_manifest
 from busan_imd.processing.data_catalog import validate_catalog
 from busan_imd.processing.income_inference import validate_manifest as validate_income_manifest
+from busan_imd.submission.report import REQUIRED_SECTION_TITLES
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 
@@ -51,6 +52,8 @@ def test_project_structure_and_required_documents() -> None:
         "outputs/infographic/2025/interactive/css",
         "outputs/infographic/2025/interactive/js",
         "outputs/infographic/2025/tables",
+        "outputs/submission/2025",
+        "outputs/submission/2025/03_data",
         "docs/data/tables",
         "docs/kor",
         "docs/eng",
@@ -61,6 +64,7 @@ def test_project_structure_and_required_documents() -> None:
         "src/busan_imd/analysis",
         "src/busan_imd/infographic",
         "src/busan_imd/infographic/presentation/dashboard",
+        "src/busan_imd/submission",
         "tests/integration",
     )
     required_documents = (
@@ -102,6 +106,7 @@ def test_project_structure_and_required_documents() -> None:
         "docs/data/manifests/ENVIRONMENTAL_OVERLAY_REPORT_2025.json",
         "docs/data/manifests/POLICY_MATRIX_REPORT_2025.json",
         "docs/data/manifests/INFOGRAPHIC_REPORT_2025.json",
+        "docs/data/manifests/SUBMISSION_DRAFT_REPORT_2025.json",
         "docs/data/manifests/CATEGORY_ASSESSMENT_REPORT_2025.json",
         "docs/data/tables/POLICY_ACTION_CATALOG_2025.csv",
         "docs/data/tables/CATEGORY_ASSESSMENT_SPEC_2025.csv",
@@ -127,6 +132,8 @@ def test_project_structure_and_required_documents() -> None:
         "docs/eng/methodology/POLICY_MATRIX_2025.md",
         "docs/kor/methodology/INFOGRAPHIC_2025.md",
         "docs/eng/methodology/INFOGRAPHIC_2025.md",
+        "docs/kor/methodology/SUBMISSION_DRAFT_2025.md",
+        "docs/eng/methodology/SUBMISSION_DRAFT_2025.md",
         "docs/kor/methodology/CATEGORY_ASSESSMENT_2025.md",
         "docs/eng/methodology/CATEGORY_ASSESSMENT_2025.md",
         "outputs/infographic/2025/interactive/html/document.html",
@@ -138,6 +145,16 @@ def test_project_structure_and_required_documents() -> None:
         "outputs/infographic/2025/tables/busan_admin_dong_category_assessment_2025.csv",
         "outputs/infographic/2025/tables/busan_admin_dong_major_category_assessment_2025.csv",
         "outputs/infographic/2025/tables/busan_admin_dong_category_indicator_scores_2025.csv",
+        "outputs/submission/2025/01_data-visualization.pdf",
+        "outputs/submission/2025/02_analysis-report.pdf",
+        "outputs/submission/2025/02_analysis-report.md",
+        "outputs/submission/2025/README.md",
+        "outputs/submission/2025/03_data/source-catalog.csv",
+        "outputs/submission/2025/03_data/data-dictionary.csv",
+        "outputs/submission/2025/03_data/busan_admin_dong_action_profile_2025.csv",
+        "outputs/submission/2025/03_data/busan_admin_dong_category_assessment_2025.csv",
+        "outputs/submission/2025/03_data/busan_admin_dong_major_category_assessment_2025.csv",
+        "outputs/submission/2025/03_data/busan_admin_dong_category_indicator_scores_2025.csv",
         "notebooks/01_candidate_profile_eda.ipynb",
         "notebooks/02_deprivation_cluster_review.ipynb",
         "notebooks/03_environmental_overlay_review.ipynb",
@@ -458,6 +475,47 @@ def test_infographic_report_and_outputs_cover_cod23_scope() -> None:
     assert "align-items:stretch" in action_map
     assert "height:min(46vh,440px)" in action_map
     assert "function syncPanelHeights()" in action_map
+
+
+def test_submission_draft_report_covers_cod24_scope() -> None:
+    infographic = read_json("docs/data/manifests/INFOGRAPHIC_REPORT_2025.json")
+    report = read_json("docs/data/manifests/SUBMISSION_DRAFT_REPORT_2025.json")
+
+    assert report["artifact_status"] == "submission_draft"
+    assert report["cover_pages"] == 1
+    assert report["body_pages"] <= 10
+    assert report["visualization_page_count"] == 1
+    assert report["dataset_count"] == 42
+    assert report["hwpx_status"] == "hangul_paste_required"
+    assert report["output_sha256"]["visualization_pdf"] == infographic["output_sha256"]["pdf"]
+    assert not (REPOSITORY_ROOT / "outputs/submission/2025/02_analysis-report.hwpx").exists()
+    markdown = (REPOSITORY_ROOT / report["output_paths"]["report_markdown"]).read_text(
+        encoding="utf-8"
+    )
+    for title in REQUIRED_SECTION_TITLES:
+        assert f"## {title}" in markdown
+    for name, relative_path in report["output_paths"].items():
+        path = REPOSITORY_ROOT / relative_path
+        if path.suffix == ".xlsx":
+            continue
+        assert path.is_file()
+        if name in report["output_sha256"]:
+            actual_hash = hashlib.sha256(path.read_bytes()).hexdigest().upper()
+            assert actual_hash == report["output_sha256"][name]
+    for table in report["analysis_tables"]:
+        path = REPOSITORY_ROOT / table
+        actual_hash = hashlib.sha256(path.read_bytes()).hexdigest().upper()
+        assert actual_hash == report["output_sha256"][Path(table).name]
+    visualization = (REPOSITORY_ROOT / report["output_paths"]["visualization_pdf"]).read_bytes()
+    assert len(re.findall(rb"/Type\s*/Page\b", visualization)) == 1
+    pdf = (REPOSITORY_ROOT / report["output_paths"]["report_pdf"]).read_bytes()
+    assert len(re.findall(rb"/Type\s*/Page\b", pdf)) == report["total_pages"]
+    catalog = pd.read_csv(REPOSITORY_ROOT / report["output_paths"]["source_catalog_csv"])
+    assert len(catalog) == 42
+    assert "source_url" in catalog.columns
+    readme_path = REPOSITORY_ROOT / report["output_paths"]["package_readme"]
+    assert "Hangul" in readme_path.read_text(encoding="utf-8")
+    assert len(report["analysis_tables"]) == 4
 
 
 def test_category_assessment_is_complete_and_flags_estimation() -> None:
