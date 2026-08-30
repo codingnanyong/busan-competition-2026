@@ -62,9 +62,10 @@ outputs/
                                      # 직접 고치면 다음 생성에서 덮어씀
 └─ submission/2025/                  # 공모전 압축 초안. 파이프라인이 다시 모음
    ├─ 01_data-visualization.pdf      # 1페이지 PDF 복사본
-   ├─ 02_analysis-report.pdf         # 표지+본문. 본문 10페이지 이하
-   ├─ 02_analysis-report.md          # HWPX에 붙여 넣을 본문
+   ├─ 02_analysis-report.pdf         # 파이프라인 초안 PDF. 접수용 아님
+   ├─ 02_analysis-report.md          # HWPX에 붙여 넣었던 본문
    └─ 03_data/                       # 출처 목록·데이터 사전·파생 CSV. 원천 없음
+└─ contest-upload/2025/              # 접수용 ZIP. Git 제외. Drive output에 복사
 
 docs/
 ├─ kor/            # 국문 문서

@@ -7,25 +7,32 @@ COD-24는 공모전 최종 압축파일의 **기계 작성 초안**을 만든다
 HWPX는 Hangul에서 서식 원본에 본문을 옮겨 작성한다. 이 단계는 빈 서식 파일을 제출
 보고서로 복사하지 않는다.
 
-초안 지위는 `submission_draft`다. 접수번호, 최종 파일명, 동의서 서명은 제출 직전에
-참가 신청 폼을 다시 확인한 뒤 채운다. COD-25에서 재현성·페이지 수·HWPX/PDF 일치,
-라이선스 제외를 검수한다.
+초안 지위는 `submission_draft`다. Git에 올리는 기계 초안과 접수용 ZIP은 다르다.
+접수용 ZIP은 `outputs/contest-upload/2025/`와 Drive `output`에 두며, Hangul 작성
+HWPX·공식 PDF·1페이지 시각화·파생표·브라우저 대시보드를 담는다. 접수번호는 비운다.
+동의서는 ZIP 밖 PDF로 따로 올린다. COD-25는 재현성·페이지 수·라이선스 제외를
+검수하고, COD-26은 최종 제출 기록과 v1.0.0 발행을 맡는다.
 
 ## 패키지
 
 | 파일 | 역할 |
 |---|---|
 | [`01_data-visualization.pdf`](../../../outputs/submission/2025/01_data-visualization.pdf) | COD-23 1페이지 PDF 복사본. 정확히 1장 |
-| [`02_analysis-report.pdf`](../../../outputs/submission/2025/02_analysis-report.pdf) | 표지 1장 + 본문 7장. 본문 10페이지 이하 |
-| [`02_analysis-report.md`](../../../outputs/submission/2025/02_analysis-report.md) | 공식 서식 목차에 붙여 넣을 국문 본문 |
+| [`02_analysis-report.pdf`](../../../outputs/submission/2025/02_analysis-report.pdf) | 파이프라인 초안 PDF. 접수용이 아님 |
+| `02_analysis-report-official.pdf` | Hangul에서보낸 공식 보고서 PDF. Git에 올리지 않음 |
+| `02_analysis-report.hwpx` | Hangul 작성본. Git 초안에는 두지 않음 |
+| [`02_analysis-report.md`](../../../outputs/submission/2025/02_analysis-report.md) | 서식에 붙여 넣었던 국문 본문 |
 | [`03_data/source-catalog.csv`](../../../outputs/submission/2025/03_data/source-catalog.csv) | 감사 42개 자료의 출처·기준일·라이선스·채택. XLSX는 파이프라인이 로컬에서 다시 만든다 |
+| `03_data/README.txt` | 원천을 ZIP에 넣지 않는 이유와 재수집 안내 |
+| `04_interactive/` | 접수용 ZIP에만 복사. `outputs/infographic/2025/interactive/`와 같다 |
 | [`03_data/data-dictionary.csv`](../../../outputs/submission/2025/03_data/data-dictionary.csv) | 분석 컬럼 사전 |
 | `03_data/*.csv` | 동별 프로필·카테고리 평가 파생 표 |
 | [`README.md`](../../../outputs/submission/2025/README.md) | Hangul 붙여넣기 안내 |
 | [SUBMISSION_DRAFT_REPORT_2025.json](../../data/manifests/SUBMISSION_DRAFT_REPORT_2025.json) | 페이지 수·체크섬·HWPX 상태 |
 
 `data/raw`와 재배포가 금지된 원천, 개인 식별자는 넣지 않는다. 1페이지 시각화의 설계는
-[2025 1페이지 인포그래픽](INFOGRAPHIC_2025.md)을 따른다.
+[2025 1페이지 인포그래픽](INFOGRAPHIC_2025.md)을 따른다. 브라우저 대시보드는 같은
+문서의 HTML 경로를 접수용 ZIP `04_interactive/`로 복사한다.
 
 ## 실행
 

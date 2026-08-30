@@ -1,6 +1,6 @@
 # 2026 Big Data Competition Submission Requirements
 
-Verified on: 2026-08-11 (KST)
+Verified on: 2026-08-31 (KST). The application-form filename and upload fields were rechecked on 2026-08-31.
 
 ## Sources
 
@@ -31,15 +31,23 @@ Upload one archive containing all of the following files.
 | Data visualization | PDF | One page |
 | Analysis report | HWPX and PDF | Both formats required; no more than 10 pages excluding the cover |
 | Data used | XLS, CSV, etc. | Data files used in the analysis |
-| Final upload | One archive | Maximum 1 GB |
+| Final upload | One archive | Maximum 1 GB. Name: `분야_팀명.zip` |
+| Privacy consent | One PDF | Separate upload from the archive. Combine all member signatures. Maximum 100 MB |
 
-The official material does not specify a filename convention. Recheck the application form immediately before submission. A recommended package layout is documented in the [Korean requirements](../kor/COMPETITION_REQUIREMENTS.md).
+The form example is `분야1. 빅데이터 분석 및 시각화_ABC.zip`. This team's upload name is
+`분야1. 빅데이터 분석 및 시각화_codingnanyong.zip`. The inner layout is in the
+[Korean requirements](../kor/COMPETITION_REQUIREMENTS.md). The archive also includes
+`04_interactive/`, a standalone browser dashboard that does not replace the required
+one-page PDF.
 
-Do not redistribute source data when its license prohibits redistribution. Include the provider, source URL, reference date, license, and acquisition method in a source catalog, and submit only redistributable derived data.
+Do not put raw extracts in the archive. Record provider, source URL, reference date,
+and license in `source-catalog` and submit only redistributable derived tables. The
+team raw-data bundle stays on Google Drive under `raw-data/2025/`.
 
 The machine-written draft lives in the [2025 submission draft](methodology/SUBMISSION_DRAFT_2025.md)
-and `outputs/submission/2025/`. Fill the official HWPX in Hangul from a copy of the template;
-do not treat the blank template as the submitted report.
+and `outputs/submission/2025/`. The contest ZIP is under `outputs/contest-upload/2025/`
+and Drive `output`. The official HWPX and PDF are the Hangul-authored files, not the
+blank template or the pipeline PDF.
 
 ## Report contents
 
@@ -63,13 +71,14 @@ The report outline may be adapted to the analysis. Leave the application number 
 - [ ] Every dataset records its source, reference period, and license.
 - [ ] Personal data and source data prohibited from redistribution are excluded.
 - [ ] The archive opens correctly and is no larger than 1 GB.
-- [ ] Only one archive is uploaded to the application form.
+- [ ] Only one archive is uploaded in the documents field.
+- [ ] The consent PDF is uploaded in the separate form field.
+- [ ] The archive name is `분야1. 빅데이터 분석 및 시각화_<team>.zip`.
 - [ ] Schedule, formats, and any new filename rule are rechecked before submission.
 
 ## Not published or unresolved
 
 - Evaluation categories and score allocation: not found in the available official material
-- Mandatory filename convention: not found in the available official material
 - Ownership and public-disclosure terms for submitted work: not confirmed by the available material
 
 These items must not be converted into assumed requirements. Dataset-specific use and redistribution terms are tracked in the COD-10 data-availability audit.

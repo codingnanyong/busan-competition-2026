@@ -1,6 +1,6 @@
 # 2026 Big Data 활용 대회 제출 요구사항
 
-확인 기준일: 2026-08-11 (KST)
+확인 기준일: 2026-08-31 (KST). 신청 폼 파일명·업로드 칸은 2026-08-31에 재확인했다.
 
 ## 공식 근거
 
@@ -31,26 +31,44 @@
 | 데이터 시각화 | PDF | 1장 |
 | 분석보고서 | HWPX 및 PDF | 두 형식 모두 제출, 표지 제외 10페이지 이하 |
 | 활용데이터 | XLS, CSV 등 | 분석에 활용한 데이터 파일 |
-| 최종 업로드 | 압축파일 1개 | 최대 1GB |
+| 최종 업로드 | 압축파일 1개 | 최대 1GB. 파일명 `분야_팀명.zip` |
+| 개인정보 동의서 | PDF 1개 | 압축파일과 별도 업로드. 팀원 서명본을 하나로 합친다. 최대 100MB |
 
-권장 패키지 구조는 다음과 같다. 실제 파일명 규칙은 공식 자료에 공개되지 않았으므로 제출 직전에 참가 신청 폼을 다시 확인한다.
+신청 폼의 압축파일명 예는 `분야1. 빅데이터 분석 및 시각화_ABC.zip`이다. 이 팀의
+업로드 파일명은 `분야1. 빅데이터 분석 및 시각화_codingnanyong.zip`이다.
 
 ```text
-team-name_project-name.zip
+분야1. 빅데이터 분석 및 시각화_codingnanyong.zip
 ├── 01_data-visualization.pdf
 ├── 02_analysis-report.hwpx
 ├── 02_analysis-report.pdf
-└── 03_data/
-    ├── source-catalog.xlsx
-    ├── analysis-data.csv
-    └── data-dictionary.xlsx
+├── 03_data/
+│   ├── README.txt
+│   ├── source-catalog.xlsx
+│   ├── source-catalog.csv
+│   ├── data-dictionary.xlsx
+│   ├── data-dictionary.csv
+│   └── busan_admin_dong_*.csv
+└── 04_interactive/
+    ├── README.txt
+    ├── busan_admin_dong_action_map_2025.html
+    ├── css/
+    └── js/
 ```
 
-원천데이터의 재배포가 라이선스상 허용되지 않으면 해당 파일을 압축파일에 포함하지 않는다. 대신 제공기관, 원문 URL, 기준일, 라이선스, 수집 방법을 `source-catalog.xlsx`에 기록하고 공개 가능한 파생데이터만 제출한다.
+`04_interactive`는 필수 1페이지 PDF를 대체하지 않는다. 브라우저에서 바로 여는
+독립형 대시보드이며 서버가 필요 없다. 여는 파일은
+`busan_admin_dong_action_map_2025.html`이다.
+
+원천데이터는 ZIP에 넣지 않는다. SGIS·HEIS·KOROAD 등 재배포 조건이 미확정인 자료와
+용량·개인정보 때문이다. 제공기관, 원문 URL, 기준일, 라이선스는 `source-catalog`에
+적고 공개 가능한 파생표만 낸다. 팀 재현용 원천 번들은 Google Drive
+`raw-data/2025/`에만 둔다.
 
 기계 작성 초안은 [2025 제출물 초안](methodology/SUBMISSION_DRAFT_2025.md)과
-`outputs/submission/2025/`에 둔다. 공식 HWPX는 Hangul에서 서식 원본 복사본에 본문을
-옮기며, 빈 서식 파일을 제출 보고서로 쓰지 않는다.
+`outputs/submission/2025/`에 둔다. 접수용 ZIP은
+`outputs/contest-upload/2025/`와 Drive `output`에 둔다. 공식 HWPX·PDF는 Hangul
+작성본이며, 빈 서식과 파이프라인 PDF를 제출 보고서로 쓰지 않는다.
 
 ## 분석보고서 필수 구성
 
@@ -74,13 +92,14 @@ team-name_project-name.zip
 - [ ] 모든 데이터의 출처·기준기간·라이선스를 기록했다.
 - [ ] 재배포가 금지된 원천데이터와 개인정보를 제외했다.
 - [ ] 압축파일이 정상적으로 열리고 전체 크기가 1GB 이하이다.
-- [ ] 참가 신청 폼에는 압축파일 하나만 업로드한다.
+- [ ] 참가 신청 폼 제출 서류 칸에는 압축파일 하나만 업로드한다.
+- [ ] 동의서는 압축파일과 다른 칸에 PDF 하나로 업로드한다.
+- [ ] 압축파일명이 `분야1. 빅데이터 분석 및 시각화_팀명.zip`이다.
 - [ ] 제출 직전에 일정, 파일 형식, 파일명 규칙 변경 여부를 다시 확인한다.
 
 ## 미공개·추가 확인 항목
 
 - 평가항목 및 세부 배점: 공식 자료에서 확인되지 않음
-- 지정 파일명 규칙: 공식 자료에서 확인되지 않음
 - 결과물 저작권·공개 범위: 확인 가능한 자료만으로 확정하지 못함
 
 미공개 항목은 추측해 요구사항으로 만들지 않는다. 데이터별 이용·재배포 조건은 데이터 가용성 감사(COD-10)에서 별도로 관리한다.

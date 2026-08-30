@@ -61,9 +61,10 @@ outputs/
                                      # hand edits are overwritten on the next generate
 └─ submission/2025/                  # contest-archive draft. pipeline reassembles
    ├─ 01_data-visualization.pdf      # copy of the one-page PDF
-   ├─ 02_analysis-report.pdf         # cover plus body. body ≤ 10 pages
-   ├─ 02_analysis-report.md          # body to paste into the HWPX template
+   ├─ 02_analysis-report.pdf         # pipeline draft PDF. not the contest file
+   ├─ 02_analysis-report.md          # body that was pasted into the HWPX
    └─ 03_data/                       # catalog, dictionary, derived CSVs. no raw extracts
+└─ contest-upload/2025/              # contest ZIP. gitignored. copied to Drive output
 
 docs/
 ├─ kor/            # Korean prose

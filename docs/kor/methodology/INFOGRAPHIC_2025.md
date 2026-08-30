@@ -34,6 +34,7 @@
   평가지표·정책 예시까지 내려가 확인하는 206개 동 독립형 대시보드.
   같은 폴더의 `html/`·`css/`·`js/`를 수정하고, 채워진 HTML을 브라우저에서 바로 연다.
   JavaScript 서버는 필요 없다. `js/data.js`만 파이프라인이 다시 만든다.
+  접수용 ZIP에는 `04_interactive/`로 복사한다. 1페이지 PDF를 대체하지 않는다.
 - [`busan_admin_dong_action_profile_2025.csv`](../../../outputs/infographic/2025/tables/busan_admin_dong_action_profile_2025.csv):
   동별 6개 영역 점수·취약순위·개선방향·상대 저취약 영역
 - [INFOGRAPHIC_REPORT_2025.json](../../data/manifests/INFOGRAPHIC_REPORT_2025.json):
