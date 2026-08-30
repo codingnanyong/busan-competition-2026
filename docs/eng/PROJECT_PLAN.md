@@ -60,7 +60,7 @@ Measure living-condition deprivation across Busan's administrative dongs in the 
 - Write the analytical report and evidence documentation (contest application filed 2026-08-31)
 - Complete the one-page visualization PDF (included in the filed ZIP)
 - Verify reproducibility of submission data, code, and README (COD-25)
-- Publish v1.0.0 and Wiki (COD-26; ZIP filing is done)
+- Publish v1.0.0 and Wiki (COD-26)
 - Prepare slides, demo, and Q&A (COD-27, after document screening)
 
 ## Key risks
