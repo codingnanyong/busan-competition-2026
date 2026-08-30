@@ -7,6 +7,15 @@
 미러 규칙과 브랜치·PR 형식은 [Git 워크플로](GIT_WORKFLOW.md), Linear 이슈 생성은
 [연동 운영 가이드](INTEGRATIONS.md)를 따른다.
 
+2026-08-31 공모전 서류 접수를 마쳤다. 열린 이슈는 아래만 남긴다.
+
+| 이슈 | GitHub | 상태 |
+|---|---|---|
+| [COD-24](https://linear.app/codingnanyong/issue/COD-24) 분석보고서 | [#33](https://github.com/codingnanyong/busan-competition-2026/issues/33) | 닫힘. 접수와 PR #80 |
+| [COD-25](https://linear.app/codingnanyong/issue/COD-25) 재현성 검증 | [#34](https://github.com/codingnanyong/busan-competition-2026/issues/34) | 이 PR 병합으로 닫음 |
+| [COD-26](https://linear.app/codingnanyong/issue/COD-26) 최종 제출·v1.0.0 | [#35](https://github.com/codingnanyong/busan-competition-2026/issues/35) | 이 PR 병합 후 develop→main으로 태그 발행 |
+| [COD-27](https://linear.app/codingnanyong/issue/COD-27) 발표 준비 | [#36](https://github.com/codingnanyong/busan-competition-2026/issues/36) | 열림. 서류평가 이후 착수 |
+
 | 마일스톤 | Linear | GitHub | 작업 |
 |---|---|---|---|
 | M0 | [COD-5](https://linear.app/codingnanyong/issue/COD-5) | [#14](https://github.com/codingnanyong/busan-competition-2026/issues/14) | 저장소 브랜치·PR·릴리스·문서 정책 확정 |

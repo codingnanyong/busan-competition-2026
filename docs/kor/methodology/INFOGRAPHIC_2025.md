@@ -34,6 +34,7 @@
   평가지표·정책 예시까지 내려가 확인하는 206개 동 독립형 대시보드.
   같은 폴더의 `html/`·`css/`·`js/`를 수정하고, 채워진 HTML을 브라우저에서 바로 연다.
   JavaScript 서버는 필요 없다. `js/data.js`만 파이프라인이 다시 만든다.
+  접수용 ZIP에는 `04_interactive/`로 복사한다. 1페이지 PDF를 대체하지 않는다.
 - [`busan_admin_dong_action_profile_2025.csv`](../../../outputs/infographic/2025/tables/busan_admin_dong_action_profile_2025.csv):
   동별 6개 영역 점수·취약순위·개선방향·상대 저취약 영역
 - [INFOGRAPHIC_REPORT_2025.json](../../data/manifests/INFOGRAPHIC_REPORT_2025.json):
@@ -89,5 +90,6 @@ docker compose run --rm jupyter python scripts/rebuild_processed.py
 청록 점으로 구분한다. 정책 카드는 COD-22의 양의 초과점수 게이트를 통과한 후보만 요약한다.
 하단에는 비공식·실험 지위와 금지 해석을 항상 표시한다.
 
-현재 파일은 `submission_draft`다. COD-24 보고서와 용어를 맞춘 뒤 제출 직전에 공식 파일명,
-출처 표기 크기, PDF 1페이지, 인쇄 가독성을 다시 검수한다.
+현재 파일은 `submission_draft`다. 보고서·데이터 패키지 초안은
+[2025 제출물 초안](SUBMISSION_DRAFT_2025.md)과 같은 용어를 쓴다. 제출 직전에 공식
+파일명, 출처 표기 크기, PDF 1페이지, 인쇄 가독성을 다시 검수한다.

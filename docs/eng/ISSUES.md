@@ -7,6 +7,15 @@
 Mirroring rules and branch/PR format are in the [Git workflow](GIT_WORKFLOW.md). Create Linear
 issues with the [integration operations guide](INTEGRATIONS.md).
 
+The contest application was submitted on 2026-08-31. Only these issues stay open.
+
+| Issue | GitHub | Status |
+|---|---|---|
+| [COD-24](https://linear.app/codingnanyong/issue/COD-24) report | [#33](https://github.com/codingnanyong/busan-competition-2026/issues/33) | Closed. Filed and merged in PR #80 |
+| [COD-25](https://linear.app/codingnanyong/issue/COD-25) reproducibility | [#34](https://github.com/codingnanyong/busan-competition-2026/issues/34) | Closed by this PR |
+| [COD-26](https://linear.app/codingnanyong/issue/COD-26) v1.0.0 release | [#35](https://github.com/codingnanyong/busan-competition-2026/issues/35) | Closed by this PR; tag follows develop→main |
+| [COD-27](https://linear.app/codingnanyong/issue/COD-27) presentation | [#36](https://github.com/codingnanyong/busan-competition-2026/issues/36) | Open. Start after document screening |
+
 | Milestone | Linear | GitHub | Work item |
 |---|---|---|---|
 | M0 | [COD-5](https://linear.app/codingnanyong/issue/COD-5) | [#14](https://github.com/codingnanyong/busan-competition-2026/issues/14) | Finalize repository branch, PR, release, and documentation policy |
