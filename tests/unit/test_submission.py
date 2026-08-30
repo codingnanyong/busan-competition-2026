@@ -22,6 +22,7 @@ from busan_imd.submission.report import (
     noto_family,
     wrap_korean,
 )
+from busan_imd.submission.verify import verify_committed_package
 
 
 def test_report_covers_official_sections_within_page_limit() -> None:
@@ -53,6 +54,7 @@ def test_source_catalog_keeps_provenance_columns(tmp_path: Path) -> None:
                 "indicator_candidate": "boundary",
                 "provider": "Busan",
                 "source_url": "https://example.invalid/geo",
+                "access_method": "public web page",
                 "reference_period": "2025",
                 "spatial_unit": "administrative dong",
                 "license": "public",
@@ -73,6 +75,7 @@ def test_source_catalog_keeps_provenance_columns(tmp_path: Path) -> None:
         "indicator_candidate",
         "provider",
         "source_url",
+        "access_method",
         "reference_period",
         "spatial_unit",
         "license",
@@ -107,6 +110,15 @@ def test_data_dictionary_and_readme_writers(tmp_path: Path) -> None:
     assert "Hangul" in readme.read_text(encoding="utf-8")
     copied = pd.read_excel(dictionary_output, engine="openpyxl")
     assert copied.loc[0, "column_name"] == "admin_dong_code"
+
+
+def test_committed_submission_package_passes_reproducibility_checks() -> None:
+    report = verify_committed_package()
+
+    assert report["visualization_pages"] == 1
+    assert report["dataset_count"] == 42
+    assert report["official_hwpx_in_git"] is False
+    assert report["secret_hits"] == []
 
 
 def test_copy_visualization_requires_a_one_page_pdf(tmp_path: Path) -> None:

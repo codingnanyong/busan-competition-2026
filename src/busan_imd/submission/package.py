@@ -79,6 +79,7 @@ def write_source_catalog(audit_path: Path, output_path: Path) -> int:
         "indicator_candidate",
         "provider",
         "source_url",
+        "access_method",
         "reference_period",
         "spatial_unit",
         "license",

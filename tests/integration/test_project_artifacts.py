@@ -134,6 +134,8 @@ def test_project_structure_and_required_documents() -> None:
         "docs/eng/methodology/INFOGRAPHIC_2025.md",
         "docs/kor/methodology/SUBMISSION_DRAFT_2025.md",
         "docs/eng/methodology/SUBMISSION_DRAFT_2025.md",
+        "docs/kor/methodology/REPRODUCIBILITY_QA_2025.md",
+        "docs/eng/methodology/REPRODUCIBILITY_QA_2025.md",
         "docs/kor/methodology/CATEGORY_ASSESSMENT_2025.md",
         "docs/eng/methodology/CATEGORY_ASSESSMENT_2025.md",
         "outputs/infographic/2025/interactive/html/document.html",
@@ -149,6 +151,7 @@ def test_project_structure_and_required_documents() -> None:
         "outputs/submission/2025/02_analysis-report.pdf",
         "outputs/submission/2025/02_analysis-report.md",
         "outputs/submission/2025/README.md",
+        "outputs/submission/2025/03_data/README.txt",
         "outputs/submission/2025/03_data/source-catalog.csv",
         "outputs/submission/2025/03_data/data-dictionary.csv",
         "outputs/submission/2025/03_data/busan_admin_dong_action_profile_2025.csv",
@@ -488,7 +491,6 @@ def test_submission_draft_report_covers_cod24_scope() -> None:
     assert report["dataset_count"] == 42
     assert report["hwpx_status"] == "hangul_paste_required"
     assert report["output_sha256"]["visualization_pdf"] == infographic["output_sha256"]["pdf"]
-    assert not (REPOSITORY_ROOT / "outputs/submission/2025/02_analysis-report.hwpx").exists()
     markdown = (REPOSITORY_ROOT / report["output_paths"]["report_markdown"]).read_text(
         encoding="utf-8"
     )

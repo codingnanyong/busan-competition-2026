@@ -10,9 +10,10 @@ step does not copy the blank template in as the submitted report.
 The artifact status is `submission_draft`. The Git draft and the contest ZIP differ. The
 contest ZIP lives in `outputs/contest-upload/2025/` and Drive `output`. It carries the
 Hangul HWPX, official PDF, one-page visual, derived tables, and the browser dashboard.
-Leave the application number blank. Upload the consent PDF outside the ZIP. COD-25
-checks reproducibility, page counts, and license exclusions. COD-26 records the final
-submission and the v1.0.0 release.
+Leave the application number blank. Upload the consent PDF outside the ZIP.
+Reproducibility, page counts, and license exclusions are recorded in
+[2025 submission reproducibility review](REPRODUCIBILITY_QA_2025.md). COD-26 publishes
+v1.0.0, the GitHub Release, and the Wiki.
 
 ## Package
 

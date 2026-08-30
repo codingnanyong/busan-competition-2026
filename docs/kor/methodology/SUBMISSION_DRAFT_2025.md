@@ -10,8 +10,9 @@ HWPX는 Hangul에서 서식 원본에 본문을 옮겨 작성한다. 이 단계�
 초안 지위는 `submission_draft`다. Git에 올리는 기계 초안과 접수용 ZIP은 다르다.
 접수용 ZIP은 `outputs/contest-upload/2025/`와 Drive `output`에 두며, Hangul 작성
 HWPX·공식 PDF·1페이지 시각화·파생표·브라우저 대시보드를 담는다. 접수번호는 비운다.
-동의서는 ZIP 밖 PDF로 따로 올린다. COD-25는 재현성·페이지 수·라이선스 제외를
-검수하고, COD-26은 최종 제출 기록과 v1.0.0 발행을 맡는다.
+동의서는 ZIP 밖 PDF로 따로 올린다. 재현성·페이지 수·라이선스 제외 검수는
+[2025 제출 재현성 검증](REPRODUCIBILITY_QA_2025.md)에 기록한다. COD-26은
+v1.0.0 태그와 Release·Wiki를 맡는다.
 
 ## 패키지
 
