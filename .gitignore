@@ -19,3 +19,9 @@ outputs/*
 !outputs/submission/
 # Excel zip files are generated locally. Committing them from Windows corrupted the zip.
 outputs/submission/**/*.xlsx
+# Hangul-authored report and official export. Keep local or on Drive.
+outputs/submission/**/*.hwpx
+outputs/submission/**/*-official.pdf
+# Korean-filename template copy. The tracked original uses an ASCII name.
+docs/templates/*.hwpx
+!docs/templates/2026-big-data-competition-submission-template.hwpx

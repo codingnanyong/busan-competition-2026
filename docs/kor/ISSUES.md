@@ -14,7 +14,8 @@
 | [COD-24](https://linear.app/codingnanyong/issue/COD-24) 분석보고서 | [#33](https://github.com/codingnanyong/busan-competition-2026/issues/33) | 닫힘. 접수와 PR #80 |
 | [COD-25](https://linear.app/codingnanyong/issue/COD-25) 재현성 검증 | [#34](https://github.com/codingnanyong/busan-competition-2026/issues/34) | 닫힘. PR #81 |
 | [COD-26](https://linear.app/codingnanyong/issue/COD-26) 최종 제출·v1.0.0 | [#35](https://github.com/codingnanyong/busan-competition-2026/issues/35) | 닫힘. PR #82·#83, `v1.0.0` |
-| [COD-27](https://linear.app/codingnanyong/issue/COD-27) 발표 준비 | [#36](https://github.com/codingnanyong/busan-competition-2026/issues/36) | 열림. 대본은 git 밖 `outputs/presentation/2025/` |
+| [COD-27](https://linear.app/codingnanyong/issue/COD-27) 발표 준비 | [#36](https://github.com/codingnanyong/busan-competition-2026/issues/36) | 닫힘. PR #84. 대본은 git 밖 |
+| [COD-40](https://linear.app/codingnanyong/issue/COD-40) Hangul 산출물 제외 | [#85](https://github.com/codingnanyong/busan-competition-2026/issues/85) | 이 PR에서 `.gitignore`에 둔다 |
 
 | 마일스톤 | Linear | GitHub | 작업 |
 |---|---|---|---|
@@ -53,3 +54,4 @@
 | — | [COD-37](https://linear.app/codingnanyong/issue/COD-37) | [#72](https://github.com/codingnanyong/busan-competition-2026/issues/72) | 배차 결측을 0으로 합산하지 않고 노선정류장 경로와 승하차 해시를 고친다 |
 | — | [COD-38](https://linear.app/codingnanyong/issue/COD-38) | [#74](https://github.com/codingnanyong/busan-competition-2026/issues/74) | 병합된 PR 재검사 실패 알림을 막고 v0.8.1을 배포한다 |
 | — | [COD-39](https://linear.app/codingnanyong/issue/COD-39) | [#77](https://github.com/codingnanyong/busan-competition-2026/issues/77) | Linear 이슈 생성 때 공모전 프로젝트를 지정한다 |
+| — | [COD-40](https://linear.app/codingnanyong/issue/COD-40) | [#85](https://github.com/codingnanyong/busan-competition-2026/issues/85) | 한글 작성 보고서와 한글 파일명 서식을 git에서 제외한다 |
