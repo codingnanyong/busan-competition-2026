@@ -61,7 +61,7 @@
 - 1페이지 시각화 PDF 완성 (접수 ZIP에 포함)
 - 제출 데이터·코드·README 재현성 검증 (COD-25)
 - v1.0.0 릴리스 및 Wiki (COD-26)
-- 발표자료·데모·질의응답 준비 (COD-27, 서류평가 이후)
+- 발표 대본·대시보드 데모·질의응답 (COD-27). git에 올리지 않고 `outputs/presentation/2025/`와 Drive `output/presentation/2025/`에 둔다.
 
 ## 주요 리스크
 
