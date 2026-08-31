@@ -61,7 +61,7 @@ Measure living-condition deprivation across Busan's administrative dongs in the 
 - Complete the one-page visualization PDF (included in the filed ZIP)
 - Verify reproducibility of submission data, code, and README (COD-25)
 - Publish v1.0.0 and Wiki (COD-26)
-- Prepare slides, demo, and Q&A (COD-27, after document screening)
+- Slide script, dashboard demo, and Q&A (COD-27, [2025 presentation package](methodology/PRESENTATION_2025.md))
 
 ## Key risks
 

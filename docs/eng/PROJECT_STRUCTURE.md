@@ -69,7 +69,7 @@ outputs/
 docs/
 ├─ kor/            # Korean prose
 │  ├─ data/        # data policy and request notes
-│  ├─ methodology/ # scoring, policy, infographic, and submission-draft method
+│  ├─ methodology/ # scoring, policy, infographic, submission, and presentation method
 │  └─ releases/    # versioned release notes
 ├─ eng/            # English counterparts
 ├─ data/           # language-neutral tables and checksums

@@ -76,6 +76,10 @@ The report outline may be adapted to the analysis. Leave the application number 
 - [ ] The archive name is `분야1. 빅데이터 분석 및 시각화_<team>.zip`.
 - [ ] Schedule, formats, and any new filename rule are rechecked before submission.
 
+The oral round is on 2026-10-29. The notice does not publish talk length, slide format, or
+a scoring rubric. The rehearsal script, dashboard demo, and anticipated Q&A are in the
+[2025 presentation package](methodology/PRESENTATION_2025.md).
+
 ## Not published or unresolved
 
 - Evaluation categories and score allocation: not found in the available official material

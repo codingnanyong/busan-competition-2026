@@ -136,6 +136,8 @@ def test_project_structure_and_required_documents() -> None:
         "docs/eng/methodology/SUBMISSION_DRAFT_2025.md",
         "docs/kor/methodology/REPRODUCIBILITY_QA_2025.md",
         "docs/eng/methodology/REPRODUCIBILITY_QA_2025.md",
+        "docs/kor/methodology/PRESENTATION_2025.md",
+        "docs/eng/methodology/PRESENTATION_2025.md",
         "docs/kor/methodology/CATEGORY_ASSESSMENT_2025.md",
         "docs/eng/methodology/CATEGORY_ASSESSMENT_2025.md",
         "outputs/infographic/2025/interactive/html/document.html",
@@ -518,6 +520,37 @@ def test_submission_draft_report_covers_cod24_scope() -> None:
     readme_path = REPOSITORY_ROOT / report["output_paths"]["package_readme"]
     assert "Hangul" in readme_path.read_text(encoding="utf-8")
     assert len(report["analysis_tables"]) == 4
+
+
+def test_presentation_package_covers_cod27_scope() -> None:
+    korean = (REPOSITORY_ROOT / "docs/kor/methodology/PRESENTATION_2025.md").read_text(
+        encoding="utf-8"
+    )
+    english = (REPOSITORY_ROOT / "docs/eng/methodology/PRESENTATION_2025.md").read_text(
+        encoding="utf-8"
+    )
+    dashboard = (
+        REPOSITORY_ROOT
+        / "outputs/infographic/2025/interactive/busan_admin_dong_action_map_2025.html"
+    )
+
+    assert "COD-27" in korean
+    assert "COD-27" in english
+    assert "모라3동" in korean
+    assert "Mora 3" in english
+    assert "82.82" in korean
+    assert "82.82" in english
+    assert "busan_admin_dong_action_map_2025.html" in korean
+    assert "busan_admin_dong_action_map_2025.html" in english
+    assert "질의응답" in korean
+    assert "Q&A" in english
+    assert "70점" in korean
+    assert "70" in english
+    assert "개인" in korean and "자격" in korean
+    assert "individual eligibility" in english
+    assert "실험" in korean
+    assert "experimental" in english.lower()
+    assert dashboard.is_file()
 
 
 def test_category_assessment_is_complete_and_flags_estimation() -> None:

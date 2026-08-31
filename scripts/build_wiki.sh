@@ -47,6 +47,7 @@ publish_page docs/kor/methodology/POLICY_MATRIX_2025.md KO-Policy-Matrix-2025
 publish_page docs/kor/methodology/INFOGRAPHIC_2025.md KO-Infographic-2025
 publish_page docs/kor/methodology/SUBMISSION_DRAFT_2025.md KO-Submission-Draft-2025
 publish_page docs/kor/methodology/REPRODUCIBILITY_QA_2025.md KO-Reproducibility-QA-2025
+publish_page docs/kor/methodology/PRESENTATION_2025.md KO-Presentation-2025
 publish_page docs/kor/methodology/CATEGORY_ASSESSMENT_2025.md KO-Category-Assessment-2025
 publish_page docs/kor/methodology/INDICATOR_SPEC.md KO-Indicator-Spec
 publish_page docs/kor/methodology/LIMITATIONS.md KO-Limitations
@@ -71,6 +72,7 @@ publish_page docs/eng/methodology/POLICY_MATRIX_2025.md EN-Policy-Matrix-2025
 publish_page docs/eng/methodology/INFOGRAPHIC_2025.md EN-Infographic-2025
 publish_page docs/eng/methodology/SUBMISSION_DRAFT_2025.md EN-Submission-Draft-2025
 publish_page docs/eng/methodology/REPRODUCIBILITY_QA_2025.md EN-Reproducibility-QA-2025
+publish_page docs/eng/methodology/PRESENTATION_2025.md EN-Presentation-2025
 publish_page docs/eng/methodology/CATEGORY_ASSESSMENT_2025.md EN-Category-Assessment-2025
 publish_page docs/eng/methodology/INDICATOR_SPEC.md EN-Indicator-Spec
 publish_page docs/eng/methodology/LIMITATIONS.md EN-Limitations
@@ -111,6 +113,7 @@ printf '%s\n' \
   '- [[2025 1페이지 인포그래픽|KO-Infographic-2025]]' \
   '- [[2025 제출물 초안|KO-Submission-Draft-2025]]' \
   '- [[2025 제출 재현성 검증|KO-Reproducibility-QA-2025]]' \
+  '- [[2025 발표평가 패키지|KO-Presentation-2025]]' \
   '- [[지표 명세|KO-Indicator-Spec]]' \
   '- [[한계 및 해석|KO-Limitations]]' \
   '- [[확장 모델|KO-Expansion-Model]]' \
@@ -136,6 +139,7 @@ printf '%s\n' \
   '- [[2025 One-Page Infographic|EN-Infographic-2025]]' \
   '- [[2025 Submission Draft|EN-Submission-Draft-2025]]' \
   '- [[2025 Reproducibility Review|EN-Reproducibility-QA-2025]]' \
+  '- [[2025 Presentation Package|EN-Presentation-2025]]' \
   '- [[Indicator Specification|EN-Indicator-Spec]]' \
   '- [[Limitations|EN-Limitations]]' \
   '- [[Expansion Model|EN-Expansion-Model]]' \
