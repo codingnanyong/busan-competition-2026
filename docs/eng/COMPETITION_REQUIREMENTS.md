@@ -77,8 +77,8 @@ The report outline may be adapted to the analysis. Leave the application number 
 - [ ] Schedule, formats, and any new filename rule are rechecked before submission.
 
 The oral round is on 2026-10-29. The notice does not publish talk length, slide format, or
-a scoring rubric. The rehearsal script, dashboard demo, and anticipated Q&A are in the
-[2025 presentation package](methodology/PRESENTATION_2025.md).
+a scoring rubric. Do not commit slide scripts, demo notes, or Q&A. Keep them in local
+`outputs/presentation/2025/` and Drive `output/presentation/2025/`.
 
 ## Not published or unresolved
 

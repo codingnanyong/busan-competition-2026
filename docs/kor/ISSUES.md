@@ -14,7 +14,7 @@
 | [COD-24](https://linear.app/codingnanyong/issue/COD-24) 분석보고서 | [#33](https://github.com/codingnanyong/busan-competition-2026/issues/33) | 닫힘. 접수와 PR #80 |
 | [COD-25](https://linear.app/codingnanyong/issue/COD-25) 재현성 검증 | [#34](https://github.com/codingnanyong/busan-competition-2026/issues/34) | 닫힘. PR #81 |
 | [COD-26](https://linear.app/codingnanyong/issue/COD-26) 최종 제출·v1.0.0 | [#35](https://github.com/codingnanyong/busan-competition-2026/issues/35) | 닫힘. PR #82·#83, `v1.0.0` |
-| [COD-27](https://linear.app/codingnanyong/issue/COD-27) 발표 준비 | [#36](https://github.com/codingnanyong/busan-competition-2026/issues/36) | 이 PR에서 대본·데모·질의응답을 둔다 |
+| [COD-27](https://linear.app/codingnanyong/issue/COD-27) 발표 준비 | [#36](https://github.com/codingnanyong/busan-competition-2026/issues/36) | 열림. 대본은 git 밖 `outputs/presentation/2025/` |
 
 | 마일스톤 | Linear | GitHub | 작업 |
 |---|---|---|---|

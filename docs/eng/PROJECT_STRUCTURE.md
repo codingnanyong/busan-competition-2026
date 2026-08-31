@@ -65,11 +65,12 @@ outputs/
    ├─ 02_analysis-report.md          # body that was pasted into the HWPX
    └─ 03_data/                       # catalog, dictionary, derived CSVs. no raw extracts
 └─ contest-upload/2025/              # contest ZIP. gitignored. copied to Drive output
+└─ presentation/2025/                # oral-round script and Q&A. gitignored. copied to Drive output
 
 docs/
 ├─ kor/            # Korean prose
 │  ├─ data/        # data policy and request notes
-│  ├─ methodology/ # scoring, policy, infographic, submission, and presentation method
+│  ├─ methodology/ # scoring, policy, infographic, and submission-draft method
 │  └─ releases/    # versioned release notes
 ├─ eng/            # English counterparts
 ├─ data/           # language-neutral tables and checksums

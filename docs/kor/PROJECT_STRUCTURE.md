@@ -66,11 +66,12 @@ outputs/
    ├─ 02_analysis-report.md          # HWPX에 붙여 넣었던 본문
    └─ 03_data/                       # 출처 목록·데이터 사전·파생 CSV. 원천 없음
 └─ contest-upload/2025/              # 접수용 ZIP. Git 제외. Drive output에 복사
+└─ presentation/2025/                # 발표 대본·질의. Git 제외. Drive output에 복사
 
 docs/
 ├─ kor/            # 국문 문서
 │  ├─ data/        # 데이터 정책·요청 설명
-│  ├─ methodology/ # 점수·정책·인포그래픽·제출·발표 방법
+│  ├─ methodology/ # 점수·정책·인포그래픽·제출 초안 방법
 │  └─ releases/    # 버전별 릴리스 설명
 ├─ eng/            # 영문 대응 문서
 ├─ data/           # 언어에 묶이지 않는 표와 체크섬
