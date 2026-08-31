@@ -13,7 +13,8 @@ Hangul HWPX, official PDF, one-page visual, derived tables, and the browser dash
 Leave the application number blank. Upload the consent PDF outside the ZIP.
 Reproducibility, page counts, and license exclusions are recorded in
 [2025 submission reproducibility review](REPRODUCIBILITY_QA_2025.md). COD-26 publishes
-v1.0.0, the GitHub Release, and the Wiki.
+v1.0.0, the GitHub Release, and the Wiki. Do not commit the slide script, demo, or Q&A.
+Keep them in `outputs/presentation/2025/` and Drive `output/presentation/2025/`.
 
 ## Package
 

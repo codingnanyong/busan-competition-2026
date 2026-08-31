@@ -14,6 +14,7 @@ outputs/*
 !data/processed/.gitkeep
 !outputs/.gitkeep
 # Track submission visuals and the contest draft package. Scratch under outputs/eda stays ignored.
+# Contest ZIP and oral-round slides stay local or on Drive output. Do not track them.
 !outputs/infographic/
 !outputs/submission/
 # Excel zip files are generated locally. Committing them from Windows corrupted the zip.
