@@ -8,6 +8,13 @@
 
 ### Fixed
 
+## [1.0.1] - 2026-08-31
+
+### Changed
+
+- Hangul 작성 HWPX·공식 PDF와 한글 파일명 서식 복사본을 git에서 제외한다
+- 발표 대본은 Drive `output/presentation/2025/`에 두고 git에 올리지 않는다
+
 ## [1.0.0] - 2026-08-31
 
 ### Added

@@ -6,6 +6,7 @@
 - 출처: [대회 안내 및 접수 페이지](https://www.allforyoung.com/posts/83834)의 첨부 서식
 
 이 파일은 원본 내용을 수정하지 않고 저장소에 보관한다. 보고서 작성 시 원본을 복사해 사용한다.
+한글 파일명 복사본과 Hangul 작성 HWPX·공식 PDF는 git에 올리지 않는다.
 붙여 넣은 본문은 [`outputs/submission/2025/02_analysis-report.md`](../../outputs/submission/2025/02_analysis-report.md)다.
 작성된 HWPX·PDF는 접수용 ZIP에 넣고, 빈 서식을 제출 보고서로 쓰지 않는다.
 요구사항은 [`docs/kor/COMPETITION_REQUIREMENTS.md`](../kor/COMPETITION_REQUIREMENTS.md)를 확인한다.

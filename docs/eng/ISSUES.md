@@ -14,7 +14,8 @@ The contest application was submitted on 2026-08-31. Only these issues stay open
 | [COD-24](https://linear.app/codingnanyong/issue/COD-24) report | [#33](https://github.com/codingnanyong/busan-competition-2026/issues/33) | Closed. Filed and merged in PR #80 |
 | [COD-25](https://linear.app/codingnanyong/issue/COD-25) reproducibility | [#34](https://github.com/codingnanyong/busan-competition-2026/issues/34) | Closed. PR #81 |
 | [COD-26](https://linear.app/codingnanyong/issue/COD-26) v1.0.0 release | [#35](https://github.com/codingnanyong/busan-competition-2026/issues/35) | Closed. PRs #82 and #83, `v1.0.0` |
-| [COD-27](https://linear.app/codingnanyong/issue/COD-27) presentation | [#36](https://github.com/codingnanyong/busan-competition-2026/issues/36) | Open. Script stays off git in `outputs/presentation/2025/` |
+| [COD-27](https://linear.app/codingnanyong/issue/COD-27) presentation | [#36](https://github.com/codingnanyong/busan-competition-2026/issues/36) | Closed. PR #84. Script stays off git |
+| [COD-40](https://linear.app/codingnanyong/issue/COD-40) ignore Hangul artifacts | [#85](https://github.com/codingnanyong/busan-competition-2026/issues/85) | This PR adds them to `.gitignore` |
 
 | Milestone | Linear | GitHub | Work item |
 |---|---|---|---|
@@ -53,3 +54,4 @@ The contest application was submitted on 2026-08-31. Only these issues stay open
 | — | [COD-37](https://linear.app/codingnanyong/issue/COD-37) | [#72](https://github.com/codingnanyong/busan-competition-2026/issues/72) | Keep missing BIMS schedules as missing and fix route-stop paths and boarding hashes |
 | — | [COD-38](https://linear.app/codingnanyong/issue/COD-38) | [#74](https://github.com/codingnanyong/busan-competition-2026/issues/74) | Stop merged PR policy false failures and ship v0.8.1 |
 | — | [COD-39](https://linear.app/codingnanyong/issue/COD-39) | [#77](https://github.com/codingnanyong/busan-competition-2026/issues/77) | Attach new Linear issues to the contest project |
+| — | [COD-40](https://linear.app/codingnanyong/issue/COD-40) | [#85](https://github.com/codingnanyong/busan-competition-2026/issues/85) | Ignore Hangul-authored reports and the Korean-filename template |
